@@ -1,0 +1,105 @@
+﻿<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>html:not(.lang-ready) body{visibility:hidden}</style>
+  <noscript><style>html body{visibility:visible!important}</style></noscript>
+  <title>Halaman Tidak Ditemukan | DokterPanggil.id</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#D83030">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#D83030',
+            cream: '#FFF9F5',
+            charcoal: '#2D2D2D',
+            'warm-gray': '#F7F3F0'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="w-full min-h-screen bg-warm-gray" style="font-family:'DM Sans',sans-serif;color:#2D2D2D">
+  <header class="w-full bg-primary shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center" aria-label="DokterPanggil">
+        <img src="assets/images/logo-white.png" alt="DokterPanggil" class="h-9 w-auto" width="140" height="36" decoding="async">
+      </a>
+      <div class="lang-switch lang-switch--on-dark" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="id" class="is-active" aria-pressed="true">ID</button>
+        <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-20 sm:py-28 text-center">
+    <p class="text-sm font-bold tracking-widest text-primary mb-3" data-i18n="code">404</p>
+    <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-i18n="title">Halaman tidak ditemukan</h1>
+    <p class="text-gray-600 leading-relaxed mb-10" data-i18n="body">Maaf, alamat yang Anda buka tidak tersedia. Kembali ke beranda atau pilih layanan / dokter di Makassar.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="index.html" data-i18n="home" class="px-7 py-3.5 rounded-full bg-primary text-white font-semibold hover:scale-105 transition-transform">Ke Beranda</a>
+      <a href="layanan/index.html" data-i18n="services" class="px-7 py-3.5 rounded-full bg-white border border-[#F1E7E0] text-charcoal font-semibold hover:border-primary/40 transition-colors">Layanan</a>
+      <a href="dokter/index.html" data-i18n="doctors" class="px-7 py-3.5 rounded-full bg-white border border-[#F1E7E0] text-charcoal font-semibold hover:border-primary/40 transition-colors">Dokter</a>
+    </div>
+    <p class="mt-8">
+      <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20DokterPanggil%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="wa" class="text-sm font-semibold text-primary hover:underline">Chat WhatsApp</a>
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var dict = {
+        id: {
+          code: '404',
+          title: 'Halaman tidak ditemukan',
+          body: 'Maaf, alamat yang Anda buka tidak tersedia. Kembali ke beranda atau pilih layanan / dokter di Makassar.',
+          home: 'Ke Beranda',
+          services: 'Layanan',
+          doctors: 'Dokter',
+          wa: 'Chat WhatsApp'
+        },
+        en: {
+          code: '404',
+          title: 'Page not found',
+          body: 'Sorry, that address is not available. Return home or browse services / doctors in Makassar.',
+          home: 'Go Home',
+          services: 'Services',
+          doctors: 'Doctors',
+          wa: 'Chat on WhatsApp'
+        }
+      };
+      function setLang(lang) {
+        if (!dict[lang]) lang = 'id';
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var v = dict[lang][el.getAttribute('data-i18n')];
+          if (v !== undefined) el.textContent = v;
+        });
+        document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+          var active = btn.getAttribute('data-lang-btn') === lang;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-pressed', String(active));
+        });
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+        document.documentElement.classList.add('lang-ready');
+      }
+      document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+        btn.addEventListener('click', function () { setLang(btn.getAttribute('data-lang-btn')); });
+      });
+      var saved = 'id';
+      try { saved = localStorage.getItem('lang') || 'id'; } catch (e) {}
+      setLang(saved);
+      setTimeout(function () { document.documentElement.classList.add('lang-ready'); }, 2500);
+    })();
+  </script>
+</body>
+</html>

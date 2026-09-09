@@ -1,0 +1,239 @@
+/**
+ * Styles used only by the generated SEO landing pages.
+ * Loaded after styles.css so the shared header/footer look stays identical.
+ *
+ * Note: never introduce an element with id="home" on these pages -- styles.css
+ * sizes #home to the full viewport for the homepage carousel.
+ */
+
+.seo-prose p { color: #4B4B4B; line-height: 1.75; }
+.seo-prose p + p { margin-top: 1rem; }
+
+/* Bullet rows with a leading icon, used for scope/limit/preparation lists */
+.seo-list { display: grid; gap: 0.75rem; }
+.seo-list li { display: flex; gap: 0.625rem; align-items: flex-start; line-height: 1.6; }
+.seo-list li > span { flex: 1 1 auto; }
+
+.seo-dot { flex: 0 0 auto; width: 1.5rem; height: 1.5rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin-top: 0.0625rem; }
+
+/* Numbered booking steps */
+.seo-step-num { flex: 0 0 auto; width: 2.25rem; height: 2.25rem; border-radius: 9999px; background: #D83030; color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+/* FAQ accordion — mirrors the modal behaviour but scoped to these pages */
+.seo-faq-item + .seo-faq-item { border-top: 1px solid #F1E7E0; }
+.seo-faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; background: none; border: 0; cursor: pointer; padding: 1.125rem 0; font-weight: 600; color: #2D2D2D; }
+.seo-faq-q svg { flex-shrink: 0; transition: transform 0.25s ease; }
+.seo-faq-q[aria-expanded="true"] svg { transform: rotate(180deg); }
+.seo-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.seo-faq-a.open { max-height: 2000px; }
+.seo-faq-a > div { padding-bottom: 1.125rem; color: #4B4B4B; line-height: 1.7; }
+
+/* Breadcrumb trail */
+.seo-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; font-size: 0.8125rem; }
+.seo-crumbs a { text-decoration: none; }
+.seo-crumbs a:hover { text-decoration: underline; }
+
+/* Compact inline note under section heads */
+.seo-inline-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: #6B6B6B;
+    padding: 0.7rem 0.85rem;
+    border-radius: 0.75rem;
+    background: rgba(216, 48, 48, 0.05);
+    border: 1px solid rgba(216, 48, 48, 0.1);
+}
+.seo-inline-note span { flex: 1 1 auto; }
+
+/* Vaccination category modal */
+.vax-modal-hero {
+    background: linear-gradient(135deg, #D83030 0%, #E85555 48%, #EA843F 100%);
+    overflow: hidden;
+}
+.vax-modal-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 100% 0%, rgba(255,255,255,0.22), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 0% 100%, rgba(0,0,0,0.08), transparent 50%);
+    pointer-events: none;
+}
+.vax-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #772017;
+    background: rgba(216, 48, 48, 0.08);
+    border: 1px solid rgba(216, 48, 48, 0.12);
+}
+#vax-modal .vax-anim {
+    opacity: 0;
+    transform: translateY(10px);
+}
+#vax-modal.is-open .vax-anim {
+    animation: vaxFadeUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--vax-i, 0) * 45ms + 80ms);
+}
+@keyframes vaxFadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Soft branded scrollbar inside vaccine modal */
+#vax-modal-body {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(216, 48, 48, 0.35) transparent;
+}
+#vax-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+#vax-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 12px 0;
+}
+#vax-modal-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(216, 48, 48, 0.45), rgba(234, 132, 63, 0.4));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+#vax-modal-body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(216, 48, 48, 0.7), rgba(234, 132, 63, 0.55));
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Sticky CTA bar — always visible while content scrolls */
+.vax-modal-footer {
+    flex: 0 0 auto;
+    padding: 0.85rem 1.15rem 1.1rem;
+    background: rgba(255, 253, 251, 0.96);
+    border-top: 1px solid #F1E7E0;
+    box-shadow: 0 -8px 24px rgba(45, 45, 45, 0.06);
+    backdrop-filter: blur(8px);
+}
+@supports not (backdrop-filter: blur(8px)) {
+    .vax-modal-footer { background: #FFFDFB; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .seo-faq-a, .seo-faq-q svg { transition-duration: 0.01ms; }
+    #vax-modal .vax-anim,
+    #vax-modal.is-open .vax-anim {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+}
+
+/* Child vaccination age tabs + schedule rows */
+.vax-age-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.vax-age-tab {
+    appearance: none;
+    border: 1px solid rgba(216, 48, 48, 0.18);
+    background: #fff;
+    color: #2D2D2D;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 0.65rem 1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.vax-age-tab:hover {
+    border-color: rgba(216, 48, 48, 0.35);
+    background: rgba(216, 48, 48, 0.04);
+}
+.vax-age-tab.is-active {
+    background: #D83030;
+    border-color: #D83030;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(216, 48, 48, 0.22);
+}
+.vax-age-panel { display: none; }
+.vax-age-panel.is-active { display: block; }
+.vax-modal-schedule .vax-age-tabs { margin-bottom: 0.85rem; }
+.vax-modal-schedule .vax-age-group {
+    margin-top: 0.85rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #F1E7E0;
+    border-radius: 1rem;
+    background: #FFFDFB;
+}
+.vax-modal-schedule .vax-age-group-title {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.vax-age-group-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2D2D2D;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid #F1E7E0;
+}
+.vax-rows {
+    display: grid;
+    gap: 0.85rem;
+}
+.vax-row {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #F5EEE8;
+}
+.vax-row:first-child { padding-top: 0; }
+.vax-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+.vax-row-name {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #2D2D2D;
+    margin-bottom: 0.45rem;
+}
+.vax-row-meta {
+    display: grid;
+    gap: 0.45rem;
+}
+@media (min-width: 640px) {
+    .vax-row-meta {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+}
+.vax-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+.vax-meta-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #9A9A9A;
+}
+.vax-meta-value,
+.vax-brand {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: #4B4B4B;
+}
+.vax-brand-pending {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: #8A8A8A;
+    font-style: italic;
+}
