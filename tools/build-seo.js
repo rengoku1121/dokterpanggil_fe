@@ -1710,6 +1710,56 @@ const NAV_LINKS = [
     { label: 'Kontak', i18n: 'nav.contact', href: 'index.html#contact' }
 ];
 
+const NAV_SERVICE_GROUPS = [
+    { key: 'nav.g.main', title: 'Layanan Utama', slugs: ['kunjungan-dokter', 'kunjungan-dokter-spesialis', 'perawatan-lansia', 'konsultasi-online'] },
+    { key: 'nav.g.procedures', title: 'Tindakan Medis', slugs: ['tindakan-medis', 'terapi-infus', 'infus-vitamin', 'terapi-oksigen', 'terapi-nebulizer', 'perawatan-luka', 'pemasangan-ngt', 'pemasangan-kateter', 'suction'] },
+    { key: 'nav.g.exam', title: 'Pemeriksaan', slugs: ['pemeriksaan-kesehatan', 'tes-laboratorium', 'vaksinasi'] },
+    { key: 'nav.g.other', title: 'Layanan Lainnya', slugs: ['perawatan-rumah', 'farmasi'] }
+];
+
+function navServiceLabel(svc) {
+    return { id: svc.name.id, en: svc.name.en };
+}
+
+function navServiceGroupsHtml(prefix, linkClass) {
+    return NAV_SERVICE_GROUPS.map(g => {
+        const items = g.slugs.map(slug => {
+            const svc = SERVICES.filter(s => s.slug === slug)[0];
+            if (!svc) return '';
+            const label = navServiceLabel(svc);
+            return '<a href="' + prefix + 'layanan/' + slug + '.html" class="' + linkClass + '"'
+                + biAttrs(label.id, label.en) + '>' + esc(label.id) + '</a>';
+        }).join('');
+        return '<div class="nav-svc-group">'
+            + '<p class="nav-svc-heading" data-i18n="' + g.key + '">' + esc(g.title) + '</p>'
+            + items
+            + '</div>';
+    }).join('');
+}
+
+function navServicesDesktop(prefix) {
+    return '<div class="nav-dd" data-nav-dd>'
+        + '<button type="button" class="nav-dd-toggle text-sm font-medium text-white/90 hover:text-white transition-colors" aria-expanded="false" aria-haspopup="true" aria-controls="nav-dd-panel">'
+        + '<span data-i18n="nav.services">Layanan</span>'
+        + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>'
+        + '</button>'
+        + '<div id="nav-dd-panel" class="nav-dd-panel" hidden>'
+        + '<div class="nav-dd-grid">' + navServiceGroupsHtml(prefix, 'nav-dd-link') + '</div>'
+        + '<a href="' + prefix + 'layanan/index.html" class="nav-dd-all" data-i18n="nav.allServices">Lihat semua layanan</a>'
+        + '</div></div>';
+}
+
+function navServicesMobile(prefix) {
+    return '<div class="nav-acc" data-nav-acc>'
+        + '<button type="button" class="mobile-nav-link nav-acc-toggle" aria-expanded="false" aria-controls="nav-acc-panel">'
+        + '<span data-i18n="nav.services">Layanan</span>'
+        + '</button>'
+        + '<div id="nav-acc-panel" class="nav-acc-panel" hidden>'
+        + navServiceGroupsHtml(prefix, 'nav-acc-link')
+        + '<a href="' + prefix + 'layanan/index.html" class="nav-acc-all" data-i18n="nav.allServices">Lihat semua layanan</a>'
+        + '</div></div>';
+}
+
 function langSwitch(variant) {
     return '<div class="lang-switch lang-switch--' + variant + '" role="group" aria-label="Language">'
         + '<button type="button" data-lang-btn="id" class="is-active" aria-pressed="true">ID</button>'
@@ -1727,10 +1777,14 @@ function navWaIcon() {
 
 function header(prefix, links) {
     const desktop = links.map(l =>
-        '<a href="' + prefix + l.href + '" data-i18n="' + l.i18n + '" class="text-sm font-medium text-white/90 hover:text-white transition-colors">' + esc(l.label) + '</a>'
+        l.i18n === 'nav.services'
+            ? navServicesDesktop(prefix)
+            : '<a href="' + prefix + l.href + '" data-i18n="' + l.i18n + '" class="text-sm font-medium text-white/90 hover:text-white transition-colors">' + esc(l.label) + '</a>'
     ).join(' ');
     const mobile = links.map(l =>
-        '<a href="' + prefix + l.href + '" data-i18n="' + l.i18n + '" class="mobile-nav-link">' + esc(l.label) + '</a>'
+        l.i18n === 'nav.services'
+            ? navServicesMobile(prefix)
+            : '<a href="' + prefix + l.href + '" data-i18n="' + l.i18n + '" class="mobile-nav-link">' + esc(l.label) + '</a>'
     ).join('');
     const waAskMsg = 'Halo, saya ingin bertanya tentang layanan DokterPanggil di Makassar.';
     const waAskEn = 'Hi, I would like to ask about DokterPanggil services in Makassar.';

@@ -34,6 +34,7 @@
             menuBtn.setAttribute('aria-expanded', String(open));
             menuBtn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
             if (!open) {
+                closeNavAccordions();
                 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 window.setTimeout(function () {
                     if (!menu.classList.contains('is-open')) {
@@ -47,6 +48,37 @@
 
     function closeMenu() { setMenuOpen(false); }
 
+    var NAV_DD_MS = 280;
+    var NAV_ACC_MS = 380;
+    function navPrefersReduce() {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    function hideNavPanelAfter(el, panel, ms) {
+        var hide = function () { if (!el.classList.contains('is-open')) panel.hidden = true; };
+        if (navPrefersReduce()) hide();
+        else setTimeout(hide, ms);
+    }
+
+    function closeNavDropdowns() {
+        document.querySelectorAll('[data-nav-dd]').forEach(function (dd) {
+            dd.classList.remove('is-open');
+            var toggle = dd.querySelector('.nav-dd-toggle');
+            var panel = dd.querySelector('.nav-dd-panel');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+            if (panel) hideNavPanelAfter(dd, panel, NAV_DD_MS);
+        });
+    }
+
+    function closeNavAccordions() {
+        document.querySelectorAll('[data-nav-acc]').forEach(function (acc) {
+            acc.classList.remove('is-open');
+            var toggle = acc.querySelector('.nav-acc-toggle');
+            var panel = acc.querySelector('.nav-acc-panel');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+            if (panel) hideNavPanelAfter(acc, panel, NAV_ACC_MS);
+        });
+    }
+
     if (menuBtn && menu) {
         menuBtn.addEventListener('click', function () {
             setMenuOpen(!menu.classList.contains('is-open'));
@@ -54,16 +86,76 @@
     }
     if (backdrop) backdrop.addEventListener('click', closeMenu);
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMenu();
+        if (e.key === 'Escape') {
+            closeNavDropdowns();
+            closeMenu();
+        }
     });
     window.addEventListener('resize', function () {
         if (window.matchMedia('(min-width: 1024px)').matches) closeMenu();
+        else closeNavDropdowns();
     });
     if (menu) {
         menu.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', closeMenu);
         });
     }
+
+    (function initNavMenus() {
+        var desktopMq = window.matchMedia('(min-width: 1024px)');
+        document.querySelectorAll('[data-nav-dd]').forEach(function (dd) {
+            var toggle = dd.querySelector('.nav-dd-toggle');
+            var panel = dd.querySelector('.nav-dd-panel');
+            if (!toggle || !panel) return;
+            var closeTimer = null;
+            function open() {
+                if (!desktopMq.matches) return;
+                if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+                panel.hidden = false;
+                toggle.setAttribute('aria-expanded', 'true');
+                requestAnimationFrame(function () { dd.classList.add('is-open'); });
+            }
+            function close() {
+                dd.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                hideNavPanelAfter(dd, panel, NAV_DD_MS);
+            }
+            function scheduleClose() {
+                if (closeTimer) clearTimeout(closeTimer);
+                closeTimer = setTimeout(close, 120);
+            }
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (!desktopMq.matches) return;
+                if (dd.classList.contains('is-open')) close();
+                else open();
+            });
+            dd.addEventListener('mouseenter', open);
+            dd.addEventListener('mouseleave', function () {
+                if (desktopMq.matches) scheduleClose();
+            });
+            document.addEventListener('click', function (e) {
+                if (!dd.contains(e.target)) close();
+            });
+        });
+        document.querySelectorAll('[data-nav-acc]').forEach(function (acc) {
+            var toggle = acc.querySelector('.nav-acc-toggle');
+            var panel = acc.querySelector('.nav-acc-panel');
+            if (!toggle || !panel) return;
+            toggle.addEventListener('click', function () {
+                var next = !acc.classList.contains('is-open');
+                toggle.setAttribute('aria-expanded', String(next));
+                if (next) {
+                    panel.hidden = false;
+                    requestAnimationFrame(function () { acc.classList.add('is-open'); });
+                    acc.scrollIntoView({ block: 'nearest' });
+                } else {
+                    acc.classList.remove('is-open');
+                    hideNavPanelAfter(acc, panel, NAV_ACC_MS);
+                }
+            });
+        });
+    })();
 
     /* FAQ accordion */
     document.addEventListener('click', function (e) {
@@ -95,6 +187,11 @@
             'nav.doctors': 'Temukan Dokter',
             'nav.locations': 'Lokasi',
             'nav.contact': 'Kontak',
+            'nav.allServices': 'Lihat semua layanan',
+            'nav.g.main': 'Layanan Utama',
+            'nav.g.procedures': 'Tindakan Medis',
+            'nav.g.exam': 'Pemeriksaan',
+            'nav.g.other': 'Layanan Lainnya',
             'btn.book': 'Pesan Sekarang',
             'cta.book': 'Pesan Sekarang',
             'cta.ask': 'Chat WhatsApp',
@@ -122,6 +219,11 @@
             'nav.doctors': 'Find a Doctor',
             'nav.locations': 'Locations',
             'nav.contact': 'Contact',
+            'nav.allServices': 'See all services',
+            'nav.g.main': 'Main Services',
+            'nav.g.procedures': 'Medical Procedures',
+            'nav.g.exam': 'Health Checks',
+            'nav.g.other': 'Other Services',
             'btn.book': 'Book Now',
             'cta.book': 'Book Now',
             'cta.ask': 'Chat WhatsApp',

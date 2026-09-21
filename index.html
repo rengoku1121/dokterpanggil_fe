@@ -54,7 +54,7 @@
   <header id="main-header" class="sticky top-0 z-50 w-full bg-primary shadow-md">
    <div class="nav-bar max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
     <a href="#home" class="flex items-center relative z-[60] min-w-0" aria-label="DokterPanggil"><img src="assets/images/logo-white.png" alt="DokterPanggil" class="h-9 w-auto" width="140" height="36" decoding="async"></a>
-    <nav class="hidden lg:flex items-center gap-6" aria-label="Menu utama"><a href="#home" data-i18n="nav.home" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Beranda</a> <a href="#about" data-i18n="nav.about" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Tentang Kami</a> <a href="layanan/index.html" data-i18n="nav.services" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Layanan</a> <a href="dokter/index.html" data-i18n="nav.doctors" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Temukan Dokter</a> <a href="#locations" data-i18n="nav.locations" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Lokasi</a> <a href="#contact" data-i18n="nav.contact" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Kontak</a>
+    <nav class="hidden lg:flex items-center gap-6" aria-label="Menu utama"><a href="#home" data-i18n="nav.home" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Beranda</a> <a href="#about" data-i18n="nav.about" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Tentang Kami</a> <div class="nav-dd" data-nav-dd><button type="button" class="nav-dd-toggle text-sm font-medium text-white/90 hover:text-white transition-colors" aria-expanded="false" aria-haspopup="true" aria-controls="nav-dd-panel"><span data-i18n="nav.services">Layanan</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="nav-dd-panel" class="nav-dd-panel" hidden><div class="nav-dd-grid"><div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.main">Layanan Utama</p><a href="layanan/kunjungan-dokter.html" class="nav-dd-link" data-i18n-id="Dokter Umum 24 Jam" data-i18n-en="GP Visit 24 Hours">Dokter Umum 24 Jam</a><a href="layanan/kunjungan-dokter-spesialis.html" class="nav-dd-link" data-i18n-id="Dokter Spesialis" data-i18n-en="Specialist Doctor">Dokter Spesialis</a><a href="layanan/perawatan-lansia.html" class="nav-dd-link" data-i18n-id="Rawat Inap di Rumah" data-i18n-en="Home Inpatient Care">Rawat Inap di Rumah</a><a href="layanan/konsultasi-online.html" class="nav-dd-link" data-i18n-id="Konsultasi Online" data-i18n-en="Online Consultation">Konsultasi Online</a></div><div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.procedures">Tindakan Medis</p><a href="layanan/tindakan-medis.html" class="nav-dd-link" data-i18n-id="Tindakan Medis" data-i18n-en="Medical Procedures">Tindakan Medis</a><a href="layanan/terapi-infus.html" class="nav-dd-link" data-i18n-id="Terapi Infus" data-i18n-en="Infusion Therapy">Terapi Infus</a><a href="layanan/infus-vitamin.html" class="nav-dd-link" data-i18n-id="Infus Vitamin" data-i18n-en="Vitamin Infusion">Infus Vitamin</a><a href="layanan/terapi-oksigen.html" class="nav-dd-link" data-i18n-id="Terapi Oksigen" data-i18n-en="Oxygen Therapy">Terapi Oksigen</a><a href="layanan/terapi-nebulizer.html" class="nav-dd-link" data-i18n-id="Terapi Nebulizer" data-i18n-en="Nebulizer Therapy">Terapi Nebulizer</a><a href="layanan/perawatan-luka.html" class="nav-dd-link" data-i18n-id="Perawatan Luka" data-i18n-en="Wound Care">Perawatan Luka</a><a href="layanan/pemasangan-ngt.html" class="nav-dd-link" data-i18n-id="Pemasangan Selang Makan" data-i18n-en="Feeding Tube Placement">Pemasangan Selang Makan</a><a href="layanan/pemasangan-kateter.html" class="nav-dd-link" data-i18n-id="Pemasangan Kateter Urin" data-i18n-en="Urinary Catheter Placement">Pemasangan Kateter Urin</a><a href="layanan/suction.html" class="nav-dd-link" data-i18n-id="Suction / Sedot Dahak" data-i18n-en="Suction / Phlegm Clearance">Suction / Sedot Dahak</a></div><div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.exam">Pemeriksaan</p><a href="layanan/pemeriksaan-kesehatan.html" class="nav-dd-link" data-i18n-id="Medical Check-Up di Rumah" data-i18n-en="Medical Check-Up at Home">Medical Check-Up di Rumah</a><a href="layanan/tes-laboratorium.html" class="nav-dd-link" data-i18n-id="Laboratorium" data-i18n-en="Laboratory">Laboratorium</a><a href="layanan/vaksinasi.html" class="nav-dd-link" data-i18n-id="Vaksinasi" data-i18n-en="Vaccination">Vaksinasi</a></div><div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.other">Layanan Lainnya</p><a href="layanan/perawatan-rumah.html" class="nav-dd-link" data-i18n-id="Perawat Homecare" data-i18n-en="Homecare Nursing">Perawat Homecare</a><a href="layanan/farmasi.html" class="nav-dd-link" data-i18n-id="Farmasi" data-i18n-en="Pharmacy">Farmasi</a></div></div><a href="layanan/index.html" class="nav-dd-all" data-i18n="nav.allServices">Lihat semua layanan</a></div></div> <a href="dokter/index.html" data-i18n="nav.doctors" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Temukan Dokter</a> <a href="#locations" data-i18n="nav.locations" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Lokasi</a> <a href="#contact" data-i18n="nav.contact" class="text-sm font-medium text-white/90 hover:text-white transition-colors">Kontak</a>
     </nav>
     <div class="nav-toolbar">
      <div class="hidden lg:flex items-center gap-3">
@@ -86,7 +86,16 @@
     <nav class="mobile-panel-nav" aria-label="Menu mobile">
      <a href="#home" data-i18n="nav.home" class="mobile-nav-link">Beranda</a>
      <a href="#about" data-i18n="nav.about" class="mobile-nav-link">Tentang Kami</a>
-     <a href="layanan/index.html" data-i18n="nav.services" class="mobile-nav-link">Layanan</a>
+     <div class="nav-acc" data-nav-acc>
+      <button type="button" class="mobile-nav-link nav-acc-toggle" aria-expanded="false" aria-controls="nav-acc-panel"><span data-i18n="nav.services">Layanan</span></button>
+      <div id="nav-acc-panel" class="nav-acc-panel" hidden>
+       <div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.main">Layanan Utama</p><a href="layanan/kunjungan-dokter.html" class="nav-acc-link" data-i18n-id="Dokter Umum 24 Jam" data-i18n-en="GP Visit 24 Hours">Dokter Umum 24 Jam</a><a href="layanan/kunjungan-dokter-spesialis.html" class="nav-acc-link" data-i18n-id="Dokter Spesialis" data-i18n-en="Specialist Doctor">Dokter Spesialis</a><a href="layanan/perawatan-lansia.html" class="nav-acc-link" data-i18n-id="Rawat Inap di Rumah" data-i18n-en="Home Inpatient Care">Rawat Inap di Rumah</a><a href="layanan/konsultasi-online.html" class="nav-acc-link" data-i18n-id="Konsultasi Online" data-i18n-en="Online Consultation">Konsultasi Online</a></div>
+       <div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.procedures">Tindakan Medis</p><a href="layanan/tindakan-medis.html" class="nav-acc-link" data-i18n-id="Tindakan Medis" data-i18n-en="Medical Procedures">Tindakan Medis</a><a href="layanan/terapi-infus.html" class="nav-acc-link" data-i18n-id="Terapi Infus" data-i18n-en="Infusion Therapy">Terapi Infus</a><a href="layanan/infus-vitamin.html" class="nav-acc-link" data-i18n-id="Infus Vitamin" data-i18n-en="Vitamin Infusion">Infus Vitamin</a><a href="layanan/terapi-oksigen.html" class="nav-acc-link" data-i18n-id="Terapi Oksigen" data-i18n-en="Oxygen Therapy">Terapi Oksigen</a><a href="layanan/terapi-nebulizer.html" class="nav-acc-link" data-i18n-id="Terapi Nebulizer" data-i18n-en="Nebulizer Therapy">Terapi Nebulizer</a><a href="layanan/perawatan-luka.html" class="nav-acc-link" data-i18n-id="Perawatan Luka" data-i18n-en="Wound Care">Perawatan Luka</a><a href="layanan/pemasangan-ngt.html" class="nav-acc-link" data-i18n-id="Pemasangan Selang Makan" data-i18n-en="Feeding Tube Placement">Pemasangan Selang Makan</a><a href="layanan/pemasangan-kateter.html" class="nav-acc-link" data-i18n-id="Pemasangan Kateter Urin" data-i18n-en="Urinary Catheter Placement">Pemasangan Kateter Urin</a><a href="layanan/suction.html" class="nav-acc-link" data-i18n-id="Suction / Sedot Dahak" data-i18n-en="Suction / Phlegm Clearance">Suction / Sedot Dahak</a></div>
+       <div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.exam">Pemeriksaan</p><a href="layanan/pemeriksaan-kesehatan.html" class="nav-acc-link" data-i18n-id="Medical Check-Up di Rumah" data-i18n-en="Medical Check-Up at Home">Medical Check-Up di Rumah</a><a href="layanan/tes-laboratorium.html" class="nav-acc-link" data-i18n-id="Laboratorium" data-i18n-en="Laboratory">Laboratorium</a><a href="layanan/vaksinasi.html" class="nav-acc-link" data-i18n-id="Vaksinasi" data-i18n-en="Vaccination">Vaksinasi</a></div>
+       <div class="nav-svc-group"><p class="nav-svc-heading" data-i18n="nav.g.other">Layanan Lainnya</p><a href="layanan/perawatan-rumah.html" class="nav-acc-link" data-i18n-id="Perawat Homecare" data-i18n-en="Homecare Nursing">Perawat Homecare</a><a href="layanan/farmasi.html" class="nav-acc-link" data-i18n-id="Farmasi" data-i18n-en="Pharmacy">Farmasi</a></div>
+       <a href="layanan/index.html" class="nav-acc-all" data-i18n="nav.allServices">Lihat semua layanan</a>
+      </div>
+     </div>
      <a href="dokter/index.html" data-i18n="nav.doctors" class="mobile-nav-link">Temukan Dokter</a>
      <a href="#locations" data-i18n="nav.locations" class="mobile-nav-link">Lokasi</a>
      <a href="#contact" data-i18n="nav.contact" class="mobile-nav-link">Kontak</a>
@@ -105,68 +114,78 @@
    <section id="home" class="relative w-full overflow-hidden bg-charcoal">
     <!-- Slide 1 -->
     <div class="hero-slide active">
-     <img src="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?fm=jpg&amp;q=75&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Dokter Umum 24 Jam datang ke rumah" class="absolute inset-0 w-full h-full object-cover object-center" fetchpriority="high" decoding="async" sizes="100vw">
-     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25"></div>
+     <img src="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?fm=jpg&amp;q=75&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Dokter Umum 24 Jam datang ke rumah" class="hero-photo hero-photo--1" fetchpriority="high" decoding="async" sizes="100vw">
+     <div class="hero-shade"></div>
      <div class="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
       <div class="max-w-2xl text-white">
        <span data-i18n="hero.s1badge" class="hero-anim inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4 bg-primary text-white">Dokter Umum 24 Jam</span>
-       <h1 class="hero-anim text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-        <span data-i18n="hero.s1title" class="block">Butuh Dokter? Kami siap datang 24 jam</span>
-        <span data-i18n="hero.s1lead" class="block mt-3 text-xl md:text-2xl font-semibold leading-snug text-white/95">Dokter langsung ke rumah Anda untuk pemeriksaan, pengobatan, hingga tindakan medis ringan.</span>
-       </h1>
-       <div class="hero-anim flex flex-wrap gap-2 mb-8" aria-label="Keunggulan">
+       <h1 data-i18n="hero.s1title" class="hero-anim hero-title">Butuh Dokter? Kami siap datang 24 jam</h1>
+       <p data-i18n="hero.s1lead" class="hero-anim hero-sub">Dokter langsung ke rumah Anda untuk pemeriksaan, pengobatan, hingga tindakan medis ringan.</p>
+       <div class="hero-anim flex flex-wrap gap-2 mb-5 md:mb-8" aria-label="Keunggulan">
         <span data-i18n="hero.s1t1" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">24 Jam</span>
         <span data-i18n="hero.s1t2" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">Visit ke Rumah</span>
-        <span data-i18n="hero.s1t3" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">Dokter berpengalaman</span>
        </div>
-       <div class="hero-anim flex flex-wrap gap-3">
-        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20panggil%20dokter%20umum%20ke%20rumah%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s1cta1" data-wa-id="Halo, saya ingin panggil dokter umum ke rumah di Makassar." data-wa-en="Hi, I would like to call a GP home visit in Makassar." class="px-7 py-3.5 rounded-full font-semibold text-base bg-primary text-white shadow-lg hover:scale-105 transition-transform">Pesan Sekarang</a>
-        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20buat%20janji%20temu%20dokter%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s1cta2" data-wa-id="Halo, saya ingin buat janji temu dokter di Makassar." data-wa-en="Hi, I would like to book a doctor appointment in Makassar." class="px-7 py-3.5 rounded-full font-semibold text-base bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">Chat WhatsApp</a>
+       <div class="hero-anim hero-cta-row">
+        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20panggil%20dokter%20umum%20ke%20rumah%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s1cta1" data-wa-id="Halo, saya ingin panggil dokter umum ke rumah di Makassar." data-wa-en="Hi, I would like to call a GP home visit in Makassar." class="hero-cta bg-primary text-white shadow-lg hover:scale-105 transition-transform">Pesan Sekarang</a>
+        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20buat%20janji%20temu%20dokter%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s1cta2" data-wa-id="Halo, saya ingin buat janji temu dokter di Makassar." data-wa-en="Hi, I would like to book a doctor appointment in Makassar." class="hero-cta hero-cta-ghost bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">Chat WhatsApp</a>
        </div>
       </div>
      </div>
     </div>
     <!-- Slide 2 -->
     <div class="hero-slide">
-     <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?fm=jpg&amp;q=70&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Dokter spesialis siap konsultasi" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" decoding="async" sizes="100vw">
-     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25"></div>
+     <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?fm=jpg&amp;q=70&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Dokter spesialis siap konsultasi" class="hero-photo hero-photo--2" loading="lazy" decoding="async" sizes="100vw">
+     <div class="hero-shade"></div>
      <div class="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
       <div class="max-w-2xl text-white">
        <span data-i18n="hero.s2badge" class="hero-anim inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4 bg-primary text-white">Temukan Dokter Spesialis</span>
-       <h1 data-i18n="hero.s2title" class="hero-anim text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">Dokter Spesialis untuk Perawatan yang Tepat</h1>
-       <p data-i18n="hero.s2sub" class="hero-anim text-lg md:text-xl mb-8 leading-relaxed text-white/90 max-w-xl">Cari dokter spesialis berdasarkan nama, bidang keahlian, atau kondisi medis</p>
-       <div class="hero-anim flex flex-wrap gap-3">
-        <a href="dokter-spesialis/index.html" data-i18n="hero.s2cta1" class="px-7 py-3.5 rounded-full font-semibold text-base bg-primary text-white shadow-lg hover:scale-105 transition-transform">Temukan Dokter Spesialis</a>
-        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20buat%20janji%20temu%20dokter%20spesialis%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s2cta2" data-wa-id="Halo, saya ingin buat janji temu dokter spesialis di Makassar." data-wa-en="Hi, I would like to book a specialist appointment in Makassar." class="px-7 py-3.5 rounded-full font-semibold text-base bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">Chat WhatsApp</a>
+       <h1 data-i18n="hero.s2title" class="hero-anim hero-title">Dokter Spesialis untuk Perawatan yang Tepat</h1>
+       <p data-i18n="hero.s2sub" class="hero-anim hero-sub">Cari dokter spesialis berdasarkan nama, bidang keahlian, atau kondisi medis</p>
+       <div class="hero-anim flex flex-wrap gap-2 mb-5 md:mb-8" aria-label="Keunggulan">
+        <span data-i18n="hero.s2t1" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">Sesuai Bidang</span>
+        <span data-i18n="hero.s2t2" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">Visit ke Rumah</span>
+       </div>
+       <div class="hero-anim hero-cta-row">
+        <a href="dokter-spesialis/index.html" data-i18n="hero.s2cta1" class="hero-cta bg-primary text-white shadow-lg hover:scale-105 transition-transform">Temukan Dokter Spesialis</a>
+        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20buat%20janji%20temu%20dokter%20spesialis%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s2cta2" data-wa-id="Halo, saya ingin buat janji temu dokter spesialis di Makassar." data-wa-en="Hi, I would like to book a specialist appointment in Makassar." class="hero-cta hero-cta-ghost bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">Chat WhatsApp</a>
        </div>
       </div>
      </div>
     </div>
     <!-- Slide 3 -->
     <div class="hero-slide">
-     <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?fm=jpg&amp;q=70&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Homecare 24 jam di rumah" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" decoding="async" sizes="100vw">
-     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25"></div>
+     <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?fm=jpg&amp;q=70&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Homecare 24 jam di rumah" class="hero-photo hero-photo--3" loading="lazy" decoding="async" sizes="100vw">
+     <div class="hero-shade"></div>
      <div class="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
       <div class="max-w-2xl text-white">
        <span data-i18n="hero.s3badge" class="hero-anim inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4 bg-primary text-white">Homecare 24 jam</span>
-       <h1 data-i18n="hero.s3title" class="hero-anim text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">Layanan Kesehatan Lengkap, Langsung di Rumah Anda</h1>
-       <p data-i18n="hero.s3sub" class="hero-anim text-lg md:text-xl mb-8 leading-relaxed text-white/90 max-w-xl">Dokter, Perawat, Laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan homecare, menghadirkan perawatan yang lebih nyaman langsung di Rumah Anda</p>
-       <div class="hero-anim flex flex-wrap gap-3">
-        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20kesehatan%20ke%20rumah%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s3cta1" data-wa-id="Halo, saya ingin pesan layanan kesehatan ke rumah di Makassar." data-wa-en="Hi, I would like to book a home healthcare service in Makassar." class="px-7 py-3.5 rounded-full font-semibold text-base bg-primary text-white shadow-lg hover:scale-105 transition-transform">Pesan Sekarang</a>
-        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20buat%20janji%20temu%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s3cta2" data-wa-id="Halo, saya ingin buat janji temu di Makassar." data-wa-en="Hi, I would like to book an appointment in Makassar." class="px-7 py-3.5 rounded-full font-semibold text-base bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">Chat WhatsApp</a>
+       <h1 data-i18n="hero.s3title" class="hero-anim hero-title">Layanan Kesehatan Lengkap, Langsung di Rumah Anda</h1>
+       <p data-i18n="hero.s3sub" class="hero-anim hero-sub">Dokter, Perawat, Laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan homecare, menghadirkan perawatan yang lebih nyaman langsung di Rumah Anda</p>
+       <div class="hero-anim flex flex-wrap gap-2 mb-5 md:mb-8" aria-label="Keunggulan">
+        <span data-i18n="hero.s3t1" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">Dokter &amp; Perawat</span>
+        <span data-i18n="hero.s3t2" class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">Langsung di Rumah</span>
+       </div>
+       <div class="hero-anim hero-cta-row">
+        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20kesehatan%20ke%20rumah%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s3cta1" data-wa-id="Halo, saya ingin pesan layanan kesehatan ke rumah di Makassar." data-wa-en="Hi, I would like to book a home healthcare service in Makassar." class="hero-cta bg-primary text-white shadow-lg hover:scale-105 transition-transform">Pesan Sekarang</a>
+        <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20buat%20janji%20temu%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="hero.s3cta2" data-wa-id="Halo, saya ingin buat janji temu di Makassar." data-wa-en="Hi, I would like to book an appointment in Makassar." class="hero-cta hero-cta-ghost bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">Chat WhatsApp</a>
        </div>
       </div>
      </div>
-    </div><button id="hero-prev" class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white flex items-center justify-center transition-colors" aria-label="Slide sebelumnya"> <i data-lucide="chevron-left" style="width:24px;height:24px;color:white"></i> </button> <button id="hero-next" class="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white flex items-center justify-center transition-colors" aria-label="Slide berikutnya"> <i data-lucide="chevron-right" style="width:24px;height:24px;color:white"></i> </button>
-    <div id="hero-dots" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3"></div>
+    </div>
+    <div class="hero-controls" role="group" aria-label="Navigasi slide">
+     <button type="button" id="hero-prev" class="hero-nav-btn" aria-label="Slide sebelumnya"><i data-lucide="chevron-left" style="width:22px;height:22px"></i></button>
+     <div id="hero-dots" class="hero-dots"></div>
+     <button type="button" id="hero-next" class="hero-nav-btn" aria-label="Slide berikutnya"><i data-lucide="chevron-right" style="width:22px;height:22px"></i></button>
+    </div>
    </section><!-- About -->
    <section id="about" class="w-full py-16 bg-warm-gray">
-    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-     <div class="rounded-3xl overflow-hidden shadow-xl fade-up"><img src="https://plus.unsplash.com/premium_photo-1664475811964-75af7d90ee4b?fm=jpg&amp;q=75&amp;w=800&amp;auto=format&amp;fit=crop" alt="Perawat mendampingi pasien lansia di rumah" class="w-full h-[380px] object-cover" loading="lazy">
+    <div class="about-layout max-w-7xl mx-auto px-4">
+     <h2 data-i18n="about.title" class="about-title text-3xl font-bold fade-up">Layanan Kesehatan, Lebih Dekat dengan Anda</h2>
+     <div class="about-photo rounded-3xl overflow-hidden shadow-xl fade-up">
+      <img src="https://plus.unsplash.com/premium_photo-1664475811964-75af7d90ee4b?fm=jpg&amp;q=75&amp;w=800&amp;auto=format&amp;fit=crop" alt="Perawat mendampingi pasien lansia di rumah" class="w-full h-[380px] object-cover" loading="lazy">
      </div>
-     <div class="fade-up">
-      <h2 data-i18n="about.title" class="text-3xl font-bold mb-4">Layanan Kesehatan, Lebih Dekat dengan Anda</h2>
-      <p data-i18n="about.desc" class="text-base leading-relaxed mb-6 text-gray-600">Dokter Panggil di bawah CV. Mentari Kasih Indonesia adalah layanan kesehatan berbasis homecare yang memberikan layanan 24 jam dengan menghadirkan dokter, perawat, dan tenaga kesehatan langsung ke rumah Anda. Pemeriksaan laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan agar perawatan lebih mudah, nyaman, dan dekat bagi pasien dan keluarga.</p>
+     <div class="about-body fade-up">
+      <p data-i18n="about.desc" class="about-desc mb-6 text-gray-600 text-justify">Dokter Panggil di bawah CV. Mentari Kasih Indonesia adalah layanan kesehatan berbasis homecare yang memberikan layanan 24 jam dengan menghadirkan dokter, perawat, dan tenaga kesehatan langsung ke rumah Anda. Pemeriksaan laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan agar perawatan lebih mudah, nyaman, dan dekat bagi pasien dan keluarga.</p>
       <div class="grid grid-cols-2 gap-3">
        <div class="flex items-center gap-2">
         <i data-lucide="heart" style="width:18px;height:18px;color:#D83030"></i><span data-i18n="about.v1" class="text-sm font-medium">Datang ke Rumah</span>
@@ -184,48 +203,129 @@
      </div>
     </div>
    </section><!-- Services teaser → halaman layanan -->
-   <section id="services" class="w-full py-16 bg-white">
+   <section id="services" class="w-full py-14 sm:py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
-     <div class="text-center fade-up">
-      <h2 data-i18n="svc.title" class="text-3xl font-bold mb-3">Layanan Kami</h2>
-      <p data-i18n="svc.subtitle" class="text-lg text-gray-600 mb-8">Beragam layanan kesehatan untuk kebutuhan Anda dan Keluarga, langsung di rumah</p>
+     <div class="home-svc-head fade-up">
+      <p class="home-svc-kicker" data-i18n-id="Layanan kesehatan ke rumah" data-i18n-en="Home healthcare">Layanan kesehatan ke rumah</p>
+      <h2 data-i18n="svc.title" class="text-3xl font-bold mb-2">Layanan Kami</h2>
+      <p data-i18n="svc.subtitle" class="text-sm sm:text-base text-gray-600 max-w-2xl">Beragam layanan kesehatan untuk kebutuhan Anda dan Keluarga, langsung di rumah</p>
+     </div>
+     <div class="home-svc-grid fade-up">
+      <a href="layanan/kunjungan-dokter.html" class="home-svc-card">
+       <div class="home-svc-card-media"><img src="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Dokter umum datang ke rumah" loading="lazy" decoding="async"></div>
+       <div class="home-svc-card-body">
+        <span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="stethoscope"></i></span>
+        <h3 data-i18n-id="Dokter Umum 24 Jam" data-i18n-en="GP Visit 24 Hours">Dokter Umum 24 Jam</h3>
+        <p data-i18n-id="Dokter datang ke rumah, siap 24 jam." data-i18n-en="A doctor comes to your home, available 24 hours.">Dokter datang ke rumah, siap 24 jam.</p>
+       </div>
+      </a>
+      <a href="layanan/kunjungan-dokter-spesialis.html" class="home-svc-card">
+       <div class="home-svc-card-media"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Dokter spesialis" loading="lazy" decoding="async"></div>
+       <div class="home-svc-card-body">
+        <span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="heart-pulse"></i></span>
+        <h3 data-i18n-id="Dokter Spesialis" data-i18n-en="Specialist Doctor">Dokter Spesialis</h3>
+        <p data-i18n-id="Spesialis sesuai kebutuhan, langsung di rumah." data-i18n-en="The right specialist, at your home.">Spesialis sesuai kebutuhan, langsung di rumah.</p>
+       </div>
+      </a>
+      <a href="layanan/perawatan-rumah.html" class="home-svc-card">
+       <div class="home-svc-card-media"><img src="https://plus.unsplash.com/premium_photo-1664475811964-75af7d90ee4b?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Perawat homecare" loading="lazy" decoding="async"></div>
+       <div class="home-svc-card-body">
+        <span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="heart-handshake"></i></span>
+        <h3 data-i18n-id="Perawat Homecare" data-i18n-en="Homecare Nursing">Perawat Homecare</h3>
+        <p data-i18n-id="Pendampingan perawat profesional di rumah." data-i18n-en="Professional nurse support at home.">Pendampingan perawat profesional di rumah.</p>
+       </div>
+      </a>
+      <a href="layanan/perawatan-lansia.html" class="home-svc-card">
+       <div class="home-svc-card-media"><img src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Rawat inap di rumah" loading="lazy" decoding="async"></div>
+       <div class="home-svc-card-body">
+        <span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="helping-hand"></i></span>
+        <h3 data-i18n-id="Rawat Inap di Rumah" data-i18n-en="Home Inpatient Care">Rawat Inap di Rumah</h3>
+        <p data-i18n-id="Perawatan terpantau dokter dan perawat." data-i18n-en="Care monitored by a doctor and nurse.">Perawatan terpantau dokter dan perawat.</p>
+       </div>
+      </a>
+      <a href="layanan/konsultasi-online.html" class="home-svc-card">
+       <div class="home-svc-card-media"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Konsultasi online" loading="lazy" decoding="async"></div>
+       <div class="home-svc-card-body">
+        <span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="monitor-smartphone"></i></span>
+        <h3 data-i18n-id="Konsultasi Online" data-i18n-en="Online Consultation">Konsultasi Online</h3>
+        <p data-i18n-id="Chat, telepon, atau video call dengan dokter." data-i18n-en="Chat, call, or video consult a doctor.">Chat, telepon, atau video call dengan dokter.</p>
+       </div>
+      </a>
+      <a href="layanan/pemeriksaan-kesehatan.html" class="home-svc-card">
+       <div class="home-svc-card-media"><img src="https://images.unsplash.com/photo-1631815590058-860e4f83c1e8?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Medical check-up di rumah" loading="lazy" decoding="async"></div>
+       <div class="home-svc-card-body">
+        <span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="clipboard-check"></i></span>
+        <h3 data-i18n-id="Medical Check-Up di Rumah" data-i18n-en="Medical Check-Up at Home">Medical Check-Up di Rumah</h3>
+        <p data-i18n-id="Pemeriksaan kesehatan menyeluruh di rumah." data-i18n-en="A comprehensive health check at home.">Pemeriksaan kesehatan menyeluruh di rumah.</p>
+       </div>
+      </a>
+     </div>
+     <div class="home-svc-proc fade-up">
+      <div class="home-svc-proc-head">
+       <div>
+        <h3 data-i18n-id="Tindakan Medis" data-i18n-en="Medical Procedures">Tindakan Medis</h3>
+        <p data-i18n-id="Infus, oksigen, perawatan luka, dan tindakan keperawatan lainnya di rumah." data-i18n-en="Infusion, oxygen, wound care, and other nursing procedures at home.">Infus, oksigen, perawatan luka, dan tindakan keperawatan lainnya di rumah.</p>
+       </div>
+       <a href="layanan/tindakan-medis.html" class="home-svc-proc-all" data-i18n-id="Lihat semua →" data-i18n-en="View all →">Lihat semua →</a>
+      </div>
+      <div class="home-svc-proc-grid">
+       <a href="layanan/terapi-infus.html" class="home-svc-chip"><i data-lucide="syringe"></i><span data-i18n-id="Terapi Infus" data-i18n-en="Infusion Therapy">Terapi Infus</span></a>
+       <a href="layanan/infus-vitamin.html" class="home-svc-chip"><i data-lucide="droplets"></i><span data-i18n-id="Infus Vitamin" data-i18n-en="Vitamin Infusion">Infus Vitamin</span></a>
+       <a href="layanan/terapi-oksigen.html" class="home-svc-chip"><i data-lucide="wind"></i><span data-i18n-id="Terapi Oksigen" data-i18n-en="Oxygen Therapy">Terapi Oksigen</span></a>
+       <a href="layanan/terapi-nebulizer.html" class="home-svc-chip"><i data-lucide="cloud"></i><span data-i18n-id="Terapi Nebulizer" data-i18n-en="Nebulizer Therapy">Terapi Nebulizer</span></a>
+       <a href="layanan/perawatan-luka.html" class="home-svc-chip"><i data-lucide="plus-square"></i><span data-i18n-id="Perawatan Luka" data-i18n-en="Wound Care">Perawatan Luka</span></a>
+       <a href="layanan/pemasangan-ngt.html" class="home-svc-chip"><i data-lucide="clipboard-list"></i><span data-i18n-id="Pemasangan Selang Makan" data-i18n-en="Feeding Tube Placement">Pemasangan Selang Makan</span></a>
+       <a href="layanan/pemasangan-kateter.html" class="home-svc-chip"><i data-lucide="droplet"></i><span data-i18n-id="Pemasangan Kateter Urin" data-i18n-en="Urinary Catheter Placement">Pemasangan Kateter Urin</span></a>
+       <a href="layanan/suction.html" class="home-svc-chip"><i data-lucide="activity"></i><span data-i18n-id="Suction / Sedot Dahak" data-i18n-en="Suction / Phlegm Clearance">Suction / Sedot Dahak</span></a>
+      </div>
+     </div>
+     <div class="home-svc-tabs fade-up" data-svc-tabs>
+      <div class="home-svc-tabs-card">
+       <div class="home-svc-tabs-bar" role="tablist" aria-label="Kategori layanan" data-tab="0">
+        <button type="button" role="tab" id="svc-tab-exam" aria-controls="svc-panel-exam" aria-selected="true" tabindex="0" data-i18n-id="Pemeriksaan" data-i18n-en="Screening &amp; Tests">Pemeriksaan</button>
+        <button type="button" role="tab" id="svc-tab-other" aria-controls="svc-panel-other" aria-selected="false" tabindex="-1" data-i18n-id="Layanan Lainnya" data-i18n-en="Other Services">Layanan Lainnya</button>
+       </div>
+       <div id="svc-panel-exam" class="home-svc-tabs-panel" role="tabpanel" aria-labelledby="svc-tab-exam">
+        <p data-i18n-id="MCU, laboratorium, dan vaksinasi langsung di rumah." data-i18n-en="Check-ups, lab tests, and vaccination at home.">MCU, laboratorium, dan vaksinasi langsung di rumah.</p>
+        <div class="home-svc-cat-list">
+         <a href="layanan/pemeriksaan-kesehatan.html" data-i18n-id="Medical Check-Up di Rumah" data-i18n-en="Medical Check-Up at Home">Medical Check-Up di Rumah</a>
+         <a href="layanan/tes-laboratorium.html" data-i18n-id="Laboratorium" data-i18n-en="Laboratory">Laboratorium</a>
+         <a href="layanan/vaksinasi.html" data-i18n-id="Vaksinasi" data-i18n-en="Vaccination">Vaksinasi</a>
+        </div>
+       </div>
+       <div id="svc-panel-other" class="home-svc-tabs-panel" role="tabpanel" aria-labelledby="svc-tab-other" hidden>
+        <p data-i18n-id="Pendampingan perawat dan pengantaran obat ke rumah." data-i18n-en="Home nursing support and medicine delivery.">Pendampingan perawat dan pengantaran obat ke rumah.</p>
+        <div class="home-svc-cat-list">
+         <a href="layanan/perawatan-rumah.html" data-i18n-id="Perawat Homecare" data-i18n-en="Homecare Nursing">Perawat Homecare</a>
+         <a href="layanan/farmasi.html" data-i18n-id="Farmasi" data-i18n-en="Pharmacy">Farmasi</a>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="home-svc-foot fade-up">
       <a href="layanan/index.html" data-i18n="svc.all" class="inline-flex px-7 py-3.5 rounded-full text-sm font-semibold bg-primary text-white hover:scale-105 transition-transform">Lihat semua layanan →</a>
      </div>
     </div>
    </section><!-- Why Choose Us -->
-   <section class="w-full py-16 bg-cream">
+   <section class="why-section">
     <div class="max-w-7xl mx-auto px-4">
-     <div class="text-center mb-12 fade-up">
-      <h2 data-i18n="why.title" class="text-3xl font-bold mb-3">Mengapa Memilih Kami</h2>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 fade-up">
-      <div class="text-center p-5">
-       <div class="w-14 h-14 mx-auto mb-3 bg-white rounded-2xl shadow flex items-center justify-center">
-        <i data-lucide="shield-check" style="width:26px;height:26px;color:#D83030"></i>
-       </div>
-       <p data-i18n="why.1" class="font-semibold text-sm mb-2">Tenaga Kesehatan Profesional</p>
-       <p data-i18n="why.1desc" class="text-xs text-gray-600 leading-relaxed">Pelayanan diberikan oleh dokter, perawat, dan tenaga kesehatan yang kompeten sesuai kebutuhan pasien.</p>
+     <h2 data-i18n="why.title" class="why-title fade-up">Mengapa Memilih Kami</h2>
+     <div class="why-grid fade-up">
+      <div class="why-item">
+       <span class="why-icon" aria-hidden="true"><i data-lucide="shield-check" style="width:22px;height:22px"></i></span>
+       <p data-i18n="why.1">Tenaga Kesehatan Profesional</p>
       </div>
-      <div class="text-center p-5">
-       <div class="w-14 h-14 mx-auto mb-3 bg-white rounded-2xl shadow flex items-center justify-center">
-        <i data-lucide="user" style="width:26px;height:26px;color:#D83030"></i>
-       </div>
-       <p data-i18n="why.2" class="font-semibold text-sm mb-2">Pelayanan sesuai kebutuhan pasien</p>
-       <p data-i18n="why.2desc" class="text-xs text-gray-600 leading-relaxed">Setiap layanan disesuaikan dengan kondisi dan kebutuhan masing-masing pasien.</p>
+      <div class="why-item">
+       <span class="why-icon" aria-hidden="true"><i data-lucide="user" style="width:22px;height:22px"></i></span>
+       <p data-i18n="why.2">Pelayanan sesuai kebutuhan pasien</p>
       </div>
-      <div class="text-center p-5">
-       <div class="w-14 h-14 mx-auto mb-3 bg-white rounded-2xl shadow flex items-center justify-center">
-        <i data-lucide="git-merge" style="width:26px;height:26px;color:#D83030"></i>
-       </div>
-       <p data-i18n="why.3" class="font-semibold text-sm mb-2">Perawatan yang Terkoordinasi</p>
-       <p data-i18n="why.3desc" class="text-xs text-gray-600 leading-relaxed">Kebutuhan dokter, perawat, pemeriksaan laboratorium hingga layanan pendukung dapat dikoordinasikan melalui satu layanan.</p>
+      <div class="why-item">
+       <span class="why-icon" aria-hidden="true"><i data-lucide="git-merge" style="width:22px;height:22px"></i></span>
+       <p data-i18n="why.3">Perawatan yang Terkoordinasi</p>
       </div>
-      <div class="text-center p-5">
-       <div class="w-14 h-14 mx-auto mb-3 bg-white rounded-2xl shadow flex items-center justify-center">
-        <i data-lucide="heart-handshake" style="width:26px;height:26px;color:#D83030"></i>
-       </div>
-       <p data-i18n="why.4" class="font-semibold text-sm mb-2">Pendampingan untuk Pasien dan Keluarga</p>
-       <p data-i18n="why.4desc" class="text-xs text-gray-600 leading-relaxed">Kami membantu pasien dan keluarga mendapatkan pelayanan kesehatan di rumah dengan proses yang lebih mudah dan nyaman.</p>
+      <div class="why-item">
+       <span class="why-icon" aria-hidden="true"><i data-lucide="heart-handshake" style="width:22px;height:22px"></i></span>
+       <p data-i18n="why.4">Pendampingan untuk Pasien dan Keluarga</p>
       </div>
      </div>
     </div>
@@ -233,10 +333,10 @@
    <section id="how" class="w-full py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
      <div class="text-center mb-12 fade-up">
-      <h2 data-i18n="how.title" class="text-3xl font-bold mb-3">Cara Panggil Dokter Panggil</h2>
+      <h2 data-i18n="how.title" class="text-3xl font-bold mb-3">Cara Panggil</h2>
      </div>
-     <div class="grid md:grid-cols-4 gap-6 fade-up">
-      <div class="text-center relative">
+     <div class="how-grid fade-up">
+      <div class="text-center">
        <div class="w-16 h-16 mx-auto mb-4 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">1</div>
        <p data-i18n="how.1" class="font-semibold text-sm mb-2">Hubungi Kami 24 Jam</p>
        <p data-i18n="how.1desc" class="text-xs text-gray-600 leading-relaxed">WhatsApp atau hubungi Hotline Dokter Panggil untuk memulai layanan.</p>
@@ -258,8 +358,8 @@
       </div>
      </div>
     </div>
-   </section><!-- Doctors teaser -->
-   <section id="doctors" class="w-full py-16 bg-warm-gray">
+   </section><!-- Doctors teaser: hidden for now. Unhide by removing class/attrs below. -->
+   <section id="doctors" class="w-full py-16 bg-warm-gray hidden" hidden aria-hidden="true">
     <div class="max-w-7xl mx-auto px-4">
      <div class="text-center mb-10 fade-up">
       <h2 data-i18n="doctors.title" class="text-3xl font-bold mb-3">Temukan Dokter yang Tepat untuk Anda</h2>
@@ -321,50 +421,33 @@
       <h2 data-i18n="loc.title" class="text-3xl font-bold mb-3">Tersedia di Kota Anda</h2>
       <p data-i18n="loc.subtitle" class="text-lg text-gray-600">Saat ini Dokter Panggil melayani Makassar. Surabaya akan segera hadir.</p>
      </div>
-     <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-      <div class="lg:col-span-4 flex flex-col">
-       <p data-i18n="loc.pick" class="text-sm font-semibold text-charcoal mb-3">Area layanan</p>
-       <div id="loc-city-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 flex-1" role="tablist" aria-label="Kota layanan">
-        <button type="button" role="tab" aria-selected="true" data-city="makassar" data-map="https://www.google.com/maps?q=Jl.+Letnan+Jenderal+Hertasning+No.+110,+Makassar&amp;hl=id&amp;z=16&amp;output=embed" class="loc-city-btn is-active text-left px-4 py-3.5 rounded-2xl bg-white border border-[#F1E7E0] transition-all">
-         <span class="flex items-center gap-3">
-          <span class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><i data-lucide="map-pin" style="width:18px;height:18px;color:#D83030"></i></span>
-          <span class="min-w-0">
-           <span class="flex items-center gap-2 flex-wrap">
-            <span class="text-sm font-semibold">Makassar</span>
-            <span data-i18n="loc.available" class="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-soft-green/15 text-soft-green">Tersedia</span>
-           </span>
-           <span class="block text-xs text-gray-500 mt-0.5">Sulawesi Selatan</span>
-          </span>
-         </span>
-        </button>
-        <button type="button" role="tab" aria-selected="false" aria-disabled="true" disabled data-city="surabaya" class="loc-city-btn loc-city-soon text-left px-4 py-3.5 rounded-2xl bg-white border border-[#F1E7E0] opacity-70 cursor-not-allowed">
-         <span class="flex items-center gap-3">
-          <span class="w-9 h-9 rounded-xl bg-warm-gray flex items-center justify-center shrink-0"><i data-lucide="map-pin" style="width:18px;height:18px;color:#9CA3AF"></i></span>
-          <span class="min-w-0">
-           <span class="flex items-center gap-2 flex-wrap">
-            <span class="text-sm font-semibold text-gray-500">Surabaya</span>
-            <span data-i18n="loc.soon" class="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-accent/15 text-accent">Segera hadir</span>
-           </span>
-           <span class="block text-xs text-gray-400 mt-0.5">Jawa Timur</span>
-          </span>
-         </span>
-        </button>
-       </div>
-      </div>
-      <div class="lg:col-span-8">
-       <div class="loc-map-frame relative rounded-3xl overflow-hidden bg-white border border-[#F1E7E0] shadow-sm">
-        <iframe id="loc-map" title="Peta area layanan DokterPanggil di Makassar" data-src="https://www.google.com/maps?q=Jl.+Letnan+Jenderal+Hertasning+No.+110,+Makassar&amp;hl=id&amp;z=16&amp;output=embed" src="about:blank" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen class="w-full h-[300px] sm:h-[380px] lg:h-[460px] border-0"></iframe>
-        <div class="absolute left-4 bottom-4 max-w-[calc(100%-2rem)]">
-         <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 backdrop-blur border border-[#F1E7E0] shadow-sm">
-          <i data-lucide="map-pinned" style="width:16px;height:16px;color:#D83030"></i>
-          <span id="loc-map-label" class="text-xs sm:text-sm font-semibold text-charcoal">Makassar</span>
+     <div class="loc-cities">
+      <article class="loc-card loc-card--on">
+       <div class="flex items-start gap-3">
+        <span class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><i data-lucide="map-pin" style="width:18px;height:18px;color:#D83030"></i></span>
+        <div class="min-w-0">
+         <div class="flex items-center gap-2 flex-wrap">
+          <h3 class="text-base font-semibold">Makassar</h3>
+          <span data-i18n="loc.available" class="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-soft-green/15 text-soft-green">Tersedia</span>
          </div>
+         <p class="text-xs text-gray-500 mt-0.5">Sulawesi Selatan</p>
+         <p data-i18n="loc.address" class="text-sm text-gray-600 mt-2 leading-relaxed">Jl. Letnan Jenderal Hertasning No. 110, Makassar</p>
+         <a href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Letnan+Jenderal+Hertasning+No.+110,+Makassar" target="_blank" rel="noopener noreferrer" data-i18n="loc.openMaps" class="loc-maps-btn">Buka di Google Maps →</a>
         </div>
        </div>
-       <p class="mt-3 text-center lg:text-left">
-        <a id="loc-map-open" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Letnan+Jenderal+Hertasning+No.+110,+Makassar" target="_blank" rel="noopener noreferrer" data-i18n="loc.openMaps" class="text-sm font-semibold text-primary hover:underline">Buka di Google Maps â†’</a>
-       </p>
-      </div>
+      </article>
+      <article class="loc-card loc-card--soon">
+       <div class="flex items-start gap-3">
+        <span class="w-10 h-10 rounded-xl bg-[#F4EEE9] flex items-center justify-center shrink-0"><i data-lucide="map-pin" style="width:18px;height:18px;color:#9CA3AF"></i></span>
+        <div class="min-w-0">
+         <div class="flex items-center gap-2 flex-wrap">
+          <h3 class="text-base font-semibold text-gray-500">Surabaya</h3>
+          <span data-i18n="loc.soon" class="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-accent/15 text-accent">Segera hadir</span>
+         </div>
+         <p class="text-xs text-gray-400 mt-0.5">Jawa Timur</p>
+        </div>
+       </div>
+      </article>
      </div>
     </div>
    </section><!-- Testimonials: grid design + multi-card slider -->

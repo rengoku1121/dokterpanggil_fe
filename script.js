@@ -29,6 +29,7 @@ function setMobileMenuOpen(open) {
         mobileMenuBtn.setAttribute('aria-expanded', String(open));
         mobileMenuBtn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
         if (!open) {
+            closeNavAccordions();
             const closeDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 380;
             window.setTimeout(() => {
                 if (!mobileMenu.classList.contains('is-open')) {
@@ -49,16 +50,107 @@ function toggleMobileMenu() {
 if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileMenu);
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeMobileMenu();
+    if (e.key === 'Escape') {
+        closeNavDropdowns();
+        closeMobileMenu();
+    }
 });
 window.addEventListener('resize', () => {
     if (window.matchMedia('(min-width: 1024px)').matches) closeMobileMenu();
+    else closeNavDropdowns();
 });
 if (mobileMenu) {
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => closeMobileMenu());
     });
 }
+
+const NAV_DD_MS = 280;
+const NAV_ACC_MS = 380;
+function navPrefersReduce() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+function hideNavPanelAfter(el, panel, ms) {
+    const hide = () => { if (!el.classList.contains('is-open')) panel.hidden = true; };
+    if (navPrefersReduce()) hide();
+    else setTimeout(hide, ms);
+}
+
+function closeNavDropdowns() {
+    document.querySelectorAll('[data-nav-dd]').forEach(dd => {
+        dd.classList.remove('is-open');
+        const toggle = dd.querySelector('.nav-dd-toggle');
+        const panel = dd.querySelector('.nav-dd-panel');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        if (panel) hideNavPanelAfter(dd, panel, NAV_DD_MS);
+    });
+}
+
+function closeNavAccordions() {
+    document.querySelectorAll('[data-nav-acc]').forEach(acc => {
+        acc.classList.remove('is-open');
+        const toggle = acc.querySelector('.nav-acc-toggle');
+        const panel = acc.querySelector('.nav-acc-panel');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        if (panel) hideNavPanelAfter(acc, panel, NAV_ACC_MS);
+    });
+}
+
+(function initNavMenus() {
+    const desktopMq = window.matchMedia('(min-width: 1024px)');
+    document.querySelectorAll('[data-nav-dd]').forEach(dd => {
+        const toggle = dd.querySelector('.nav-dd-toggle');
+        const panel = dd.querySelector('.nav-dd-panel');
+        if (!toggle || !panel) return;
+        let closeTimer = null;
+        const open = () => {
+            if (!desktopMq.matches) return;
+            if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+            panel.hidden = false;
+            toggle.setAttribute('aria-expanded', 'true');
+            requestAnimationFrame(() => dd.classList.add('is-open'));
+        };
+        const close = () => {
+            dd.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            hideNavPanelAfter(dd, panel, NAV_DD_MS);
+        };
+        const scheduleClose = () => {
+            if (closeTimer) clearTimeout(closeTimer);
+            closeTimer = setTimeout(close, 120);
+        };
+        toggle.addEventListener('click', e => {
+            e.preventDefault();
+            if (!desktopMq.matches) return;
+            if (dd.classList.contains('is-open')) close();
+            else open();
+        });
+        dd.addEventListener('mouseenter', open);
+        dd.addEventListener('mouseleave', () => {
+            if (desktopMq.matches) scheduleClose();
+        });
+        document.addEventListener('click', e => {
+            if (!dd.contains(e.target)) close();
+        });
+    });
+    document.querySelectorAll('[data-nav-acc]').forEach(acc => {
+        const toggle = acc.querySelector('.nav-acc-toggle');
+        const panel = acc.querySelector('.nav-acc-panel');
+        if (!toggle || !panel) return;
+        toggle.addEventListener('click', () => {
+            const next = !acc.classList.contains('is-open');
+            toggle.setAttribute('aria-expanded', String(next));
+            if (next) {
+                panel.hidden = false;
+                requestAnimationFrame(() => acc.classList.add('is-open'));
+                acc.scrollIntoView({ block: 'nearest' });
+            } else {
+                acc.classList.remove('is-open');
+                hideNavPanelAfter(acc, panel, NAV_ACC_MS);
+            }
+        });
+    });
+})();
 
 // Smooth animated scroll to sections when clicking nav / anchor links
 function animatedScrollTo(targetY, duration = 800) {
@@ -147,6 +239,43 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
     go(0);
     start();
+})();
+
+// Homepage services: Pemeriksaan / Layanan Lainnya tabs
+(function initHomeSvcTabs() {
+    const root = document.querySelector('[data-svc-tabs]');
+    if (!root) return;
+    const bar = root.querySelector('.home-svc-tabs-bar');
+    const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+
+    function activate(tab) {
+        tabs.forEach(t => {
+            const on = t === tab;
+            t.setAttribute('aria-selected', String(on));
+            t.tabIndex = on ? 0 : -1;
+        });
+        panels.forEach(p => {
+            p.hidden = p.getAttribute('aria-labelledby') !== tab.id;
+        });
+        if (bar) bar.dataset.tab = String(tabs.indexOf(tab));
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => activate(tab));
+        tab.addEventListener('keydown', e => {
+            const i = tabs.indexOf(tab);
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'Home' && e.key !== 'End') return;
+            e.preventDefault();
+            let next = tab;
+            if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+            if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+            if (e.key === 'Home') next = tabs[0];
+            if (e.key === 'End') next = tabs[tabs.length - 1];
+            next.focus();
+            activate(next);
+        });
+    });
 })();
 
 // Testimonials multi-card slider (3 desktop / 2 tablet / 1 mobile)
@@ -241,55 +370,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     window.addEventListener('resize', layout);
     layout();
     start();
-})();
-
-// Locations map city switcher (+ lazy-load iframe when section is near)
-(function initLocationMap() {
-    const list = document.getElementById('loc-city-list');
-    const map = document.getElementById('loc-map');
-    const label = document.getElementById('loc-map-label');
-    const openLink = document.getElementById('loc-map-open');
-    const section = document.getElementById('locations');
-    if (!list || !map) return;
-
-    function ensureMapSrc(src) {
-        const next = src || map.getAttribute('data-src');
-        if (!next) return;
-        if (map.getAttribute('src') !== next) map.src = next;
-        map.setAttribute('data-src', next);
-    }
-
-    if (section && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver(entries => {
-            if (!entries.some(e => e.isIntersecting)) return;
-            ensureMapSrc();
-            io.disconnect();
-        }, { rootMargin: '200px 0px' });
-        io.observe(section);
-    } else {
-        ensureMapSrc();
-    }
-
-    list.addEventListener('click', e => {
-        const btn = e.target.closest('.loc-city-btn');
-        if (!btn || btn.disabled || btn.classList.contains('loc-city-soon')) return;
-        const src = btn.getAttribute('data-map');
-        const name = (btn.querySelector('.font-semibold') || {}).textContent || '';
-        if (!src) return;
-
-        list.querySelectorAll('.loc-city-btn').forEach(b => {
-            b.classList.remove('is-active');
-            b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-selected', 'true');
-
-        ensureMapSrc(src);
-        if (label) label.textContent = name.trim();
-        if (openLink) {
-            openLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name.trim() + ', Indonesia');
-        }
-    });
 })();
 
 // FAQ accordion — animated open/close; only one open at a time
@@ -397,6 +477,8 @@ const translations = {
     id: {
         'lang.label': 'Bahasa',
         'nav.home': 'Beranda', 'nav.about': 'Tentang Kami', 'nav.services': 'Layanan', 'nav.doctors': 'Temukan Dokter', 'nav.gallery': 'Galeri', 'nav.locations': 'Lokasi', 'nav.contact': 'Kontak',
+        'nav.allServices': 'Lihat semua layanan',
+        'nav.g.main': 'Layanan Utama', 'nav.g.procedures': 'Tindakan Medis', 'nav.g.exam': 'Pemeriksaan', 'nav.g.other': 'Layanan Lainnya',
         'btn.book': 'Pesan Sekarang', 'btn.phone': 'Telepon',
         'hero.badge': 'Layanan Kesehatan Lebih Dekat, Langsung di Rumah Anda',
         'hero.title': 'Dokter dan Perawat Profesional Datang ke Rumah Anda',
@@ -408,15 +490,17 @@ const translations = {
         'hero.s1badge': 'Dokter Umum 24 Jam',
         'hero.s1title': 'Butuh Dokter? Kami siap datang 24 jam',
         'hero.s1lead': 'Dokter langsung ke rumah Anda untuk pemeriksaan, pengobatan, hingga tindakan medis ringan.',
-        'hero.s1t1': '24 Jam', 'hero.s1t2': 'Visit ke Rumah', 'hero.s1t3': 'Dokter berpengalaman',
+        'hero.s1t1': '24 Jam', 'hero.s1t2': 'Visit ke Rumah',
         'hero.s1cta1': 'Pesan Sekarang', 'hero.s1cta2': 'Chat WhatsApp',
         'hero.s2badge': 'Temukan Dokter Spesialis',
         'hero.s2title': 'Dokter Spesialis untuk Perawatan yang Tepat',
         'hero.s2sub': 'Cari dokter spesialis berdasarkan nama, bidang keahlian, atau kondisi medis',
+        'hero.s2t1': 'Sesuai Bidang', 'hero.s2t2': 'Visit ke Rumah',
         'hero.s2cta1': 'Temukan Dokter Spesialis', 'hero.s2cta2': 'Chat WhatsApp',
         'hero.s3badge': 'Homecare 24 jam',
         'hero.s3title': 'Layanan Kesehatan Lengkap, Langsung di Rumah Anda',
         'hero.s3sub': 'Dokter, Perawat, Laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan homecare, menghadirkan perawatan yang lebih nyaman langsung di Rumah Anda',
+        'hero.s3t1': 'Dokter & Perawat', 'hero.s3t2': 'Langsung di Rumah',
         'hero.s3cta1': 'Pesan Sekarang', 'hero.s3cta2': 'Chat WhatsApp',
         'about.title': 'Layanan Kesehatan, Lebih Dekat dengan Anda',
         'about.desc': "Dokter Panggil di bawah CV. Mentari Kasih Indonesia adalah layanan kesehatan berbasis homecare yang memberikan layanan 24 jam dengan menghadirkan dokter, perawat, dan tenaga kesehatan langsung ke rumah Anda. Pemeriksaan laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan agar perawatan lebih mudah, nyaman, dan dekat bagi pasien dan keluarga.",
@@ -426,14 +510,10 @@ const translations = {
         'svc.all': 'Lihat semua layanan →',
         'why.title': 'Mengapa Memilih Kami',
         'why.1': 'Tenaga Kesehatan Profesional',
-        'why.1desc': 'Pelayanan diberikan oleh dokter, perawat, dan tenaga kesehatan yang kompeten sesuai kebutuhan pasien.',
         'why.2': 'Pelayanan sesuai kebutuhan pasien',
-        'why.2desc': 'Setiap layanan disesuaikan dengan kondisi dan kebutuhan masing-masing pasien.',
         'why.3': 'Perawatan yang Terkoordinasi',
-        'why.3desc': 'Kebutuhan dokter, perawat, pemeriksaan laboratorium hingga layanan pendukung dapat dikoordinasikan melalui satu layanan.',
         'why.4': 'Pendampingan untuk Pasien dan Keluarga',
-        'why.4desc': 'Kami membantu pasien dan keluarga mendapatkan pelayanan kesehatan di rumah dengan proses yang lebih mudah dan nyaman.',
-        'how.title': 'Cara Panggil Dokter Panggil',
+        'how.title': 'Cara Panggil',
         'how.1': 'Hubungi Kami 24 Jam',
         'how.1desc': 'WhatsApp atau hubungi Hotline Dokter Panggil untuk memulai layanan.',
         'how.2': 'Sampaikan Kebutuhan',
@@ -458,6 +538,7 @@ const translations = {
         'loc.pick': 'Area layanan',
         'loc.available': 'Tersedia',
         'loc.soon': 'Segera hadir',
+        'loc.address': 'Jl. Letnan Jenderal Hertasning No. 110, Makassar',
         'loc.openMaps': 'Buka di Google Maps →',
         'loc.expanding': '',
         'testi.title': 'Cerita dari Pasien Kami',
@@ -521,6 +602,8 @@ const translations = {
     en: {
         'lang.label': 'Language',
         'nav.home': 'Home', 'nav.about': 'About Us', 'nav.services': 'Services', 'nav.doctors': 'Find a Doctor', 'nav.gallery': 'Gallery', 'nav.locations': 'Locations', 'nav.contact': 'Contact',
+        'nav.allServices': 'See all services',
+        'nav.g.main': 'Main Services', 'nav.g.procedures': 'Medical Procedures', 'nav.g.exam': 'Health Checks', 'nav.g.other': 'Other Services',
         'btn.book': 'Book Now', 'btn.phone': 'Call',
         'hero.badge': 'Healthcare Closer to You, Right at Home',
         'hero.title': 'Professional Doctors and Nurses Come to Your Home',
@@ -531,15 +614,17 @@ const translations = {
         'hero.s1badge': 'GP Visit 24 Hours',
         'hero.s1title': 'Need a Doctor? We are ready 24 hours',
         'hero.s1lead': 'A doctor comes to your home for examination, treatment, and minor medical procedures.',
-        'hero.s1t1': '24 Hours', 'hero.s1t2': 'Home Visit', 'hero.s1t3': 'Experienced Doctors',
+        'hero.s1t1': '24 Hours', 'hero.s1t2': 'Home Visit',
         'hero.s1cta1': 'Book Now', 'hero.s1cta2': 'Chat WhatsApp',
         'hero.s2badge': 'Find a Specialist',
         'hero.s2title': 'Specialist doctors for the right care',
         'hero.s2sub': 'Search specialists by name, specialty, or medical condition',
+        'hero.s2t1': 'By Specialty', 'hero.s2t2': 'Home Visit',
         'hero.s2cta1': 'Find a Specialist', 'hero.s2cta2': 'Chat WhatsApp',
         'hero.s3badge': 'Homecare 24 hours',
         'hero.s3title': 'Complete Healthcare, Right at Your Home',
         'hero.s3sub': 'Doctors, nurses, laboratory, and medication needs integrated in one homecare service—more comfortable care right at your home',
+        'hero.s3t1': 'Doctor & Nurse', 'hero.s3t2': 'At Your Home',
         'hero.s3cta1': 'Book Now', 'hero.s3cta2': 'Chat WhatsApp',
         'about.title': 'Healthcare, Closer to You',
         'about.desc': "Dokter Panggil, under CV. Mentari Kasih Indonesia, is a 24-hour homecare health service that brings doctors, nurses, and healthcare professionals directly to your home. Laboratory tests and medication needs are integrated in one service so care stays easier, more comfortable, and closer for patients and families.",
@@ -549,14 +634,10 @@ const translations = {
         'svc.all': 'View all services →',
         'why.title': 'Why Choose Us',
         'why.1': 'Professional Healthcare Team',
-        'why.1desc': 'Care is delivered by competent doctors, nurses, and health workers matched to patient needs.',
         'why.2': 'Care tailored to each patient',
-        'why.2desc': 'Every service is adjusted to each patient’s condition and needs.',
         'why.3': 'Coordinated Care',
-        'why.3desc': 'Doctor visits, nursing, lab tests, and supporting services can be coordinated through one service.',
         'why.4': 'Support for Patients and Families',
-        'why.4desc': 'We help patients and families get home healthcare with a simpler, more comfortable process.',
-        'how.title': 'How to Call Dokter Panggil',
+        'how.title': 'How to Call',
         'how.1': 'Contact Us 24 Hours',
         'how.1desc': 'WhatsApp or call the Dokter Panggil hotline to start a service.',
         'how.2': 'Share Your Needs',
@@ -581,6 +662,7 @@ const translations = {
         'loc.pick': 'Service area',
         'loc.available': 'Available',
         'loc.soon': 'Coming soon',
+        'loc.address': 'Jl. Letnan Jenderal Hertasning No. 110, Makassar',
         'loc.openMaps': 'Open in Google Maps →',
         'loc.expanding': '',
         'testi.title': 'Stories from Our Patients',
@@ -655,6 +737,10 @@ function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const val = dict[el.getAttribute('data-i18n')];
         if (val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-id]').forEach(el => {
+        const next = el.getAttribute(lang === 'en' ? 'data-i18n-en' : 'data-i18n-id');
+        if (next != null) el.textContent = next;
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const val = dict[el.getAttribute('data-i18n-placeholder')];
