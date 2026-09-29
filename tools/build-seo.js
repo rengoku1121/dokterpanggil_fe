@@ -213,10 +213,10 @@ function dokterUmumBody(prefix, en) {
     const symptomsEn = e.symptoms || symptoms;
 
     const visitSteps = [
-        { n: '01', title: 'Evaluasi Keluhan', desc: 'Dokter menanyakan keluhan, riwayat penyakit, obat yang sedang digunakan, dan informasi kesehatan lainnya.' },
-        { n: '02', title: 'Pemeriksaan Fisik', desc: 'Pemeriksaan tanda vital dan pemeriksaan fisik dilakukan sesuai kondisi pasien. Peralatan medis standar akan dibawa saat pemeriksaan.' },
-        { n: '03', title: 'Penilaian & Penanganan', desc: 'Dokter menjelaskan hasil pemeriksaan dan memberikan terapi atau tindakan awal bila diperlukan.' },
-        { n: '04', title: 'Rencana Perawatan Selanjutnya', desc: 'Bila dibutuhkan, dokter dapat merekomendasikan obat, pemeriksaan laboratorium, tindakan medis, konsultasi dokter spesialis, atau rujukan ke fasilitas kesehatan.' }
+        { n: '01', title: 'Evaluasi Keluhan' },
+        { n: '02', title: 'Pemeriksaan Fisik' },
+        { n: '03', title: 'Penilaian & Penanganan' },
+        { n: '04', title: 'Rencana Perawatan Selanjutnya' }
     ];
 
     const followUps = [
@@ -278,12 +278,10 @@ function dokterUmumBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
-        sectionHead('Kapan Sebaiknya Memanggil Dokter ke Rumah?', null, e.whenTitle)
+        sectionHead('Kapan Memanggil Dokter ke Rumah?', null, e.whenTitle)
         + whenCards(whenItems, e.whenCards),
         sectionHead('Apa yang Dilakukan Dokter Saat Kunjungan', 'Pemeriksaan langsung di rumah — dokter akan melakukan pemeriksaan sesuai keluhan dan kondisi pasien untuk menentukan penanganan yang dibutuhkan.', e.visitTitle, e.visitLead)
-        + howStepCards(visitSteps, e.visitSteps),
-        sectionHead('Cara Panggil Dokter', null, e.howTitle)
-        + howStepCards(howSteps, e.howSteps),
+        + howStepCards(visitSteps, e.visitSteps, 'grid-cols-2 lg:grid-cols-4'),
         sectionHead('Keluhan yang Dapat Ditangani Dokter Umum', 'Dokter umum dapat melakukan pemeriksaan dan penanganan awal untuk berbagai keluhan kesehatan pada anak, dewasa, maupun lansia.', e.symptomsTitle, e.symptomsLead)
         + pills(symptoms, symptomsEn)
         + '<p class="mt-5 text-sm text-gray-600 leading-relaxed">'
@@ -291,6 +289,8 @@ function dokterUmumBody(prefix, en) {
         + '<a href="' + esc(waLink(waAsk)) + '" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline"'
         + biAttrs('Ceritakan kondisi pasien kepada tim kami melalui WhatsApp. Kami akan membantu mengarahkan layanan yang sesuai.', e.symptomsMissLink || 'Tell our team about the patient’s condition via WhatsApp. We will help direct you to the right service.')
         + '>Ceritakan kondisi pasien kepada tim kami melalui WhatsApp. Kami akan membantu mengarahkan layanan yang sesuai.</a></p>',
+        sectionHead('Cara Panggil Dokter', null, e.howTitle)
+        + howStepCards(howSteps, e.howSteps),
         sectionHead('Perawatan Tidak Berhenti Setelah Konsultasi', 'Apabila dibutuhkan berdasarkan hasil pemeriksaan, Tim Dokter Panggil dapat membantu mengoordinasikan layanan lanjutan di rumah:', e.followTitle, e.followLead)
         + iconRowCards(followUps, e.followUps),
         promoBanner({
@@ -1711,14 +1711,21 @@ const NAV_LINKS = [
 ];
 
 const NAV_SERVICE_GROUPS = [
-    { key: 'nav.g.main', title: 'Layanan Utama', slugs: ['kunjungan-dokter', 'kunjungan-dokter-spesialis', 'perawatan-lansia', 'konsultasi-online'] },
-    { key: 'nav.g.procedures', title: 'Tindakan Medis', slugs: ['tindakan-medis', 'terapi-infus', 'infus-vitamin', 'terapi-oksigen', 'terapi-nebulizer', 'perawatan-luka', 'pemasangan-ngt', 'pemasangan-kateter', 'suction'] },
-    { key: 'nav.g.exam', title: 'Pemeriksaan', slugs: ['pemeriksaan-kesehatan', 'tes-laboratorium', 'vaksinasi'] },
-    { key: 'nav.g.other', title: 'Layanan Lainnya', slugs: ['perawatan-rumah', 'farmasi'] }
+    { key: 'nav.g.main', title: 'Layanan Utama', slugs: ['kunjungan-dokter', 'kunjungan-dokter-spesialis', 'perawatan-rumah', 'perawatan-lansia'] },
+    { key: 'nav.g.procedures', title: 'Tindakan Medis', slugs: ['terapi-infus', 'infus-vitamin', 'terapi-oksigen', 'terapi-nebulizer', 'perawatan-luka', 'vaksinasi', 'pemasangan-ngt', 'pemasangan-kateter', 'suction'] },
+    { key: 'nav.g.exam', title: 'Pemeriksaan & Penunjang', slugs: ['tes-laboratorium', 'farmasi'] },
+    { key: 'nav.g.other', title: 'Layanan Lainnya', slugs: ['pemeriksaan-kesehatan', 'konsultasi-online'] }
 ];
 
+const NAV_LABEL_OVERRIDES = {
+    'kunjungan-dokter-spesialis': { id: 'Dokter Spesialis ke Rumah', en: 'Specialist Home Visit' },
+    'tes-laboratorium': { id: 'Laboratorium di Rumah', en: 'Home Laboratory' },
+    'farmasi': { id: 'Layanan Farmasi', en: 'Pharmacy Service' },
+    'pemeriksaan-kesehatan': { id: 'Medical Check-Up', en: 'Medical Check-Up' }
+};
+
 function navServiceLabel(svc) {
-    return { id: svc.name.id, en: svc.name.en };
+    return NAV_LABEL_OVERRIDES[svc.slug] || { id: svc.name.id, en: svc.name.en };
 }
 
 function navServiceGroupsHtml(prefix, linkClass) {
@@ -1944,14 +1951,12 @@ function faqSchema(items) {
 }
 
 /**
- * Hero band. Uses the brand red so the page reads as part of the same site,
- * without reusing the homepage carousel markup or its full-viewport #home id.
+ * Full-bleed photo hero with text overlay — same idea as the homepage,
+ * without the carousel markup or its full-viewport #home id.
  */
 function hero(page, prefix) {
-    const image = page.heroImage
-        ? '<div class="lg:w-[42%] shrink-0"><div class="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] bg-white/10">'
-        + '<img src="' + photo(page.heroImage, 900) + '" alt="' + esc(page.heroAlt || page.h1) + '" data-retry="1" loading="eager" decoding="async" class="w-full h-full object-cover object-center">'
-        + '</div></div>'
+    const img = page.heroImage
+        ? '<img src="' + photo(page.heroImage, 1400) + '" alt="' + esc(page.heroAlt || page.h1) + '" class="hero-photo" data-retry="1" fetchpriority="high" decoding="async">'
         : '';
 
     const chipItems = Array.isArray(page.heroChips) && page.heroChips.length
@@ -1962,37 +1967,33 @@ function hero(page, prefix) {
             { id: T('trust.3'), en: Ten('trust.3') }
         ];
     const chips = chipItems.map(c =>
-        '<span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">'
+        '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold">'
         + icon('check', 13, 'white') + biSpan(c.id, c.en, '') + '</span>'
     ).join('');
     const lead = page.lead
-        ? biTag('p', page.lead, page.leadEn, 'class="text-base sm:text-lg text-white/90 leading-relaxed mb-6 max-w-2xl"')
+        ? biTag('p', page.lead, page.leadEn, 'class="hero-sub"')
         : '';
-    const h1Class = page.lead
-        ? 'class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4"'
-        : 'class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6"';
     const { bookLabel: bookCta, askLabel: askCta } = ctaPair({
         bookHref: page.ctaBookHref,
         bookLabel: page.ctaBook,
         askLabel: page.ctaAsk
     });
 
-    return '<section class="w-full bg-primary text-white">'
-        + '<div class="max-w-7xl mx-auto px-4 py-12 sm:py-16">'
+    return '<section class="seo-hero">'
+        + img
+        + '<div class="hero-shade" aria-hidden="true"></div>'
+        + '<div class="seo-hero-inner">'
         + breadcrumbs(page.crumbs, prefix)
-        + '<div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-center">'
-        + '<div class="flex-1">'
-        + biTag('h1', page.h1, page.h1En, h1Class)
+        + '<div class="seo-hero-copy">'
+        + biTag('h1', page.h1, page.h1En, 'class="hero-title"')
         + lead
-        + '<div class="flex flex-wrap gap-2 mb-8">' + chips + '</div>'
-        + '<div class="flex flex-col sm:flex-row gap-3">'
+        + '<div class="flex flex-wrap gap-2 mb-5 md:mb-8">' + chips + '</div>'
+        + '<div class="hero-cta-row">'
         + '<a href="' + esc(page.ctaBookHref || waLink(page.waBookMessage || page.waMessage)) + '"'
         + (page.ctaBookHref ? '' : ' target="_blank" rel="noopener noreferrer"')
-        + biAttrs(bookCta.id, bookCta.en) + ' class="px-7 py-3.5 rounded-full bg-white text-primary font-semibold text-center transition-transform hover:scale-105">' + esc(bookCta.id) + '</a>'
-        + '<a href="' + esc(waLink(page.waMessage)) + '" target="_blank" rel="noopener noreferrer"' + biAttrs(askCta.id, askCta.en) + ' class="px-7 py-3.5 rounded-full border-2 border-white/70 text-white font-semibold text-center transition-transform hover:scale-105 hover:bg-white/10">' + esc(askCta.id) + '</a>'
-        + '</div></div>'
-        + image
-        + '</div></div></section>';
+        + biAttrs(bookCta.id, bookCta.en) + ' class="hero-cta bg-primary text-white shadow-lg hover:scale-105 transition-transform">' + esc(bookCta.id) + '</a>'
+        + '<a href="' + esc(waLink(page.waMessage)) + '" target="_blank" rel="noopener noreferrer"' + biAttrs(askCta.id, askCta.en) + ' class="hero-cta hero-cta-ghost bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">' + esc(askCta.id) + '</a>'
+        + '</div></div></div></section>';
 }
 
 function renderShell(page) {

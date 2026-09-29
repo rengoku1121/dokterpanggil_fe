@@ -241,43 +241,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     start();
 })();
 
-// Homepage services: Pemeriksaan / Layanan Lainnya tabs
-(function initHomeSvcTabs() {
-    const root = document.querySelector('[data-svc-tabs]');
-    if (!root) return;
-    const bar = root.querySelector('.home-svc-tabs-bar');
-    const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
-    const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
-
-    function activate(tab) {
-        tabs.forEach(t => {
-            const on = t === tab;
-            t.setAttribute('aria-selected', String(on));
-            t.tabIndex = on ? 0 : -1;
-        });
-        panels.forEach(p => {
-            p.hidden = p.getAttribute('aria-labelledby') !== tab.id;
-        });
-        if (bar) bar.dataset.tab = String(tabs.indexOf(tab));
-    }
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => activate(tab));
-        tab.addEventListener('keydown', e => {
-            const i = tabs.indexOf(tab);
-            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'Home' && e.key !== 'End') return;
-            e.preventDefault();
-            let next = tab;
-            if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
-            if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
-            if (e.key === 'Home') next = tabs[0];
-            if (e.key === 'End') next = tabs[tabs.length - 1];
-            next.focus();
-            activate(next);
-        });
-    });
-})();
-
 // Testimonials multi-card slider (3 desktop / 2 tablet / 1 mobile)
 (function initTestiCarousel() {
     const viewport = document.getElementById('testi-viewport');
@@ -478,7 +441,7 @@ const translations = {
         'lang.label': 'Bahasa',
         'nav.home': 'Beranda', 'nav.about': 'Tentang Kami', 'nav.services': 'Layanan', 'nav.doctors': 'Temukan Dokter', 'nav.gallery': 'Galeri', 'nav.locations': 'Lokasi', 'nav.contact': 'Kontak',
         'nav.allServices': 'Lihat semua layanan',
-        'nav.g.main': 'Layanan Utama', 'nav.g.procedures': 'Tindakan Medis', 'nav.g.exam': 'Pemeriksaan', 'nav.g.other': 'Layanan Lainnya',
+        'nav.g.main': 'Layanan Utama', 'nav.g.procedures': 'Tindakan Medis', 'nav.g.exam': 'Pemeriksaan & Penunjang', 'nav.g.other': 'Layanan Lainnya',
         'btn.book': 'Pesan Sekarang', 'btn.phone': 'Telepon',
         'hero.badge': 'Layanan Kesehatan Lebih Dekat, Langsung di Rumah Anda',
         'hero.title': 'Dokter dan Perawat Profesional Datang ke Rumah Anda',
@@ -503,10 +466,10 @@ const translations = {
         'hero.s3t1': 'Dokter & Perawat', 'hero.s3t2': 'Langsung di Rumah',
         'hero.s3cta1': 'Pesan Sekarang', 'hero.s3cta2': 'Chat WhatsApp',
         'about.title': 'Layanan Kesehatan, Lebih Dekat dengan Anda',
-        'about.desc': "Dokter Panggil di bawah CV. Mentari Kasih Indonesia adalah layanan kesehatan berbasis homecare yang memberikan layanan 24 jam dengan menghadirkan dokter, perawat, dan tenaga kesehatan langsung ke rumah Anda. Pemeriksaan laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan agar perawatan lebih mudah, nyaman, dan dekat bagi pasien dan keluarga.",
+        'about.desc': "Dokter Panggil di bawah CV. Mentari Kasih Indonesia merupakan layanan kesehatan berbasis homecare yang menghadirkan tim dokter, perawat serta pemeriksaan laboratorium hingga kebutuhan obat dalam satu layanan terintegrasi. Kami hadir untuk membuat pelayanan dan perawatan kesehatan menjadi lebih mudah, nyaman, dan dekat bagi pasien dan keluarga.",
         'about.v1': 'Datang ke Rumah', 'about.v2': 'Siap 24 Jam', 'about.v3': 'Layanan Lengkap', 'about.v4': 'Lebih Nyaman',
         'svc.title': 'Layanan Kami',
-        'svc.subtitle': 'Beragam layanan kesehatan untuk kebutuhan Anda dan Keluarga, langsung di rumah',
+        'svc.subtitle': 'Dokter, Perawat, dan Petugas Laboratorium hadir langsung ke rumah untuk membantu kebutuhan kesehatan Anda dan Keluarga',
         'svc.all': 'Lihat semua layanan →',
         'why.title': 'Mengapa Memilih Kami',
         'why.1': 'Tenaga Kesehatan Profesional',
@@ -603,7 +566,7 @@ const translations = {
         'lang.label': 'Language',
         'nav.home': 'Home', 'nav.about': 'About Us', 'nav.services': 'Services', 'nav.doctors': 'Find a Doctor', 'nav.gallery': 'Gallery', 'nav.locations': 'Locations', 'nav.contact': 'Contact',
         'nav.allServices': 'See all services',
-        'nav.g.main': 'Main Services', 'nav.g.procedures': 'Medical Procedures', 'nav.g.exam': 'Health Checks', 'nav.g.other': 'Other Services',
+        'nav.g.main': 'Main Services', 'nav.g.procedures': 'Medical Procedures', 'nav.g.exam': 'Tests & Support', 'nav.g.other': 'Other Services',
         'btn.book': 'Book Now', 'btn.phone': 'Call',
         'hero.badge': 'Healthcare Closer to You, Right at Home',
         'hero.title': 'Professional Doctors and Nurses Come to Your Home',
@@ -627,10 +590,10 @@ const translations = {
         'hero.s3t1': 'Doctor & Nurse', 'hero.s3t2': 'At Your Home',
         'hero.s3cta1': 'Book Now', 'hero.s3cta2': 'Chat WhatsApp',
         'about.title': 'Healthcare, Closer to You',
-        'about.desc': "Dokter Panggil, under CV. Mentari Kasih Indonesia, is a 24-hour homecare health service that brings doctors, nurses, and healthcare professionals directly to your home. Laboratory tests and medication needs are integrated in one service so care stays easier, more comfortable, and closer for patients and families.",
+        'about.desc': "Dokter Panggil, under CV. Mentari Kasih Indonesia, is a homecare health service that brings a team of doctors, nurses, laboratory tests, and medication needs together in one integrated service. We are here to make healthcare and treatment easier, more comfortable, and closer for patients and families.",
         'about.v1': 'Comes to Your Home', 'about.v2': 'Ready 24 Hours', 'about.v3': 'Complete Services', 'about.v4': 'More Comfortable',
         'svc.title': 'Our Services',
-        'svc.subtitle': 'A range of healthcare services for you and your family, right at home',
+        'svc.subtitle': 'Doctors, nurses, and laboratory staff come to your home to support the health needs of you and your family',
         'svc.all': 'View all services →',
         'why.title': 'Why Choose Us',
         'why.1': 'Professional Healthcare Team',

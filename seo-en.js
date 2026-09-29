@@ -16,7 +16,7 @@ module.exports = {
             ctaBook: 'Call a Doctor Now',
             ctaAsk: 'Ask via WhatsApp',
             d1: {
-                whenTitle: 'When Should You Call a Doctor to Your Home?',
+                whenTitle: 'When to Call a Doctor Home?',
                 whenCards: [
                     { title: 'Feeling Unwell and Need a Doctor’s Exam', desc: 'Fever, cough, cold, sore throat, dizziness, nausea, vomiting, diarrhea, pain, fatigue, or other concerns that need an in-person check' },
                     { title: 'Patient Finds Travel Difficult or Uncomfortable', desc: 'Suitable for older adults, patients who feel weak, are recovering, or have limited mobility and are more comfortable being examined at home' },
@@ -34,10 +34,10 @@ module.exports = {
                 visitTitle: 'What the Doctor Does During the Visit',
                 visitLead: 'An exam at home — the doctor examines based on symptoms and the patient’s condition to decide the care needed.',
                 visitSteps: [
-                    { title: 'Symptom Evaluation', desc: 'The doctor asks about symptoms, medical history, current medicines, and other health information.' },
-                    { title: 'Physical Exam', desc: 'Vital signs and a physical exam are done based on the patient’s condition. Standard medical equipment is brought to the visit.' },
-                    { title: 'Assessment & Initial Care', desc: 'The doctor explains findings and provides therapy or initial treatment if needed.' },
-                    { title: 'Next Care Plan', desc: 'If needed, the doctor may recommend medicine, lab tests, procedures, a specialist consult, or referral to a healthcare facility.' }
+                    { title: 'Symptom Evaluation' },
+                    { title: 'Physical Exam' },
+                    { title: 'Assessment & Initial Care' },
+                    { title: 'Next Care Plan' }
                 ],
                 followTitle: 'Care Does Not Stop After the Consultation',
                 followLead: 'When needed based on the exam, the Dokter Panggil team can help coordinate follow-up care at home:',

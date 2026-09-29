@@ -6,6 +6,48 @@
  * sizes #home to the full viewport for the homepage carousel.
  */
 
+/* Full-bleed overlay hero (reuses .hero-photo / .hero-shade / .hero-title from styles.css) */
+.seo-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - var(--nav-h, 64px));
+    background: #2d2d2d;
+    color: #fff;
+}
+@supports not (height: 100svh) {
+    .seo-hero { min-height: calc(100vh - var(--nav-h, 64px)); }
+}
+main > section.seo-hero {
+    content-visibility: visible;
+    contain-intrinsic-size: unset;
+}
+.seo-hero-inner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: inherit;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1.75rem 1.5rem 2.5rem;
+}
+.seo-hero-copy { max-width: 42rem; }
+.seo-hero .seo-crumbs { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35); }
+.seo-hero .hero-title { color: #fff; }
+.seo-hero .hero-photo { object-position: 50% 28%; }
+.seo-hero .hero-shade {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.28));
+}
+@media (max-width: 767px) {
+    .seo-hero .hero-shade {
+        background: linear-gradient(180deg, rgba(18, 14, 12, 0.42) 0%, rgba(18, 14, 12, 0.55) 42%, rgba(18, 14, 12, 0.72) 100%);
+    }
+}
+@media (min-width: 768px) {
+    .seo-hero-inner { padding: 3.5rem 2.5rem; }
+}
+
 .seo-prose p { color: #4B4B4B; line-height: 1.75; }
 .seo-prose p + p { margin-top: 1rem; }
 
@@ -18,6 +60,36 @@
 
 /* Numbered booking steps */
 .seo-step-num { flex: 0 0 auto; width: 2.25rem; height: 2.25rem; border-radius: 9999px; background: #D83030; color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+/* Title-only steps: compact 2-col tiles on phones */
+.seo-steps-tiles { gap: 0.65rem; }
+.seo-steps-tiles .canva-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 0.45rem;
+    min-height: 100%;
+    padding: 0.85rem 0.6rem 0.9rem;
+}
+.seo-steps-tiles .seo-step-num {
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 0.65rem;
+    letter-spacing: 0;
+}
+.seo-steps-tiles .seo-step-title {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #2D2D2D;
+}
+@media (min-width: 1024px) {
+    .seo-steps-tiles { gap: 0.9rem; }
+    .seo-steps-tiles .canva-card { padding: 1.05rem 0.85rem 1.1rem; }
+    .seo-steps-tiles .seo-step-num { width: 2rem; height: 2rem; font-size: 0.72rem; }
+    .seo-steps-tiles .seo-step-title { font-size: 0.875rem; }
+}
 
 /* FAQ accordion — mirrors the modal behaviour but scoped to these pages */
 .seo-faq-item + .seo-faq-item { border-top: 1px solid #F1E7E0; }

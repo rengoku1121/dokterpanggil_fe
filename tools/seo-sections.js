@@ -80,13 +80,14 @@ module.exports = function createSeoSections(h) {
     function howStepCards(steps, stepsEn, cols) {
         const en = stepsEn || [];
         const grid = cols || 'sm:grid-cols-2 lg:grid-cols-3';
-        return '<ol class="grid ' + grid + ' gap-5">' + steps.map((s, i) => {
+        const titlesOnly = steps.every(s => !s.desc);
+        return '<ol class="grid ' + grid + (titlesOnly ? ' seo-steps-tiles gap-3' : ' gap-5') + '">' + steps.map((s, i) => {
             const se = en[i] || {};
             const n = s.n || String(i + 1).padStart(2, '0');
             return '<li class="canva-card rounded-2xl p-5 flex gap-4">'
                 + '<span class="seo-step-num">' + n + '</span>'
-                + '<span>' + biTag('span', s.title, se.title, 'class="block font-semibold mb-1"')
-                + biTag('span', s.desc, se.desc, 'class="block text-sm text-gray-500 leading-relaxed"')
+                + '<span>' + biTag('span', s.title, se.title, 'class="block font-semibold seo-step-title' + (s.desc ? ' mb-1' : '') + '"')
+                + (s.desc ? biTag('span', s.desc, se.desc, 'class="block text-sm text-gray-500 leading-relaxed"') : '')
                 + '</span></li>';
         }).join('') + '</ol>';
     }
