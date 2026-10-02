@@ -6,16 +6,12 @@
  * sizes #home to the full viewport for the homepage carousel.
  */
 
-/* Full-bleed overlay hero (reuses .hero-photo / .hero-shade / .hero-title from styles.css) */
+/* Overlay hero sized to the copy, not the full viewport */
 .seo-hero {
     position: relative;
     overflow: hidden;
-    min-height: calc(100svh - var(--nav-h, 64px));
     background: #2d2d2d;
     color: #fff;
-}
-@supports not (height: 100svh) {
-    .seo-hero { min-height: calc(100vh - var(--nav-h, 64px)); }
 }
 main > section.seo-hero {
     content-visibility: visible;
@@ -26,11 +22,10 @@ main > section.seo-hero {
     z-index: 10;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    min-height: inherit;
+    justify-content: flex-start;
     max-width: 80rem;
     margin: 0 auto;
-    padding: 1.75rem 1.5rem 2.5rem;
+    padding: 1.35rem 1.25rem 1.75rem;
 }
 .seo-hero-copy { max-width: 42rem; }
 .seo-hero .seo-crumbs { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35); }
@@ -41,11 +36,11 @@ main > section.seo-hero {
 }
 @media (max-width: 767px) {
     .seo-hero .hero-shade {
-        background: linear-gradient(180deg, rgba(18, 14, 12, 0.42) 0%, rgba(18, 14, 12, 0.55) 42%, rgba(18, 14, 12, 0.72) 100%);
+        background: linear-gradient(180deg, rgba(18, 14, 12, 0.7) 0%, rgba(18, 14, 12, 0.52) 58%, rgba(18, 14, 12, 0.38) 100%);
     }
 }
 @media (min-width: 768px) {
-    .seo-hero-inner { padding: 3.5rem 2.5rem; }
+    .seo-hero-inner { padding: 2rem 2.5rem 2.35rem; }
 }
 
 .seo-prose p { color: #4B4B4B; line-height: 1.75; }
