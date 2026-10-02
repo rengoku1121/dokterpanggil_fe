@@ -7,8 +7,26 @@ module.exports = function createSeoSections(h) {
         wrapWide, sectionHead, biTag, biAttrs, biSpan, icon, esc, waLink, BRAND
     } = h;
 
+    function isFaqPart(html) {
+        return typeof html === 'string'
+            && html.indexOf('seo-faq-item') !== -1
+            && html.indexOf('Pertanyaan Umum') !== -1;
+    }
+
+    function isCtaPart(html) {
+        return typeof html === 'string'
+            && html.indexOf('rounded-3xl bg-primary text-white') !== -1;
+    }
+
     function composeBody(parts) {
-        return parts.filter(Boolean).map((inner, i) =>
+        const list = parts.filter(Boolean);
+        const faqIdx = list.findIndex(isFaqPart);
+        const ctaIdx = list.findIndex(isCtaPart);
+        if (faqIdx !== -1 && ctaIdx !== -1 && faqIdx < ctaIdx) {
+            const faq = list.splice(faqIdx, 1)[0];
+            list.splice(ctaIdx, 0, faq);
+        }
+        return list.map((inner, i) =>
             wrapWide(inner, i % 2 === 1 ? 'alt' : '')
         ).join('\n');
     }
@@ -51,13 +69,25 @@ module.exports = function createSeoSections(h) {
 
     function iconRowCards(items, itemsEn) {
         const en = itemsEn || [];
+        const titlesOnly = items.every(c => !c.desc);
+        if (titlesOnly) {
+            return '<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 seo-icon-tiles">' + items.map((c, i) => {
+                const ce = en[i] || {};
+                return '<div class="canva-card rounded-2xl">'
+                    + (c.icon
+                        ? '<div class="seo-icon-tile-ic">' + icon(c.icon, 22, BRAND) + '</div>'
+                        : '')
+                    + biTag('h3', c.title, ce.title, 'class="seo-icon-tile-title"')
+                    + '</div>';
+            }).join('') + '</div>';
+        }
         return '<div class="grid sm:grid-cols-2 gap-4">' + items.map((c, i) => {
             const ce = en[i] || {};
             return '<div class="canva-card rounded-2xl p-5 flex gap-4">'
                 + (c.icon
                     ? '<div class="w-11 h-11 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center">' + icon(c.icon, 22, BRAND) + '</div>'
                     : '')
-                + '<div>' + biTag('h3', c.title, ce.title, 'class="font-bold mb-1 text-sm leading-snug"')
+                + '<div>' + biTag('h3', c.title, ce.title, 'class="font-bold text-sm leading-snug mb-1"')
                 + biTag('p', c.desc, ce.desc, 'class="text-sm text-gray-600 leading-relaxed"')
                 + '</div></div>';
         }).join('') + '</div>';

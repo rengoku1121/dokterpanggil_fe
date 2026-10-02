@@ -91,6 +91,109 @@ main > section.seo-hero {
     .seo-steps-tiles .seo-step-title { font-size: 0.875rem; }
 }
 
+/* Title-only icon cards: compact tiles so they don't look empty */
+.seo-icon-tiles { gap: 0.65rem; }
+.seo-icon-tiles .canva-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.55rem;
+    min-height: 8.5rem;
+    padding: 0.95rem 0.7rem;
+}
+.seo-icon-tile-ic {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.85rem;
+    background: rgba(216, 48, 48, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.seo-icon-tile-title {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    font-weight: 600;
+    color: #2D2D2D;
+    margin: 0;
+}
+.seo-roster {
+    overflow: hidden;
+    padding: 0.15rem 0;
+    border-left: 4px solid #D83030;
+}
+.seo-roster-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.25rem 1.3rem;
+    position: relative;
+}
+.seo-roster-row + .seo-roster-row {
+    border-top: 1px solid #F1E7E0;
+}
+.seo-roster-ic {
+    width: 3.15rem;
+    height: 3.15rem;
+    border-radius: 1rem;
+    background: rgba(216, 48, 48, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.seo-roster-body { flex: 1 1 auto; min-width: 0; }
+.seo-roster-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.7rem 0.85rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.3rem;
+}
+.seo-roster-role {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2D2D2D;
+}
+.seo-roster-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.7rem;
+    border-radius: 9999px;
+    background: rgba(216, 48, 48, 0.08);
+    border: 1px solid rgba(216, 48, 48, 0.16);
+    color: #D83030;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.seo-roster-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #4B4B4B;
+}
+@media (min-width: 768px) {
+    .seo-roster-row { gap: 1.2rem; padding: 1.55rem 1.7rem 1.6rem; }
+    .seo-roster-ic { width: 3.4rem; height: 3.4rem; }
+    .seo-roster-role { font-size: 1.12rem; }
+    .seo-roster-text { font-size: 1rem; }
+}
+
+@media (min-width: 1024px) {
+    .seo-icon-tiles { gap: 0.9rem; }
+    .seo-icon-tiles .canva-card { min-height: 8rem; padding: 1.15rem 0.9rem; }
+    .seo-icon-tile-ic { width: 2.75rem; height: 2.75rem; }
+    .seo-icon-tile-title { font-size: 0.875rem; }
+}
+
 /* FAQ accordion — mirrors the modal behaviour but scoped to these pages */
 .seo-faq-item + .seo-faq-item { border-top: 1px solid #F1E7E0; }
 .seo-faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; background: none; border: 0; cursor: pointer; padding: 1.125rem 0; font-weight: 600; color: #2D2D2D; }

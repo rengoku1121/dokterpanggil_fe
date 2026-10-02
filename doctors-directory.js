@@ -8,7 +8,14 @@
     const WA_NUMBER = '628114677700';
     const MODAL_ANIM_MS = 260;
     const modalHideTimers = {};
-    const docState = { category: 'all', specialty: 'all', query: '' };
+    const root = document.getElementById('temukan-dokter');
+    const defaultCat = root && root.getAttribute('data-default-cat');
+    const deferCards = !!(root && root.getAttribute('data-defer-cards') === '1');
+    const docState = {
+        category: defaultCat || 'all',
+        specialty: deferCards ? 'pending' : 'all',
+        query: ''
+    };
     let currentLang = 'id';
 
     const UI = {
@@ -97,7 +104,7 @@
         const q = docState.query.trim().toLowerCase();
         return DOCTORS.filter(d => {
             if (docState.category !== 'all' && d.category !== docState.category) return false;
-            if (docState.category === 'spesialis' && docState.specialty !== 'all' && d.specialty !== docState.specialty) return false;
+            if (docState.category === 'spesialis' && docState.specialty !== 'all' && docState.specialty !== 'pending' && d.specialty !== docState.specialty) return false;
             if (q) {
                 const spec = d.specialty ? L(SPECIALTIES[d.specialty]) : '';
                 const cond = (d.conditions && (d.conditions[currentLang] || d.conditions.id) || []).join(' ');
@@ -126,29 +133,49 @@
         }).join('');
     }
 
+    function specOptions() {
+        const present = Object.keys(SPECIALTIES).filter(k => DOCTORS.some(d => d.specialty === k));
+        return [{ key: 'all', label: t('spAll'), icon: 'layout-grid' }].concat(
+            present.map(k => ({ key: k, label: L(SPECIALTIES[k]), icon: SPECIALTIES[k].icon || 'stethoscope' }))
+        );
+    }
+
     function renderSpecialtyFilters() {
         const wrap = document.getElementById('specialty-filters');
         if (!wrap) return;
         if (docState.category !== 'spesialis') { wrap.classList.add('hidden'); wrap.innerHTML = ''; return; }
         wrap.classList.remove('hidden');
-        const present = Object.keys(SPECIALTIES).filter(k => DOCTORS.some(d => d.specialty === k));
-        const chips = [{ key: 'all', label: t('spAll'), icon: null }].concat(
-            present.map(k => ({ key: k, label: L(SPECIALTIES[k]), icon: SPECIALTIES[k].icon }))
-        );
-        wrap.innerHTML = chips.map(c => {
-            const active = docState.specialty === c.key;
-            const cls = active
-                ? 'bg-primary text-white border-primary'
-                : 'bg-white text-charcoal border-gray-200 hover:border-primary/40';
-            const icon = c.icon ? '<i data-lucide="' + c.icon + '" style="width:14px;height:14px"></i>' : '';
-            return '<button type="button" class="doc-spec-btn inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2.5 rounded-full text-xs font-medium border transition-colors ' + cls + '" data-spec="' + c.key + '">' + icon + '<span>' + c.label + '</span></button>';
-        }).join('');
+        const options = specOptions();
+        const pending = docState.specialty === 'pending';
+        wrap.innerHTML = '<div class="spec-grid">' + options.map(c => {
+            const active = !pending && docState.specialty === c.key;
+            return '<button type="button" class="spec-tile' + (active ? ' is-active' : '') + '" aria-pressed="' + (active ? 'true' : 'false') + '" data-spec="' + c.key + '">'
+                + '<span class="spec-tile-icon"><i data-lucide="' + c.icon + '" style="width:16px;height:16px"></i></span>'
+                + '<span class="spec-tile-label">' + c.label + '</span>'
+                + '</button>';
+        }).join('') + '</div>';
+    }
+
+    function shouldDeferCards() {
+        return deferCards && !docState.query.trim() && docState.specialty === 'pending';
     }
 
     function renderDoctorCards() {
         const grid = document.getElementById('doctors-grid');
         const empty = document.getElementById('doctors-empty');
+        const hint = document.getElementById('doctors-hint');
         if (!grid) return;
+        if (shouldDeferCards()) {
+            grid.innerHTML = '';
+            grid.classList.remove('is-updating');
+            if (empty) {
+                empty.classList.add('hidden');
+                empty.classList.remove('is-shown');
+            }
+            if (hint) hint.classList.remove('hidden');
+            return;
+        }
+        if (hint) hint.classList.add('hidden');
         const list = filterDoctors();
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -298,7 +325,7 @@
 
     const specs = document.getElementById('specialty-filters');
     if (specs) specs.addEventListener('click', e => {
-        const btn = e.target.closest('.doc-spec-btn');
+        const btn = e.target.closest('.spec-tile');
         if (!btn) return;
         docState.specialty = btn.dataset.spec;
         renderDoctors();

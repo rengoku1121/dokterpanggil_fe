@@ -83,7 +83,7 @@
             h1: 'Pendampingan Perawat Profesional langsung di Rumah',
             metaTitle: 'Perawat Homecare ke Rumah | DokterPanggil.id',
             metaDesc: 'Pendampingan perawat profesional di rumah berdasarkan rekomendasi dan supervisi dokter. Pemantauan, perawatan, dan koordinasi medis di Makassar.',
-            lead: 'Perawat profesional siap memberikan pendampingan, observasi, dan tindakan keperawatan berdasarkan rekomendasi dan supervisi dokter, sehingga pasien memperoleh perawatan yang berkesinambungan di rumah.',
+            lead: 'Perawat profesional hadir langsung di rumah untuk mendampingi, memantau kondisi, dan membantu kebutuhan perawatan pasien berdasarkan rekomendasi serta di bawah supervisi dokter.',
             heroChips: [
                 { id: 'Perawat Profesional', en: 'Professional Nurses' },
                 { id: 'Di Bawah Supervisi Dokter', en: 'Under Doctor Supervision' },

@@ -987,6 +987,11 @@ main > section:not(#home) {
 }
 
 @media (min-width: 1024px) {
+  .how-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 100%;
+    gap: 1.25rem;
+  }
   .about-layout {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -1392,6 +1397,78 @@ main > section:not(#home) {
   display: flex;
   justify-content: center;
   margin-top: 1.6rem;
+}
+
+/* Specialty grid — compact, scannable filter tiles */
+#specialty-filters {
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+@media (min-width: 1024px) {
+  .spec-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.spec-tile {
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.6rem 0.45rem;
+  border: 1px solid #E8E0DA;
+  border-radius: 0.95rem;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(45, 45, 45, 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.spec-tile:hover,
+.spec-tile:focus-visible {
+  border-color: #D8C8BE;
+  box-shadow: 0 6px 16px rgba(45, 45, 45, 0.08);
+  transform: translateY(-1px);
+}
+.spec-tile.is-active {
+  border-color: rgba(216, 48, 48, 0.4);
+  background: rgba(216, 48, 48, 0.08);
+  box-shadow: 0 8px 20px rgba(216, 48, 48, 0.14);
+}
+.spec-tile-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 0.7rem;
+  background: #F7F3F0;
+  color: #6B6B6B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spec-tile.is-active .spec-tile-icon {
+  background: #fff;
+  color: #D83030;
+}
+.spec-tile-label {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.765rem;
+  font-weight: 600;
+  color: #2D2D2D;
+  line-height: 1.25;
+}
+.spec-tile.is-active .spec-tile-label {
+  color: #D83030;
 }
 
 /* Doctor directory — card enter animation on search/filter */

@@ -342,9 +342,38 @@ function dokterUmumBody(prefix, en) {
 }
 
 /** Form D2 — body for Dokter Spesialis ke Rumah (same section rhythm as D1). */
+/** Set false + rebuild to restore the old "Lihat Dokter Spesialis" button. */
+const INLINE_SPECIALIST_SEARCH = true;
+
+function findSpecialistCtaCard(e, findHref) {
+    return '<div class="canva-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">'
+        + '<div class="max-w-2xl">'
+        + biTag('h2', 'Temukan Dokter Spesialis', e.findTitle, 'class="text-xl sm:text-2xl font-bold mb-2"')
+        + biTag('p', 'Cari berdasarkan nama, spesialisasi, atau kondisi medis.', e.findLead, 'class="text-gray-600 leading-relaxed"')
+        + '</div>'
+        + '<a href="' + esc(findHref) + '"' + biAttrs('Lihat Dokter Spesialis', e.findCta || 'Browse Specialists') + ' class="shrink-0 px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold text-center hover:scale-105 transition-transform">Lihat Dokter Spesialis</a>'
+        + '</div>';
+}
+
+function specialistSearchBlock(e) {
+    return '<div id="temukan-dokter" class="scroll-mt-28" data-default-cat="spesialis" data-defer-cards="1">'
+        + biTag('h2', 'Temukan Dokter Spesialis', e.findTitle, 'class="text-2xl sm:text-3xl font-bold mb-2"')
+        + biTag('p', 'Cari berdasarkan nama, spesialisasi, atau kondisi medis.', e.findLead, 'class="text-gray-500 mb-6 leading-relaxed max-w-3xl"')
+        + '<div class="max-w-xl mx-auto mb-6">'
+        + '<div class="relative">'
+        + '<i data-lucide="search" style="width:18px;height:18px" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>'
+        + '<input id="doctor-search" type="search" placeholder="Cari nama, spesialisasi, atau kondisi..." class="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary/30">'
+        + '</div></div>'
+        + '<div id="specialty-filters"></div>'
+        + '<p id="doctors-hint" class="text-center text-gray-500 py-6" data-i18n-id="Pilih spesialisasi atau ketik nama untuk melihat dokter." data-i18n-en="Choose a specialty or type a name to see doctors.">Pilih spesialisasi atau ketik nama untuk melihat dokter.</p>'
+        + '<div id="doctors-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>'
+        + '<p id="doctors-empty" class="hidden text-center text-gray-500 py-10"></p>'
+        + '</div>';
+}
+
 function dokterSpesialisBody(prefix, en) {
     const {
-        composeBody, aboutCard, whenCards, iconInfoCards, iconRowCards, howStepCards,
+        composeBody, aboutCard, iconInfoCards, iconRowCards, howStepCards,
         compactStepCards, whyCards, pills, pathCards, doctorNursePathCards, doubtBox,
         noteLine, promoBanner, linkCards, flowPills
     } = sections;
@@ -352,32 +381,6 @@ function dokterSpesialisBody(prefix, en) {
     const waAsk = 'Halo, saya ingin konsultasikan kebutuhan dokter spesialis ke rumah di Makassar.';
     const waBook = 'Halo, saya ingin panggil dokter spesialis ke rumah di Makassar.';
     const findHref = prefix + 'dokter/index.html?cat=spesialis#temukan-dokter';
-
-    const whenItems = [
-        {
-            title: 'Membutuhkan Pemeriksaan yang Lebih Spesifik',
-            desc: 'Ketika kondisi pasien membutuhkan penilaian lebih lanjut oleh dokter spesialis sesuai bidang keahliannya.'
-        },
-        {
-            title: 'Membutuhkan Kontrol atau Evaluasi Lanjutan',
-            desc: 'Untuk pasien yang membutuhkan pemantauan kondisi, evaluasi pengobatan, atau konsultasi lanjutan setelah pemeriksaan maupun perawatan sebelumnya.'
-        },
-        {
-            title: 'Pasien Sulit atau Tidak Nyaman Bepergian',
-            desc: 'Cocok untuk lansia, pasien dengan keterbatasan mobilitas, dalam masa pemulihan, atau kondisi lain yang membuat perjalanan ke fasilitas kesehatan menjadi lebih sulit.'
-        },
-        {
-            title: 'Membutuhkan Perawatan Lanjutan di Rumah',
-            desc: 'Dokter spesialis dapat mengevaluasi kondisi pasien dan memberikan rekomendasi perawatan selanjutnya yang dapat dikoordinasikan bersama tim homecare sesuai kebutuhan.'
-        }
-    ];
-
-    const flowSteps = [
-        { n: '01', title: 'Sampaikan Kebutuhan Pasien', desc: 'Informasikan kondisi pasien atau dokter spesialis yang dibutuhkan.' },
-        { n: '02', title: 'Pilih Dokter Spesialis', desc: 'Tim membantu menemukan dokter sesuai kebutuhan pasien.' },
-        { n: '03', title: 'Penjadwalan Kunjungan', desc: 'Waktu kunjungan dikoordinasikan terlebih dahulu bersama dokter spesialis.' },
-        { n: '04', title: 'Dokter Datang ke Rumah', desc: 'Setelah jadwal dikonfirmasi, dokter spesialis melakukan pemeriksaan dan konsultasi langsung di rumah.' }
-    ];
 
     const getItems = [
         { n: '01', title: 'Konsultasi Medis', desc: 'Evaluasi keluhan dan riwayat kesehatan.' },
@@ -387,10 +390,10 @@ function dokterSpesialisBody(prefix, en) {
     ];
 
     const followUps = [
-        { icon: 'pill', title: 'Obat & Farmasi', desc: 'Membantu kebutuhan obat sesuai resep atau anjuran dokter.' },
-        { icon: 'test-tubes', title: 'Pemeriksaan Laboratorium', desc: 'Pengambilan sampel dapat dilakukan langsung di rumah.' },
-        { icon: 'syringe', title: 'Tindakan Medis', desc: 'Infus, nebulizer, perawatan luka, pemasangan kateter, dan tindakan lain sesuai indikasi.' },
-        { icon: 'heart-handshake', title: 'Perawat Homecare hingga Rawat Inap di Rumah', desc: 'Pendampingan dan pemantauan pasien untuk kebutuhan perawatan lanjutan.' }
+        { icon: 'pill', title: 'Obat & Farmasi' },
+        { icon: 'test-tubes', title: 'Pemeriksaan Laboratorium' },
+        { icon: 'syringe', title: 'Tindakan Medis' },
+        { icon: 'heart-handshake', title: 'Perawat Homecare hingga Rawat Inap di Rumah' }
     ];
 
     const howSteps = [
@@ -399,14 +402,6 @@ function dokterSpesialisBody(prefix, en) {
         { n: '3', title: 'Konfirmasi Layanan & Biaya', desc: 'Tim akan menginformasikan layanan dan perkiraan biaya sebelum kunjungan.' },
         { n: '4', title: 'Dokter Menghubungi Anda', desc: 'Setelah dikonfirmasi, dokter yang bertugas akan menghubungi Anda untuk persiapan dan kunjungan.' }
     ];
-
-    const whyItems = [
-        { title: 'Dokter Sesuai Kebutuhan', desc: 'Temukan dokter spesialis berdasarkan bidang keahlian atau kondisi pasien.' },
-        { title: 'Konsultasi Nyaman di Rumah', desc: 'Pasien tidak perlu melakukan perjalanan dan menunggu di fasilitas kesehatan.' },
-        { title: 'Penjadwalan Terkoordinasi', desc: 'Tim membantu mengoordinasikan jadwal kunjungan bersama dokter spesialis.' },
-        { title: 'Perawatan Lanjutan Terintegrasi', desc: 'Kebutuhan setelah konsultasi dapat dikoordinasikan melalui layanan Dokter Panggil.' }
-    ];
-    const whyIcons = ['stethoscope', 'home', 'calendar', 'share-2'];
 
     const faqs = [
         {
@@ -433,18 +428,7 @@ function dokterSpesialisBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
-        // Form D2 — pintu ke Temukan Dokter (bukan fake search)
-        '<div class="canva-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">'
-        + '<div class="max-w-2xl">'
-        + biTag('h2', 'Temukan Dokter Spesialis', e.findTitle, 'class="text-xl sm:text-2xl font-bold mb-2"')
-        + biTag('p', 'Cari berdasarkan nama, spesialisasi, atau kondisi medis.', e.findLead, 'class="text-gray-600 leading-relaxed"')
-        + '</div>'
-        + '<a href="' + esc(findHref) + '"' + biAttrs('Lihat Dokter Spesialis', e.findCta || 'Browse Specialists') + ' class="shrink-0 px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold text-center hover:scale-105 transition-transform">Lihat Dokter Spesialis</a>'
-        + '</div>',
-        sectionHead('Kapan Sebaiknya Memanggil Dokter Spesialis ke Rumah?', null, e.whenTitle)
-        + whenCards(whenItems, e.whenCards),
-        sectionHead('Bagaimana Kunjungan Dokter Spesialis Berlangsung?', null, e.flowTitle)
-        + howStepCards(flowSteps, e.flowSteps),
+        INLINE_SPECIALIST_SEARCH ? specialistSearchBlock(e) : findSpecialistCtaCard(e, findHref),
         sectionHead('Cara Panggil Dokter', null, e.howTitle)
         + howStepCards(howSteps, e.howSteps),
         sectionHead('Apa yang Didapatkan Saat Kunjungan?', null, e.getTitle)
@@ -461,8 +445,6 @@ function dokterSpesialisBody(prefix, en) {
             href: findHref,
             external: false
         }),
-        sectionHead('Mengapa Dokter Spesialis bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -639,29 +621,11 @@ function rawatInapBody(prefix, en) {
     const waAsk = 'Halo, saya ingin bertanya tentang rawat inap di rumah di Makassar.';
     const waBook = 'Halo, saya ingin konsultasikan kondisi pasien untuk rawat inap di rumah di Makassar.';
 
-    const whenLead = 'Rawat inap di rumah dapat dipertimbangkan untuk pasien yang membutuhkan perawatan dan pemantauan berkelanjutan, namun berdasarkan penilaian dokter kondisinya memungkinkan untuk mendapatkan perawatan di rumah.';
     const whenItems = [
         { title: 'Setelah Pulang dari Rumah Sakit', desc: 'Untuk pasien yang masih membutuhkan perawatan, pemantauan, atau terapi lanjutan selama masa pemulihan di rumah.' },
         { title: 'Membutuhkan Perawatan Berkelanjutan', desc: 'Untuk kondisi tertentu yang membutuhkan pemberian terapi dan pemantauan secara berkala dalam beberapa hari atau sesuai rencana dokter.' },
         { title: 'Pasien dengan Mobilitas Terbatas', desc: 'Untuk pasien yang membutuhkan perawatan medis tetapi memiliki keterbatasan untuk melakukan perjalanan ke fasilitas kesehatan.' },
         { title: 'Membutuhkan Pemantauan Berkelanjutan', desc: 'Untuk pasien yang membutuhkan pemantauan kondisi dan pendampingan perawat secara berkala atau berkelanjutan sesuai rencana perawatan dan rekomendasi dokter.' }
-    ];
-
-    const includes = [
-        { icon: 'stethoscope', title: 'Dokter', desc: 'Melakukan penilaian, menentukan rencana perawatan, serta mengevaluasi perkembangan kondisi pasien.' },
-        { icon: 'heart-handshake', title: 'Perawat Homecare', desc: 'Mendampingi pasien, melakukan pemantauan, menjalankan rencana perawatan, dan berkoordinasi dengan dokter.' },
-        { icon: 'pill', title: 'Obat & Terapi', desc: 'Pemberian obat dan terapi dilakukan sesuai resep serta instruksi medis.' },
-        { icon: 'test-tubes', title: 'Pemeriksaan Laboratorium', desc: 'Pengambilan sampel dapat dilakukan di rumah apabila dibutuhkan untuk pemantauan kondisi pasien.' },
-        { icon: 'syringe', title: 'Tindakan Medis', desc: 'Infus, nebulizer, perawatan luka, kateter, suction, atau tindakan lainnya dapat dilakukan sesuai kebutuhan dan indikasi medis.' },
-        { icon: 'clipboard-list', title: 'Peralatan Medis', desc: 'Peralatan untuk membantu pemantauan dan perawatan dapat disiapkan sesuai kondisi pasien.' }
-    ];
-    const flowSteps = [
-        { n: '01', title: 'Dokter', desc: 'Penilaian dan rencana perawatan.' },
-        { n: '02', title: 'Rencana Perawatan', desc: 'Disusun sesuai kondisi pasien.' },
-        { n: '03', title: 'Perawat + Pemantauan', desc: 'Pendampingan di rumah sesuai rencana.' },
-        { n: '04', title: 'Obat · Lab · Tindakan · Alat', desc: 'Dikoordinasikan sesuai kebutuhan.' },
-        { n: '05', title: 'Evaluasi Dokter', desc: 'Perkembangan ditinjau kembali.' },
-        { n: '06', title: 'Lanjutkan / Sesuaikan / Rujuk', desc: 'Keputusan sesuai kondisi pasien.' }
     ];
 
     const startSteps = [
@@ -671,14 +635,6 @@ function rawatInapBody(prefix, en) {
         { n: '04', title: 'Rekomendasi Rencana Perawatan', desc: 'Dokter merekomendasikan kebutuhan perawat, obat, tindakan, pemeriksaan, alat medis, serta pemantauan yang diperlukan.' },
         { n: '05', title: 'Perawatan Dimulai di Rumah', desc: 'Tim medis menjalankan rencana perawatan dan melakukan pemantauan sesuai kondisi pasien serta berkoordinasi dengan dokter penanggung jawab.' }
     ];
-
-    const whyItems = [
-        { title: 'Perawatan Berdasarkan Penilaian Dokter', desc: 'Rencana pelayanan disusun berdasarkan kondisi dan kebutuhan medis pasien.' },
-        { title: 'Tim Medis Terkoordinasi', desc: 'Dokter, perawat, dan layanan pendukung bekerja dalam satu rencana perawatan.' },
-        { title: 'Pemantauan Berkelanjutan', desc: 'Perkembangan kondisi pasien dipantau selama masa perawatan dan dapat dievaluasi kembali oleh dokter.' },
-        { title: 'Layanan Medis Hadir di Rumah', desc: 'Obat, laboratorium, tindakan, hingga kebutuhan medis lainnya dapat dikoordinasikan langsung di rumah sesuai kebutuhan pasien.' }
-    ];
-    const whyIcons = ['stethoscope', 'users', 'activity', 'home'];
 
     const faqs = [
         { q: 'Kondisi pasien seperti apa yang dapat dirawat di rumah?', a: 'Rawat Inap di Rumah dapat dipertimbangkan untuk pasien yang membutuhkan perawatan, terapi, dan pemantauan berkelanjutan, namun berdasarkan hasil pemeriksaan dokter kondisinya masih memungkinkan untuk mendapatkan perawatan di rumah. Kebutuhan setiap pasien akan dinilai terlebih dahulu sebelum layanan dimulai.' },
@@ -692,32 +648,30 @@ function rawatInapBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
-        sectionHead('Kapan Pasien Dapat Dirawat di Rumah?', whenLead, e.whenTitle, e.whenLead)
+        sectionHead('Kapan Pasien Dapat Dirawat di Rumah?', null, e.whenTitle)
         + whenCards(whenItems, e.whenCards),
-        sectionHead('Apa Saja yang Termasuk dalam Perawatan?', null, e.includesTitle)
-        + biTag('h3', 'Perawatan Disesuaikan dengan Kondisi Setiap Pasien', e.includesHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Tidak semua pasien mendapatkan komponen yang sama. Tim medis menyusun kebutuhan pelayanan berdasarkan kondisi dan rencana perawatan dokter.', e.includesLead, 'class="text-gray-600 leading-relaxed mb-6 max-w-3xl"')
-        + iconInfoCards(includes, e.includes)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8 mt-8 mb-6">'
-        + biTag('h3', 'Satu Pasien, Satu Perawatan yang Terkoordinasi', e.coordHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Dokter, perawat, dan layanan pendukung bekerja dalam rencana perawatan yang sama. Perkembangan kondisi pasien dipantau dan dapat dikomunikasikan kepada dokter untuk menentukan kebutuhan pelayanan selanjutnya.', e.coordBody, 'class="text-gray-600 leading-relaxed"')
-        + '</div>'
-        + compactStepCards(flowSteps, e.flowSteps, 'sm:grid-cols-2 lg:grid-cols-3'),
         sectionHead('Bagaimana Rawat Inap di Rumah Dimulai?', null, e.startTitle)
-        + biTag('p', 'Dimulai dengan Penilaian Dokter', e.startHeadline, 'class="font-semibold text-lg mb-5"')
         + howStepCards(startSteps, e.startSteps),
         sectionHead('Pemantauan Selama Perawatan', null, e.monitorTitle)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8">'
-        + biTag('h3', 'Kondisi Pasien Dipantau Selama Perawatan', e.monitorHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Perawat melakukan pemantauan sesuai rencana perawatan dan mengomunikasikan perkembangan kondisi pasien kepada dokter. Apabila diperlukan, dokter dapat melakukan evaluasi dan menyesuaikan rencana pelayanan sesuai perkembangan pasien.', e.monitorBody, 'class="text-gray-600 leading-relaxed"')
-        + '</div>',
-        sectionHead('Bagaimana Jika Kondisi Pasien Memburuk?', null, e.worseTitle)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8 border border-[#F1E7E0]">'
-        + biTag('h3', 'Keselamatan Pasien Tetap Menjadi Prioritas', e.worseHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Kondisi pasien akan dievaluasi selama masa perawatan. Apabila terdapat perubahan kondisi yang membutuhkan pemeriksaan, tindakan, atau fasilitas yang tidak dapat diberikan di rumah, dokter akan merekomendasikan pasien untuk mendapatkan penanganan lebih lanjut di fasilitas kesehatan.', e.worseBody, 'class="text-gray-600 leading-relaxed"')
-        + '</div>',
-        sectionHead('Mengapa Rawat Inap di Rumah Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
+        + '<div class="canva-card rounded-3xl seo-roster max-w-4xl">'
+        + '<article class="seo-roster-row">'
+        + '<span class="seo-roster-ic">' + icon('stethoscope', 24, BRAND) + '</span>'
+        + '<div class="seo-roster-body">'
+        + '<div class="seo-roster-top">'
+        + biTag('p', 'Dokter', e.monitorDoctorRole, 'class="seo-roster-role"')
+        + biTag('span', 'Setiap hari', e.monitorDoctorTime, 'class="seo-roster-chip"')
+        + '</div>'
+        + biTag('p', 'Melakukan kunjungan setiap hari', e.monitorDoctor, 'class="seo-roster-text"')
+        + '</div></article>'
+        + '<article class="seo-roster-row">'
+        + '<span class="seo-roster-ic">' + icon('heart-handshake', 24, BRAND) + '</span>'
+        + '<div class="seo-roster-body">'
+        + '<div class="seo-roster-top">'
+        + biTag('p', 'Perawat', e.monitorNurseRole, 'class="seo-roster-role"')
+        + biTag('span', '1 x 24 jam', e.monitorNurseTime, 'class="seo-roster-chip"')
+        + '</div>'
+        + biTag('p', 'Mendampingi 1 x 24 jam dan melakukan pemantauan sesuai rencana perawatan dan mengomunikasikan perkembangan kondisi pasien kepada dokter.', e.monitorNurse, 'class="seo-roster-text"')
+        + '</div></article></div>',
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -2418,7 +2372,13 @@ function servicePage(service) {
                 termsOfService: absUrl('/')
             },
             faqSchema(faqId)
-        ]
+        ],
+        afterBody: (service.slug === 'kunjungan-dokter-spesialis' && INLINE_SPECIALIST_SEARCH)
+            ? doctorModalMarkup()
+            : '',
+        scripts: (service.slug === 'kunjungan-dokter-spesialis' && INLINE_SPECIALIST_SEARCH)
+            ? [prefix + 'doctors-data.js', prefix + 'doctors-directory.js']
+            : undefined
     };
 }
 
@@ -2513,7 +2473,7 @@ function doctorDirectoryBlock() {
         + '<input id="doctor-search" type="search" placeholder="Cari nama, spesialisasi, atau kondisi..." class="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary/30">'
         + '</div></div>'
         + '<div id="doctor-filters" class="flex justify-center gap-2 md:gap-3 mb-4 flex-wrap"></div>'
-        + '<div id="specialty-filters" class="flex justify-center gap-2 mb-8 flex-wrap"></div>'
+        + '<div id="specialty-filters"></div>'
         + '<div id="doctors-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>'
         + '<p id="doctors-empty" class="hidden text-center text-gray-500 py-10"></p>'
         + '</div>';

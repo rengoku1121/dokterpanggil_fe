@@ -86,7 +86,7 @@ module.exports = {
 
         'perawatan-rumah': {
             h1: 'Professional Nursing Care Directly at Home',
-            lead: 'Professional nurses provide accompaniment, observation, and nursing care based on the doctor’s recommendation and supervision, so patients receive continuous care at home.',
+            lead: 'Professional nurses come directly to your home to accompany the patient, monitor their condition, and help with care needs based on the doctor’s recommendation and under doctor supervision.',
             chips: [
                 'Professional Nurses',
                 'Under Doctor Supervision',
@@ -464,8 +464,12 @@ module.exports = {
                     { title: 'Care Begins at Home', desc: 'The medical team carries out the care plan, monitors the patient, and coordinates with the attending doctor.' }
                 ],
                 monitorTitle: 'Monitoring During Care',
-                monitorHeadline: 'The Patient’s Condition Is Monitored Throughout Care',
-                monitorBody: 'Nurses monitor according to the care plan and communicate progress to the doctor. When needed, the doctor can reassess and adjust the care plan based on how the patient progresses.',
+                monitorDoctorRole: 'Doctor',
+                monitorDoctorTime: 'Every day',
+                monitorDoctor: 'Visits every day',
+                monitorNurseRole: 'Nurse',
+                monitorNurseTime: '24 hours',
+                monitorNurse: 'Stays with the patient 24 hours a day, monitors according to the care plan, and communicates the patient’s progress to the doctor.',
                 worseTitle: 'What If the Patient’s Condition Worsens?',
                 worseHeadline: 'Patient Safety Remains the Priority',
                 worseBody: 'The patient’s condition is evaluated throughout care. If changes require exams, procedures, or facilities that cannot be provided at home, the doctor will recommend further care at a healthcare facility.',
