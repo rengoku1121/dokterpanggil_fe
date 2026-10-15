@@ -875,11 +875,6 @@ function terapiInfusBody(prefix, en) {
         + biTag('p', 'Dokter dapat mempertimbangkan terapi infus pada kondisi:', e.whenSub, 'class="font-semibold mb-4"')
         + whenCards(whenItems, e.whenCards),
         sectionHead('Setiap Terapi Infus Dimulai dengan Penilaian Dokter', null, e.assessTitle)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8 mb-6">'
-        + biTag('h3', 'Infus Berdasarkan Rekomendasi Dokter', e.assessHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Sebelum terapi infus dilakukan, dokter akan menilai kondisi pasien terlebih dahulu untuk menentukan apakah infus diperlukan serta jenis terapi yang sesuai.', e.assessBody1, 'class="text-gray-600 leading-relaxed mb-3"')
-        + biTag('p', 'Penilaian dapat dilakukan melalui konsultasi online atau kunjungan dokter langsung ke rumah, sesuai kondisi pasien.', e.assessBody2, 'class="text-gray-600 leading-relaxed"')
-        + '</div>'
         + compactStepCards(assessSteps, e.assessSteps, 'sm:grid-cols-2 lg:grid-cols-4'),
         sectionHead('Bagaimana Terapi Infus Dilakukan?', null, e.howTitle)
         + biTag('p', 'Terapi Infus di Rumah dalam 5 Langkah', e.howHeadline, 'class="font-semibold text-lg mb-5"')
@@ -2382,21 +2377,85 @@ function servicePage(service) {
     };
 }
 
+function hubServicesCatalog() {
+    const featured = [
+        { href: 'kunjungan-dokter.html', icon: 'stethoscope', img: 'https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?fm=jpg&q=70&w=800&auto=format&fit=crop', alt: 'Dokter umum datang ke rumah', title: 'Dokter Umum 24 Jam', titleEn: 'GP Visit 24 Hours', desc: 'Dokter datang ke rumah, siap 24 jam.', descEn: 'A doctor comes to your home, available 24 hours.' },
+        { href: 'kunjungan-dokter-spesialis.html', icon: 'heart-pulse', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?fm=jpg&q=70&w=800&auto=format&fit=crop', alt: 'Dokter spesialis ke rumah', title: 'Dokter Spesialis ke Rumah', titleEn: 'Specialist Home Visit', desc: 'Spesialis sesuai kebutuhan, langsung di rumah.', descEn: 'The right specialist, at your home.' },
+        { href: 'perawatan-rumah.html', icon: 'heart-handshake', img: 'https://plus.unsplash.com/premium_photo-1664475811964-75af7d90ee4b?fm=jpg&q=70&w=800&auto=format&fit=crop', alt: 'Perawat homecare', title: 'Perawat Homecare', titleEn: 'Homecare Nursing', desc: 'Pendampingan perawat profesional di rumah.', descEn: 'Professional nurse support at home.' },
+        { href: 'perawatan-lansia.html', icon: 'helping-hand', img: 'https://images.unsplash.com/photo-1765896387387-0538bc9f997e?fm=jpg&q=70&w=800&auto=format&fit=crop', alt: 'Rawat inap di rumah', title: 'Rawat Inap di Rumah', titleEn: 'Home Inpatient Care', desc: 'Perawatan terpantau dokter dan perawat.', descEn: 'Care monitored by a doctor and nurse.' }
+    ];
+    const procs = [
+        { href: 'terapi-infus.html', icon: 'syringe', title: 'Terapi Infus', titleEn: 'Infusion Therapy' },
+        { href: 'infus-vitamin.html', icon: 'droplets', title: 'Infus Vitamin', titleEn: 'Vitamin Infusion' },
+        { href: 'terapi-oksigen.html', icon: 'wind', title: 'Terapi Oksigen', titleEn: 'Oxygen Therapy' },
+        { href: 'terapi-nebulizer.html', icon: 'cloud', title: 'Terapi Nebulizer', titleEn: 'Nebulizer Therapy' },
+        { href: 'perawatan-luka.html', icon: 'plus-square', title: 'Perawatan Luka', titleEn: 'Wound Care' },
+        { href: 'vaksinasi.html', icon: 'shield', title: 'Vaksinasi', titleEn: 'Vaccination' },
+        { href: 'pemasangan-ngt.html', icon: 'clipboard-list', title: 'Pemasangan Selang Makan', titleEn: 'Feeding Tube Placement' },
+        { href: 'pemasangan-kateter.html', icon: 'droplet', title: 'Pemasangan Kateter Urin', titleEn: 'Urinary Catheter Placement' },
+        { href: 'suction.html', icon: 'activity', title: 'Suction / Sedot Dahak', titleEn: 'Suction / Phlegm Clearance' }
+    ];
+    const exam = [
+        { href: 'tes-laboratorium.html', icon: 'flask-conical', full: 'Laboratorium di Rumah', fullEn: 'Home Laboratory', brief: 'Laboratorium', briefEn: 'Laboratory' },
+        { href: 'farmasi.html', icon: 'pill', full: 'Layanan Farmasi', fullEn: 'Pharmacy Service', brief: 'Farmasi', briefEn: 'Pharmacy' }
+    ];
+    const other = [
+        { href: 'pemeriksaan-kesehatan.html', icon: 'clipboard-check', full: 'Medical Check-Up', fullEn: 'Medical Check-Up', brief: 'Check-Up', briefEn: 'Check-Up' },
+        { href: 'konsultasi-online.html', icon: 'monitor-smartphone', full: 'Konsultasi Online', fullEn: 'Online Consultation', brief: 'Konsultasi', briefEn: 'Consult' }
+    ];
+
+    function boxLink(item) {
+        return '<a href="' + esc(item.href) + '"><i data-lucide="' + item.icon + '"></i>'
+            + '<span class="home-svc-full"' + biAttrs(item.full, item.fullEn) + '>' + esc(item.full) + '</span>'
+            + '<span class="home-svc-brief"' + biAttrs(item.brief, item.briefEn) + '>' + esc(item.brief) + '</span></a>';
+    }
+
+    const featuredHtml = '<div class="home-svc-grid hub-svc-grid">' + featured.map(function (item) {
+        return '<a href="' + esc(item.href) + '" class="home-svc-card">'
+            + '<div class="home-svc-card-media"><img src="' + esc(item.img) + '" alt="' + esc(item.alt) + '" loading="lazy" decoding="async"></div>'
+            + '<div class="home-svc-card-body">'
+            + '<span class="home-svc-card-icon" aria-hidden="true"><i data-lucide="' + item.icon + '"></i></span>'
+            + biTag('h3', item.title, item.titleEn, '')
+            + biTag('p', item.desc, item.descEn, '')
+            + '</div></a>';
+    }).join('') + '</div>';
+
+    const procHtml = '<div class="home-svc-proc">'
+        + '<div class="home-svc-proc-head">'
+        + biTag('h3', 'Tindakan Medis', 'Medical Procedures', '')
+        + '<a href="tindakan-medis.html" class="home-svc-proc-all"' + biAttrs('Lihat semua →', 'View all →') + '>Lihat semua →</a>'
+        + '</div><div class="home-svc-proc-grid">'
+        + procs.map(function (item) {
+            return '<a href="' + esc(item.href) + '" class="home-svc-chip"><i data-lucide="' + item.icon + '"></i>'
+                + biSpan(item.title, item.titleEn, '') + '</a>';
+        }).join('')
+        + '</div></div>';
+
+    const pairHtml = '<div class="home-svc-pair">'
+        + '<div class="home-svc-box"><h3>'
+        + '<span class="home-svc-full"' + biAttrs('Pemeriksaan dan Layanan Penunjang', 'Tests & Supporting Care') + '>Pemeriksaan dan Layanan Penunjang</span>'
+        + '<span class="home-svc-brief"' + biAttrs('Pemeriksaan & Penunjang', 'Tests & Support') + '>Pemeriksaan &amp; Penunjang</span>'
+        + '</h3><div class="home-svc-box-list">' + exam.map(boxLink).join('') + '</div></div>'
+        + '<div class="home-svc-box"><h3>'
+        + '<span class="home-svc-full"' + biAttrs('Layanan Lainnya', 'Other Services') + '>Layanan Lainnya</span>'
+        + '<span class="home-svc-brief"' + biAttrs('Layanan Lainnya', 'Other Services') + '>Layanan Lainnya</span>'
+        + '</h3><div class="home-svc-box-list">' + other.map(boxLink).join('') + '</div></div>'
+        + '</div>';
+
+    return featuredHtml + procHtml + pairHtml;
+}
+
 function servicesHub() {
     /* The hub itself lives in layanan/, so siblings are linked without a prefix
        while anything outside the folder needs to step back up. */
     const prefix = '../';
     const hubEn = SEO_EN.hubs.layanan || {};
-    const cards = '<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">' + SEO_SERVICES.map(s => {
-        const enLead = pick(s.tagline, 'en');
-        return linkCard(s.slug + '.html', s.icon, L(s.name), L(s.tagline), pick(s.name, 'en'), enLead);
-    }).join('') + '</div>';
 
     const body = [
-        // Catalog — modest bottom gap before CTA
+        // Catalog — same boxed layout as the homepage services section
         '<section class="w-full pt-12 sm:pt-16 pb-8 sm:pb-10"><div class="max-w-7xl mx-auto px-4">'
         + sectionHead('Pilih Layanan Sesuai Kebutuhan Anda', 'Temukan layanan kesehatan yang sesuai untuk kebutuhan Anda dan Keluarga di Rumah', hubEn.catalogTitle, hubEn.catalogSub)
-        + cards
+        + hubServicesCatalog()
         + '</div></section>',
         '<section class="w-full pt-0 pb-12 sm:pb-16"><div class="max-w-7xl mx-auto px-4">'
         + ctaBlock(prefix,

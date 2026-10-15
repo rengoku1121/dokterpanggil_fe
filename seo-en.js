@@ -1325,9 +1325,6 @@ module.exports = {
                     { title: 'Continuing Recommended Therapy', desc: 'For patients who still need IV therapy as part of a care plan already set by the doctor.' }
                 ],
                 assessTitle: 'Every Infusion Starts with a Doctor Assessment',
-                assessHeadline: 'Infusion Based on Doctor Recommendation',
-                assessBody1: 'Before infusion therapy is given, the doctor assesses the patient first to decide whether an infusion is needed and which therapy is appropriate.',
-                assessBody2: 'Assessment can be done via online consultation or a doctor home visit, depending on the patient’s condition.',
                 assessSteps: [
                     { title: 'Share the Patient’s Condition', desc: 'Tell the Dokter Panggil team about symptoms and condition.' },
                     { title: 'Doctor Assessment', desc: 'Online consult or direct home visit.' },

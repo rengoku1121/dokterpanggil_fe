@@ -6,6 +6,19 @@
  * sizes #home to the full viewport for the homepage carousel.
  */
 
+/* Hub catalog reuses homepage service cards, but keeps 2 boxes per row */
+.hub-svc-grid.home-svc-grid,
+.hub-svc-grid {
+    grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 768px) {
+    .hub-svc-grid.home-svc-grid,
+    .hub-svc-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
 /* Overlay hero sized to the copy, not the full viewport */
 .seo-hero {
     position: relative;
