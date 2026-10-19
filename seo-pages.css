@@ -210,6 +210,30 @@ main > section.seo-hero {
 .seo-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .seo-faq-a.open { max-height: 2000px; }
 .seo-faq-a > div { padding-bottom: 1.125rem; color: #4B4B4B; line-height: 1.7; }
+.seo-faq-more { display: flex; justify-content: center; margin-top: 1.25rem; }
+.seo-faq-more-btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    border: 2px solid #D83030;
+    background: transparent;
+    color: #D83030;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.seo-faq-more-btn:hover,
+.seo-faq-more-btn:focus-visible { background: #D83030; color: #fff; }
+.seo-faq-item.seo-faq-reveal { animation: seoFaqReveal 0.4s ease both; }
+.seo-faq-item.seo-faq-conceal { animation: seoFaqConceal 0.22s ease both; }
+@keyframes seoFaqReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+}
+@keyframes seoFaqConceal {
+    from { opacity: 1; transform: none; }
+    to { opacity: 0; transform: translateY(8px); }
+}
 
 /* Breadcrumb trail */
 .seo-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; font-size: 0.8125rem; }
@@ -306,6 +330,7 @@ main > section.seo-hero {
 }
 @media (prefers-reduced-motion: reduce) {
     .seo-faq-a, .seo-faq-q svg { transition-duration: 0.01ms; }
+    .seo-faq-item.seo-faq-reveal, .seo-faq-item.seo-faq-conceal { animation: none; }
     #vax-modal .vax-anim,
     #vax-modal.is-open .vax-anim {
         opacity: 1;

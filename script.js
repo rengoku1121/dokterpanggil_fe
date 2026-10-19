@@ -404,6 +404,65 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             openItem(item);
         });
     });
+
+    const VISIBLE = 4;
+    const extra = items.slice(VISIBLE);
+    const toggle = document.getElementById('faq-toggle');
+    if (!extra.length || !toggle) return;
+
+    function hideExtra() {
+        extra.forEach(item => {
+            item.classList.remove('faq-reveal', 'faq-conceal');
+            item.style.animationDelay = '';
+            if (item.classList.contains('is-open')) {
+                item.classList.remove('is-open');
+                item.open = false;
+                const answer = item.querySelector('.faq-answer');
+                if (answer) answer.style.height = '';
+            }
+            item.hidden = true;
+        });
+    }
+
+    let hideTimer = null;
+
+    function setExpanded(expanded, relabel) {
+        const animate = relabel && !prefersReducedMotion();
+        clearTimeout(hideTimer);
+        if (expanded) {
+            extra.forEach((item, i) => {
+                item.classList.remove('faq-conceal');
+                item.hidden = false;
+                if (!animate) return;
+                item.style.animationDelay = (i * 45) + 'ms';
+                item.classList.remove('faq-reveal');
+                void item.offsetWidth;
+                item.classList.add('faq-reveal');
+            });
+        } else if (animate) {
+            extra.forEach(item => {
+                item.style.animationDelay = '';
+                item.classList.remove('faq-reveal');
+                item.classList.add('faq-conceal');
+            });
+            hideTimer = setTimeout(hideExtra, 220);
+        } else {
+            hideExtra();
+        }
+        const key = expanded ? 'faq.less' : 'faq.more';
+        toggle.setAttribute('data-i18n', key);
+        toggle.setAttribute('aria-expanded', String(expanded));
+        // translations/currentLang are declared later in this file, so only read them after load
+        if (relabel && translations[currentLang][key]) toggle.textContent = translations[currentLang][key];
+    }
+
+    toggle.hidden = false;
+    setExpanded(false, false);
+    toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        setExpanded(!expanded, true);
+        if (expanded) setTimeout(() => document.getElementById('faq').scrollIntoView({ behavior: 'smooth', block: 'start' }), 220);
+    });
 })();
 
 let currentLang = 'id';
@@ -465,10 +524,12 @@ const translations = {
         'hero.s3sub': 'Dokter, Perawat, Laboratorium hingga kebutuhan obat terintegrasi dalam satu layanan homecare, menghadirkan perawatan yang lebih nyaman langsung di Rumah Anda',
         'hero.s3t1': 'Dokter & Perawat', 'hero.s3t2': 'Langsung di Rumah',
         'hero.s3cta1': 'Pesan Sekarang', 'hero.s3cta2': 'Chat WhatsApp',
-        'about.title': 'Layanan Kesehatan, Lebih Dekat dengan Anda',
+        'about.kicker': 'Tentang Kami',
+        'about.title': 'Perawatan yang Datang',
+        'about.titleEm': 'ke Rumah Anda',
         'about.desc': "Dokter Panggil di bawah CV. Mentari Kasih Indonesia merupakan layanan kesehatan berbasis homecare yang menghadirkan tim dokter, perawat serta pemeriksaan laboratorium hingga kebutuhan obat dalam satu layanan terintegrasi. Kami hadir untuk membuat pelayanan dan perawatan kesehatan menjadi lebih mudah, nyaman, dan dekat bagi pasien dan keluarga.",
         'about.v1': 'Datang ke Rumah', 'about.v2': 'Siap 24 Jam', 'about.v3': 'Layanan Lengkap', 'about.v4': 'Lebih Nyaman',
-        'svc.title': 'Layanan Kami',
+        'svc.title': 'Layanan Kesehatan ke Rumah',
         'svc.subtitle': 'Dokter, Perawat, dan Petugas Laboratorium hadir langsung ke rumah untuk membantu kebutuhan kesehatan Anda dan Keluarga',
         'svc.all': 'Lihat semua layanan →',
         'why.title': 'Mengapa Memilih Kami',
@@ -496,7 +557,6 @@ const translations = {
         'doctors.cat.nurseDesc': 'Perawat profesional siap mendampingi pasien di rumah selama 24 jam untuk pemantauan, perawatan, dan kebutuhan harian pasien.',
         'gallery.title': 'Perawatan dalam Aksi',
         'loc.title': 'Tersedia di Kota Anda',
-        'loc.subtitle': 'Saat ini Dokter Panggil melayani Makassar. Surabaya akan segera hadir.',
         'loc.placeholder': 'Masukkan kota atau area Anda...', 'loc.check': 'Cek',
         'loc.pick': 'Area layanan',
         'loc.available': 'Tersedia',
@@ -518,6 +578,7 @@ const translations = {
         'testi.6': '“Informasi mudah didapat dan alasan memilih Dokter Panggil karena rating baik.”',
         'testi.6name': 'Bambang', 'testi.6city': 'Makassar',
         'faq.title': 'Pertanyaan yang Sering Diajukan',
+        'faq.more': 'Lihat lebih banyak', 'faq.less': 'Tampilkan lebih sedikit',
         'faq.q1': 'Apakah Dokter Panggil tersedia 24 jam?',
         'faq.a1': 'Ya. Layanan dokter umum tersedia 24 jam, termasuk malam hari, akhir pekan, dan hari libur. Untuk dokter spesialis, ketersediaan menyesuaikan jadwal tenaga medis yang dijadwalkan terlebih dahulu.',
         'faq.q2': 'Bagaimana cara memanggil dokter ke rumah?',
@@ -589,10 +650,12 @@ const translations = {
         'hero.s3sub': 'Doctors, nurses, laboratory, and medication needs integrated in one homecare service—more comfortable care right at your home',
         'hero.s3t1': 'Doctor & Nurse', 'hero.s3t2': 'At Your Home',
         'hero.s3cta1': 'Book Now', 'hero.s3cta2': 'Chat WhatsApp',
-        'about.title': 'Healthcare, Closer to You',
+        'about.kicker': 'About Us',
+        'about.title': 'Care That Comes',
+        'about.titleEm': 'to Your Home',
         'about.desc': "Dokter Panggil, under CV. Mentari Kasih Indonesia, is a homecare health service that brings a team of doctors, nurses, laboratory tests, and medication needs together in one integrated service. We are here to make healthcare and treatment easier, more comfortable, and closer for patients and families.",
         'about.v1': 'Comes to Your Home', 'about.v2': 'Ready 24 Hours', 'about.v3': 'Complete Services', 'about.v4': 'More Comfortable',
-        'svc.title': 'Our Services',
+        'svc.title': 'Home Healthcare Services',
         'svc.subtitle': 'Doctors, nurses, and laboratory staff come to your home to support the health needs of you and your family',
         'svc.all': 'View all services →',
         'why.title': 'Why Choose Us',
@@ -620,7 +683,6 @@ const translations = {
         'doctors.cat.nurseDesc': 'Professional nurses ready to support patients at home around the clock for monitoring, care, and daily needs.',
         'gallery.title': 'Care in Action',
         'loc.title': 'Available in Your City',
-        'loc.subtitle': 'Dokter Panggil currently serves Makassar. Surabaya is coming soon.',
         'loc.placeholder': 'Enter your city or area...', 'loc.check': 'Check',
         'loc.pick': 'Service area',
         'loc.available': 'Available',
@@ -642,6 +704,7 @@ const translations = {
         'testi.6': '“Information is easy to get, and I chose Dokter Panggil because of the good rating.”',
         'testi.6name': 'Bambang', 'testi.6city': 'Makassar',
         'faq.title': 'Frequently Asked Questions',
+        'faq.more': 'Show more', 'faq.less': 'Show less',
         'faq.q1': 'Is Dokter Panggil available 24 hours?',
         'faq.a1': 'Yes. GP visits are available 24 hours, including nights, weekends, and holidays. Specialist availability follows the scheduled medical team calendar.',
         'faq.q2': 'How do I call a doctor to my home?',

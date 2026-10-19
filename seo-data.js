@@ -66,6 +66,7 @@
         'kunjungan-dokter': {
             // Form D1 — hero wording dari client
             h1: 'Dokter Umum 24 Jam ke Rumah',
+            h1Lines: ['Dokter Umum', '24 Jam ke Rumah'],
             metaTitle: 'Dokter Umum 24 Jam ke Rumah | DokterPanggil.id',
             metaDesc: 'Butuh pemeriksaan dokter tanpa harus pergi ke rumah sakit atau klinik? Dokter umum siap datang ke rumah 24 jam untuk anak, dewasa, dan lansia di Makassar.',
             lead: 'Butuh pemeriksaan dokter tanpa harus pergi ke rumah sakit atau klinik? Dokter umum siap datang ke rumah untuk melakukan pemeriksaan, memberikan penanganan awal, dan membantu menentukan perawatan selanjutnya sesuai kondisi pasien.',

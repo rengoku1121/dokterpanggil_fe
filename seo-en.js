@@ -7,6 +7,7 @@ module.exports = {
     services: {
         'kunjungan-dokter': {
             h1: 'GP Visit 24 Hours at Home',
+            h1Lines: ['GP Visit', '24 Hours at Home'],
             lead: 'Need a doctor’s exam without going to a hospital or clinic? A GP is ready to come to your home for an examination, initial care, and to help decide next steps based on the patient’s condition.',
             chips: [
                 'Available 24 Hours',
@@ -23,8 +24,6 @@ module.exports = {
                     { title: 'A Child Is Unwell', desc: 'When a child has a fever or feels unwell and parents want a doctor’s exam without taking the child out or waiting in line' },
                     { title: 'Need an Assessment Before Further Care', desc: 'A doctor can examine first to decide whether the patient needs medicine, lab tests, medical procedures, nursing care, a specialist consult, or further care at a healthcare facility.' }
                 ],
-                doubtTitle: 'Still unsure whether the patient’s condition can be handled at home?',
-                doubtBody: 'Tell the Dokter Panggil team about the patient’s symptoms. We will help direct you to the right service.',
                 doubtCta: 'Ask via WhatsApp',
                 symptomsTitle: 'Conditions a GP Can Handle',
                 symptomsLead: 'A GP can examine and provide initial care for a wide range of health concerns in children, adults, and older adults.',
@@ -47,21 +46,12 @@ module.exports = {
                     { title: 'Medical Procedures', desc: 'Infusion, nebulizer, wound care, catheter placement, and other procedures as indicated.' },
                     { title: 'Homecare Nursing to Home Inpatient Care', desc: 'Companionship and monitoring for ongoing care needs.' }
                 ],
-                nightTitle: 'Need a Doctor at Night? We are still ready.',
-                nightBody: 'GP visits are available 24 hours, including nights, weekends, and holidays.',
                 howTitle: 'How to Call a Doctor',
                 howSteps: [
                     { title: 'Contact Us 24 Hours', desc: 'WhatsApp or call the Dokter Panggil Call Centre.' },
                     { title: 'Share the Patient’s Condition', desc: 'Share symptoms, the patient’s ID card details, and the visit location.' },
                     { title: 'Confirm Service & Cost', desc: 'The team will explain the service and estimated cost before the visit.' },
                     { title: 'The Doctor Contacts You', desc: 'After confirmation, the assigned doctor will contact you for preparation and the visit.' }
-                ],
-                whyTitle: 'Why Call a GP from Dokter Panggil?',
-                whyItems: [
-                    { title: 'Available 24 Hours', desc: 'Access a GP whenever needed, including at night.' },
-                    { title: 'Exam Directly at Home', desc: 'Patients do not need to queue or travel when feeling unwell.' },
-                    { title: 'Coordinated Care', desc: 'Medicine, lab, procedures, and nursing can be coordinated after the exam.' },
-                    { title: 'For the Whole Family', desc: 'Care is available for children, adults, and older adults.' }
                 ],
                 areaLabel: 'Service Area',
                 areaTitle: 'GP Home Visits in Makassar',
@@ -710,7 +700,7 @@ module.exports = {
                 ],
                 doubtTitle: 'Not sure which specialist is right?',
                 doubtBody: 'Tell the Dokter Panggil team about the patient’s condition or needs. We will help direct you to the right specialist.',
-                doubtCta: 'Find a Specialist',
+                doubtCta: 'Chat Now',
                 flowTitle: 'How Does a Specialist Visit Work?',
                 flowSteps: [
                     { title: 'Share the Patient’s Needs', desc: 'Tell us the patient’s condition or which specialist is needed.' },

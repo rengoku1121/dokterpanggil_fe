@@ -167,6 +167,100 @@
         q.setAttribute('aria-expanded', String(open));
     });
 
+    /* FAQ: show the first few questions, reveal the rest on "Lihat lebih banyak" */
+    (function initFaqMore() {
+        const VISIBLE = 4;
+        const REVEAL_STAGGER_MS = 45;
+        const CONCEAL_MS = 220;
+        const LABELS = {
+            more: { id: 'Lihat lebih banyak', en: 'Show more' },
+            less: { id: 'Tampilkan lebih sedikit', en: 'Show less' }
+        };
+
+        function reduceMotion() {
+            return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+
+        const boxes = [];
+        document.querySelectorAll('.seo-faq-item').forEach(function (item) {
+            if (boxes.indexOf(item.parentElement) === -1) boxes.push(item.parentElement);
+        });
+
+        boxes.forEach(function (box) {
+            const items = Array.prototype.filter.call(box.children, function (el) {
+                return el.classList.contains('seo-faq-item');
+            });
+            const extra = items.slice(VISIBLE);
+            if (!extra.length) return;
+
+            const wrap = document.createElement('div');
+            wrap.className = 'seo-faq-more';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'seo-faq-more-btn';
+            wrap.appendChild(btn);
+            box.insertAdjacentElement('afterend', wrap);
+
+            let hideTimer = null;
+
+            function setLabel(expanded) {
+                const label = expanded ? LABELS.less : LABELS.more;
+                btn.setAttribute('data-i18n-id', label.id);
+                btn.setAttribute('data-i18n-en', label.en);
+                btn.setAttribute('aria-expanded', String(expanded));
+                btn.textContent = document.documentElement.lang === 'en' ? label.en : label.id;
+            }
+
+            function hideExtra() {
+                extra.forEach(function (item) {
+                    item.classList.remove('seo-faq-reveal', 'seo-faq-conceal');
+                    item.style.animationDelay = '';
+                    const q = item.querySelector('.seo-faq-q');
+                    const a = item.querySelector('.seo-faq-a');
+                    if (a) a.classList.remove('open');
+                    if (q) q.setAttribute('aria-expanded', 'false');
+                    item.hidden = true;
+                });
+            }
+
+            function setExpanded(expanded, animate) {
+                clearTimeout(hideTimer);
+                if (expanded) {
+                    extra.forEach(function (item, i) {
+                        item.classList.remove('seo-faq-conceal', 'seo-faq-reveal');
+                        item.hidden = false;
+                        if (!animate) return;
+                        item.style.animationDelay = (i * REVEAL_STAGGER_MS) + 'ms';
+                        void item.offsetWidth;
+                        item.classList.add('seo-faq-reveal');
+                    });
+                } else if (animate) {
+                    extra.forEach(function (item) {
+                        item.style.animationDelay = '';
+                        item.classList.remove('seo-faq-reveal');
+                        item.classList.add('seo-faq-conceal');
+                    });
+                    hideTimer = setTimeout(hideExtra, CONCEAL_MS);
+                } else {
+                    hideExtra();
+                }
+                setLabel(expanded);
+            }
+
+            setExpanded(false, false);
+            btn.addEventListener('click', function () {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                const animate = !reduceMotion();
+                setExpanded(!expanded, animate);
+                if (expanded) {
+                    setTimeout(function () {
+                        box.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'center' });
+                    }, animate ? CONCEAL_MS : 0);
+                }
+            });
+        });
+    })();
+
     /* Retry remote images once — CDN hiccups otherwise leave an empty frame */
     document.querySelectorAll('img[data-retry]').forEach(function (img) {
         img.addEventListener('error', function () {
