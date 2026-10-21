@@ -204,12 +204,16 @@ main > section.seo-hero {
 
 /* FAQ accordion — mirrors the modal behaviour but scoped to these pages */
 .seo-faq-item + .seo-faq-item { border-top: 1px solid #F1E7E0; }
-.seo-faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; background: none; border: 0; cursor: pointer; padding: 1.125rem 0; font-weight: 600; color: #2D2D2D; }
+.seo-faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; background: none; border: 0; cursor: pointer; padding: 1rem 0; font-size: 0.8125rem; line-height: 1.45; font-weight: 600; color: #2D2D2D; }
 .seo-faq-q svg { flex-shrink: 0; transition: transform 0.25s ease; }
 .seo-faq-q[aria-expanded="true"] svg { transform: rotate(180deg); }
 .seo-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .seo-faq-a.open { max-height: 2000px; }
-.seo-faq-a > div { padding-bottom: 1.125rem; color: #4B4B4B; line-height: 1.7; }
+.seo-faq-a > div { padding-bottom: 1rem; color: #4B4B4B; font-size: 0.78125rem; line-height: 1.65; }
+@media (min-width: 640px) {
+    .seo-faq-q { font-size: 0.875rem; }
+    .seo-faq-a > div { font-size: 0.8125rem; }
+}
 .seo-faq-more { display: flex; justify-content: center; margin-top: 1.25rem; }
 .seo-faq-more-btn {
     padding: 0.75rem 1.75rem;

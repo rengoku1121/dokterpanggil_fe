@@ -878,19 +878,7 @@ module.exports = {
             d4: {
                 pickTitle: 'Choose the Medical Procedure You Need',
                 pickLead: 'Find the medical procedure that fits the patient’s needs. Every procedure is based on a doctor’s recommendation after assessing the patient’s condition.',
-                procedures: [
-                    { title: 'Infusion Therapy', desc: 'IV fluids and therapy based on indication and the doctor’s recommendation.', cta: 'View details →' },
-                    { title: 'Vitamin Infusion', desc: 'Vitamin infusion based on condition assessment and the doctor’s recommendation.', cta: 'View details →' },
-                    { title: 'Oxygen Therapy', desc: 'Oxygen therapy based on the patient’s condition and medical needs.', cta: 'View details →' },
-                    { title: 'Nebulizer Therapy', desc: 'Nebulizer therapy based on indication and the doctor’s recommendation.', cta: 'View details →' },
-                    { title: 'Wound Care', desc: 'Wound care and dressing changes matched to the wound type, condition, and care needs.', cta: 'View details →' },
-                    { title: 'Home Vaccination', desc: 'Vaccination at home based on vaccine type and patient condition.', cta: 'View details →' },
-                    { title: 'Feeding Tube (NGT)', desc: 'Feeding tube placement or change based on need and medical recommendation.', cta: 'View details →' },
-                    { title: 'Urinary Catheter', desc: 'Urinary catheter placement or change based on indication and the doctor’s recommendation.', cta: 'View details →' },
-                    { title: 'Suction', desc: 'Helps clear secretions or phlegm based on the patient’s condition and medical needs.', cta: 'View details →' }
-                ],
                 assessTitle: 'Every Procedure Starts with a Doctor Assessment',
-                assessLead: 'To ensure the procedure fits the patient’s condition and needs, every medical procedure is based on a doctor’s recommendation. Assessment can be done via online consultation or a doctor home visit, depending on the patient’s condition.',
                 assessSteps: [
                     { title: 'Patient Condition', desc: 'Share symptoms or the procedure needed.' },
                     { title: 'Doctor Assessment', desc: 'Online consult or home visit.' },
@@ -898,9 +886,9 @@ module.exports = {
                     { title: 'Staff & Supplies Prep', desc: 'Doctor/nurse, medicine, tools, and supplies are prepared.' },
                     { title: 'Procedure at Home', desc: 'Done based on the recommendation and patient condition.' }
                 ],
-                whoTitle: 'Who Performs the Procedure?',
-                whoHeadline: 'Done by a Doctor or Nurse',
-                whoBody: 'Medical procedures can be done by a doctor or nurse depending on the procedure type, staff competence, and patient condition. Every procedure follows the doctor’s recommendation and medical plan.',
+                whoTitle: 'Procedures Are Done by a Doctor or Nurse',
+                whoLead: 'Medical procedures can be done by a doctor or nurse depending on the procedure type, staff competence, and the patient’s condition.',
+                whoBody: 'Every procedure follows the doctor’s recommendation and medical plan.',
                 whoNurse: 'For nurse-led procedures: the nurse carries out the procedure according to the doctor’s recommendation and medical plan, and monitors the patient as needed.',
                 howTitle: 'How Are Medical Procedures Done?',
                 howHeadline: 'From Assessment to Care at Home',
@@ -911,9 +899,6 @@ module.exports = {
                     { title: 'Procedure Preparation', desc: 'The team prepares the doctor or nurse, medicine, tools, and medical supplies needed.' },
                     { title: 'Procedure Done at Home', desc: 'The procedure is done based on the doctor’s recommendation and patient condition, with monitoring as needed.' }
                 ],
-                doubtTitle: 'Not Sure Which Procedure Is Needed?',
-                doubtLead: 'You do not need to choose the medical procedure yourself.',
-                doubtBody: 'Tell the Dokter Panggil team about the patient’s symptoms and condition. A doctor will assess and decide the right procedure.',
                 doubtCta: 'Discuss Patient Condition',
                 whyTitle: 'Why Medical Procedures with Dokter Panggil?',
                 whyItems: [
@@ -1304,15 +1289,13 @@ module.exports = {
             d5: {
                 aboutTitle: 'About Infusion Therapy at Home',
                 aboutP1: 'Infusion therapy is the delivery of fluids, medicine, or certain therapies through a vein based on the patient’s medical needs.',
-                aboutP2: 'At Dokter Panggil, infusion therapy is done after a doctor assesses the patient and gives a recommendation, to ensure the therapy fits the patient’s condition and can be provided safely at home.',
+                aboutP2: 'Infusion therapy is done after a doctor assesses the patient and gives a recommendation, to ensure the therapy fits the patient’s condition and can be provided at home.',
                 whenTitle: 'When Is This Procedure Needed?',
-                whenLead: 'A doctor considers infusion therapy based on the exam findings, the patient’s condition, and fluid or therapy needs.',
-                whenSub: 'A doctor may consider infusion therapy in these situations:',
                 whenCards: [
-                    { title: 'Fluid Deficit', desc: 'When the patient lacks fluids and oral intake is not enough to meet the body’s fluid needs.' },
-                    { title: 'Difficulty Eating or Drinking', desc: 'For example with nausea, vomiting, or other conditions that make it hard to meet or keep up oral fluid intake.' },
-                    { title: 'Needs Medicine Through a Vein', desc: 'When the doctor decides medicine or therapy should be given directly through a vein.' },
-                    { title: 'Continuing Recommended Therapy', desc: 'For patients who still need IV therapy as part of a care plan already set by the doctor.' }
+                    { title: 'Fluid Deficit' },
+                    { title: 'Difficulty Eating or Drinking' },
+                    { title: 'Needs Medicine Through a Vein' },
+                    { title: 'Continuing Recommended Therapy' }
                 ],
                 assessTitle: 'Every Infusion Starts with a Doctor Assessment',
                 assessSteps: [
@@ -1321,28 +1304,9 @@ module.exports = {
                     { title: 'Therapy Recommendation', desc: 'The doctor decides if an infusion is needed and which type.' },
                     { title: 'Infusion at Home', desc: 'Provided based on the recommendation and patient condition.' }
                 ],
-                howTitle: 'How Is Infusion Therapy Done?',
-                howHeadline: 'Home Infusion Therapy in 5 Steps',
-                howSteps: [
-                    { title: 'Patient Condition Assessment', desc: 'The doctor assesses and determines therapy needs based on the patient’s condition.' },
-                    { title: 'Therapy Preparation', desc: 'The nurse prepares IV fluids, medicine, tools, and supplies based on the doctor’s recommendation.' },
-                    { title: 'IV Access Placement', desc: 'A doctor or nurse places the IV access for the patient.' },
-                    { title: 'Therapy Delivery & Monitoring', desc: 'Therapy is given according to the doctor’s plan while the patient is monitored during the infusion.' },
-                    { title: 'Evaluation After Therapy', desc: 'After therapy, the patient’s condition is evaluated as needed and the patient or family receives guidance on next care.' }
-                ],
-                whoTitle: 'Who Performs Infusion Therapy?',
-                whoHeadline: 'Done by a Doctor or Nurse',
+                whoTitle: 'Procedures Are Done by a Doctor or Nurse',
                 whoBody: 'IV placement and therapy can be done by a doctor or nurse according to the care plan, based on the recommendation of the doctor who assessed the patient.',
                 whoNurse: 'If done by a nurse, the procedure follows the therapy plan set by the doctor.',
-                prepTitle: 'What Is Prepared Before the Visit?',
-                prepLead: 'Before medical staff arrive, the doctor does an initial triage to understand the patient’s condition and estimate possible therapy needs. The doctor then coordinates with the nurse so the right medicine, IV fluids, and medical supplies are prepared and brought to the visit.',
-                prepLead2: 'Besides supplies prepared from triage, the Dokter Panggil team also brings a standard medical kit to support examination and care at home.',
-                prepItems: [
-                    { title: 'Initial Triage by the Doctor', desc: 'The doctor reviews symptoms and condition before the visit to help determine which exam and therapy needs to prepare.' },
-                    { title: 'Therapy Needs Prepared', desc: 'The doctor coordinates with the nurse to prepare IV fluids, medicine, tools, and supplies that may be needed based on triage.' },
-                    { title: 'Standard Medical Kit Always Brought', desc: 'The team brings a standard medical kit to support examination and procedures during the home visit.' }
-                ],
-                prepNote: 'The therapy given is still determined by the doctor’s assessment and the patient’s condition at the time of care.',
                 monitorTitle: 'Monitoring During Therapy',
                 monitorHeadline: 'The Patient Is Monitored During the Infusion',
                 monitorBody: 'During therapy, the doctor or nurse monitors based on the patient’s condition and the type of therapy given. If there are symptoms or changes, therapy can be reassessed and coordinated with the doctor.',

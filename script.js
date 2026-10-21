@@ -405,7 +405,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         });
     });
 
-    const VISIBLE = 4;
+    const VISIBLE = 3;
     const extra = items.slice(VISIBLE);
     const toggle = document.getElementById('faq-toggle');
     if (!extra.length || !toggle) return;
@@ -422,6 +422,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             }
             item.hidden = true;
         });
+        items[0].parentElement.classList.add('faq-collapsed');
     }
 
     let hideTimer = null;
@@ -430,6 +431,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         const animate = relabel && !prefersReducedMotion();
         clearTimeout(hideTimer);
         if (expanded) {
+            items[0].parentElement.classList.remove('faq-collapsed');
             extra.forEach((item, i) => {
                 item.classList.remove('faq-conceal');
                 item.hidden = false;

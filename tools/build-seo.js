@@ -326,16 +326,20 @@ function findSpecialistCtaCard(e, findHref) {
         + '</div>';
 }
 
+/** Search input with the specialty filter button + dropdown rendered inside it by doctors-directory.js. */
+function doctorSearchField() {
+    return '<div class="spec-search max-w-2xl mx-auto mb-6">'
+        + '<i data-lucide="search" style="width:18px;height:18px" class="spec-search-icon"></i>'
+        + '<input id="doctor-search" type="search" placeholder="Cari nama, spesialisasi, atau kondisi..." class="spec-search-input">'
+        + '<div id="specialty-filters"></div>'
+        + '</div>';
+}
+
 function specialistSearchBlock(e) {
     return '<div id="temukan-dokter" class="scroll-mt-28" data-default-cat="spesialis" data-defer-cards="1">'
         + biTag('h2', 'Temukan Dokter Spesialis', e.findTitle, 'class="text-2xl sm:text-3xl font-bold mb-2"')
         + biTag('p', 'Cari berdasarkan nama, spesialisasi, atau kondisi medis.', e.findLead, 'class="text-gray-500 mb-6 leading-relaxed max-w-3xl"')
-        + '<div class="max-w-xl mx-auto mb-6">'
-        + '<div class="relative">'
-        + '<i data-lucide="search" style="width:18px;height:18px" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>'
-        + '<input id="doctor-search" type="search" placeholder="Cari nama, spesialisasi, atau kondisi..." class="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary/30">'
-        + '</div></div>'
-        + '<div id="specialty-filters"></div>'
+        + doctorSearchField()
         + '<div id="doctors-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>'
         + '<p id="doctors-empty" class="hidden text-center text-gray-500 py-10"></p>'
         + '</div>';
@@ -641,32 +645,24 @@ function tindakanMedisBody(prefix, en) {
     const waAsk = 'Halo, saya ingin konsultasikan kebutuhan tindakan medis di rumah di Makassar.';
     const waBook = 'Halo, saya ingin konsultasikan kondisi pasien untuk tindakan medis di rumah di Makassar.';
 
+    // Same chips, icons, and labels as the homepage "Tindakan Medis" box
     const procedures = [
-        { href: prefix + 'layanan/terapi-infus.html', icon: 'syringe', title: 'Terapi Infus', desc: 'Pemberian cairan dan terapi melalui infus sesuai indikasi serta rekomendasi dokter.', titleEn: 'Infusion Therapy', descEn: 'IV fluids and therapy based on indication and the doctor’s recommendation.' },
-        { href: prefix + 'layanan/infus-vitamin.html', icon: 'pill', title: 'Infus Vitamin', desc: 'Pemberian vitamin melalui infus berdasarkan hasil penilaian kondisi dan rekomendasi dokter.', titleEn: 'Vitamin Infusion', descEn: 'Vitamin infusion based on condition assessment and the doctor’s recommendation.' },
-        { href: prefix + 'layanan/terapi-oksigen.html', icon: 'wind', title: 'Terapi Oksigen', desc: 'Pemberian terapi oksigen sesuai kondisi dan kebutuhan medis pasien.', titleEn: 'Oxygen Therapy', descEn: 'Oxygen therapy based on the patient’s condition and medical needs.' },
-        { href: prefix + 'layanan/terapi-nebulizer.html', icon: 'cloud', title: 'Terapi Uap / Nebulizer', desc: 'Pemberian terapi melalui nebulizer sesuai indikasi dan rekomendasi dokter.', titleEn: 'Nebulizer Therapy', descEn: 'Nebulizer therapy based on indication and the doctor’s recommendation.' },
-        { href: prefix + 'layanan/perawatan-luka.html', icon: 'plus-square', title: 'Perawatan Luka', desc: 'Perawatan dan penggantian balutan sesuai jenis, kondisi, dan kebutuhan perawatan luka pasien.', titleEn: 'Wound Care', descEn: 'Wound care and dressing changes matched to the wound type, condition, and care needs.' },
-        { href: prefix + 'layanan/vaksinasi.html', icon: 'syringe', title: 'Vaksinasi di Rumah', desc: 'Pelayanan vaksinasi langsung di rumah sesuai jenis vaksin dan kondisi pasien.', titleEn: 'Home Vaccination', descEn: 'Vaccination at home based on vaccine type and patient condition.' },
-        { href: prefix + 'layanan/pemasangan-ngt.html', icon: 'utensils', title: 'Pemasangan Selang Makan (NGT)', desc: 'Pemasangan atau penggantian selang makan berdasarkan kebutuhan dan rekomendasi medis.', titleEn: 'Feeding Tube (NGT)', descEn: 'Feeding tube placement or change based on need and medical recommendation.' },
-        { href: prefix + 'layanan/pemasangan-kateter.html', icon: 'droplets', title: 'Pemasangan Kateter Urine', desc: 'Pemasangan atau penggantian kateter urine sesuai indikasi dan rekomendasi dokter.', titleEn: 'Urinary Catheter', descEn: 'Urinary catheter placement or change based on indication and the doctor’s recommendation.' },
-        { href: prefix + 'layanan/suction.html', icon: 'activity', title: 'Suction / Sedot Dahak', desc: 'Tindakan membantu mengeluarkan sekret atau dahak sesuai kondisi dan kebutuhan medis pasien.', titleEn: 'Suction', descEn: 'Helps clear secretions or phlegm based on the patient’s condition and medical needs.' }
+        { slug: 'terapi-infus', icon: 'syringe', title: 'Terapi Infus', titleEn: 'Infusion Therapy' },
+        { slug: 'infus-vitamin', icon: 'droplets', title: 'Infus Vitamin', titleEn: 'Vitamin Infusion' },
+        { slug: 'terapi-oksigen', icon: 'wind', title: 'Terapi Oksigen', titleEn: 'Oxygen Therapy' },
+        { slug: 'terapi-nebulizer', icon: 'cloud', title: 'Terapi Nebulizer', titleEn: 'Nebulizer Therapy' },
+        { slug: 'perawatan-luka', icon: 'plus-square', title: 'Perawatan Luka', titleEn: 'Wound Care' },
+        { slug: 'vaksinasi', icon: 'shield', title: 'Vaksinasi', titleEn: 'Vaccination' },
+        { slug: 'pemasangan-ngt', icon: 'clipboard-list', title: 'Pemasangan Selang Makan', titleEn: 'Feeding Tube Placement' },
+        { slug: 'pemasangan-kateter', icon: 'droplet', title: 'Pemasangan Kateter Urin', titleEn: 'Urinary Catheter Placement' },
+        { slug: 'suction', icon: 'activity', title: 'Suction / Sedot Dahak', titleEn: 'Suction / Phlegm Clearance' }
     ];
-    // Safer Lucide 0.263 icons
-    const procIcons = ['syringe', 'pill', 'wind', 'cloud', 'heart-pulse', 'syringe', 'clipboard-list', 'droplets', 'activity'];
-    const procItems = procedures.map((p, i) => {
-        const pe = (e.procedures && e.procedures[i]) || {};
-        return {
-            href: p.href,
-            icon: procIcons[i],
-            title: p.title,
-            titleEn: pe.title || p.titleEn,
-            desc: p.desc,
-            descEn: pe.desc || p.descEn,
-            cta: 'Lihat detail →',
-            ctaEn: pe.cta || 'View details →'
-        };
-    });
+    const procChips = '<div class="home-svc-proc mt-0"><div class="home-svc-proc-grid">'
+        + procedures.map(p =>
+            '<a href="' + esc(prefix + 'layanan/' + p.slug + '.html') + '" class="home-svc-chip">'
+            + '<i data-lucide="' + p.icon + '"></i>' + biSpan(p.title, p.titleEn, '') + '</a>'
+        ).join('')
+        + '</div></div>';
 
     const assessSteps = [
         { n: '01', title: 'Kondisi Pasien', desc: 'Informasikan keluhan atau kebutuhan tindakan.' },
@@ -684,14 +680,6 @@ function tindakanMedisBody(prefix, en) {
         { n: '05', title: 'Tindakan Dilakukan di Rumah', desc: 'Tindakan dilakukan sesuai rekomendasi dokter dan kondisi pasien, disertai pemantauan sesuai kebutuhan.' }
     ];
 
-    const whyItems = [
-        { title: 'Berdasarkan Penilaian Dokter', desc: 'Setiap tindakan diberikan berdasarkan hasil penilaian dan rekomendasi dokter sesuai kondisi pasien.' },
-        { title: 'Tenaga Kesehatan Sesuai Kompetensi', desc: 'Tindakan dilakukan oleh dokter atau perawat sesuai jenis tindakan dan kompetensi tenaga kesehatan.' },
-        { title: 'Kebutuhan Dipersiapkan Sebelum Kunjungan', desc: 'Obat, alat, dan bahan medis dipersiapkan berdasarkan tindakan yang direkomendasikan sebelum tenaga kesehatan datang ke rumah.' },
-        { title: 'Terhubung dengan Layanan Medis Lainnya', desc: 'Apabila diperlukan, kebutuhan dokter, laboratorium, obat, perawat homecare, maupun layanan lanjutan dapat dikoordinasikan.' }
-    ];
-    const whyIcons = ['stethoscope', 'shield-check', 'clipboard-check', 'share-2'];
-
     const faqs = [
         { q: 'Apakah tindakan medis dapat langsung dipesan tanpa pemeriksaan dokter?', a: 'Tidak. Setiap tindakan medis di Dokter Panggil dilakukan berdasarkan rekomendasi dokter. Penilaian dokter dapat dilakukan melalui konsultasi online atau kunjungan dokter langsung ke rumah sesuai kondisi pasien.' },
         { q: 'Apakah harus selalu memanggil dokter ke rumah sebelum tindakan?', a: 'Tidak selalu. Untuk kondisi yang memungkinkan, penilaian awal dapat dilakukan melalui konsultasi online. Dokter akan menentukan apakah tindakan dapat dilakukan berdasarkan konsultasi tersebut atau pasien membutuhkan pemeriksaan langsung terlebih dahulu.' },
@@ -704,30 +692,17 @@ function tindakanMedisBody(prefix, en) {
 
     return composeBody([
         sectionHead('Pilih Tindakan Medis yang Dibutuhkan', 'Temukan layanan tindakan medis sesuai kebutuhan pasien. Setiap tindakan dilakukan berdasarkan rekomendasi dokter setelah penilaian kondisi pasien.', e.pickTitle, e.pickLead)
-        + '<div id="pilih-tindakan">' + linkCards(procItems) + '</div>',
-        sectionHead('Setiap Tindakan Dimulai dengan Penilaian Dokter', 'Untuk memastikan tindakan yang diberikan sesuai dengan kondisi dan kebutuhan pasien, setiap tindakan medis akan dilakukan berdasarkan rekomendasi dokter. Penilaian dokter dapat dilakukan melalui konsultasi online atau kunjungan dokter langsung ke rumah, sesuai kondisi pasien.', e.assessTitle, e.assessLead)
+        + '<div id="pilih-tindakan">' + procChips + '</div>',
+        sectionHead('Setiap Tindakan Dimulai dengan Penilaian Dokter', null, e.assessTitle)
         + compactStepCards(assessSteps, e.assessSteps, 'sm:grid-cols-2 lg:grid-cols-5'),
-        sectionHead('Siapa yang Melakukan Tindakan?', null, e.whoTitle)
+        sectionHead('Tindakan dilakukan oleh Dokter atau Perawat', 'Tindakan medis dapat dilakukan oleh dokter maupun perawat sesuai jenis tindakan, kompetensi tenaga kesehatan, dan kondisi pasien.', e.whoTitle, e.whoLead)
         + '<div class="canva-card rounded-3xl p-6 sm:p-8">'
-        + biTag('h3', 'Dilakukan oleh Dokter atau Perawat', e.whoHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Tindakan medis dapat dilakukan oleh dokter maupun perawat sesuai jenis tindakan, kompetensi tenaga kesehatan, dan kondisi pasien. Setiap tindakan dilakukan berdasarkan rekomendasi serta rencana medis yang telah ditentukan oleh dokter.', e.whoBody, 'class="text-gray-600 leading-relaxed mb-4"')
+        + biTag('p', 'Setiap tindakan dilakukan berdasarkan rekomendasi serta rencana medis yang telah ditentukan oleh dokter.', e.whoBody, 'class="text-gray-600 leading-relaxed mb-4"')
         + biTag('p', 'Untuk tindakan yang dilakukan perawat: perawat menjalankan tindakan sesuai rekomendasi dan rencana medis dokter serta melakukan pemantauan pasien sesuai kebutuhan.', e.whoNurse, 'class="text-sm text-gray-600 leading-relaxed"')
         + '</div>',
         sectionHead('Bagaimana Tindakan Medis Dilakukan?', null, e.howTitle)
         + biTag('p', 'Dari Penilaian hingga Tindakan di Rumah', e.howHeadline, 'class="font-semibold text-lg mb-5"')
         + howStepCards(howSteps, e.howSteps),
-        sectionHead('Tidak Yakin Tindakan yang Dibutuhkan?', null, e.doubtTitle)
-        + doubtBox({
-            title: 'Anda tidak perlu menentukan tindakan medis sendiri.',
-            titleEn: e.doubtLead,
-            body: 'Ceritakan keluhan dan kondisi pasien kepada Tim Dokter Panggil. Dokter akan melakukan penilaian dan menentukan tindakan yang sesuai.',
-            bodyEn: e.doubtBody,
-            cta: 'Chat WhatsApp',
-            ctaEn: 'Chat WhatsApp',
-            href: waLink(waBook)
-        }),
-        sectionHead('Mengapa Tindakan Medis Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -754,12 +729,11 @@ function terapiInfusBody(prefix, en) {
     const waAsk = 'Halo, saya ingin bertanya tentang terapi infus di rumah di Makassar.';
     const waBook = 'Halo, saya ingin konsultasikan kondisi pasien untuk terapi infus di rumah di Makassar.';
 
-    const whenLead = 'Dokter akan mempertimbangkan terapi infus berdasarkan hasil pemeriksaan, kondisi pasien, serta kebutuhan cairan atau terapi yang diperlukan.';
     const whenItems = [
-        { title: 'Kekurangan Cairan', desc: 'Pada kondisi tertentu ketika pasien mengalami kekurangan cairan dan asupan melalui mulut belum mencukupi kebutuhan cairan tubuh.' },
-        { title: 'Sulit Makan atau Minum', desc: 'Misalnya pada kondisi mual, muntah, atau kondisi tertentu yang menyebabkan pasien sulit memenuhi atau mempertahankan asupan cairan melalui mulut.' },
-        { title: 'Membutuhkan Obat melalui Pembuluh Darah', desc: 'Pada kondisi tertentu ketika dokter menentukan bahwa obat atau terapi perlu diberikan langsung melalui pembuluh darah.' },
-        { title: 'Melanjutkan Terapi yang Telah Direkomendasikan', desc: 'Untuk pasien yang masih membutuhkan terapi melalui infus sebagai bagian dari rencana perawatan yang telah ditentukan dokter.' }
+        { icon: 'droplets', title: 'Kekurangan Cairan' },
+        { icon: 'utensils-crossed', title: 'Sulit Makan atau Minum' },
+        { icon: 'syringe', title: 'Membutuhkan Obat melalui Pembuluh Darah' },
+        { icon: 'clipboard-check', title: 'Melanjutkan Terapi yang Telah Direkomendasikan' }
     ];
 
     const assessSteps = [
@@ -768,35 +742,6 @@ function terapiInfusBody(prefix, en) {
         { n: '03', title: 'Rekomendasi Terapi', desc: 'Dokter menentukan apakah infus diperlukan dan jenis terapinya.' },
         { n: '04', title: 'Terapi Infus di Rumah', desc: 'Dilakukan sesuai rekomendasi dan kondisi pasien.' }
     ];
-    const howSteps = [
-        { n: '01', title: 'Penilaian Kondisi Pasien', desc: 'Dokter melakukan penilaian dan menentukan kebutuhan terapi berdasarkan kondisi pasien.' },
-        { n: '02', title: 'Persiapan Terapi', desc: 'Perawat mempersiapkan cairan infus, obat, serta alat dan bahan medis sesuai rekomendasi dokter.' },
-        { n: '03', title: 'Pemasangan Infus', desc: 'Dokter atau perawat melakukan pemasangan akses infus pada pasien.' },
-        { n: '04', title: 'Pemberian & Pemantauan Terapi', desc: 'Terapi diberikan sesuai rencana dokter dan kondisi pasien dipantau selama pemberian infus.' },
-        { n: '05', title: 'Evaluasi Setelah Terapi', desc: 'Setelah terapi selesai, kondisi pasien dievaluasi sesuai kebutuhan dan pasien atau keluarga mendapatkan arahan mengenai perawatan selanjutnya.' }
-    ];
-
-    const prepItems = [
-        { title: 'Triase Awal oleh Dokter', desc: 'Dokter menggali keluhan dan kondisi pasien sebelum kunjungan untuk membantu menentukan kebutuhan pemeriksaan dan terapi yang perlu dipersiapkan.' },
-        { title: 'Kebutuhan Terapi Dipersiapkan', desc: 'Dokter berkoordinasi dengan perawat untuk menyiapkan cairan infus, obat, alat, dan bahan medis yang mungkin diperlukan berdasarkan hasil triase.' },
-        { title: 'Kit Medis Standar Selalu Dibawa', desc: 'Tim membawa kit medis standar untuk mendukung pemeriksaan dan tindakan selama kunjungan di rumah.' }
-    ];
-    const prepEn = e.prepItems || [];
-    const prepCards = '<div class="grid md:grid-cols-3 gap-4">' + prepItems.map((item, i) => {
-        const pe = prepEn[i] || {};
-        return '<div class="canva-card rounded-2xl p-5">'
-            + biTag('h3', item.title, pe.title, 'class="font-bold mb-2 text-sm leading-snug"')
-            + biTag('p', item.desc, pe.desc, 'class="text-sm text-gray-600 leading-relaxed"')
-            + '</div>';
-    }).join('') + '</div>';
-
-    const whyItems = [
-        { title: 'Berdasarkan Penilaian Dokter', desc: 'Infus diberikan berdasarkan kondisi dan kebutuhan medis pasien, bukan hanya berdasarkan permintaan.' },
-        { title: 'Terapi Disiapkan Sesuai Kebutuhan', desc: 'Jenis cairan, obat, alat, dan bahan medis dipersiapkan sesuai rencana terapi dokter.' },
-        { title: 'Dokter & Perawat Profesional', desc: 'Pemasangan dan pemberian terapi dilakukan oleh tenaga kesehatan sesuai kompetensi dan rencana pelayanan.' },
-        { title: 'Terhubung dengan Layanan Medis', desc: 'Apabila diperlukan, pemeriksaan dokter, laboratorium, obat, maupun perawatan lanjutan dapat dikoordinasikan melalui Tim Dokter Panggil.' }
-    ];
-    const whyIcons = ['stethoscope', 'clipboard-check', 'shield-check', 'share-2'];
 
     const faqs = [
         { q: 'Apakah saya bisa langsung meminta infus tanpa konsultasi dokter?', a: 'Tidak. Terapi infus di Dokter Panggil dilakukan berdasarkan rekomendasi dokter setelah penilaian kondisi pasien. Penilaian dapat dilakukan melalui konsultasi online atau kunjungan dokter langsung ke rumah sesuai kondisi pasien.' },
@@ -812,34 +757,22 @@ function terapiInfusBody(prefix, en) {
         sectionHead('Tentang Terapi Infus di Rumah', null, e.aboutTitle)
         + aboutCard([
             'Terapi infus merupakan pemberian cairan, obat, atau terapi tertentu melalui pembuluh darah sesuai kebutuhan medis pasien.',
-            'Di Dokter Panggil, terapi infus dilakukan setelah dokter melakukan penilaian dan memberikan rekomendasi, untuk memastikan jenis terapi yang diberikan sesuai dengan kondisi pasien dan memungkinkan untuk dilakukan di rumah.'
+            'Terapi infus dilakukan setelah dokter melakukan penilaian dan memberikan rekomendasi, untuk memastikan jenis terapi yang diberikan sesuai dengan kondisi pasien dan memungkinkan untuk dilakukan di rumah.'
         ], [e.aboutP1, e.aboutP2]),
-        sectionHead('Kapan Tindakan Ini Dibutuhkan?', whenLead, e.whenTitle, e.whenLead)
-        + biTag('p', 'Dokter dapat mempertimbangkan terapi infus pada kondisi:', e.whenSub, 'class="font-semibold mb-4"')
-        + whenCards(whenItems, e.whenCards),
+        sectionHead('Kapan Tindakan Ini Dibutuhkan?', null, e.whenTitle)
+        + iconRowCards(whenItems, e.whenCards),
         sectionHead('Setiap Terapi Infus Dimulai dengan Penilaian Dokter', null, e.assessTitle)
         + compactStepCards(assessSteps, e.assessSteps, 'sm:grid-cols-2 lg:grid-cols-4'),
-        sectionHead('Bagaimana Terapi Infus Dilakukan?', null, e.howTitle)
-        + biTag('p', 'Terapi Infus di Rumah dalam 5 Langkah', e.howHeadline, 'class="font-semibold text-lg mb-5"')
-        + howStepCards(howSteps, e.howSteps),
-        sectionHead('Siapa yang Melakukan Terapi Infus?', null, e.whoTitle)
+        sectionHead('Tindakan dilakukan oleh Dokter atau Perawat', null, e.whoTitle)
         + '<div class="canva-card rounded-2xl p-5 sm:p-6 max-w-3xl">'
-        + biTag('h3', 'Dilakukan oleh Dokter atau Perawat', e.whoHeadline, 'class="font-bold mb-2"')
         + biTag('p', 'Pemasangan dan pemberian terapi infus dapat dilakukan oleh dokter atau perawat sesuai rencana pelayanan, berdasarkan rekomendasi dokter yang telah menilai kondisi pasien.', e.whoBody, 'class="text-sm text-gray-600 leading-relaxed mb-3"')
         + biTag('p', 'Apabila dilakukan oleh perawat, tindakan dilakukan sesuai rencana terapi yang telah ditentukan dokter.', e.whoNurse, 'class="text-sm text-gray-600 leading-relaxed"')
         + '</div>',
-        sectionHead('Apa yang Dipersiapkan Sebelum Kunjungan?', null, e.prepTitle)
-        + biTag('p', 'Sebelum tenaga medis datang ke rumah, dokter akan melakukan triase awal untuk memahami kondisi pasien dan memperkirakan kebutuhan terapi yang mungkin diperlukan. Dokter kemudian berkoordinasi dengan perawat agar obat, cairan infus, serta kebutuhan medis yang sesuai telah dipersiapkan dan dibawa saat kunjungan.', e.prepLead, 'class="text-gray-600 leading-relaxed mb-4 max-w-3xl"')
-        + biTag('p', 'Selain kebutuhan yang disiapkan berdasarkan hasil triase, Tim Dokter Panggil juga membawa kit medis standar untuk mendukung pemeriksaan dan pelayanan pasien di rumah.', e.prepLead2, 'class="text-gray-600 leading-relaxed mb-6 max-w-3xl"')
-        + prepCards
-        + biTag('p', 'Terapi yang diberikan tetap ditentukan berdasarkan hasil penilaian dokter dan kondisi pasien saat pelayanan.', e.prepNote, 'class="text-sm text-gray-500 mt-5 max-w-3xl"'),
         sectionHead('Pemantauan Selama Terapi', null, e.monitorTitle)
         + '<div class="canva-card rounded-3xl p-6 sm:p-8">'
         + biTag('h3', 'Pasien Dipantau Selama Pemberian Infus', e.monitorHeadline, 'class="text-xl font-bold mb-2"')
         + biTag('p', 'Selama terapi berlangsung, dokter atau perawat melakukan pemantauan sesuai kondisi pasien dan jenis terapi yang diberikan. Apabila terdapat keluhan atau perubahan kondisi, terapi dapat dievaluasi dan dikoordinasikan dengan dokter.', e.monitorBody, 'class="text-gray-600 leading-relaxed"')
         + '</div>',
-        sectionHead('Mengapa Terapi Infus Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -951,14 +884,6 @@ function infusVitaminBody(prefix, en) {
         }
     ]);
 
-    const whyItems = [
-        { title: 'Pemeriksaan Sebelum Terapi', desc: 'Kondisi pasien diperiksa terlebih dahulu sebelum infus vitamin diberikan.' },
-        { title: 'Rekomendasi Vitamin oleh Dokter', desc: 'Pilihan vitamin ditentukan berdasarkan kondisi dan hasil penilaian dokter.' },
-        { title: 'Pilihan Dokter atau Perawat', desc: 'Pasien dapat memilih kunjungan langsung oleh dokter atau perawat sesuai kebutuhan layanan.' },
-        { title: 'Pemantauan Selama Terapi', desc: 'Pemberian infus dilakukan oleh tenaga kesehatan dengan pemantauan kondisi pasien selama terapi.' }
-    ];
-    const whyIcons = ['clipboard-check', 'stethoscope', 'users', 'activity'];
-
     const faqs = [
         { q: 'Apa saja pilihan Infus Vitamin yang tersedia?', a: 'Dokter Panggil menyediakan tiga pilihan yaitu Vitamin C, Multivitamin yang mengandung Vitamin B Kompleks + Vitamin C, serta Immunobooster. Pilihan yang diberikan akan disesuaikan dengan kondisi pasien berdasarkan rekomendasi dokter.' },
         { q: 'Apakah bisa memilih Infus Vitamin dengan dokter atau perawat?', a: 'Ya. Saat melakukan booking, pasien dapat memilih layanan dengan dokter atau perawat. Keduanya tetap melalui pemeriksaan kondisi pasien dan rekomendasi dokter sebelum vitamin diberikan.' },
@@ -996,8 +921,6 @@ function infusVitaminBody(prefix, en) {
         + biTag('p', 'Sebelum infus vitamin diberikan, sampaikan kepada dokter atau perawat apabila memiliki riwayat penyakit tertentu, alergi, sedang mengonsumsi obat atau suplemen, sedang hamil atau menyusui, atau sedang menjalani terapi medis lainnya.', e.healthBody, 'class="text-sm text-gray-600 leading-relaxed mb-3"')
         + biTag('p', 'Informasi tersebut akan menjadi bagian dari penilaian dokter dalam menentukan kesesuaian terapi.', e.healthNote, 'class="text-sm text-gray-600 leading-relaxed"')
         + '</div>',
-        sectionHead('Mengapa Infus Vitamin Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -1061,14 +984,6 @@ function terapiOksigenBody(prefix, en) {
             + '</div>';
     }).join('') + '</div>';
 
-    const whyItems = [
-        { title: 'Berdasarkan Penilaian Dokter', desc: 'Kebutuhan terapi oksigen ditentukan berdasarkan kondisi dan hasil penilaian pasien.' },
-        { title: 'Terapi Sesuai Kebutuhan Pasien', desc: 'Metode pemberian dan rencana terapi disesuaikan dengan kondisi medis pasien.' },
-        { title: 'Pemantauan Kondisi', desc: 'Saturasi oksigen dan kondisi pasien dapat dipantau sesuai kebutuhan selama terapi.' },
-        { title: 'Terhubung dengan Tim Medis', desc: 'Apabila diperlukan, dokter, perawat, pemeriksaan laboratorium, maupun layanan medis lanjutan dapat dikoordinasikan melalui Dokter Panggil.' }
-    ];
-    const whyIcons = ['stethoscope', 'clipboard-check', 'activity', 'share-2'];
-
     const faqs = [
         { q: 'Apakah bisa langsung memesan oksigen tanpa konsultasi dokter?', a: 'Terapi oksigen diberikan berdasarkan rekomendasi dokter. Dokter akan melakukan penilaian dan pemeriksaan terlebih dahulu untuk menentukan kebutuhan dan rencana terapi sesuai kondisi pasien.' },
         { q: 'Apakah pasien sesak napas selalu membutuhkan oksigen?', a: 'Tidak selalu. Sesak napas dapat disebabkan oleh berbagai kondisi dan tidak semuanya membutuhkan terapi oksigen. Dokter akan melakukan penilaian untuk menentukan penyebab dan penanganan yang sesuai.' },
@@ -1101,8 +1016,6 @@ function terapiOksigenBody(prefix, en) {
         + whenCards(monitorItems, e.monitorItems),
         sectionHead('Peralatan Sesuai Kebutuhan Terapi', 'Peralatan terapi oksigen akan disiapkan sesuai rekomendasi dokter dan kebutuhan pasien.', e.equipTitle, e.equipLead)
         + eqCards,
-        sectionHead('Mengapa Terapi Oksigen Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -1150,14 +1063,6 @@ function terapiNebulizerBody(prefix, en) {
         { title: 'Respons terhadap Obat', desc: 'Memantau efektivitas maupun kemungkinan reaksi setelah pemberian obat.' }
     ];
 
-    const whyItems = [
-        { title: 'Berdasarkan Penilaian Dokter', desc: 'Kebutuhan nebulizer ditentukan berdasarkan kondisi pasien dan rekomendasi dokter.' },
-        { title: 'Obat Sesuai Kondisi Pasien', desc: 'Jenis dan dosis obat ditentukan berdasarkan kebutuhan medis pasien.' },
-        { title: 'Dokter & Perawat Profesional', desc: 'Terapi dilakukan oleh tenaga kesehatan sesuai kompetensi dan rencana terapi.' },
-        { title: 'Pemantauan Setelah Terapi', desc: 'Respons pasien dapat dievaluasi setelah pemberian nebulizer sesuai kondisi pasien.' }
-    ];
-    const whyIcons = ['stethoscope', 'pill', 'shield-check', 'activity'];
-
     const faqs = [
         { q: 'Apakah batuk atau pilek perlu nebulizer?', a: 'Tidak selalu. Kebutuhan nebulizer bergantung pada penyebab keluhan dan kondisi saluran pernapasan. Dokter akan melakukan penilaian terlebih dahulu.' },
         { q: 'Apakah nebulizer hanya berisi uap?', a: 'Tidak. Nebulizer mengubah cairan obat menjadi aerosol atau kabut halus yang dapat dihirup ke saluran pernapasan.' },
@@ -1194,8 +1099,6 @@ function terapiNebulizerBody(prefix, en) {
         + biTag('p', 'Respons Pasien Dievaluasi Setelah Terapi', e.monitorHeadline, 'class="font-semibold text-lg mb-2"')
         + biTag('p', 'Setelah nebulizer diberikan, tenaga medis dapat melakukan evaluasi terhadap:', e.monitorLead, 'class="text-gray-600 leading-relaxed mb-5"')
         + whenCards(monitorItems, e.monitorItems),
-        sectionHead('Mengapa Nebulizer Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -1265,14 +1168,6 @@ function perawatanLukaBody(prefix, en) {
     const monitorFlow = ['Rencana Dokter', 'Perawatan Berkala', 'Monitoring Luka', 'Evaluasi Perkembangan', 'Koordinasi Dokter Bila Diperlukan'];
     const monitorFlowEn = e.monitorFlow || ['Doctor Plan', 'Periodic Care', 'Wound Monitoring', 'Progress Evaluation', 'Doctor Coordination If Needed'];
 
-    const whyItems = [
-        { title: 'Dokter atau Perawat ke Rumah', desc: 'Pasien dapat memilih layanan sesuai kondisi dan kebutuhan perawatan.' },
-        { title: 'Terintegrasi dengan Dokter', desc: 'Perawatan luka oleh perawat tetap melalui konsultasi dan rencana perawatan dari dokter.' },
-        { title: 'Perawatan Sesuai Kondisi Luka', desc: 'Metode perawatan dan balutan disesuaikan dengan karakteristik serta perkembangan luka.' },
-        { title: 'Monitoring Secara Berkala', desc: 'Perawatan dapat dilakukan secara berkala dengan pemantauan perkembangan luka dari kunjungan ke kunjungan.' }
-    ];
-    const whyIcons = ['users', 'stethoscope', 'clipboard-check', 'activity'];
-
     const faqs = [
         { q: 'Apakah perawatan luka di rumah terasa sakit?', a: 'Tingkat rasa tidak nyaman dapat berbeda tergantung jenis, lokasi, dan kondisi luka. Tenaga medis akan melakukan perawatan dengan mempertimbangkan kondisi pasien. Apabila nyeri cukup berat atau membutuhkan penanganan tambahan, kondisi tersebut dapat dikonsultasikan dengan dokter.' },
         { q: 'Apakah jahitan luka operasi bisa dilepas di rumah?', a: 'Pada kondisi tertentu, pelepasan jahitan dapat dilakukan di rumah setelah kondisi luka dinilai dan waktu pelepasan jahitan dinyatakan sesuai. Tenaga medis akan memastikan kondisi luka terlebih dahulu sebelum tindakan dilakukan.' },
@@ -1303,8 +1198,6 @@ function perawatanLukaBody(prefix, en) {
         + biTag('p', 'Pada setiap kunjungan, perkembangan luka akan dipantau. Apabila ditemukan perubahan kondisi atau perkembangan yang tidak sesuai harapan, perawat akan berkoordinasi kembali dengan dokter untuk evaluasi lebih lanjut.', e.monitorP3, 'class="text-gray-600 leading-relaxed"')
         + '</div>'
         + flowPills(monitorFlow, monitorFlowEn),
-        sectionHead('Mengapa Perawatan Luka Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -1496,14 +1389,6 @@ function vaksinasiBody(prefix, en) {
         { n: '04', title: 'Dokter Datang Melakukan Pemeriksaan', desc: 'Dokter datang langsung ke rumah dan melakukan pemeriksaan kondisi kesehatan pasien sebelum vaksinasi untuk menentukan apakah vaksin dapat diberikan pada saat kunjungan.' },
         { n: '05', title: 'Vaksinasi oleh Dokter', desc: 'Apabila berdasarkan hasil pemeriksaan kondisi pasien sesuai untuk menerima vaksin, vaksin akan diberikan langsung oleh dokter.' }
     ];
-    const whyItems = [
-        { title: 'Vaksinasi Langsung oleh Dokter', desc: 'Pemeriksaan dan pemberian vaksin dilakukan langsung oleh dokter di rumah.' },
-        { title: 'Pemeriksaan Sebelum Vaksinasi', desc: 'Kondisi kesehatan pasien diperiksa terlebih dahulu sebelum vaksin diberikan.' },
-        { title: 'Vaksin Dipersiapkan Sebelum Kunjungan', desc: 'Ketersediaan vaksin dan kebutuhan pelayanan dikonfirmasi melalui proses booking.' },
-        { title: 'Observasi Setelah Vaksin', desc: 'Kondisi pasien dipantau dan dokter memberikan edukasi setelah vaksinasi.' }
-    ];
-    const whyIcons = ['stethoscope', 'clipboard-check', 'clipboard-list', 'activity'];
-
     const faqs = [
         { q: 'Apakah boleh vaksin saat sedang batuk atau pilek?', a: 'Bisa atau tidaknya vaksin diberikan bergantung pada kondisi pasien saat itu. Keluhan ringan tidak selalu menyebabkan vaksinasi harus ditunda. Dokter akan menilai kondisi pasien sebelum menentukan apakah vaksin dapat diberikan.' },
         { q: 'Apakah vaksinasi dapat tetap diberikan saat demam?', a: 'Tergantung kondisi pasien. Demam atau keluhan ringan tidak selalu menyebabkan vaksinasi harus ditunda. Namun, pada kondisi sakit akut sedang hingga berat, dokter dapat merekomendasikan vaksinasi ditunda sampai kondisi pasien membaik.' },
@@ -1557,8 +1442,6 @@ function vaksinasiBody(prefix, en) {
         + '</div>'
         + '<a href="' + esc(waLink(waFamily)) + '" target="_blank" rel="noopener noreferrer"' + biAttrs('Pesan Sekarang', 'Book Now') + ' class="inline-flex shrink-0 px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:scale-105 transition-transform text-center">Pesan Sekarang</a>'
         + '</div>',
-        sectionHead('Mengapa Vaksinasi Bersama Dokter Panggil?', null, e.whyTitle)
-        + whyCards(whyItems, e.whyItems, whyIcons),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -2422,8 +2305,8 @@ function servicesHub() {
         // Form C hero — judul client; subtitle paragraf dicoret → diganti 3 chip
         h1: 'Layanan Kesehatan Ke Rumah',
         h1En: hubEn.h1,
-        lead: null,
-        leadEn: null,
+        lead: 'Dokter, Perawat, dan Petugas Laboratorium hadir langsung ke rumah untuk membantu kebutuhan kesehatan Anda dan Keluarga',
+        leadEn: hubEn.lead || 'Doctors, nurses, and laboratory staff come to your home to support the health needs of you and your family',
         heroChips: [
             { id: 'Tenaga Medis Terverifikasi', en: (hubEn.chips && hubEn.chips[0]) || 'Verified Medical Professionals' },
             { id: 'Datang Langsung ke Rumah', en: (hubEn.chips && hubEn.chips[1]) || 'Come Directly to Your Home' },
@@ -2474,13 +2357,8 @@ function doctorDirectoryBlock() {
             'Meet Our Medical Team',
             'Search specialists by name, field, or medical condition. Filter by specialty, then book via WhatsApp.'
         )
-        + '<div class="max-w-xl mx-auto mb-6">'
-        + '<div class="relative">'
-        + '<i data-lucide="search" style="width:18px;height:18px" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>'
-        + '<input id="doctor-search" type="search" placeholder="Cari nama, spesialisasi, atau kondisi..." class="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary/30">'
-        + '</div></div>'
-        + '<div id="doctor-filters" class="flex justify-center gap-2 md:gap-3 mb-4 flex-wrap"></div>'
-        + '<div id="specialty-filters"></div>'
+        + doctorSearchField()
+        + '<div id="doctor-filters" class="flex justify-center gap-2 md:gap-3 mb-6 flex-wrap"></div>'
         + '<div id="doctors-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>'
         + '<p id="doctors-empty" class="hidden text-center text-gray-500 py-10"></p>'
         + '</div>';

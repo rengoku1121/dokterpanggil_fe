@@ -101,13 +101,6 @@ module.exports = function createSupportBodies(h) {
             return '<div class="canva-card rounded-2xl p-5">' + inner + '</div>';
         }).join('') + '</div>';
 
-        const whyItems = [
-            { title: 'Pemeriksaan Sesuai Kebutuhan', desc: 'Dokter membantu menentukan pemeriksaan berdasarkan kondisi pasien.' },
-            { title: 'Pengambilan Sampel di Rumah', desc: 'Pasien tidak perlu datang langsung ke laboratorium untuk pemeriksaan yang dapat dilakukan dari rumah.' },
-            { title: 'Terhubung dengan Dokter', desc: 'Hasil pemeriksaan dapat dilanjutkan dengan evaluasi dokter apabila diperlukan.' },
-            { title: 'Terintegrasi dengan Layanan Homecare', desc: 'Apabila diperlukan penanganan lebih lanjut, pelayanan dapat dikoordinasikan dengan layanan medis lainnya.' }
-        ];
-
         const faqs = [
             { q: 'Apakah semua pemeriksaan laboratorium dapat dilakukan dari rumah?', a: 'Tidak semua pemeriksaan dapat dilakukan melalui layanan pengambilan sampel di rumah. Ketersediaan bergantung pada jenis pemeriksaan, sampel yang diperlukan, serta layanan laboratorium rekanan.' },
             { q: 'Apakah pemeriksaan laboratorium harus puasa?', a: 'Tidak semua pemeriksaan membutuhkan puasa. Tim akan menginformasikan apabila terdapat persiapan khusus sebelum pengambilan sampel.' },
@@ -144,8 +137,6 @@ module.exports = function createSupportBodies(h) {
             ], [e.resultsP1, e.resultsP2]),
             sectionHead('Laboratorium di Rumah untuk Berbagai Kebutuhan', null, e.audienceTitle)
             + audienceCards,
-            sectionHead('Mengapa Laboratorium melalui Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['clipboard-check', 'home', 'stethoscope', 'heart-handshake']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -202,13 +193,6 @@ module.exports = function createSupportBodies(h) {
             { n: '06', title: 'Penggunaan Sesuai Anjuran', desc: 'Pasien menggunakan obat sesuai dosis, cara penggunaan, dan petunjuk yang diberikan.' }
         ];
 
-        const whyItems = [
-            { title: 'Terhubung dengan Dokter', desc: 'Kebutuhan obat dapat ditentukan setelah penilaian kondisi pasien oleh dokter.' },
-            { title: 'Konsultasi Online atau di Rumah', desc: 'Pasien dapat memilih konsultasi sesuai kebutuhan dan kondisi.' },
-            { title: 'Obat Diantar ke Rumah', desc: 'Kebutuhan obat dipersiapkan dan dikirim langsung ke lokasi pasien.' },
-            { title: 'Terintegrasi dengan Homecare', desc: 'Pengobatan dapat dikoordinasikan bersama pelayanan medis dan perawatan pasien di rumah.' }
-        ];
-
         const faqs = [
             { q: 'Apakah bisa memesan obat tanpa konsultasi dokter?', a: 'Tidak, pasien dapat berkonsultasi dengan dokter secara online atau melalui kunjungan langsung ke rumah.' },
             { q: 'Apakah semua obat tersedia 24 jam?', a: 'Ketersediaan setiap obat dapat berbeda. Tim akan melakukan pengecekan dan menginformasikan ketersediaan serta estimasi pengantaran sebelum pelayanan dikonfirmasi.' },
@@ -237,8 +221,6 @@ module.exports = function createSupportBodies(h) {
             + '<a href="' + esc(prefix + 'layanan/konsultasi-online.html') + '"' + biAttrs('Konsultasi Online', e.noRxCtaOnline || 'Online Consultation') + ' class="inline-flex justify-center px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:scale-105 transition-transform">Konsultasi Online</a>'
             + '<a href="' + esc(waLink(waConsult)) + '" target="_blank" rel="noopener noreferrer"' + biAttrs('Chat WhatsApp', 'Chat WhatsApp') + ' class="inline-flex justify-center px-6 py-3 rounded-full border-2 border-primary text-primary text-sm font-semibold hover:bg-primary/5 transition-colors">Chat WhatsApp</a>'
             + '</div></div>',
-            sectionHead('Mengapa Layanan Farmasi melalui Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['stethoscope', 'message-circle', 'home', 'heart-handshake']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -379,13 +361,6 @@ module.exports = function createSupportBodies(h) {
             + '</li>'
         ).join('') + '</ul>';
 
-        const whyItems = [
-            { title: 'Dokter Datang ke Rumah', desc: 'Tidak perlu datang ke klinik atau rumah sakit untuk memulai pemeriksaan.' },
-            { title: 'Pilih Dokter Anda', desc: 'Tersedia pilihan pemeriksaan bersama dokter umum atau Dokter Spesialis.' },
-            { title: 'Paket Pemeriksaan Lengkap', desc: 'Pilih Paket FIT, PRIMA, Jantung Sehat, atau Healthy Life sesuai kebutuhan pemeriksaan.' },
-            { title: 'Terintegrasi dengan Layanan Medis', desc: 'Apabila diperlukan tindak lanjut, pasien dapat terhubung dengan layanan medis Dokter Panggil lainnya.' }
-        ];
-
         const faqs = [
             { q: 'Apakah Medical Check Up dapat dilakukan tanpa kunjungan dokter?', a: 'Tidak. Setiap paket Medical Check Up Dokter Panggil mencakup kunjungan dan pemeriksaan langsung oleh dokter di rumah.' },
             { q: 'Apa perbedaan MCU Dokter Umum dan Spesialis?', a: 'Komponen pemeriksaan pada masing-masing paket sama. Perbedaannya adalah dokter yang melakukan pemeriksaan dan evaluasi, yaitu dokter umum atau Dokter Spesialis Penyakit Dalam.' },
@@ -425,8 +400,6 @@ module.exports = function createSupportBodies(h) {
                 'Tim Dokter Panggil dapat dihubungi 24 jam untuk membantu kebutuhan Medical Check Up di rumah.',
                 'Jadwal pemeriksaan akan dikonfirmasi berdasarkan pilihan dokter, paket MCU, lokasi pasien, dan ketersediaan pelayanan.'
             ], [e.hoursP1, e.hoursP2]),
-            sectionHead('Mengapa MCU bersama Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['home', 'users', 'clipboard-check', 'heart-handshake']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -559,13 +532,6 @@ module.exports = function createSupportBodies(h) {
                 + '</a>';
         }).join('') + '</div>';
 
-        const whyItems = [
-            { title: 'Dokter Umum & Spesialis', desc: 'Pilih dokter sesuai kebutuhan konsultasi.' },
-            { title: 'Pilih Cara Konsultasi', desc: 'Tersedia Chat/Telepon atau Video Call.' },
-            { title: 'Terhubung dengan Homecare', desc: 'Apabila diperlukan pemeriksaan langsung, pelayanan dapat dilanjutkan dengan kunjungan ke rumah.' },
-            { title: 'Obat Dapat Diantar', desc: 'Kebutuhan obat berdasarkan resep dokter dapat dikoordinasikan untuk diantar ke rumah.' }
-        ];
-
         const faqs = [
             { q: 'Apa perbedaan Chat/Telepon dan Video Call?', a: 'Chat/Telepon memungkinkan konsultasi melalui percakapan tertulis atau suara, sedangkan Video Call memungkinkan pasien dan dokter berkomunikasi secara visual selama sesi. Tarif layanan berbeda sesuai metode yang dipilih.' },
             { q: 'Apakah harus melakukan pembayaran sebelum konsultasi?', a: 'Ya. Setelah dokter, metode konsultasi, jadwal, dan tarif dikonfirmasi, pembayaran dilakukan terlebih dahulu sebelum sesi konsultasi dimulai.' },
@@ -613,8 +579,6 @@ module.exports = function createSupportBodies(h) {
             + biTag('p', 'Online Consultation → Resep → Farmasi → Obat Sampai Rumah.', e.rxFlow, 'class="text-sm font-semibold text-primary mb-5"')
             + '<a href="' + esc(prefix + 'layanan/farmasi.html') + '"' + biAttrs('Lihat Layanan Farmasi', e.rxCta || 'View Pharmacy Service') + ' class="inline-flex px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:scale-105 transition-transform">Lihat Layanan Farmasi</a>'
             + '</div>',
-            sectionHead('Mengapa Konsultasi Online melalui Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['users', 'phone', 'home', 'pill']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,

@@ -169,7 +169,7 @@
 
     /* FAQ: show the first few questions, reveal the rest on "Lihat lebih banyak" */
     (function initFaqMore() {
-        const VISIBLE = 4;
+        const VISIBLE = 3;
         const REVEAL_STAGGER_MS = 45;
         const CONCEAL_MS = 220;
         const LABELS = {

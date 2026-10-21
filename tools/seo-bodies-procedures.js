@@ -42,13 +42,6 @@ module.exports = function createProcedureBodies(h) {
         ];
         const typeIcons = ['clipboard-list', 'clock', 'home'];
 
-        const whyItems = [
-            { title: 'Berdasarkan Penilaian Dokter', desc: 'Kebutuhan pemasangan NGT ditentukan berdasarkan kondisi dan kebutuhan pasien.' },
-            { title: 'Dokter atau Perawat ke Rumah', desc: 'Pasien dapat memilih layanan dengan dokter atau perawat sesuai kebutuhan pelayanan.' },
-            { title: 'Perawat Tetap Terhubung dengan Dokter', desc: 'Apabila tindakan dilakukan oleh perawat, pemeriksaan awal dilanjutkan dengan konsultasi online dokter sebelum tindakan.' },
-            { title: 'Edukasi Penggunaan NGT', desc: 'Pasien dan keluarga mendapatkan arahan mengenai penggunaan dan hal-hal yang perlu diperhatikan setelah pemasangan.' }
-        ];
-
         const faqs = [
             { q: 'Apakah pemasangan NGT terasa sakit?', a: 'Pemasangan dapat menimbulkan rasa tidak nyaman pada hidung dan tenggorokan. Tenaga medis akan membantu memposisikan pasien dan melakukan tindakan sesuai prosedur untuk membantu proses pemasangan.' },
             { q: 'Berapa lama NGT dapat digunakan sebelum perlu diganti?', a: 'Lama penggunaan dan kebutuhan penggantian bergantung pada jenis selang, kondisi selang, kondisi pasien, serta rencana perawatan. Tenaga medis akan memberikan arahan sesuai NGT yang digunakan.' },
@@ -82,8 +75,6 @@ module.exports = function createProcedureBodies(h) {
             + howStepCards(howSteps, e.howSteps),
             sectionHead('Pemasangan Baru atau Penggantian Selang Makan', null, e.typesTitle)
             + iconInfoCards(typeItems, e.typeItems, typeIcons),
-            sectionHead('Mengapa Pemasangan NGT dengan Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['stethoscope', 'home', 'message-circle', 'clipboard-check']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -133,13 +124,6 @@ module.exports = function createProcedureBodies(h) {
         ];
         const typeIcons = ['clipboard-list', 'clock', 'home'];
 
-        const whyItems = [
-            { title: 'Berdasarkan Penilaian Dokter', desc: 'Kebutuhan pemasangan atau penggantian kateter ditentukan berdasarkan kondisi pasien.' },
-            { title: 'Dokter atau Perawat ke Rumah', desc: 'Tindakan dapat dilakukan oleh dokter maupun perawat sesuai kebutuhan pelayanan.' },
-            { title: 'Perawat Tetap Terhubung dengan Dokter', desc: 'Apabila tindakan dilakukan oleh perawat, pemeriksaan awal dilanjutkan dengan konsultasi online dokter sebelum tindakan.' },
-            { title: 'Perawatan Berkelanjutan di Rumah', desc: 'Pasien yang menggunakan kateter dalam periode tertentu dapat memperoleh bantuan penggantian dan pemantauan sesuai rencana perawatan.' }
-        ];
-
         const faqs = [
             { q: 'Apakah pemasangan kateter terasa sakit?', a: 'Pemasangan dapat menimbulkan rasa tidak nyaman. Tenaga medis akan melakukan tindakan secara hati-hati dan memantau kondisi pasien selama proses pemasangan.' },
             { q: 'Apakah kateter boleh digunakan dalam jangka panjang?', a: 'Pada kondisi tertentu, kateter dapat digunakan dalam periode yang lebih panjang apabila memang diperlukan secara medis. Kebutuhan penggunaan dan evaluasinya disesuaikan dengan kondisi pasien.' },
@@ -173,8 +157,6 @@ module.exports = function createProcedureBodies(h) {
             + howStepCards(howSteps, e.howSteps),
             sectionHead('Pemasangan Baru atau Penggantian Kateter', null, e.typesTitle)
             + iconInfoCards(typeItems, e.typeItems, typeIcons),
-            sectionHead('Mengapa Pemasangan Kateter dengan Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['stethoscope', 'home', 'message-circle', 'heart-pulse']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -225,13 +207,6 @@ module.exports = function createProcedureBodies(h) {
         ];
         const typeIcons = ['message-circle', 'wind', 'activity'];
 
-        const whyItems = [
-            { title: 'Berdasarkan Penilaian Dokter', desc: 'Tindakan dilakukan setelah dokter menilai kondisi dan kebutuhan pasien.' },
-            { title: 'Dokter atau Perawat ke Rumah', desc: 'Tindakan dapat dilakukan oleh dokter maupun perawat sesuai kebutuhan pelayanan.' },
-            { title: 'Perawat Tetap Terhubung dengan Dokter', desc: 'Apabila suction dilakukan oleh perawat, pemeriksaan awal dilanjutkan dengan konsultasi online dokter sebelum tindakan.' },
-            { title: 'Terintegrasi dengan Perawatan Lainnya', desc: 'Apabila diperlukan, kondisi pasien dapat ditindaklanjuti dengan layanan medis dan homecare lainnya sesuai rekomendasi dokter.' }
-        ];
-
         const faqs = [
             { q: 'Apakah semua pasien dengan banyak dahak membutuhkan suction?', a: 'Tidak. Sebagian pasien masih dapat mengeluarkan dahak secara efektif melalui batuk. Kebutuhan suction ditentukan berdasarkan kondisi pasien, kemampuan mengeluarkan sekret, dan hasil penilaian dokter.' },
             { q: 'Apakah suction terasa sakit?', a: 'Suction dapat menimbulkan rasa tidak nyaman dan merangsang batuk. Tenaga medis akan melakukan tindakan sesuai kebutuhan pasien dan memantau respons selama prosedur.' },
@@ -265,8 +240,6 @@ module.exports = function createProcedureBodies(h) {
             + howStepCards(howSteps, e.howSteps),
             sectionHead('Jenis Kebutuhan Suction', null, e.typesTitle)
             + iconInfoCards(typeItems, e.typeItems, typeIcons),
-            sectionHead('Mengapa Suction dengan Dokter Panggil?', null, e.whyTitle)
-            + whyCards(whyItems, e.whyItems, ['stethoscope', 'home', 'message-circle', 'share-2']),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,

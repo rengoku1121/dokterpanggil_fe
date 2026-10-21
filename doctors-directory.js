@@ -21,6 +21,8 @@
     const UI = {
         id: {
             spAll: 'Semua Spesialis',
+            spFilter: 'Spesialis',
+            spListLabel: 'Pilih spesialis',
             available: 'Tersedia',
             detail: 'Detail',
             book: 'Pesan Sekarang',
@@ -36,6 +38,8 @@
         },
         en: {
             spAll: 'All Specialties',
+            spFilter: 'Specialty',
+            spListLabel: 'Choose a specialty',
             available: 'Available',
             detail: 'Details',
             book: 'Book Now',
@@ -140,20 +144,75 @@
         );
     }
 
+    const SPEC_PANEL_MS = 180;
+    let specOpen = false;
+    let specHideTimer = null;
+
+    function specPanel() { return document.getElementById('spec-filter-panel'); }
+    function specButton() { return document.querySelector('#specialty-filters .spec-filter-btn'); }
+
     function renderSpecialtyFilters() {
         const wrap = document.getElementById('specialty-filters');
         if (!wrap) return;
-        if (docState.category !== 'spesialis') { wrap.classList.add('hidden'); wrap.innerHTML = ''; return; }
-        wrap.classList.remove('hidden');
+        const field = wrap.closest('.spec-search');
+        if (docState.category !== 'spesialis') {
+            specOpen = false;
+            wrap.innerHTML = '';
+            if (field) field.classList.remove('has-filter');
+            return;
+        }
+        if (field) field.classList.add('has-filter');
         const options = specOptions();
         const pending = docState.specialty === 'pending';
-        wrap.innerHTML = '<div class="spec-grid">' + options.map(c => {
-            const active = !pending && docState.specialty === c.key;
-            return '<button type="button" class="spec-tile' + (active ? ' is-active' : '') + '" aria-pressed="' + (active ? 'true' : 'false') + '" data-spec="' + c.key + '">'
-                + '<span class="spec-tile-icon"><i data-lucide="' + c.icon + '" style="width:16px;height:16px"></i></span>'
-                + '<span class="spec-tile-label">' + c.label + '</span>'
-                + '</button>';
-        }).join('') + '</div>';
+        const current = pending ? null : options.find(o => o.key === docState.specialty);
+        const label = current ? current.label : t('spFilter');
+        wrap.innerHTML = '<button type="button" class="spec-filter-btn' + (current ? ' is-set' : '') + '" aria-haspopup="listbox" aria-controls="spec-filter-panel" aria-expanded="' + specOpen + '">'
+            + '<i data-lucide="sliders-horizontal" style="width:16px;height:16px"></i>'
+            + '<span class="spec-filter-label">' + label + '</span>'
+            + '<i data-lucide="chevron-down" class="spec-filter-chev" style="width:15px;height:15px"></i>'
+            + '</button>'
+            + '<div id="spec-filter-panel" class="spec-filter-panel' + (specOpen ? ' is-open' : '') + '" role="listbox" aria-label="' + t('spListLabel') + '"' + (specOpen ? '' : ' hidden') + '>'
+            + options.map(c => {
+                const active = current && current.key === c.key;
+                return '<button type="button" role="option" class="spec-filter-opt' + (active ? ' is-active' : '') + '" aria-selected="' + (active ? 'true' : 'false') + '" data-spec="' + c.key + '">'
+                    + '<span class="spec-filter-opt-ic"><i data-lucide="' + c.icon + '" style="width:16px;height:16px"></i></span>'
+                    + '<span class="spec-filter-opt-label">' + c.label + '</span>'
+                    + (active ? '<i data-lucide="check" class="spec-filter-opt-check" style="width:16px;height:16px"></i>' : '')
+                    + '</button>';
+            }).join('')
+            + '</div>';
+    }
+
+    function openSpecPanel() {
+        const panel = specPanel();
+        const btn = specButton();
+        if (!panel || !btn) return;
+        clearTimeout(specHideTimer);
+        specOpen = true;
+        panel.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        void panel.offsetWidth;
+        panel.classList.add('is-open');
+        const active = panel.querySelector('.spec-filter-opt.is-active') || panel.querySelector('.spec-filter-opt');
+        if (active) {
+            panel.scrollTop = Math.max(0, active.offsetTop - panel.clientHeight / 2 + active.offsetHeight / 2);
+            active.focus({ preventScroll: true });
+        }
+    }
+
+    function closeSpecPanel(immediate) {
+        const panel = specPanel();
+        const btn = specButton();
+        specOpen = false;
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (!panel) return;
+        panel.classList.remove('is-open');
+        clearTimeout(specHideTimer);
+        if (immediate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            panel.hidden = true;
+            return;
+        }
+        specHideTimer = setTimeout(() => { if (!specOpen) panel.hidden = true; }, SPEC_PANEL_MS);
     }
 
     function shouldDeferCards() {
@@ -324,12 +383,43 @@
     });
 
     const specs = document.getElementById('specialty-filters');
-    if (specs) specs.addEventListener('click', e => {
-        const btn = e.target.closest('.spec-tile');
-        if (!btn) return;
-        docState.specialty = btn.dataset.spec;
-        renderDoctors();
-    });
+    if (specs) {
+        specs.addEventListener('click', e => {
+            if (e.target.closest('.spec-filter-btn')) {
+                if (specOpen) closeSpecPanel(); else openSpecPanel();
+                return;
+            }
+            const opt = e.target.closest('.spec-filter-opt');
+            if (!opt) return;
+            docState.specialty = opt.dataset.spec;
+            closeSpecPanel(true);
+            renderDoctors();
+            const btn = specButton();
+            if (btn) btn.focus({ preventScroll: true });
+        });
+
+        specs.addEventListener('keydown', e => {
+            if (!specOpen || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+            const opts = Array.from(specs.querySelectorAll('.spec-filter-opt'));
+            if (!opts.length) return;
+            e.preventDefault();
+            const idx = opts.indexOf(document.activeElement);
+            const next = e.key === 'ArrowDown'
+                ? opts[Math.min(opts.length - 1, idx + 1)]
+                : opts[Math.max(0, idx - 1)];
+            next.focus();
+        });
+
+        document.addEventListener('click', e => {
+            if (specOpen && !specs.contains(e.target)) closeSpecPanel();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape' || !specOpen) return;
+            closeSpecPanel();
+            const btn = specButton();
+            if (btn) btn.focus({ preventScroll: true });
+        });
+    }
 
     const search = document.getElementById('doctor-search');
     let searchTimer = null;
