@@ -373,6 +373,9 @@
         if (typeof window.__refreshVaxModalLang === 'function') {
             window.__refreshVaxModalLang();
         }
+        if (typeof window.__refreshVitModalLang === 'function') {
+            window.__refreshVitModalLang();
+        }
     }
 
     document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
@@ -608,6 +611,121 @@
                 const item = data.items.find(function (x) { return x.id === openId; });
                 if (item) render(item);
             }
+        };
+    })();
+
+    /* Vitamin option detail modal (layanan/infus-vitamin.html), styled like the doctor detail modal */
+    (function initVitModal() {
+        const dataEl = document.getElementById('vit-modal-data');
+        const modal = document.getElementById('vit-modal');
+        const body = document.getElementById('vit-modal-body');
+        if (!dataEl || !modal || !body) return;
+
+        let data;
+        try { data = JSON.parse(dataEl.textContent); } catch (err) { return; }
+        if (!data || !data.items) return;
+
+        const MODAL_MS = 280;
+        let hideTimer = null;
+        let openIndex = null;
+
+        function lang() {
+            return document.documentElement.lang === 'en' ? 'en' : 'id';
+        }
+        function t(obj) {
+            if (!obj) return '';
+            if (typeof obj === 'string') return obj;
+            return obj[lang()] || obj.id || '';
+        }
+        function esc(s) {
+            return String(s == null ? '' : s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function show() {
+            clearTimeout(hideTimer);
+            modal.hidden = false;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            void modal.offsetWidth;
+            modal.classList.add('is-open');
+        }
+
+        function hide() {
+            if (modal.classList.contains('hidden')) return;
+            modal.classList.remove('is-open');
+            document.body.style.overflow = '';
+            openIndex = null;
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function () {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modal.hidden = true;
+            }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : MODAL_MS);
+        }
+
+        function block(title, text) {
+            return '<div><p class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1.5">' + esc(title) + '</p>'
+                + '<p class="text-sm text-gray-600 leading-relaxed">' + esc(text) + '</p></div>';
+        }
+
+        function render(item) {
+            const ui = data.ui || {};
+            const badges = '<span class="vit-modal-badge">' + esc(t(ui.option)) + ' ' + esc(item.n) + '</span>'
+                + (item.highlight ? '<span class="vit-modal-badge is-strong">' + esc(t(ui.badge)) + '</span>' : '');
+            body.innerHTML =
+                '<div class="vit-modal-hero">'
+                + '<span class="vit-modal-hero-ic"><i data-lucide="' + esc(item.icon) + '" style="width:28px;height:28px;color:#fff"></i></span>'
+                + '<div class="vit-modal-hero-text">'
+                + '<div class="flex flex-wrap gap-1.5 mb-2">' + badges + '</div>'
+                + '<h3 id="vit-modal-title" class="text-xl font-bold leading-tight">' + esc(t(item.title)) + '</h3>'
+                + '<p class="text-sm opacity-90 mt-1">' + esc(t(item.summary)) + '</p>'
+                + '</div></div>'
+                + '<div class="p-5 space-y-4">'
+                + block(t(ui.content), t(item.content))
+                + block(t(item.roleTitle), t(item.role))
+                + block(t(item.whenTitle), t(item.when))
+                + '<p class="seo-inline-note"><i data-lucide="info" style="width:15px;height:15px;color:#D83030;flex-shrink:0;margin-top:2px"></i>'
+                + '<span>' + esc(t(ui.note)) + '</span></p>'
+                + '<div class="flex flex-col sm:flex-row gap-3 pt-1">'
+                + '<a href="' + esc(item.waBook) + '" target="_blank" rel="noopener noreferrer" class="vit-modal-book flex-1 text-center px-4 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-colors">' + esc(t(ui.book)) + '</a>'
+                + '<a href="' + esc(item.waAsk) + '" target="_blank" rel="noopener noreferrer" class="flex-1 text-center px-4 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-colors">' + esc(t(ui.ask)) + '</a>'
+                + '</div></div>';
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function open(index) {
+            const item = data.items[index];
+            if (!item) return;
+            openIndex = index;
+            render(item);
+            show();
+        }
+
+        document.addEventListener('click', function (e) {
+            const btn = e.target.closest ? e.target.closest('[data-vit-open]') : null;
+            if (btn) {
+                e.preventDefault();
+                open(parseInt(btn.getAttribute('data-vit-open'), 10));
+                return;
+            }
+            if (e.target.closest && e.target.closest('.vit-modal-book')) hide();
+        });
+
+        const overlay = document.getElementById('vit-modal-overlay');
+        const closeBtn = document.getElementById('vit-modal-close');
+        if (overlay) overlay.addEventListener('click', hide);
+        if (closeBtn) closeBtn.addEventListener('click', hide);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && openIndex !== null) hide();
+        });
+
+        window.__refreshVitModalLang = function () {
+            if (openIndex !== null && data.items[openIndex]) render(data.items[openIndex]);
         };
     })();
 

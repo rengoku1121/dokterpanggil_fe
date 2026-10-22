@@ -802,7 +802,10 @@ function infusVitaminBody(prefix, en) {
     const vitaminOptions = [
         {
             n: '01',
+            icon: 'citrus',
             title: 'Vitamin C',
+            summary: 'Vitamin C (Asam Askorbat)',
+            summaryEn: 'Vitamin C (Ascorbic Acid)',
             content: 'Vitamin C (Asam Askorbat)',
             roleTitle: 'Peran Vitamin C',
             role: 'Vitamin C berperan sebagai antioksidan serta mendukung fungsi normal sistem imun dan berbagai proses metabolisme tubuh.',
@@ -811,7 +814,10 @@ function infusVitaminBody(prefix, en) {
         },
         {
             n: '02',
+            icon: 'pill',
             title: 'Multivitamin',
+            summary: 'Vitamin B Kompleks + Vitamin C',
+            summaryEn: 'B-Complex Vitamins + Vitamin C',
             content: 'Vitamin B Kompleks + Vitamin C',
             roleTitle: 'Peran Kandungan',
             role: 'Kombinasi vitamin B kompleks dan vitamin C berperan dalam metabolisme energi, fungsi sistem saraf, pembentukan sel darah, serta membantu memenuhi kebutuhan vitamin tubuh.',
@@ -820,7 +826,11 @@ function infusVitaminBody(prefix, en) {
         },
         {
             n: '03',
+            icon: 'shield-check',
+            highlight: true,
             title: 'Immunobooster',
+            summary: '12 nutrisi lengkap: 9 vitamin larut air + 3 vitamin larut lemak',
+            summaryEn: '12 complete nutrients: 9 water-soluble + 3 fat-soluble vitamins',
             content: 'Sediaan multivitamin parenteral yang mengandung 12 nutrisi lengkap: 9 vitamin larut air (B1, B2, B3, B5, B6, B7/biotin, B9/folic acid, B12, C) dan 3 vitamin larut lemak (A, D, E).',
             roleTitle: 'Peran Kandungan',
             role: 'Digunakan untuk membantu memenuhi kebutuhan berbagai vitamin pada kondisi tertentu ketika pemberian suplementasi vitamin secara parenteral dinilai diperlukan.',
@@ -829,18 +839,63 @@ function infusVitaminBody(prefix, en) {
         }
     ];
     const vitEn = e.vitamins || [];
+    const vitBadge = { id: 'Paling Lengkap', en: e.vitBadge || 'Most Complete' };
+    const vitDetail = { id: 'Lihat detail', en: e.vitDetail || 'View details' };
     const vitCards = '<div class="grid md:grid-cols-3 gap-4">' + vitaminOptions.map((v, i) => {
         const ve = vitEn[i] || {};
-        return '<div class="canva-card rounded-2xl p-5 sm:p-6 flex flex-col">'
-            + '<span class="seo-step-num mb-3">' + v.n + '</span>'
-            + biTag('h3', v.title, ve.title, 'class="font-bold text-lg mb-1"')
-            + biTag('p', 'Kandungan: ' + v.content, 'Contents: ' + (ve.content || v.content), 'class="text-sm text-gray-500 mb-4 leading-relaxed"')
-            + biTag('p', v.roleTitle, ve.roleTitle, 'class="font-semibold text-sm mb-1"')
-            + biTag('p', v.role, ve.role, 'class="text-sm text-gray-600 leading-relaxed mb-4"')
-            + biTag('p', v.whenTitle, ve.whenTitle, 'class="font-semibold text-sm mb-1"')
-            + biTag('p', v.when, ve.when, 'class="text-sm text-gray-600 leading-relaxed"')
-            + '</div>';
+        return '<article class="vit-card' + (v.highlight ? ' is-highlight order-first md:order-none' : '') + '">'
+            + (v.highlight ? biSpan(vitBadge.id, vitBadge.en, 'vit-badge') : '')
+            + '<div class="vit-card-top">'
+            + '<span class="vit-card-ic">' + icon(v.icon, 22, BRAND) + '</span>'
+            + '<div class="min-w-0">'
+            + biTag('h3', v.title, ve.title, 'class="vit-card-title"')
+            + biTag('p', v.summary, v.summaryEn, 'class="vit-card-sum"')
+            + '</div></div>'
+            + '<button type="button" class="vit-card-btn" data-vit-open="' + i + '">'
+            + biSpan(vitDetail.id, vitDetail.en, '')
+            + icon('chevron-right', 16, 'currentColor')
+            + '</button>'
+            + '</article>';
     }).join('') + '</div>';
+
+    const vitModalData = {
+        ui: {
+            content: { id: 'Kandungan', en: e.vitContentLabel || 'Contents' },
+            option: { id: 'Pilihan', en: 'Option' },
+            badge: vitBadge,
+            note: {
+                id: 'Pilihan vitamin yang diberikan tetap berdasarkan hasil pemeriksaan dan rekomendasi dokter.',
+                en: 'The vitamin given still follows the doctor’s examination and recommendation.'
+            },
+            book: { id: 'Pesan Sekarang', en: 'Book Now' },
+            ask: { id: 'Chat WhatsApp', en: 'Chat WhatsApp' }
+        },
+        items: vitaminOptions.map((v, i) => {
+            const ve = vitEn[i] || {};
+            return {
+                n: v.n,
+                icon: v.icon,
+                highlight: Boolean(v.highlight),
+                title: { id: v.title, en: ve.title || v.title },
+                summary: { id: v.summary, en: v.summaryEn || v.summary },
+                content: { id: v.content, en: ve.content || v.content },
+                roleTitle: { id: v.roleTitle, en: ve.roleTitle || v.roleTitle },
+                role: { id: v.role, en: ve.role || v.role },
+                whenTitle: { id: v.whenTitle, en: ve.whenTitle || v.whenTitle },
+                when: { id: v.when, en: ve.when || v.when },
+                waBook: waLink('Halo, saya ingin booking infus vitamin ' + v.title + ' di rumah di Makassar.'),
+                waAsk: waLink('Halo, saya ingin bertanya tentang infus vitamin ' + v.title + ' di rumah di Makassar.')
+            };
+        })
+    };
+    const vitModalHtml = '<div id="vit-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="vit-modal-title" hidden>'
+        + '<div id="vit-modal-overlay" class="modal-overlay absolute inset-0 bg-black/50 backdrop-blur-sm"></div>'
+        + '<div class="modal-panel relative bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden overflow-y-auto">'
+        + '<button id="vit-modal-close" type="button" class="absolute top-3 right-3 z-10 w-11 h-11 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition-colors" aria-label="Tutup">'
+        + icon('x', 18, '#2D2D2D') + '</button>'
+        + '<div id="vit-modal-body"></div>'
+        + '</div></div>'
+        + '<script type="application/json" id="vit-modal-data">' + JSON.stringify(vitModalData).replace(/</g, '\\u003c') + '</script>';
 
     const whenItems = [
         { title: 'Membutuhkan Suplementasi Vitamin Tertentu', desc: 'Ketika berdasarkan hasil penilaian dokter terdapat kebutuhan tambahan vitamin tertentu.' },
@@ -861,27 +916,9 @@ function infusVitaminBody(prefix, en) {
     const nurseFlowEn = e.nurseFlow || nurseFlow;
     const doctorFlowEn = e.doctorFlow || doctorFlow;
 
-    const pathSection = pathCards([
-        {
-            icon: 'heart-handshake',
-            title: 'Infus Vitamin dengan Perawat', titleEn: e.nurseTitle,
-            p1: 'Perawat datang langsung ke rumah dan melakukan pemeriksaan awal kondisi pasien.',
-            p1En: e.nurseP1,
-            p2: 'Hasil pemeriksaan kemudian disampaikan kepada dokter. Dokter melakukan konsultasi online bersama pasien untuk melakukan penilaian dan menentukan pilihan vitamin yang sesuai.',
-            p2En: e.nurseP2,
-            p3: 'Setelah mendapatkan rekomendasi dokter, perawat memberikan terapi dan melakukan pemantauan selama infus.',
-            p3En: e.nurseP3,
-            flow: nurseFlow, flowEn: nurseFlowEn
-        },
-        {
-            icon: 'stethoscope',
-            title: 'Infus Vitamin dengan Dokter', titleEn: e.doctorTitle,
-            p1: 'Dokter datang langsung ke rumah dan melakukan pemeriksaan kesehatan pasien.',
-            p1En: e.doctorP1,
-            p2: 'Berdasarkan hasil pemeriksaan, dokter menentukan pilihan vitamin yang sesuai dengan kondisi dan kebutuhan pasien. Terapi kemudian dapat diberikan sesuai rekomendasi dokter.',
-            p2En: e.doctorP2,
-            flow: doctorFlow, flowEn: doctorFlowEn
-        }
+    const pathSection = sections.stepPathCards([
+        { icon: 'heart-handshake', title: 'Infus Vitamin dengan Perawat', titleEn: e.nurseTitle, flow: nurseFlow, flowEn: nurseFlowEn },
+        { icon: 'stethoscope', title: 'Infus Vitamin dengan Dokter', titleEn: e.doctorTitle, flow: doctorFlow, flowEn: doctorFlowEn }
     ]);
 
     const faqs = [
@@ -897,30 +934,13 @@ function infusVitaminBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
-        sectionHead('Infus Vitamin, Sesuai Kebutuhan Anda', null, e.aboutTitle)
-        + aboutCard([
-            'Infus vitamin merupakan pemberian vitamin melalui pembuluh darah sebagai salah satu metode suplementasi.',
-            'Layanan Infus Vitamin langsung di rumah dengan pemeriksaan kondisi pasien terlebih dahulu. Berdasarkan hasil pemeriksaan, dokter akan menentukan pilihan vitamin yang sesuai sebelum terapi diberikan.',
-            'Pasien dapat memilih layanan dengan dokter atau perawat. Pilihan vitamin yang diberikan tetap berdasarkan rekomendasi dokter.'
-        ], [e.aboutP1, e.aboutP2, e.aboutP3]),
         sectionHead('Pilihan Infus Vitamin', 'Setiap pilihan memiliki kandungan dan tujuan suplementasi yang berbeda. Dokter akan membantu menentukan terapi yang sesuai berdasarkan kondisi dan kebutuhan Anda.', e.vitTitle, e.vitLead)
         + vitCards
         + biTag('p', 'Pilihan dan pemberian infus vitamin disesuaikan dengan kondisi dan kebutuhan pasien berdasarkan hasil penilaian dokter melalui konsultasi online atau kunjungan langsung ke rumah.', e.vitNote, 'class="text-sm text-gray-500 mt-5 max-w-3xl"'),
-        sectionHead('Kapan Infus Vitamin Dapat Dipertimbangkan?', 'Kebutuhan vitamin setiap orang berbeda. Dokter akan mempertimbangkan pemberian infus vitamin berdasarkan kondisi kesehatan, riwayat medis, kebutuhan pasien, serta hasil pemeriksaan.', e.whenTitle, e.whenLead)
-        + whenThree,
         sectionHead('Dua Pilihan Layanan, Tetap dengan Rekomendasi Dokter', 'Pasien dapat memilih kunjungan Infus Vitamin dengan dokter atau dengan perawat. Perbedaannya terletak pada proses pemeriksaan dan konsultasi sebelum terapi diberikan.', e.pathTitle, e.pathLead)
         + pathSection,
-        sectionHead('Tim Datang dengan Kebutuhan yang Telah Dipersiapkan', null, e.prepTitle)
-        + '<div class="canva-card rounded-2xl p-5 sm:p-6 max-w-3xl">'
-        + biTag('p', 'Sebelum kunjungan, Tim Dokter Panggil mempersiapkan kebutuhan pelayanan berdasarkan informasi awal yang disampaikan saat booking.', e.prepP1, 'class="text-sm text-gray-600 leading-relaxed mb-3"')
-        + biTag('p', 'Tenaga medis juga membawa kit medis standar Dokter Panggil untuk mendukung pemeriksaan, pemberian terapi, dan pemantauan pasien di rumah.', e.prepP2, 'class="text-sm text-gray-600 leading-relaxed"')
-        + '</div>',
-        sectionHead('Informasikan Kondisi Kesehatan Anda', null, e.healthTitle)
-        + '<div class="rounded-2xl border border-[#F1E7E0] bg-warm-gray p-5 sm:p-6 max-w-3xl">'
-        + biTag('h3', 'Sampaikan Riwayat Kesehatan Sebelum Terapi', e.healthHeadline, 'class="font-bold mb-2"')
-        + biTag('p', 'Sebelum infus vitamin diberikan, sampaikan kepada dokter atau perawat apabila memiliki riwayat penyakit tertentu, alergi, sedang mengonsumsi obat atau suplemen, sedang hamil atau menyusui, atau sedang menjalani terapi medis lainnya.', e.healthBody, 'class="text-sm text-gray-600 leading-relaxed mb-3"')
-        + biTag('p', 'Informasi tersebut akan menjadi bagian dari penilaian dokter dalam menentukan kesesuaian terapi.', e.healthNote, 'class="text-sm text-gray-600 leading-relaxed"')
-        + '</div>',
+        sectionHead('Kapan Infus Vitamin Dapat Dipertimbangkan?', 'Kebutuhan vitamin setiap orang berbeda. Dokter akan mempertimbangkan pemberian infus vitamin berdasarkan kondisi kesehatan, riwayat medis, kebutuhan pasien, serta hasil pemeriksaan.', e.whenTitle, e.whenLead)
+        + whenThree,
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -933,7 +953,7 @@ function infusVitaminBody(prefix, en) {
                 bookLabel: { id: 'Booking Infus Vitamin', en: e.ctaBook || 'Book Vitamin Infusion' },
                 askLabel: { id: 'Tanya Tim Dokter Panggil', en: e.ctaAskChat || 'Ask the Dokter Panggil Team' }
             })
-    ]);
+    ]) + vitModalHtml;
 }
 
 /** Form D7 — Terapi Oksigen di Rumah. */
@@ -948,11 +968,18 @@ function terapiOksigenBody(prefix, en) {
     const waBook = 'Halo, saya ingin konsultasikan kondisi pasien untuk terapi oksigen di rumah di Makassar.';
 
     const whenItems = [
-        { title: 'Kadar Oksigen Darah Rendah', desc: 'Pada kondisi ketika hasil pemeriksaan menunjukkan kadar oksigen yang tidak sesuai dengan target yang ditentukan dokter.' },
-        { title: 'Gangguan Pernapasan Tertentu', desc: 'Pada kondisi pernapasan tertentu yang berdasarkan pemeriksaan dokter membutuhkan tambahan oksigen.' },
-        { title: 'Dalam Masa Perawatan atau Pemulihan', desc: 'Untuk pasien tertentu yang masih membutuhkan terapi oksigen sebagai bagian dari rencana perawatan di rumah.' },
-        { title: 'Melanjutkan Terapi Oksigen', desc: 'Untuk pasien yang sebelumnya telah mendapatkan rekomendasi terapi oksigen dan perlu melanjutkan terapi di rumah sesuai rencana dokter.' }
+        { icon: 'gauge', title: 'Kadar Oksigen Darah Rendah' },
+        { icon: 'wind', title: 'Gangguan Pernapasan Tertentu' },
+        { icon: 'bed', title: 'Dalam Masa Perawatan atau Pemulihan' },
+        { icon: 'refresh-cw', title: 'Melanjutkan Terapi Oksigen' }
     ];
+    const whenEn = e.whenCards || [];
+    const whenTiles = '<div class="grid grid-cols-2 gap-3 sm:gap-4 seo-icon-tiles">' + whenItems.map((c, i) =>
+        '<div class="canva-card rounded-2xl">'
+        + '<div class="seo-icon-tile-ic">' + icon(c.icon, 22, BRAND) + '</div>'
+        + biTag('h3', c.title, (whenEn[i] || {}).title, 'class="seo-icon-tile-title"')
+        + '</div>'
+    ).join('') + '</div>';
 
     const howSteps = [
         { n: '01', title: 'Penilaian Kondisi Pasien melalui Triase', desc: 'Dokter menilai keluhan, kondisi pernapasan, saturasi oksigen, serta kebutuhan medis pasien.' },
@@ -961,28 +988,13 @@ function terapiOksigenBody(prefix, en) {
         { n: '04', title: 'Pemberian Terapi Oksigen', desc: 'Oksigen diberikan sesuai rencana terapi yang telah ditentukan.' },
         { n: '05', title: 'Pemantauan & Evaluasi', desc: 'Respons pasien terhadap terapi dipantau dan dikoordinasikan dengan dokter apabila diperlukan.' }
     ];
+
     const monitorItems = [
         { title: 'Saturasi Oksigen (SpO₂)', desc: 'Untuk membantu menilai kadar oksigen pasien dan respons terhadap terapi.' },
         { title: 'Frekuensi Pernapasan', desc: 'Membantu memantau pola dan perubahan kondisi pernapasan.' },
         { title: 'Tanda Vital', desc: 'Pemantauan kondisi umum pasien sesuai kebutuhan.' },
         { title: 'Respons terhadap Terapi', desc: 'Menilai perkembangan kondisi pasien setelah terapi oksigen diberikan.' }
     ];
-
-    const equipment = [
-        { icon: 'wind', title: 'Tabung Oksigen Murni', titleEn: 'Pure Oxygen Cylinder' },
-        { icon: 'activity', title: 'Nasal Kanula', titleEn: 'Nasal Cannula' },
-        { icon: 'cloud', title: 'Masker Wajah Sederhana (Simple Mask)', titleEn: 'Simple Face Mask' },
-        { icon: 'shield-check', title: 'Masker Non Rebreathing', titleEn: 'Non-Rebreathing Mask' },
-        { icon: 'heart-pulse', title: 'Pulse Oximeter atau Patient Monitor', titleEn: 'Pulse Oximeter or Patient Monitor' }
-    ];
-    const eqEn = e.equipment || [];
-    const eqCards = '<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">' + equipment.map((item, i) => {
-        const ee = eqEn[i] || {};
-        return '<div class="canva-card rounded-2xl p-5 flex gap-3 items-center">'
-            + '<div class="w-10 h-10 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center">' + icon(item.icon, 20, BRAND) + '</div>'
-            + biTag('span', item.title, ee.title || item.titleEn, 'class="font-semibold text-sm leading-snug"')
-            + '</div>';
-    }).join('') + '</div>';
 
     const faqs = [
         { q: 'Apakah bisa langsung memesan oksigen tanpa konsultasi dokter?', a: 'Terapi oksigen diberikan berdasarkan rekomendasi dokter. Dokter akan melakukan penilaian dan pemeriksaan terlebih dahulu untuk menentukan kebutuhan dan rencana terapi sesuai kondisi pasien.' },
@@ -996,26 +1008,16 @@ function terapiOksigenBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
-        sectionHead('Apa Itu Terapi Oksigen?', null, e.aboutTitle)
+        sectionHead('Terapi Oksigen Sesuai Kebutuhan Pasien', null, e.aboutTitle)
         + '<div class="canva-card rounded-3xl p-6 sm:p-8 max-w-4xl">'
-        + biTag('h3', 'Terapi Oksigen Sesuai Kebutuhan Pasien', e.aboutHeadline, 'class="text-xl font-bold mb-3"')
-        + biTag('p', 'Terapi oksigen merupakan pemberian oksigen tambahan untuk membantu memenuhi kebutuhan oksigen tubuh pada pasien dengan kondisi tertentu.', e.aboutP1, 'class="text-gray-600 leading-relaxed mb-4"')
-        + biTag('p', 'Di Dokter Panggil, terapi oksigen diberikan berdasarkan hasil penilaian dan rekomendasi dokter, termasuk kebutuhan, metode pemberian, serta pemantauan yang diperlukan selama terapi.', e.aboutP2, 'class="text-gray-600 leading-relaxed mb-4"')
-        + biTag('p', 'Tidak semua keluhan sesak membutuhkan terapi oksigen. Penyebab keluhan dan kondisi pasien perlu dinilai terlebih dahulu oleh dokter.', e.aboutP3, 'class="text-gray-600 leading-relaxed font-medium"')
+        + biTag('p', 'Terapi oksigen merupakan pemberian oksigen tambahan untuk membantu memenuhi kebutuhan oksigen tubuh pada pasien dengan kondisi tertentu. Terapi oksigen diberikan berdasarkan hasil penilaian dan rekomendasi dokter, termasuk kebutuhan, metode pemberian, serta pemantauan yang diperlukan selama terapi.', e.aboutP1, 'class="text-gray-600 leading-relaxed"')
         + '</div>',
-        sectionHead('Kapan Dokter Dapat Merekomendasikan Terapi Oksigen?', 'Dokter dapat mempertimbangkan terapi oksigen apabila berdasarkan pemeriksaan terdapat kondisi yang menyebabkan pasien membutuhkan tambahan oksigen.', e.whenTitle, e.whenLead)
-        + whenCards(whenItems, e.whenCards),
-        sectionHead('Terapi Oksigen Berdasarkan Rekomendasi Dokter', null, e.assessTitle)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8 mb-6 max-w-4xl">'
-        + biTag('p', 'Sebelum terapi diberikan, dokter akan menilai kondisi pasien untuk menentukan apakah oksigen diperlukan, target terapi, metode pemberian, serta kebutuhan pemantauan pasien.', e.assessP1, 'class="text-gray-600 leading-relaxed mb-3"')
-        + biTag('p', 'Untuk terapi oksigen, penilaian dokter minimal dilakukan melalui pemeriksaan langsung di rumah sesuai kondisi pasien.', e.assessP2, 'class="text-gray-600 leading-relaxed"')
-        + '</div>'
-        + biTag('p', 'Terapi Oksigen di Rumah', e.howHeadline, 'class="font-semibold text-lg mb-5"')
+        sectionHead('Kapan Dokter Dapat Merekomendasikan Terapi Oksigen?', null, e.whenTitle)
+        + whenTiles,
+        sectionHead('Terapi Oksigen di Rumah', null, e.howHeadline)
         + howStepCards(howSteps, e.howSteps),
         sectionHead('Kondisi Pasien Dipantau Selama Terapi', 'Pemantauan dilakukan sesuai kondisi dan rencana terapi pasien, yang dapat mencakup:', e.monitorTitle, e.monitorLead)
         + whenCards(monitorItems, e.monitorItems),
-        sectionHead('Peralatan Sesuai Kebutuhan Terapi', 'Peralatan terapi oksigen akan disiapkan sesuai rekomendasi dokter dan kebutuhan pasien.', e.equipTitle, e.equipLead)
-        + eqCards,
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,

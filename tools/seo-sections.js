@@ -169,6 +169,25 @@ module.exports = function createSeoSections(h) {
         ).join('') + '</div>';
     }
 
+    /** Path cards without copy: icon + title header, then a numbered vertical step timeline. */
+    function stepPathCards(cards) {
+        return '<div class="grid md:grid-cols-2 gap-5">' + cards.map(c => {
+            const flowEn = c.flowEn || c.flow;
+            return '<article class="path-card">'
+                + '<header class="path-card-head">'
+                + '<span class="path-card-ic">' + icon(c.icon, 24, BRAND) + '</span>'
+                + biTag('h3', c.title, c.titleEn, 'class="path-card-title"')
+                + '</header>'
+                + '<ol class="path-steps">' + c.flow.map((s, i) =>
+                    '<li class="path-step' + (i === c.flow.length - 1 ? ' is-last' : '') + '">'
+                    + '<span class="path-step-num">' + String(i + 1).padStart(2, '0') + '</span>'
+                    + biSpan(s, flowEn[i], 'path-step-label')
+                    + '</li>'
+                ).join('') + '</ol>'
+                + '</article>';
+        }).join('') + '</div>';
+    }
+
     function doctorNursePathCards(opts) {
         const e = opts.e || {};
         return pathCards([
@@ -263,6 +282,7 @@ module.exports = function createSeoSections(h) {
         flowPills,
         pills,
         pathCards,
+        stepPathCards,
         doctorNursePathCards,
         doubtBox,
         noteLine,

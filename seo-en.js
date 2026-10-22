@@ -1212,22 +1212,15 @@ module.exports = {
             ctaBook: 'Discuss Patient Condition',
             ctaAsk: 'Contact Dokter Panggil',
             d7: {
-                aboutTitle: 'What Is Oxygen Therapy?',
-                aboutHeadline: 'Oxygen Therapy Matched to Patient Needs',
-                aboutP1: 'Oxygen therapy provides supplemental oxygen to help meet the body’s oxygen needs in certain patient conditions.',
-                aboutP2: 'At Dokter Panggil, oxygen therapy is given based on the doctor’s assessment and recommendation, including needs, delivery method, and monitoring required during therapy.',
-                aboutP3: 'Not every shortness of breath needs oxygen therapy. The cause and patient condition must be assessed by a doctor first.',
+                aboutTitle: 'Oxygen Therapy Matched to Patient Needs',
+                aboutP1: 'Oxygen therapy provides supplemental oxygen to help meet the body’s oxygen needs in certain patient conditions. It is given based on the doctor’s assessment and recommendation, including needs, delivery method, and monitoring required during therapy.',
                 whenTitle: 'When Can a Doctor Recommend Oxygen Therapy?',
-                whenLead: 'A doctor may consider oxygen therapy when the exam shows a condition that means the patient needs supplemental oxygen.',
                 whenCards: [
-                    { title: 'Low Blood Oxygen Level', desc: 'When exam findings show an oxygen level that does not match the target set by the doctor.' },
-                    { title: 'Certain Breathing Problems', desc: 'For certain breathing conditions that, based on the doctor’s exam, need supplemental oxygen.' },
-                    { title: 'During Care or Recovery', desc: 'For certain patients who still need oxygen therapy as part of a home care plan.' },
-                    { title: 'Continuing Oxygen Therapy', desc: 'For patients previously recommended oxygen therapy who need to continue it at home according to the doctor’s plan.' }
+                    { title: 'Low Blood Oxygen Level' },
+                    { title: 'Certain Breathing Problems' },
+                    { title: 'During Care or Recovery' },
+                    { title: 'Continuing Oxygen Therapy' }
                 ],
-                assessTitle: 'Oxygen Therapy Based on Doctor Recommendation',
-                assessP1: 'Before therapy is given, the doctor assesses the patient to decide whether oxygen is needed, the therapy target, delivery method, and monitoring needs.',
-                assessP2: 'For oxygen therapy, the doctor’s assessment is done at minimum through an in-person home exam based on the patient’s condition.',
                 howHeadline: 'Oxygen Therapy at Home',
                 howSteps: [
                     { title: 'Patient Condition Assessment via Triage', desc: 'The doctor reviews symptoms, breathing condition, oxygen saturation, and medical needs.' },
@@ -1243,15 +1236,6 @@ module.exports = {
                     { title: 'Respiratory Rate', desc: 'Helps monitor breathing patterns and changes.' },
                     { title: 'Vital Signs', desc: 'General condition monitoring as needed.' },
                     { title: 'Response to Therapy', desc: 'Assesses how the patient’s condition progresses after oxygen therapy.' }
-                ],
-                equipTitle: 'Equipment Matched to Therapy Needs',
-                equipLead: 'Oxygen therapy equipment is prepared based on the doctor’s recommendation and patient needs.',
-                equipment: [
-                    { title: 'Pure Oxygen Cylinder' },
-                    { title: 'Nasal Cannula' },
-                    { title: 'Simple Face Mask' },
-                    { title: 'Non-Rebreathing Mask' },
-                    { title: 'Pulse Oximeter or Patient Monitor' }
                 ],
                 whyTitle: 'Why Oxygen Therapy with Dokter Panggil?',
                 whyItems: [
@@ -1343,11 +1327,10 @@ module.exports = {
             ctaBook: 'Book Vitamin Infusion',
             ctaAsk: 'Ask the Dokter Panggil Team',
             iv: {
-                aboutTitle: 'Vitamin Infusion Matched to Your Needs',
-                aboutP1: 'Vitamin infusion delivers vitamins through a vein as one form of supplementation.',
-                aboutP2: 'Vitamin infusion is provided at home after the patient’s condition is examined first. Based on the exam, the doctor chooses the right vitamin option before therapy is given.',
-                aboutP3: 'Patients can choose a doctor or nurse visit. The vitamin given still follows the doctor’s recommendation.',
                 vitTitle: 'Vitamin Infusion Options',
+                vitDetail: 'View details',
+                vitBadge: 'Most Complete',
+                vitContentLabel: 'Contents',
                 vitLead: 'Each option has different contents and supplementation goals. A doctor helps choose the therapy that fits your condition and needs.',
                 vitamins: [
                     {
@@ -1386,21 +1369,9 @@ module.exports = {
                 pathTitle: 'Two Service Options, Still with Doctor Recommendation',
                 pathLead: 'Patients can choose a vitamin infusion visit with a doctor or with a nurse. The difference is in the exam and consultation process before therapy is given.',
                 nurseTitle: 'Vitamin Infusion with a Nurse',
-                nurseP1: 'A nurse comes to the home and does an initial check of the patient’s condition.',
-                nurseP2: 'Exam findings are shared with the doctor. The doctor then holds an online consultation with the patient to assess and choose the right vitamin option.',
-                nurseP3: 'After the doctor’s recommendation, the nurse gives the therapy and monitors the patient during the infusion.',
                 nurseFlow: ['Booking', 'Nurse Arrives', 'Exam', 'Online Doctor Consult', 'Vitamin Recommendation', 'Infusion & Monitoring'],
                 doctorTitle: 'Vitamin Infusion with a Doctor',
-                doctorP1: 'A doctor comes to the home and examines the patient’s health.',
-                doctorP2: 'Based on the exam, the doctor chooses the vitamin option that fits the patient’s condition and needs. Therapy can then be given according to the doctor’s recommendation.',
                 doctorFlow: ['Booking', 'Doctor Arrives', 'Health Exam', 'Vitamin Recommendation', 'Infusion & Monitoring'],
-                prepTitle: 'The Team Arrives with Supplies Already Prepared',
-                prepP1: 'Before the visit, the Dokter Panggil team prepares service needs based on the initial information shared at booking.',
-                prepP2: 'Medical staff also bring Dokter Panggil’s standard medical kit to support examination, therapy, and monitoring at home.',
-                healthTitle: 'Share Your Health Condition',
-                healthHeadline: 'Tell Us Your Health History Before Therapy',
-                healthBody: 'Before vitamin infusion is given, tell the doctor or nurse if you have certain medical history, allergies, are taking medicine or supplements, are pregnant or breastfeeding, or are receiving other medical therapy.',
-                healthNote: 'That information is part of the doctor’s assessment in deciding whether therapy is appropriate.',
                 whyTitle: 'Why Vitamin Infusion with Dokter Panggil?',
                 whyItems: [
                     { title: 'Exam Before Therapy', desc: 'The patient’s condition is checked before vitamin infusion is given.' },
