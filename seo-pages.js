@@ -457,16 +457,21 @@
             }).join('');
         }
 
-        function renderSchedule(schedule, ui) {
+        function renderSchedule(schedule, ui, defaultTabId) {
             if (!schedule || !schedule.tabs || !schedule.tabs.length) return '';
             const tabs = schedule.tabs;
+            let activeIdx = 0;
+            if (defaultTabId) {
+                const found = tabs.findIndex(function (tab) { return tab.id === defaultTabId; });
+                if (found >= 0) activeIdx = found;
+            }
             const tabsLabel = t(schedule.tabsLabel) || t(ui.scheduleTitle);
             const tabBtns = '<div class="vax-age-tabs" role="tablist" aria-label="' + esc(tabsLabel) + '">'
                 + tabs.map(function (tab, i) {
-                    const active = i === 0 ? ' is-active' : '';
+                    const active = i === activeIdx ? ' is-active' : '';
                     return '<button type="button" role="tab" class="vax-age-tab' + active + '"'
                         + ' data-vax-age-tab="' + esc(tab.id) + '"'
-                        + ' aria-selected="' + (i === 0 ? 'true' : 'false') + '">'
+                        + ' aria-selected="' + (i === activeIdx ? 'true' : 'false') + '">'
                         + esc(lang() === 'en' ? (tab.labelEn || tab.label) : tab.label)
                         + '</button>';
                 }).join('')
@@ -476,32 +481,40 @@
                 const groups = (tab.groups || []).map(function (g) {
                     const rows = (g.vaccines || []).map(function (v) {
                         const pending = v.brandPending || !String(v.brand || '').trim();
-                        const brandHtml = pending
-                            ? '<span class="vax-brand-pending">' + esc(t(ui.brandPending)) + '</span>'
-                            : lines(v.brands || [v.brand], 'vax-brand');
-                        let meta = '';
-                        if (v.benefit) {
-                            meta += '<span class="vax-meta-item"><span class="vax-meta-label">' + esc(t(ui.benefit)) + '</span>'
-                                + '<span class="vax-meta-value">' + esc(v.benefit) + '</span></span>';
-                        }
-                        if (v.schedule) {
-                            meta += '<span class="vax-meta-item"><span class="vax-meta-label">' + esc(t(ui.schedule)) + '</span>'
-                                + lines(v.schedules || [v.schedule], 'vax-meta-value') + '</span>';
-                        }
-                        meta += '<span class="vax-meta-item"><span class="vax-meta-label">' + esc(t(ui.brand)) + '</span>'
-                            + brandHtml + '</span>';
-                        return '<article class="vax-row"><h4 class="vax-row-name">' + esc(v.name) + '</h4>'
-                            + '<div class="vax-row-meta">' + meta + '</div></article>';
+                        const brandText = pending
+                            ? t(ui.brandPending)
+                            : (v.brands || [v.brand]).filter(Boolean).join(' · ');
+                        const sched = (v.schedules || [v.schedule]).filter(Boolean)[0] || '';
+                        const schedPill = sched
+                            ? ('<span class="vax-vaccine-pill">' + esc(sched) + '</span>')
+                            : '';
+                        const benefit = v.benefit
+                            ? ('<p class="vax-vaccine-benefit">' + esc(v.benefit) + '</p>')
+                            : '';
+                        return '<article class="vax-vaccine-card">'
+                            + '<div class="vax-vaccine-head">'
+                            + '<span class="vax-vaccine-ic" aria-hidden="true">'
+                            + '<i data-lucide="syringe" style="width:15px;height:15px;color:#D83030"></i></span>'
+                            + '<h4 class="vax-vaccine-name">' + esc(v.name) + '</h4>'
+                            + schedPill
+                            + '</div>'
+                            + benefit
+                            + '<div class="vax-vaccine-foot">'
+                            + '<span class="vax-vaccine-foot-label">' + esc(t(ui.brand)) + '</span>'
+                            + '<span class="vax-vaccine-brand' + (pending ? ' is-pending' : '') + '">' + esc(brandText) + '</span>'
+                            + '</div>'
+                            + '</article>';
                     }).join('');
                     return '<div class="vax-age-group">'
                         + (g.age ? '<h4 class="vax-age-group-title">' + esc(g.age) + '</h4>' : '')
-                        + '<div class="vax-rows">' + rows + '</div></div>';
+                        + '<div class="vax-vaccine-grid">' + rows + '</div></div>';
                 }).join('');
 
                 const lead = lang() === 'en' ? (tab.leadEn || tab.lead) : tab.lead;
-                return '<div class="vax-age-panel' + (i === 0 ? ' is-active' : '') + '"'
+                const isActive = i === activeIdx;
+                return '<div class="vax-age-panel' + (isActive ? ' is-active' : '') + '"'
                     + ' data-vax-age-panel="' + esc(tab.id) + '" role="tabpanel"'
-                    + (i === 0 ? '' : ' hidden') + '>'
+                    + (isActive ? '' : ' hidden') + '>'
                     + (lead ? '<p class="text-sm text-gray-500 leading-relaxed mb-3">' + esc(lead) + '</p>' : '')
                     + groups
                     + '</div>';
@@ -549,7 +562,7 @@
                 + '<div class="px-5 py-5 sm:px-6 sm:pb-6 space-y-5">'
                 + '<p class="vax-anim text-sm text-gray-600 leading-relaxed" style="--vax-i:1">' + esc(t(item.lead)) + '</p>'
                 + examplesBlock
-                + renderSchedule(item.schedule, ui)
+                + renderSchedule(item.schedule, ui, item.defaultTab)
                 + '<div>'
                 + '<p class="vax-anim text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2.5" style="--vax-i:7">' + esc(t(item.pointsTitle) || t(ui.pointsTitle)) + '</p>'
                 + '<ul class="space-y-2.5">' + points + '</ul>'

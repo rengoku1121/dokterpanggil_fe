@@ -253,8 +253,8 @@
 
         'pemasangan-ngt': {
             // Form — Pemasangan Selang Makan (NGT)
-            h1: 'Pemasangan Selang Makan',
-            metaTitle: 'Pemasangan Selang Makan (NGT) di Rumah | DokterPanggil.id',
+            h1: 'Pemasangan dan Pergantian Selang Makan',
+            metaTitle: 'Pemasangan dan Pergantian Selang Makan (NGT) | DokterPanggil.id',
             metaDesc: 'Pemasangan atau penggantian NGT di rumah oleh dokter atau perawat berdasarkan rekomendasi dokter di Makassar.',
             lead: 'Layanan pemasangan selang makan atau Nasogastric Tube (NGT) langsung di rumah oleh dokter atau perawat, berdasarkan hasil penilaian dan rekomendasi dokter sesuai kondisi serta kebutuhan pasien.',
             heroChips: [
@@ -270,8 +270,8 @@
 
         'pemasangan-kateter': {
             // Form — Pemasangan Kateter Urin di Rumah
-            h1: 'Pemasangan Kateter Urin di Rumah',
-            metaTitle: 'Pemasangan Kateter Urin di Rumah | DokterPanggil.id',
+            h1: 'Pemasangan dan Pergantian Selang Kateter Urin',
+            metaTitle: 'Pemasangan dan Pergantian Selang Kateter Urin | DokterPanggil.id',
             metaDesc: 'Pemasangan atau penggantian kateter urin di rumah oleh dokter atau perawat berdasarkan rekomendasi dokter di Makassar.',
             lead: 'Layanan pemasangan dan penggantian kateter urin langsung di rumah oleh dokter atau perawat, berdasarkan hasil penilaian dan rekomendasi dokter sesuai kondisi serta kebutuhan pasien.',
             heroChips: [

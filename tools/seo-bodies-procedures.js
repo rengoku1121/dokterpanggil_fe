@@ -5,7 +5,7 @@
 module.exports = function createProcedureBodies(h) {
     const {
         sectionHead, biTag, faqBlock, ctaBlock,
-        composeBody, iconInfoCards, howStepCards, whyCards, doctorNursePathCards
+        composeBody, iconInfoCards, howStepCards, whyCards, doctorNursePathCards, stepPathCards
     } = h;
 
     function ngtBody(prefix, en) {
@@ -26,15 +26,6 @@ module.exports = function createProcedureBodies(h) {
         const doctorFlowEn = e.doctorFlow || ['Booking', 'Doctor Arrives', 'Patient Exam', 'Recommendation', 'NGT Placement', 'Evaluation & Education'];
         const nurseFlowEn = e.nurseFlow || ['Booking', 'Nurse Arrives', 'Initial Exam', 'Online Doctor Consult', 'Recommendation', 'NGT Placement', 'Evaluation & Education'];
 
-        const howSteps = [
-            { n: '01', title: 'Pemeriksaan Kondisi Pasien', desc: 'Tenaga medis melakukan pemeriksaan dan memastikan rencana pemasangan sesuai dengan kondisi pasien.' },
-            { n: '02', title: 'Persiapan Pasien & Peralatan', desc: 'Peralatan dan kebutuhan tindakan dipersiapkan sebelum pemasangan.' },
-            { n: '03', title: 'Pemasangan NGT', desc: 'Selang dimasukkan melalui hidung menuju lambung menggunakan teknik yang sesuai.' },
-            { n: '04', title: 'Konfirmasi Posisi Selang', desc: 'Setelah pemasangan, posisi NGT perlu diperiksa dan dikonfirmasi sebelum digunakan untuk pemberian nutrisi atau obat.' },
-            { n: '05', title: 'Fiksasi Selang', desc: 'Setelah posisi sesuai, selang difiksasi untuk membantu mempertahankan posisinya.' },
-            { n: '06', title: 'Edukasi Pasien & Keluarga', desc: 'Keluarga diberikan penjelasan mengenai penggunaan, perawatan, serta kondisi yang perlu diperhatikan selama NGT digunakan.' }
-        ];
-
         const typeItems = [
             { title: 'Pemasangan NGT Baru', desc: 'Untuk pasien yang berdasarkan penilaian dokter membutuhkan penggunaan NGT.' },
             { title: 'Penggantian NGT', desc: 'Untuk pasien yang telah menggunakan NGT dan membutuhkan penggantian sesuai rencana perawatan.' },
@@ -52,29 +43,17 @@ module.exports = function createProcedureBodies(h) {
         return composeBody([
             sectionHead('Apa Itu Selang Makan / Nasogastric Tube?', null, e.aboutTitle)
             + '<div class="canva-card rounded-3xl p-6 sm:p-8 max-w-4xl">'
-            + biTag('h3', 'Membantu Pemberian Nutrisi dan Obat pada Kondisi Tertentu', e.aboutHeadline, 'class="text-xl font-bold mb-4"')
-            + biTag('p', 'Nasogastric Tube (NGT) atau selang makan adalah selang fleksibel yang dimasukkan melalui hidung menuju lambung.', e.aboutP1, 'class="text-gray-600 leading-relaxed mb-4"')
-            + biTag('p', 'Pada kondisi tertentu, NGT dapat digunakan untuk membantu pemberian nutrisi, cairan, atau obat ketika pasien tidak dapat memenuhi kebutuhan melalui mulut secara adekuat.', e.aboutP2, 'class="text-gray-600 leading-relaxed mb-4"')
-            + biTag('p', 'Pemasangan NGT perlu didasarkan pada penilaian kondisi pasien dan rekomendasi dokter.', e.aboutP3, 'class="text-gray-600 leading-relaxed font-medium"')
+            + biTag('p', 'Nasogastric Tube (NGT) atau selang makan adalah selang fleksibel yang dimasukkan melalui hidung menuju lambung untuk membantu pemberian nutrisi, cairan, atau obat ketika pasien tidak dapat makan atau minum dengan cukup melalui mulut. Pemasangannya dilakukan berdasarkan penilaian dan rekomendasi dokter.', e.aboutP1, 'class="text-gray-600 leading-relaxed"')
             + '</div>',
             sectionHead('Kapan Dokter Dapat Merekomendasikan NGT?', null, e.whenTitle)
             + iconInfoCards(whenItems, e.whenItems, whenIcons),
-            sectionHead('Pilih Layanan Dokter atau Perawat', null, e.pathTitle)
-            + doctorNursePathCards({
-                e,
-                doctorTitle: 'Pemasangan NGT oleh Dokter',
-                doctorP1: 'Dokter datang langsung ke rumah untuk melakukan pemeriksaan kondisi pasien dan menentukan apakah pemasangan NGT sesuai untuk dilakukan.',
-                doctorP2: 'Apabila berdasarkan hasil pemeriksaan pemasangan dapat dilakukan di rumah, dokter akan melakukan tindakan serta memberikan arahan mengenai penggunaan dan perawatan NGT.',
-                doctorFlow, doctorFlowEn,
-                nurseTitle: 'Pemasangan NGT oleh Perawat',
-                nurseP1: 'Perawat datang ke rumah dan melakukan pemeriksaan awal kondisi pasien. Hasil pemeriksaan kemudian disampaikan kepada dokter dan pasien akan melakukan konsultasi online dengan dokter.',
-                nurseP2: 'Apabila dokter merekomendasikan pemasangan NGT, perawat akan melakukan tindakan sesuai rencana yang diberikan dokter.',
-                nurseFlow, nurseFlowEn
-            }),
-            sectionHead('Bagaimana Pemasangan NGT Dilakukan?', null, e.howTitle)
-            + howStepCards(howSteps, e.howSteps),
             sectionHead('Pemasangan Baru atau Penggantian Selang Makan', null, e.typesTitle)
             + iconInfoCards(typeItems, e.typeItems, typeIcons),
+            sectionHead('Pilih Layanan Dokter atau Perawat', null, e.pathTitle)
+            + stepPathCards([
+                { icon: 'stethoscope', title: 'Pemasangan NGT oleh Dokter', titleEn: e.doctorTitle, flow: doctorFlow, flowEn: doctorFlowEn },
+                { icon: 'heart-handshake', title: 'Pemasangan NGT oleh Perawat', titleEn: e.nurseTitle, flow: nurseFlow, flowEn: nurseFlowEn }
+            ]),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -108,15 +87,6 @@ module.exports = function createProcedureBodies(h) {
         const doctorFlowEn = e.doctorFlow || ['Booking', 'Doctor Arrives', 'Exam', 'Recommendation', 'Catheter Placement/Change', 'Evaluation & Education'];
         const nurseFlowEn = e.nurseFlow || ['Booking', 'Nurse Arrives', 'Initial Exam', 'Online Doctor Consult', 'Recommendation', 'Catheter Placement/Change', 'Evaluation & Education'];
 
-        const howSteps = [
-            { n: '01', title: 'Pemeriksaan Kondisi Pasien', desc: 'Tenaga medis melakukan pemeriksaan kondisi pasien dan memastikan rencana tindakan sesuai dengan rekomendasi dokter.' },
-            { n: '02', title: 'Persiapan Pasien & Peralatan', desc: 'Pasien dipersiapkan dan kebutuhan tindakan disiapkan dengan memperhatikan prinsip kebersihan serta pencegahan infeksi.' },
-            { n: '03', title: 'Pemasangan Kateter', desc: 'Kateter dimasukkan melalui saluran kemih menuju kandung kemih menggunakan teknik yang sesuai.' },
-            { n: '04', title: 'Memastikan Aliran Urin', desc: 'Setelah pemasangan, tenaga medis memastikan urin dapat mengalir melalui kateter dengan baik.' },
-            { n: '05', title: 'Fiksasi & Kantong Urin', desc: 'Kateter dan kantong urin diatur serta diposisikan dengan baik untuk membantu menjaga aliran urin.' },
-            { n: '06', title: 'Evaluasi & Edukasi', desc: 'Tenaga medis mengevaluasi kondisi pasien setelah tindakan dan memberikan edukasi mengenai penggunaan serta perawatan kateter di rumah.' }
-        ];
-
         const typeItems = [
             { title: 'Pemasangan Kateter Baru', desc: 'Untuk pasien yang berdasarkan penilaian dokter membutuhkan penggunaan kateter urin.' },
             { title: 'Penggantian Kateter', desc: 'Untuk pasien yang telah menggunakan kateter dan membutuhkan penggantian sesuai kondisi kateter serta rencana perawatan.' },
@@ -141,20 +111,11 @@ module.exports = function createProcedureBodies(h) {
             + '</div>',
             sectionHead('Kapan Dokter Dapat Merekomendasikan Kateter Urin?', null, e.whenTitle)
             + iconInfoCards(whenItems, e.whenItems, whenIcons),
-            sectionHead('Pilih Layanan Dokter atau Perawat', 'Pemasangan dan penggantian kateter urin dapat dilakukan oleh dokter maupun perawat. Sebelum tindakan, kondisi dan kebutuhan pasien tetap dinilai oleh dokter.', e.pathTitle, e.pathLead)
-            + doctorNursePathCards({
-                e,
-                doctorTitle: 'Pemasangan Kateter oleh Dokter',
-                doctorP1: 'Dokter datang langsung ke rumah untuk melakukan pemeriksaan kondisi pasien dan menentukan kebutuhan pemasangan atau penggantian kateter.',
-                doctorP2: 'Apabila berdasarkan hasil pemeriksaan tindakan dapat dilakukan di rumah, dokter akan melakukan pemasangan kateter dan memberikan edukasi mengenai perawatan setelah tindakan.',
-                doctorFlow, doctorFlowEn,
-                nurseTitle: 'Pemasangan Kateter oleh Perawat',
-                nurseP1: 'Perawat datang ke rumah dan melakukan pemeriksaan awal kondisi pasien. Hasil pemeriksaan kemudian disampaikan kepada dokter dan pasien melakukan konsultasi online dengan dokter.',
-                nurseP2: 'Apabila dokter merekomendasikan pemasangan atau penggantian kateter, perawat akan melakukan tindakan sesuai rencana yang diberikan dokter.',
-                nurseFlow, nurseFlowEn
-            }),
-            sectionHead('Bagaimana Pemasangan Kateter Dilakukan?', 'Proses Pemasangan Kateter di Rumah', e.howTitle, e.howLead)
-            + howStepCards(howSteps, e.howSteps),
+            sectionHead('Pilih Layanan Dokter atau Perawat', null, e.pathTitle)
+            + stepPathCards([
+                { icon: 'stethoscope', title: 'Pemasangan Kateter oleh Dokter', titleEn: e.doctorTitle, flow: doctorFlow, flowEn: doctorFlowEn },
+                { icon: 'heart-handshake', title: 'Pemasangan Kateter oleh Perawat', titleEn: e.nurseTitle, flow: nurseFlow, flowEn: nurseFlowEn }
+            ]),
             sectionHead('Pemasangan Baru atau Penggantian Kateter', null, e.typesTitle)
             + iconInfoCards(typeItems, e.typeItems, typeIcons),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
@@ -191,15 +152,6 @@ module.exports = function createProcedureBodies(h) {
         const doctorFlowEn = e.doctorFlow || ['Booking', 'Doctor Arrives', 'Exam', 'Recommendation', 'Suction', 'Evaluation'];
         const nurseFlowEn = e.nurseFlow || ['Booking', 'Nurse Arrives', 'Initial Exam', 'Online Doctor Consult', 'Recommendation', 'Suction', 'Evaluation'];
 
-        const howSteps = [
-            { n: '01', title: 'Pemeriksaan Kondisi Pasien', desc: 'Kondisi pasien dinilai terlebih dahulu, terutama kondisi pernapasan dan kemampuan mengeluarkan sekret.' },
-            { n: '02', title: 'Persiapan Pasien & Peralatan', desc: 'Tenaga medis mempersiapkan pasien dan peralatan yang diperlukan sesuai tindakan.' },
-            { n: '03', title: 'Tindakan Suction', desc: 'Sekret dikeluarkan menggunakan alat suction dan teknik yang sesuai dengan kondisi serta akses jalan napas pasien.' },
-            { n: '04', title: 'Pemantauan Selama Tindakan', desc: 'Kondisi pasien dipantau selama tindakan untuk menilai toleransi dan respons pasien.' },
-            { n: '05', title: 'Evaluasi Setelah Suction', desc: 'Setelah tindakan, tenaga medis mengevaluasi kembali kondisi pernapasan dan respons pasien.' },
-            { n: '06', title: 'Edukasi Keluarga', desc: 'Keluarga diberikan informasi mengenai kondisi pasien, perawatan selanjutnya, serta tanda-tanda yang perlu diperhatikan.' }
-        ];
-
         const typeItems = [
             { title: 'Suction Sekret pada Mulut', desc: 'Membantu membersihkan sekret yang terkumpul di area mulut pada pasien yang mengalami kesulitan mengeluarkannya sendiri.' },
             { title: 'Suction Jalan Napas', desc: 'Dilakukan pada kondisi tertentu ketika sekret pada jalan napas perlu dikeluarkan dengan bantuan tenaga medis.' },
@@ -224,22 +176,13 @@ module.exports = function createProcedureBodies(h) {
             + '</div>',
             sectionHead('Kapan Suction Dapat Dipertimbangkan?', null, e.whenTitle)
             + iconInfoCards(whenItems, e.whenItems, whenIcons),
-            sectionHead('Pilih Layanan Dokter atau Perawat', 'Tindakan suction dapat dilakukan oleh dokter maupun perawat sesuai kondisi dan kebutuhan pasien. Setiap tindakan tetap dilakukan berdasarkan penilaian dan rekomendasi dokter.', e.pathTitle, e.pathLead)
-            + doctorNursePathCards({
-                e,
-                doctorTitle: 'Suction oleh Dokter',
-                doctorP1: 'Dokter datang langsung ke rumah untuk melakukan pemeriksaan kondisi pasien, termasuk kondisi pernapasan dan kebutuhan tindakan.',
-                doctorP2: 'Apabila berdasarkan hasil pemeriksaan suction diperlukan dan sesuai dilakukan di rumah, dokter dapat melakukan tindakan serta mengevaluasi respons pasien setelahnya.',
-                doctorFlow, doctorFlowEn,
-                nurseTitle: 'Suction oleh Perawat',
-                nurseP1: 'Perawat datang ke rumah dan melakukan pemeriksaan awal kondisi pasien. Hasil pemeriksaan disampaikan kepada dokter, kemudian pasien atau keluarga melakukan konsultasi online dengan dokter.',
-                nurseP2: 'Apabila dokter merekomendasikan suction, perawat akan melakukan tindakan sesuai rencana yang diberikan dokter dan memantau kondisi pasien.',
-                nurseFlow, nurseFlowEn
-            }),
-            sectionHead('Bagaimana Suction Dilakukan?', 'Proses Suction di Rumah', e.howTitle, e.howLead)
-            + howStepCards(howSteps, e.howSteps),
             sectionHead('Jenis Kebutuhan Suction', null, e.typesTitle)
             + iconInfoCards(typeItems, e.typeItems, typeIcons),
+            sectionHead('Pilih Layanan Dokter atau Perawat', null, e.pathTitle)
+            + stepPathCards([
+                { icon: 'stethoscope', title: 'Suction oleh Dokter', titleEn: e.doctorTitle, flow: doctorFlow, flowEn: doctorFlowEn },
+                { icon: 'heart-handshake', title: 'Suction oleh Perawat', titleEn: e.nurseTitle, flow: nurseFlow, flowEn: nurseFlowEn }
+            ]),
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,

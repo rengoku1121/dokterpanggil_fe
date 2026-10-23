@@ -1058,13 +1058,6 @@ function terapiNebulizerBody(prefix, en) {
         { n: '04', title: 'Pemberian Nebulizer', desc: 'Pasien menghirup aerosol obat melalui masker atau mouthpiece selama terapi berlangsung.' },
         { n: '05', title: 'Pemantauan & Evaluasi', desc: 'Kondisi dan respons pasien terhadap terapi dipantau dan dievaluasi sesuai kebutuhan.' }
     ];
-    const monitorItems = [
-        { title: 'Keluhan Pernapasan', desc: 'Menilai perubahan keluhan setelah terapi.' },
-        { title: 'Frekuensi & Pola Napas', desc: 'Memantau kondisi pernapasan pasien sesuai kebutuhan.' },
-        { title: 'Saturasi Oksigen (SpO₂)', desc: 'Dapat diperiksa sebelum dan setelah terapi sesuai kondisi pasien.' },
-        { title: 'Respons terhadap Obat', desc: 'Memantau efektivitas maupun kemungkinan reaksi setelah pemberian obat.' }
-    ];
-
     const faqs = [
         { q: 'Apakah batuk atau pilek perlu nebulizer?', a: 'Tidak selalu. Kebutuhan nebulizer bergantung pada penyebab keluhan dan kondisi saluran pernapasan. Dokter akan melakukan penilaian terlebih dahulu.' },
         { q: 'Apakah nebulizer hanya berisi uap?', a: 'Tidak. Nebulizer mengubah cairan obat menjadi aerosol atau kabut halus yang dapat dihirup ke saluran pernapasan.' },
@@ -1087,16 +1080,6 @@ function terapiNebulizerBody(prefix, en) {
         + whenCards(whenItems, e.whenCards),
         sectionHead('Proses Terapi Nebulizer di Rumah', null, e.howTitle)
         + howStepCards(howSteps, e.howSteps),
-        sectionHead('Siapa yang Melakukan Nebulizer?', null, e.whoTitle)
-        + '<div class="canva-card rounded-2xl p-5 sm:p-6 max-w-3xl">'
-        + biTag('h3', 'Dokter atau Perawat Langsung ke Rumah', e.whoHeadline, 'class="font-bold mb-2"')
-        + biTag('p', 'Terapi nebulizer dapat diberikan oleh dokter maupun perawat sesuai kebutuhan pelayanan.', e.whoBody, 'class="text-sm text-gray-600 leading-relaxed mb-3"')
-        + biTag('p', 'Apabila dilakukan oleh perawat, pemberian obat tetap mengikuti rekomendasi dan rencana terapi yang telah ditentukan dokter.', e.whoNurse, 'class="text-sm text-gray-600 leading-relaxed"')
-        + '</div>',
-        sectionHead('Pemantauan Setelah Nebulizer', null, e.monitorTitle)
-        + biTag('p', 'Respons Pasien Dievaluasi Setelah Terapi', e.monitorHeadline, 'class="font-semibold text-lg mb-2"')
-        + biTag('p', 'Setelah nebulizer diberikan, tenaga medis dapat melakukan evaluasi terhadap:', e.monitorLead, 'class="text-gray-600 leading-relaxed mb-5"')
-        + whenCards(monitorItems, e.monitorItems),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -1138,29 +1121,9 @@ function perawatanLukaBody(prefix, en) {
     const nurseFlowEn = e.nurseFlow || nurseFlow;
     const doctorFlowEn = e.doctorFlow || doctorFlow;
 
-    const pathSection = pathCards([
-        {
-            icon: 'heart-handshake',
-            title: 'Perawatan Luka dengan Perawat', titleEn: e.nurseTitle,
-            p1: 'Perawat datang langsung ke rumah untuk melakukan pemeriksaan awal kondisi luka dan kondisi pasien yang berkaitan dengan perawatan.',
-            p1En: e.nurseP1,
-            p2: 'Hasil pemeriksaan kemudian disampaikan kepada dokter dan pasien akan melakukan konsultasi online bersama dokter. Dokter menilai kondisi pasien serta memberikan rekomendasi dan rencana perawatan luka yang diperlukan.',
-            p2En: e.nurseP2,
-            p3: 'Setelah mendapatkan rekomendasi dokter, perawat melakukan perawatan luka sesuai rencana yang telah ditentukan.',
-            p3En: e.nurseP3,
-            flow: nurseFlow, flowEn: nurseFlowEn
-        },
-        {
-            icon: 'stethoscope',
-            title: 'Perawatan Luka dengan Dokter', titleEn: e.doctorTitle,
-            p1: 'Dokter datang langsung ke rumah untuk melakukan pemeriksaan luka sekaligus mengevaluasi kondisi kesehatan pasien yang dapat berkaitan dengan proses penyembuhan.',
-            p1En: e.doctorP1,
-            p2: 'Berdasarkan hasil pemeriksaan, dokter menentukan rencana perawatan dan terapi yang sesuai. Perawatan luka dapat dilakukan pada kunjungan tersebut.',
-            p2En: e.doctorP2,
-            p3: 'Apabila pasien membutuhkan perawatan berkala, dokter dapat menentukan rencana perawatan selanjutnya yang dapat dilanjutkan oleh perawat.',
-            p3En: e.doctorP3,
-            flow: doctorFlow, flowEn: doctorFlowEn
-        }
+    const pathSection = sections.stepPathCards([
+        { icon: 'heart-handshake', title: 'Perawatan Luka dengan Perawat', titleEn: e.nurseTitle, flow: nurseFlow, flowEn: nurseFlowEn },
+        { icon: 'stethoscope', title: 'Perawatan Luka dengan Dokter', titleEn: e.doctorTitle, flow: doctorFlow, flowEn: doctorFlowEn }
     ]);
 
     const monitorFlow = ['Rencana Dokter', 'Perawatan Berkala', 'Monitoring Luka', 'Evaluasi Perkembangan', 'Koordinasi Dokter Bila Diperlukan'];
@@ -1186,8 +1149,6 @@ function perawatanLukaBody(prefix, en) {
         sectionHead('Jenis Luka yang Dapat Dirawat di Rumah', 'Perawatan untuk berbagai kondisi luka.', e.typesTitle, e.typesLead)
         + iconInfoCards(woundTypes, e.woundTypes, woundIcons),
         sectionHead('Pilih Perawatan oleh Dokter atau Perawat', null, e.pathTitle)
-        + biTag('p', 'Pilih Layanan Sesuai Kebutuhan Pasien', e.pathHeadline, 'class="font-semibold text-lg mb-2"')
-        + biTag('p', 'Pasien dapat melakukan booking Perawatan Luka dengan dokter atau Perawatan Luka dengan perawat. Pada keduanya, kondisi luka akan diperiksa dan rencana perawatan tetap berada dalam rekomendasi dokter.', e.pathLead, 'class="text-gray-600 leading-relaxed mb-6 max-w-3xl"')
         + pathSection,
         sectionHead('Perawatan & Monitoring Perkembangan Luka', null, e.monitorTitle)
         + '<div class="canva-card rounded-3xl p-6 sm:p-8 mb-5 max-w-4xl">'
@@ -1221,13 +1182,13 @@ function vaksinasiBody(prefix, en) {
     const e = en.d10 || en.vax || en;
     const waAsk = 'Halo, saya ingin bertanya tentang vaksinasi di rumah di Makassar.';
     const waBook = 'Halo, saya ingin booking vaksinasi di rumah di Makassar.';
-    const waFamily = 'Halo, saya ingin booking vaksinasi keluarga di rumah di Makassar.';
-
     const categories = [
         {
             id: 'anak',
             title: 'Vaksinasi Anak Sesuai Usia & Riwayat Imunisasi',
             cardTitle: 'Vaksinasi Anak',
+            cardSubtitle: '3–5 tahun',
+            defaultTab: '2-5',
             desc: 'Vaksinasi untuk bayi dan anak sesuai usia, jadwal imunisasi, serta riwayat vaksinasi sebelumnya.',
             cta: 'Lihat Vaksin Anak',
             wa: 'Halo, saya ingin booking vaksinasi anak di rumah di Makassar.',
@@ -1249,6 +1210,7 @@ function vaksinasiBody(prefix, en) {
         {
             id: 'dewasa',
             title: 'Vaksinasi Dewasa',
+            cardTitle: 'Vaksinasi Dewasa',
             desc: 'Vaksinasi untuk dewasa sesuai usia, riwayat vaksinasi, kondisi kesehatan, pekerjaan, dan faktor risiko tertentu.',
             cta: 'Lihat Vaksin Dewasa',
             wa: 'Halo, saya ingin booking vaksinasi dewasa di rumah di Makassar.',
@@ -1270,6 +1232,7 @@ function vaksinasiBody(prefix, en) {
         {
             id: 'perjalanan',
             title: 'Vaksinasi Perjalanan',
+            cardTitle: 'Vaksinasi Perjalanan',
             desc: 'Vaksinasi untuk kebutuhan perjalanan dalam maupun luar negeri, termasuk vaksin yang direkomendasikan atau dipersyaratkan untuk tujuan tertentu.',
             cta: 'Lihat Vaksin Perjalanan',
             wa: 'Halo, saya ingin booking vaksinasi perjalanan di rumah di Makassar.',
@@ -1291,6 +1254,7 @@ function vaksinasiBody(prefix, en) {
         {
             id: 'lansia',
             title: 'Vaksinasi Lansia',
+            cardTitle: 'Vaksinasi Lansia',
             desc: 'Vaksinasi yang dapat dipertimbangkan pada usia lanjut untuk membantu memberikan perlindungan terhadap penyakit tertentu yang risikonya dapat meningkat seiring bertambahnya usia.',
             cta: 'Lihat Vaksin Lansia',
             wa: 'Halo, saya ingin booking vaksinasi lansia di rumah di Makassar.',
@@ -1312,16 +1276,25 @@ function vaksinasiBody(prefix, en) {
     ];
     const catIcons = ['baby', 'user', 'map-pin', 'heart-handshake'];
     const catEn = e.categories || [];
-    const catCards = '<div id="pilihan-vaksinasi" class="grid sm:grid-cols-2 gap-4">' + categories.map((c, i) => {
+    const vaxDetail = { id: 'Lihat detail', en: (e.modalUi && e.modalUi.detail) || 'View details' };
+    const catCards = '<div id="pilihan-vaksinasi" class="grid grid-cols-2 gap-3 sm:gap-4 max-w-3xl">' + categories.map((c, i) => {
         const ce = catEn[i] || {};
         const cardTitle = c.cardTitle || c.title;
         const cardTitleEn = ce.cardTitle || ce.title || cardTitle;
-        return '<button type="button" data-vax-open="' + esc(c.id) + '" class="canva-card rounded-2xl p-5 sm:p-6 text-left w-full hover:shadow-lg hover:border-primary/20 transition-all group">'
-            + '<div class="w-11 h-11 mb-3 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">' + icon(catIcons[i], 22, BRAND) + '</div>'
-            + biTag('h3', cardTitle, cardTitleEn, 'class="font-bold mb-2 leading-snug"')
-            + biTag('p', c.desc, ce.desc, 'class="text-sm text-gray-600 leading-relaxed mb-4"')
-            + biTag('span', c.cta + ' →', (ce.cta || c.cta) + ' →', 'class="text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all"')
-            + '</button>';
+        const sub = c.cardSubtitle || ce.cardSubtitle || '';
+        const subEn = ce.cardSubtitle || sub;
+        return '<article class="vax-card">'
+            + '<div class="vax-card-top">'
+            + '<span class="vax-card-ic">' + icon(catIcons[i], 22, BRAND) + '</span>'
+            + '<div class="min-w-0">'
+            + biTag('h3', cardTitle, cardTitleEn, 'class="vax-card-title"')
+            + (sub ? biTag('p', sub, subEn, 'class="vax-card-sub"') : '')
+            + '</div></div>'
+            + '<button type="button" class="vax-card-btn" data-vax-open="' + esc(c.id) + '">'
+            + biSpan(vaxDetail.id, vaxDetail.en, '')
+            + icon('chevron-right', 16, 'currentColor')
+            + '</button>'
+            + '</article>';
     }).join('') + '</div>';
 
     const vaxModalData = {
@@ -1337,12 +1310,14 @@ function vaksinasiBody(prefix, en) {
             benefit: { id: 'Manfaat', en: 'Benefit' },
             schedule: { id: 'Jadwal', en: 'Schedule' },
             brand: { id: 'Merek', en: 'Brand' },
-            downloadPdf: { id: 'Unduh Jadwal PDF', en: (e.modalUi && e.modalUi.downloadPdf) || 'Download Schedule PDF' }
+            downloadPdf: { id: 'Unduh Jadwal PDF', en: (e.modalUi && e.modalUi.downloadPdf) || 'Download Schedule PDF' },
+            detail: { id: 'Lihat detail', en: (e.modalUi && e.modalUi.detail) || 'View details' }
         },
         items: categories.map((c, i) => {
             const ce = catEn[i] || {};
             const item = {
                 id: c.id,
+                defaultTab: c.defaultTab || null,
                 icon: catIcons[i],
                 title: { id: c.title, en: ce.title || c.title },
                 badge: { id: c.badge, en: ce.badge || c.badge },
@@ -1397,49 +1372,13 @@ function vaksinasiBody(prefix, en) {
     ];
     const faqEn = e.faqs || [];
 
-    const helpTips = [
-        { icon: 'message-circle', title: 'Tidak Masalah Jika Belum Tahu', desc: 'Tidak masalah apabila pasien atau keluarga belum mengetahui jenis vaksin atau dosis berikutnya yang dibutuhkan.' },
-        { icon: 'clipboard-list', title: 'Sampaikan Saat Booking', desc: 'Saat melakukan booking, informasikan usia, riwayat vaksinasi, serta tujuan atau kebutuhan vaksinasi kepada Tim Dokter Panggil.' },
-        { icon: 'book-open', title: 'Siapkan Catatan Imunisasi', desc: 'Apabila tersedia, siapkan buku imunisasi, sertifikat, atau catatan vaksinasi sebelumnya untuk membantu mengevaluasi riwayat vaksinasi pasien.' }
-    ];
-    const helpTipIcons = ['message-circle', 'clipboard-list', 'book-open'];
-
-    const checkPoints = [
-        { icon: 'stethoscope', title: 'Pemeriksaan Tetap Dilakukan', desc: 'Meskipun vaksin telah dipesan dan dipersiapkan, dokter tetap akan melakukan pemeriksaan kesehatan sebelum vaksin diberikan.' },
-        { icon: 'clipboard-check', title: 'Menilai Kondisi Saat Kunjungan', desc: 'Pemeriksaan dilakukan untuk memastikan kondisi pasien saat kunjungan dan menentukan apakah vaksinasi dapat diberikan pada saat tersebut.' },
-        { icon: 'calendar-clock', title: 'Bisa Ditunda Jika Perlu', desc: 'Apabila dokter menilai vaksinasi perlu ditunda karena kondisi tertentu, dokter akan memberikan rekomendasi sesuai kondisi pasien.' }
-    ];
-    const checkIcons = ['stethoscope', 'clipboard-check', 'clock'];
-
-    const storagePoints = [
-        { icon: 'clipboard-check', title: 'Dipersiapkan Setelah Booking', desc: 'Setelah booking dikonfirmasi, vaksin akan dipersiapkan sesuai jenis dan jumlah yang dibutuhkan.' },
-        { icon: 'thermometer', title: 'Penyimpanan & Rantai Dingin', desc: 'Vaksin disimpan dan dibawa dengan memperhatikan persyaratan suhu dan penyimpanan sesuai ketentuan vaksin hingga waktu pemberian.' }
-    ];
-    const storageIcons = ['package', 'thermometer'];
-
     return composeBody([
         sectionHead('Pilihan Vaksinasi', 'Vaksin untuk berbagai kebutuhan.', e.catTitle, e.catLead)
         + '<div class="mb-6 max-w-2xl">' + noteLine('Layanan vaksinasi wajib melalui booking terlebih dahulu untuk memastikan ketersediaan vaksin dan persiapan pelayanan.', e.bookingNote) + '</div>'
         + catCards,
-        sectionHead('Belum Tahu Vaksin yang Dibutuhkan?', 'Kami bantu menentukan kebutuhan vaksinasi.', e.helpTitle, e.helpLead)
-        + iconInfoCards(helpTips, e.helpTips, helpTipIcons),
+        sectionHead('Belum Tahu Vaksin yang Dibutuhkan?', 'Kami bantu menentukan kebutuhan vaksinasi. Jadi, saat melakukan booking, informasikan usia, riwayat vaksinasi, serta tujuan atau kebutuhan vaksinasi kepada Tim Dokter Panggil. Apabila tersedia, siapkan buku imunisasi, sertifikat, atau catatan vaksinasi sebelumnya untuk membantu mengevaluasi riwayat vaksinasi pasien.', e.helpTitle, e.helpLead),
         sectionHead('Bagaimana Vaksinasi di Rumah Dilakukan?', null, e.howTitle)
         + howStepCards(howSteps, e.howSteps),
-        sectionHead('Sudah Booking? Kondisi Tetap Diperiksa Terlebih Dahulu', 'Booking menyiapkan vaksin — dokter tetap menilai kondisi pasien sebelum vaksin diberikan.', e.checkTitle, e.checkLead)
-        + iconInfoCards(checkPoints, e.checkPoints, checkIcons)
-        + '<div class="mt-5 max-w-3xl">' + noteLine('Booking memastikan persiapan layanan dan ketersediaan vaksin, bukan berarti vaksin otomatis diberikan tanpa pemeriksaan dokter.', e.checkP4) + '</div>',
-        sectionHead('Persiapan & Penyimpanan Vaksin', null, e.storageTitle)
-        + '<div class="mb-5 max-w-2xl">' + noteLine('Layanan vaksinasi wajib melalui booking agar Tim Dokter Panggil dapat memastikan ketersediaan vaksin dan mempersiapkan kebutuhan pelayanan sebelum dokter datang.', e.storageP1) + '</div>'
-        + iconInfoCards(storagePoints, e.storagePoints, storageIcons),
-        sectionHead('Vaksinasi Beberapa Anggota Keluarga dalam Satu Kunjungan', null, e.familyTitle)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 sm:items-center">'
-        + '<div class="w-14 h-14 shrink-0 bg-primary/10 rounded-2xl flex items-center justify-center">' + icon('users', 28, BRAND) + '</div>'
-        + '<div class="flex-1">'
-        + biTag('p', 'Layanan vaksinasi dapat dijadwalkan untuk beberapa anggota keluarga dalam satu lokasi.', e.familyP1, 'class="text-gray-600 leading-relaxed mb-2"')
-        + biTag('p', 'Saat booking, informasikan jumlah pasien, usia, serta kebutuhan vaksin masing-masing agar tim dapat mempersiapkan vaksin dan kebutuhan pelayanan sebelum kunjungan dokter.', e.familyP2, 'class="text-sm text-gray-500 leading-relaxed mb-4 sm:mb-0"')
-        + '</div>'
-        + '<a href="' + esc(waLink(waFamily)) + '" target="_blank" rel="noopener noreferrer"' + biAttrs('Pesan Sekarang', 'Book Now') + ' class="inline-flex shrink-0 px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:scale-105 transition-transform text-center">Pesan Sekarang</a>'
-        + '</div>',
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,

@@ -367,8 +367,8 @@
             },
             {
                 "id": "2-5",
-                "label": "2–5 tahun",
-                "labelEn": "2–5 years",
+                "label": "3–5 tahun",
+                "labelEn": "3–5 years",
                 "lead": "Booster dan vaksin lanjutan sesuai usia prasekolah serta pemantauan imunisasi tahunan.",
                 "leadEn": "Boosters and follow-up vaccines for preschool age, plus annual immunization where relevant.",
                 "groups": [

@@ -275,12 +275,14 @@ module.exports = {
                     ask: 'Chat WhatsApp',
                     close: 'Close',
                     temp: 'Temporary copy — full schedule & list coming soon.',
-                    downloadPdf: 'Download Schedule PDF'
+                    downloadPdf: 'Download Schedule PDF',
+                    detail: 'View details'
                 },
                 categories: [
                     {
                         title: 'Child Vaccination Matched to Age & Immunization History',
                         cardTitle: 'Child Vaccination',
+                        cardSubtitle: '3–5 years',
                         desc: 'Vaccination for babies and children based on age, immunization schedule, and prior vaccination history.',
                         cta: 'View Child Vaccines',
                         badge: 'Babies & Children',
@@ -298,6 +300,7 @@ module.exports = {
                     },
                     {
                         title: 'Adult Vaccination',
+                        cardTitle: 'Adult Vaccination',
                         desc: 'Vaccination for adults based on age, vaccination history, health condition, occupation, and certain risk factors.',
                         cta: 'View Adult Vaccines',
                         badge: 'Adults',
@@ -315,6 +318,7 @@ module.exports = {
                     },
                     {
                         title: 'Travel Vaccination',
+                        cardTitle: 'Travel Vaccination',
                         desc: 'Vaccination for domestic or international travel, including vaccines recommended or required for certain destinations.',
                         cta: 'View Travel Vaccines',
                         badge: 'Travel',
@@ -332,6 +336,7 @@ module.exports = {
                     },
                     {
                         title: 'Elderly Vaccination',
+                        cardTitle: 'Elderly Vaccination',
                         desc: 'Vaccination that may be considered later in life to help protect against certain diseases whose risk can rise with age.',
                         cta: 'View Elderly Vaccines',
                         badge: 'Older Adults',
@@ -349,12 +354,7 @@ module.exports = {
                     }
                 ],
                 helpTitle: 'Not Sure Which Vaccine You Need?',
-                helpLead: 'We help determine vaccination needs.',
-                helpTips: [
-                    { title: 'It’s Fine If You’re Not Sure Yet', desc: 'It is fine if the patient or family does not yet know which vaccine or next dose is needed.' },
-                    { title: 'Share Details When Booking', desc: 'When booking, share age, vaccination history, and the purpose or need for vaccination with the Dokter Panggil team.' },
-                    { title: 'Prepare Immunization Records', desc: 'If available, prepare the immunization book, certificate, or prior vaccination notes to help evaluate the patient’s history.' }
-                ],
+                helpLead: 'We help determine vaccination needs. When booking, share the patient’s age, vaccination history, and the purpose or need for vaccination with the Dokter Panggil team. If available, prepare the immunization book, certificate, or prior vaccination notes to help evaluate the patient’s vaccination history.',
                 howTitle: 'How Does Home Vaccination Work?',
                 howSteps: [
                     { title: 'Book Vaccination', desc: 'Contact Dokter Panggil and share vaccination needs, patient details, and vaccine type if already known.' },
@@ -363,24 +363,6 @@ module.exports = {
                     { title: 'Doctor Arrives for Exam', desc: 'The doctor comes to the home and examines the patient’s health before vaccination to decide whether the vaccine can be given that visit.' },
                     { title: 'Vaccination by the Doctor', desc: 'If the exam finds the patient is fit to receive the vaccine, it is given directly by the doctor.' }
                 ],
-                checkTitle: 'Already Booked? The Condition Is Still Checked First',
-                checkLead: 'Booking prepares the vaccine — the doctor still assesses the patient before it is given.',
-                checkPoints: [
-                    { title: 'Exam Still Happens', desc: 'Even if the vaccine has been ordered and prepared, the doctor still examines the patient before it is given.' },
-                    { title: 'Condition at the Visit', desc: 'The exam confirms the patient’s condition at the visit and whether vaccination can proceed then.' },
-                    { title: 'May Be Delayed If Needed', desc: 'If the doctor finds vaccination should be delayed for a certain condition, recommendations are given accordingly.' }
-                ],
-                checkP4: 'Booking ensures service preparation and vaccine availability — it does not mean the vaccine is given automatically without a doctor exam.',
-                storageTitle: 'Vaccine Preparation & Storage',
-                storageP1: 'Vaccination requires booking so the Dokter Panggil team can confirm vaccine availability and prepare the service before the doctor arrives.',
-                storagePoints: [
-                    { title: 'Prepared After Booking', desc: 'After booking is confirmed, vaccines are prepared by type and quantity needed.' },
-                    { title: 'Storage & Cold Chain', desc: 'Vaccines are stored and transported according to temperature and storage requirements until they are given.' }
-                ],
-                familyTitle: 'Vaccinate Several Family Members in One Visit',
-                familyP1: 'Vaccination can be scheduled for several family members at one location.',
-                familyP2: 'When booking, share the number of patients, ages, and each vaccine need so the team can prepare vaccines and supplies before the doctor visit.',
-                familyCta: 'Book Now',
                 whyTitle: 'Why Vaccination with Dokter Panggil?',
                 whyItems: [
                     { title: 'Vaccination by a Doctor', desc: 'Exam and vaccine delivery are done directly by a doctor at home.' },
@@ -513,17 +495,9 @@ module.exports = {
                     { title: 'Other Wounds', desc: 'Other wound conditions can be discussed first with the Dokter Panggil team to determine the right service.' }
                 ],
                 pathTitle: 'Choose Care by a Doctor or a Nurse',
-                pathHeadline: 'Choose the Service That Fits Patient Needs',
-                pathLead: 'Patients can book Wound Care with a doctor or Wound Care with a nurse. In both options, the wound is examined and the care plan stays under the doctor’s recommendation.',
                 nurseTitle: 'Wound Care with a Nurse',
-                nurseP1: 'A nurse comes to the home for an initial check of the wound and related patient condition.',
-                nurseP2: 'Findings are shared with the doctor and the patient has an online consultation. The doctor assesses the patient and provides the wound care recommendation and plan.',
-                nurseP3: 'After the doctor’s recommendation, the nurse provides wound care according to the plan.',
                 nurseFlow: ['Booking', 'Nurse Arrives', 'Wound Exam', 'Online Doctor Consult', 'Care Recommendation', 'Wound Care'],
                 doctorTitle: 'Wound Care with a Doctor',
-                doctorP1: 'A doctor comes to the home to examine the wound and evaluate health factors that may affect healing.',
-                doctorP2: 'Based on the exam, the doctor sets the care plan and therapy. Wound care can be done during that visit.',
-                doctorP3: 'If periodic care is needed, the doctor can set a follow-up plan that a nurse can continue.',
                 doctorFlow: ['Booking', 'Doctor Arrives', 'Wound & Patient Exam', 'Recommendation', 'Wound Care', 'Follow-up Plan'],
                 monitorTitle: 'Care & Monitoring of Wound Progress',
                 monitorP1: 'Some wounds are not finished in one visit and need periodic home visits.',
@@ -952,26 +926,6 @@ module.exports = {
                     { title: 'Nebulizer Delivery', desc: 'The patient inhales the medicine aerosol through a mask or mouthpiece during therapy.' },
                     { title: 'Monitoring & Evaluation', desc: 'The patient’s condition and response to therapy are monitored and evaluated as needed.' }
                 ],
-                whoTitle: 'Who Performs the Nebulizer?',
-                whoHeadline: 'A Doctor or Nurse Comes to Your Home',
-                whoBody: 'Nebulizer therapy can be given by a doctor or nurse based on service needs.',
-                whoNurse: 'If done by a nurse, medicine delivery still follows the doctor’s recommendation and therapy plan.',
-                monitorTitle: 'Monitoring After Nebulizer Therapy',
-                monitorHeadline: 'Patient Response Is Evaluated After Therapy',
-                monitorLead: 'After the nebulizer is given, medical staff may evaluate:',
-                monitorItems: [
-                    { title: 'Breathing Symptoms', desc: 'Assesses changes in symptoms after therapy.' },
-                    { title: 'Breathing Rate & Pattern', desc: 'Monitors the patient’s breathing condition as needed.' },
-                    { title: 'Oxygen Saturation (SpO₂)', desc: 'Can be checked before and after therapy based on the patient’s condition.' },
-                    { title: 'Response to Medicine', desc: 'Monitors effectiveness and possible reactions after medicine is given.' }
-                ],
-                whyTitle: 'Why Nebulizer Therapy with Dokter Panggil?',
-                whyItems: [
-                    { title: 'Based on Doctor Assessment', desc: 'Nebulizer needs are based on the patient’s condition and the doctor’s recommendation.' },
-                    { title: 'Medicine Matched to Patient Needs', desc: 'Medicine type and dose are based on the patient’s medical needs.' },
-                    { title: 'Professional Doctors & Nurses', desc: 'Therapy is done by healthcare professionals matched to competence and the therapy plan.' },
-                    { title: 'Monitoring After Therapy', desc: 'Patient response can be evaluated after nebulizer delivery based on the patient’s condition.' }
-                ],
                 faqTitle: 'FAQ',
                 faqs: [
                     { q: 'Do cough or cold symptoms need a nebulizer?', a: 'Not always. Nebulizer needs depend on the cause of symptoms and airway condition. A doctor assesses first.' },
@@ -990,7 +944,7 @@ module.exports = {
         },
 
         'pemasangan-ngt': {
-            h1: 'Feeding Tube Placement',
+            h1: 'Feeding Tube Placement and Replacement',
             lead: 'Nasogastric tube (NGT) placement at home by a doctor or nurse, based on the doctor’s assessment and recommendation for the patient’s condition and needs.',
             chips: [
                 'Based on Doctor Recommendation',
@@ -1001,10 +955,7 @@ module.exports = {
             ctaAsk: 'Discuss Patient Condition',
             ngt: {
                 aboutTitle: 'What Is a Feeding Tube / Nasogastric Tube?',
-                aboutHeadline: 'Helps Deliver Nutrition and Medicine in Certain Conditions',
-                aboutP1: 'A nasogastric tube (NGT), or feeding tube, is a flexible tube inserted through the nose into the stomach.',
-                aboutP2: 'In certain conditions, an NGT can help deliver nutrition, fluids, or medicine when the patient cannot meet needs adequately by mouth.',
-                aboutP3: 'NGT placement must be based on patient assessment and a doctor’s recommendation.',
+                aboutP1: 'A nasogastric tube (NGT), or feeding tube, is a flexible tube inserted through the nose into the stomach to help deliver nutrition, fluids, or medicine when the patient cannot eat or drink enough by mouth. Placement is based on the doctor’s assessment and recommendation.',
                 whenTitle: 'When Can a Doctor Recommend an NGT?',
                 whenItems: [
                     { title: 'Difficulty Swallowing', desc: 'In certain conditions that impair swallowing so oral intake is insufficient or unsuitable as usual.' },
@@ -1014,22 +965,9 @@ module.exports = {
                 ],
                 pathTitle: 'Choose Doctor or Nurse Service',
                 doctorTitle: 'NGT Placement by a Doctor',
-                doctorP1: 'A doctor comes to the home to examine the patient and decide whether NGT placement is appropriate.',
-                doctorP2: 'If the exam shows placement can be done at home, the doctor performs the procedure and gives guidance on NGT use and care.',
                 nurseTitle: 'NGT Placement by a Nurse',
-                nurseP1: 'A nurse comes to the home for an initial exam. Findings are shared with a doctor, and the patient has an online doctor consultation.',
-                nurseP2: 'If the doctor recommends NGT placement, the nurse performs the procedure according to the doctor’s plan.',
                 doctorFlow: ['Booking', 'Doctor Arrives', 'Patient Exam', 'Recommendation', 'NGT Placement', 'Evaluation & Education'],
                 nurseFlow: ['Booking', 'Nurse Arrives', 'Initial Exam', 'Online Doctor Consult', 'Recommendation', 'NGT Placement', 'Evaluation & Education'],
-                howTitle: 'How Is NGT Placement Done?',
-                howSteps: [
-                    { title: 'Patient Condition Exam', desc: 'Medical staff examine the patient and confirm the placement plan fits the condition.' },
-                    { title: 'Patient & Equipment Prep', desc: 'Equipment and procedure needs are prepared before placement.' },
-                    { title: 'NGT Placement', desc: 'The tube is inserted through the nose into the stomach using the appropriate technique.' },
-                    { title: 'Confirm Tube Position', desc: 'After placement, NGT position is checked and confirmed before use for nutrition or medicine.' },
-                    { title: 'Tube Fixation', desc: 'Once position is correct, the tube is secured to help keep it in place.' },
-                    { title: 'Patient & Family Education', desc: 'The family receives guidance on use, care, and what to watch for while the NGT is in place.' }
-                ],
                 typesTitle: 'New Placement or Feeding Tube Replacement',
                 typeItems: [
                     { title: 'New NGT Placement', desc: 'For patients who, based on doctor assessment, need an NGT.' },
@@ -1058,7 +996,7 @@ module.exports = {
         },
 
         'pemasangan-kateter': {
-            h1: 'Urinary Catheter Placement at Home',
+            h1: 'Urinary Catheter Placement and Replacement',
             lead: 'Urinary catheter placement and change at home by a doctor or nurse, based on the doctor’s assessment and recommendation for the patient’s condition and needs.',
             chips: [
                 'Based on Doctor Recommendation',
@@ -1080,25 +1018,10 @@ module.exports = {
                     { title: 'Continuing Catheter Use', desc: 'For patients who previously used a catheter and need replacement or reinsertion per the care plan.' }
                 ],
                 pathTitle: 'Choose Doctor or Nurse Service',
-                pathLead: 'Urinary catheter placement and change can be done by a doctor or nurse. Before the procedure, the patient’s condition and needs are still assessed by a doctor.',
                 doctorTitle: 'Catheter Placement by a Doctor',
-                doctorP1: 'A doctor comes to the home to examine the patient and determine the need for catheter placement or change.',
-                doctorP2: 'If the exam shows the procedure can be done at home, the doctor places the catheter and educates on aftercare.',
                 nurseTitle: 'Catheter Placement by a Nurse',
-                nurseP1: 'A nurse comes to the home for an initial exam. Findings are shared with a doctor, and the patient has an online doctor consultation.',
-                nurseP2: 'If the doctor recommends catheter placement or change, the nurse performs the procedure according to the doctor’s plan.',
                 doctorFlow: ['Booking', 'Doctor Arrives', 'Exam', 'Recommendation', 'Catheter Placement/Change', 'Evaluation & Education'],
                 nurseFlow: ['Booking', 'Nurse Arrives', 'Initial Exam', 'Online Doctor Consult', 'Recommendation', 'Catheter Placement/Change', 'Evaluation & Education'],
-                howTitle: 'How Is Catheter Placement Done?',
-                howLead: 'Catheter Placement Process at Home',
-                howSteps: [
-                    { title: 'Patient Condition Exam', desc: 'Medical staff examine the patient and confirm the plan matches the doctor’s recommendation.' },
-                    { title: 'Patient & Equipment Prep', desc: 'The patient and procedure needs are prepared with attention to hygiene and infection prevention.' },
-                    { title: 'Catheter Placement', desc: 'The catheter is inserted through the urinary tract into the bladder using the appropriate technique.' },
-                    { title: 'Confirm Urine Flow', desc: 'After placement, staff confirm urine can flow through the catheter properly.' },
-                    { title: 'Fixation & Urine Bag', desc: 'The catheter and urine bag are positioned to help maintain urine flow.' },
-                    { title: 'Evaluation & Education', desc: 'Staff evaluate the patient after the procedure and educate on catheter use and home care.' }
-                ],
                 typesTitle: 'New Placement or Catheter Replacement',
                 typeItems: [
                     { title: 'New Catheter Placement', desc: 'For patients who, based on doctor assessment, need a urinary catheter.' },
@@ -1151,25 +1074,10 @@ module.exports = {
                     { title: 'Continuing Care at Home', desc: 'For patients who previously received care and still need suction per the doctor’s recommendation.' }
                 ],
                 pathTitle: 'Choose Doctor or Nurse Service',
-                pathLead: 'Suction can be done by a doctor or nurse based on the patient’s condition and needs. Every procedure still follows doctor assessment and recommendation.',
                 doctorTitle: 'Suction by a Doctor',
-                doctorP1: 'A doctor comes to the home to examine the patient, including breathing condition and procedure needs.',
-                doctorP2: 'If the exam shows suction is needed and suitable at home, the doctor can perform it and evaluate the patient’s response afterward.',
                 nurseTitle: 'Suction by a Nurse',
-                nurseP1: 'A nurse comes to the home for an initial exam. Findings are shared with a doctor, then the patient or family has an online doctor consultation.',
-                nurseP2: 'If the doctor recommends suction, the nurse performs it according to the doctor’s plan and monitors the patient.',
                 doctorFlow: ['Booking', 'Doctor Arrives', 'Exam', 'Recommendation', 'Suction', 'Evaluation'],
                 nurseFlow: ['Booking', 'Nurse Arrives', 'Initial Exam', 'Online Doctor Consult', 'Recommendation', 'Suction', 'Evaluation'],
-                howTitle: 'How Is Suction Done?',
-                howLead: 'Suction Process at Home',
-                howSteps: [
-                    { title: 'Patient Condition Exam', desc: 'The patient is assessed first, especially breathing condition and ability to clear secretions.' },
-                    { title: 'Patient & Equipment Prep', desc: 'Medical staff prepare the patient and equipment needed for the procedure.' },
-                    { title: 'Suction Procedure', desc: 'Secretions are cleared with suction equipment and technique matched to the patient’s condition and airway access.' },
-                    { title: 'Monitoring During the Procedure', desc: 'The patient is monitored during suction to assess tolerance and response.' },
-                    { title: 'Evaluation After Suction', desc: 'After the procedure, staff reassess breathing condition and patient response.' },
-                    { title: 'Family Education', desc: 'The family receives information on the patient’s condition, next care, and warning signs to watch.' }
-                ],
                 typesTitle: 'Types of Suction Needs',
                 typeItems: [
                     { title: 'Oral Secretion Suction', desc: 'Helps clear secretions collected in the mouth for patients who cannot clear them on their own.' },
