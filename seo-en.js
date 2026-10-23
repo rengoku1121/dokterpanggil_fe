@@ -938,18 +938,15 @@ module.exports = {
                 aboutP2: 'Nebulizer therapy can be used for certain breathing conditions when a doctor’s exam indicates medicine should be given by nebulizer.',
                 aboutP3: 'Medicine type, dose, and nebulizer frequency are based on the doctor’s recommendation and the patient’s condition.',
                 whenTitle: 'When Can a Doctor Recommend a Nebulizer?',
-                whenLead: 'The doctor considers therapy based on symptoms, exam findings, medical history, and the patient’s breathing condition.',
                 whenCards: [
                     { title: 'Wheezing or Certain Breath Sounds', desc: 'When the exam shows an airway problem that may need medicine through a nebulizer.' },
                     { title: 'Airway Narrowing', desc: 'When the doctor finds medicine is needed to help address airway narrowing.' },
                     { title: 'Certain Breathing Conditions', desc: 'A nebulizer can be part of therapy for certain breathing diseases or disorders based on the doctor’s exam.' },
                     { title: 'Continuing Recommended Therapy', desc: 'For patients who already have a nebulizer therapy plan and still need medicine according to the doctor’s recommendation.' }
                 ],
-                medTitle: 'Nebulizer Medicine Is Determined by the Doctor',
-                medBody: 'Before therapy is given, the doctor assesses the patient to decide whether a nebulizer is needed and to set medicine type, dose, combination, and frequency based on patient needs.',
                 howTitle: 'How Nebulizer Therapy Works at Home',
                 howSteps: [
-                    { title: 'Condition Triage', desc: 'The patient’s breathing condition and symptoms are assessed first through triage based on service needs.' },
+                    { title: 'Condition Triage', desc: 'The doctor will contact you about the patient’s condition and breathing symptoms before the visit.' },
                     { title: 'Medicine & Nebulizer Prep', desc: 'Medicine and nebulizer devices are prepared according to the doctor’s therapy plan to bring to the patient.' },
                     { title: 'Therapy Determination', desc: 'The doctor decides nebulizer needs and which medicine to give based on the patient’s condition.' },
                     { title: 'Nebulizer Delivery', desc: 'The patient inhales the medicine aerosol through a mask or mouthpiece during therapy.' },

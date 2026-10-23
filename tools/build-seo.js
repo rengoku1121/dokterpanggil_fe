@@ -1052,7 +1052,7 @@ function terapiNebulizerBody(prefix, en) {
     ];
 
     const howSteps = [
-        { n: '01', title: 'Triase Kondisi', desc: 'Kondisi dan keluhan pernapasan pasien dinilai terlebih dahulu sesuai kebutuhan pelayanan melalui triase.' },
+        { n: '01', title: 'Triase Kondisi', desc: 'Dokter akan menghubungi terkait kondisi dan keluhan pernapasan pasien sebelum kunjungan.' },
         { n: '02', title: 'Persiapan Obat & Nebulizer', desc: 'Obat dan perangkat nebulizer dipersiapkan sesuai rencana terapi dokter untuk dibawa ke lokasi pasien.' },
         { n: '03', title: 'Penentuan Terapi', desc: 'Dokter menentukan kebutuhan nebulizer serta obat yang akan diberikan berdasarkan kondisi pasien.' },
         { n: '04', title: 'Pemberian Nebulizer', desc: 'Pasien menghirup aerosol obat melalui masker atau mouthpiece selama terapi berlangsung.' },
@@ -1083,12 +1083,8 @@ function terapiNebulizerBody(prefix, en) {
         + biTag('p', 'Terapi nebulizer dapat digunakan pada kondisi pernapasan tertentu apabila berdasarkan pemeriksaan dokter terdapat indikasi pemberian obat melalui nebulizer.', e.aboutP2, 'class="text-gray-600 leading-relaxed mb-4"')
         + biTag('p', 'Jenis obat, dosis, dan frekuensi nebulizer ditentukan berdasarkan rekomendasi dokter dan kondisi pasien.', e.aboutP3, 'class="text-gray-600 leading-relaxed font-medium"')
         + '</div>',
-        sectionHead('Kapan Dokter Dapat Merekomendasikan Nebulizer?', 'Dokter akan mempertimbangkan terapi berdasarkan keluhan, hasil pemeriksaan, riwayat penyakit, serta kondisi pernapasan pasien.', e.whenTitle, e.whenLead)
+        sectionHead('Kapan Dokter Dapat Merekomendasikan Nebulizer?', null, e.whenTitle)
         + whenCards(whenItems, e.whenCards),
-        sectionHead('Obat Nebulizer Ditentukan oleh Dokter', null, e.medTitle)
-        + aboutCard([
-            'Sebelum terapi diberikan, dokter akan menilai kondisi pasien untuk menentukan apakah nebulizer diperlukan serta menentukan jenis obat, dosis, kombinasi obat, dan frekuensi pemberian sesuai kebutuhan pasien.'
-        ], [e.medBody]),
         sectionHead('Proses Terapi Nebulizer di Rumah', null, e.howTitle)
         + howStepCards(howSteps, e.howSteps),
         sectionHead('Siapa yang Melakukan Nebulizer?', null, e.whoTitle)
