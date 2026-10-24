@@ -1018,6 +1018,20 @@ main > section:not(#home):has(.spec-search) {
   line-height: 1.35;
   text-align: center;
 }
+/* Descriptions are desktop-only; phones/tablets keep the compact icon + title tiles */
+.why-item .why-desc { display: none; }
+@media (min-width: 1024px) {
+  .why-grid { gap: 1.25rem; }
+  .why-item { justify-content: flex-start; gap: 0.6rem; padding: 0.5rem 0.75rem; }
+  .why-item .why-desc {
+    display: block;
+    max-width: 17rem;
+    font-size: var(--dp-fs-body);
+    font-weight: 400;
+    line-height: 1.6;
+    color: #6b6560;
+  }
+}
 .how-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
