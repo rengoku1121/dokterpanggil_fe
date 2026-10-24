@@ -495,12 +495,20 @@ function perawatHomecareBody(prefix, en) {
             + '</div>';
     }).join('') + '</div>';
 
-    const startSteps = [
-        { n: '01', title: 'Konsultasi & Pemeriksaan Dokter', desc: 'Dokter melakukan penilaian terhadap kondisi dan kebutuhan perawatan pasien.' },
-        { n: '02', title: 'Rekomendasi Pendampingan', desc: 'Dokter menentukan kebutuhan pendampingan, rencana perawatan, serta durasi sesuai dengan kondisi pasien.' },
-        { n: '03', title: 'Konfirmasi Biaya', desc: 'Tim Dokter Panggil menginformasikan estimasi biaya kepada keluarga.' },
-        { n: '04', title: 'Pendampingan Dimulai', desc: 'Perawat menjalankan pendampingan sesuai rencana perawatan dengan supervisi dokter.' }
+    const linked = [
+        { href: prefix + 'layanan/kunjungan-dokter-spesialis.html', icon: 'heart-pulse', title: 'Dokter Spesialis' },
+        { href: prefix + 'layanan/tes-laboratorium.html', icon: 'test-tube', title: 'Laboratorium' },
+        { href: prefix + 'layanan/farmasi.html', icon: 'pill', title: 'Farmasi' },
+        { href: prefix + 'layanan/tindakan-medis.html', icon: 'syringe', title: 'Tindakan Medis' }
     ];
+    const linkedEn = e.linkedItems || [];
+    const linkedTiles = '<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 seo-icon-tiles">' + linked.map((l, i) =>
+        '<a href="' + esc(l.href) + '" class="canva-card rounded-2xl seo-link-tile">'
+        + '<div class="seo-icon-tile-ic">' + icon(l.icon, 22, BRAND) + '</div>'
+        + biTag('h3', l.title, linkedEn[i] || l.title, 'class="seo-icon-tile-title"')
+        + '<span class="seo-link-tile-more">' + biTag('span', 'Lihat layanan', e.linkedMore || 'View service') + icon('arrow-right', 13, 'currentColor') + '</span>'
+        + '</a>'
+    ).join('') + '</div>';
 
     const faqs = [
         { q: 'Apakah bisa langsung memesan perawat homecare?', a: 'Pendampingan perawat dilakukan berdasarkan rekomendasi dokter. Dokter akan menilai kondisi pasien terlebih dahulu untuk menentukan kebutuhan dan bentuk pendampingan yang sesuai.' },
@@ -515,20 +523,16 @@ function perawatHomecareBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
+        sectionHead('Pendampingan dengan Supervisi Dokter', null, e.superTitle)
+        + compactStepCards(flowSteps, e.flowSteps, 'sm:grid-cols-2 lg:grid-cols-5'),
         sectionHead('Kapan Membutuhkan Perawat Homecare di Rumah?', whenIntro, e.whenTitle, e.whenLead)
         + whenCards(whenItems, e.whenCards),
-        sectionHead('Pendampingan dengan Supervisi Dokter', null, e.superTitle)
-        + '<div class="canva-card rounded-3xl p-6 sm:p-8 mb-6">'
-        + biTag('h3', 'Perawat Tidak Bekerja Sendiri', e.superHeadline, 'class="text-xl font-bold mb-2"')
-        + biTag('p', 'Setiap pendampingan Perawat Homecare Dokter Panggil berada di bawah supervisi dokter. Perawat melakukan pemantauan dan menjalankan rencana perawatan di rumah, sementara perkembangan kondisi pasien dapat dikoordinasikan dengan dokter selama masa pendampingan.', e.superBody, 'class="text-gray-600 leading-relaxed"')
-        + '</div>'
-        + compactStepCards(flowSteps, e.flowSteps, 'sm:grid-cols-2 lg:grid-cols-5'),
         sectionHead('Apa yang Dilakukan Perawat Selama Pendampingan?', 'Perawatan sesuai rencana dokter — perawat membantu menjalankan pemantauan dan kebutuhan perawatan pasien di rumah sesuai rencana perawatan dan arahan dokter yang melakukan supervisi.', e.tasksTitle, e.tasksLead)
         + taskCards,
         sectionHead('Durasi Pendampingan Sesuai Kebutuhan Pasien', 'Durasi pendampingan perawat ditentukan berdasarkan kondisi pasien, kebutuhan pemantauan, dan rekomendasi dokter.', e.durationTitle, e.durationLead)
         + durCards,
-        sectionHead('Bagaimana Pendampingan Perawat Dimulai?', null, e.startTitle)
-        + howStepCards(startSteps, e.startSteps),
+        sectionHead('Perawatan yang Tetap Terhubung', 'Selama pendampingan, perawat berkoordinasi dengan dokter. Apabila kondisi pasien berubah, dokter dapat mengevaluasi dan menghubungkan pasien dengan layanan berikut sesuai kebutuhan.', e.linkedTitle, e.linkedLead)
+        + linkedTiles,
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,

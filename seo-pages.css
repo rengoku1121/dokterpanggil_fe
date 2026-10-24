@@ -121,6 +121,26 @@ main > section.seo-hero {
     justify-content: center;
     flex-shrink: 0;
 }
+.seo-link-tile {
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.seo-link-tile:hover,
+.seo-link-tile:focus-visible {
+    transform: translateY(-3px);
+    border-color: rgba(216, 48, 48, 0.3);
+    box-shadow: 0 12px 26px rgba(216, 48, 48, 0.1);
+}
+.seo-link-tile-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #D83030;
+    transition: gap 0.2s ease;
+}
+.seo-link-tile:hover .seo-link-tile-more { gap: 0.45rem; }
 .seo-icon-tile-title {
     font-size: 0.78rem;
     line-height: 1.35;
@@ -427,6 +447,355 @@ main > section.seo-hero {
     border: 1px solid rgba(216, 48, 48, 0.1);
 }
 .seo-inline-note span { flex: 1 1 auto; }
+
+/* Konsultasi online: method + price rows inside each doctor card */
+.ko-methods {
+    margin-top: auto;
+    padding-top: 1.1rem;
+    border-top: 1px dashed #F1E7E0;
+    display: grid;
+    gap: 0.6rem;
+}
+.ko-methods-label {
+    margin: 0 0 0.1rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9A9A9A;
+}
+.ko-method {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 1rem;
+    border: 1px solid #F1E7E0;
+    background: #FFFDFB;
+    color: #2D2D2D;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.ko-method:hover,
+.ko-method:focus-visible {
+    border-color: #D83030;
+    background: #FFF5F3;
+    box-shadow: 0 8px 20px rgba(216, 48, 48, 0.12);
+    transform: translateY(-1px);
+}
+.ko-method-ic {
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: rgba(216, 48, 48, 0.08);
+}
+.ko-method-text { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; line-height: 1.25; }
+.ko-method-name { font-size: 0.9rem; font-weight: 700; }
+.ko-method-sub { font-size: 0.72rem; color: #8A8178; margin-top: 0.1rem; }
+.ko-method-price {
+    flex-shrink: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #D83030;
+    letter-spacing: -0.01em;
+}
+.ko-method-go {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: #D83030;
+    color: #fff;
+    transition: transform 0.2s ease;
+}
+.ko-method:hover .ko-method-go { transform: translateX(2px); }
+
+/* MCU pricing (subscription-style doctor toggle + package cards) */
+main > section:not(#home):has(.mcu-pricing) { content-visibility: visible; }
+.mcu-pricing { margin-bottom: 1.5rem; }
+.mcu-pricing[data-mcu-doc="gp"] [data-doc="sp"],
+.mcu-pricing[data-mcu-doc="sp"] [data-doc="gp"] { display: none !important; }
+
+.mcu-toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.75rem;
+}
+.mcu-toggle {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 26rem;
+    padding: 0.3rem;
+    border-radius: 9999px;
+    background: #fff;
+    border: 1px solid #F1E7E0;
+    box-shadow: 0 6px 20px rgba(45, 45, 45, 0.07);
+}
+.mcu-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0.3rem;
+    bottom: 0.3rem;
+    left: 0.3rem;
+    width: calc(50% - 0.3rem);
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #D83030 0%, #E85555 100%);
+    box-shadow: 0 6px 16px rgba(216, 48, 48, 0.28);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mcu-pricing[data-mcu-doc="sp"] .mcu-toggle::before { transform: translateX(100%); }
+.mcu-toggle-btn {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: #4B4B4B;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.25s ease;
+}
+.mcu-toggle-btn[aria-pressed="true"] { color: #fff; }
+.mcu-toggle-btn:focus-visible { outline: 2px solid #D83030; outline-offset: 2px; }
+.mcu-toggle-ic { display: inline-flex; flex-shrink: 0; }
+.mcu-toggle-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+.mcu-toggle-label { font-size: 0.875rem; font-weight: 700; }
+.mcu-toggle-from { font-size: 0.6875rem; font-weight: 500; opacity: 0.8; }
+@media (max-width: 767px) {
+    .mcu-toggle-wrap {
+        position: sticky;
+        top: calc(var(--nav-h, 64px) + 0.5rem);
+        z-index: 20;
+        margin-bottom: 1.25rem;
+    }
+    .mcu-toggle-ic { display: none; }
+    .mcu-toggle-btn { justify-content: center; text-align: center; }
+    .mcu-toggle-text { align-items: center; }
+}
+
+.mcu-grid {
+    display: grid;
+    gap: 1.25rem;
+    align-items: stretch;
+}
+@media (min-width: 768px) {
+    .mcu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 0.5rem; }
+}
+@media (min-width: 1024px) {
+    .mcu-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+}
+@media (max-width: 767px) {
+    .mcu-grid {
+        display: flex;
+        gap: 0.85rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin: 0 -1rem;
+        padding: 0.5rem 1rem 0.75rem;
+        scroll-padding: 0 1rem;
+    }
+    .mcu-grid::-webkit-scrollbar { display: none; }
+    .mcu-card { flex: 0 0 85%; scroll-snap-align: center; }
+}
+
+.mcu-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.35rem 1.25rem 1.4rem;
+    border-radius: 1.5rem;
+    border: 1px solid #F1E7E0;
+    background: #FFFDFB;
+    box-shadow: 0 2px 14px rgba(45, 45, 45, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+@media (hover: hover) {
+    .mcu-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(45, 45, 45, 0.08); }
+}
+.mcu-card.is-featured {
+    border: 2px solid #D83030;
+    background: linear-gradient(180deg, #FFF1EE 0%, #FFFDFB 42%);
+    box-shadow: 0 14px 34px rgba(216, 48, 48, 0.16);
+}
+@media (min-width: 1024px) {
+    .mcu-card.is-featured { transform: translateY(-0.5rem); }
+    .mcu-card.is-featured:hover { transform: translateY(-0.7rem); }
+}
+
+.mcu-badge-slot { min-height: 1.6rem; margin-bottom: 0.5rem; }
+.mcu-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #D83030;
+    background: rgba(216, 48, 48, 0.08);
+}
+.mcu-badge.is-hot {
+    color: #fff;
+    background: linear-gradient(135deg, #D83030 0%, #EA843F 100%);
+    box-shadow: 0 4px 12px rgba(216, 48, 48, 0.25);
+}
+.mcu-name {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #2D2D2D;
+}
+.mcu-price-wrap { min-height: 3.6rem; }
+.mcu-price {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.1rem;
+    margin: 0;
+    color: #2D2D2D;
+}
+.mcu-amt { font-size: 1.6rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; }
+.mcu-card.is-featured .mcu-amt { color: #D83030; }
+.mcu-ast { font-size: 0.85rem; font-weight: 700; color: #D83030; }
+.mcu-by { margin: 0.25rem 0 0; font-size: 0.75rem; color: #8A8178; }
+.mcu-pricing.is-switching .mcu-price,
+.mcu-pricing.is-switching .mcu-by { animation: mcuSwap 0.35s ease; }
+@keyframes mcuSwap {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.mcu-count {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.85rem 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6b6560;
+}
+.mcu-cta {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 9999px;
+    border: 2px solid #D83030;
+    background: #fff;
+    color: #D83030;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.mcu-cta:hover { background: #D83030; color: #fff; }
+.mcu-card.is-featured .mcu-cta { background: #D83030; color: #fff; }
+.mcu-card.is-featured .mcu-cta:hover { background: #B92828; border-color: #B92828; }
+
+.mcu-checks {
+    list-style: none;
+    margin: 1.15rem 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px dashed #F1E7E0;
+    display: grid;
+    gap: 0.5rem;
+}
+.mcu-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: #3D3D3D;
+}
+.mcu-check-ic {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(216, 48, 48, 0.1);
+    color: #D83030;
+}
+.mcu-check.is-off { color: #B5ADA6; }
+.mcu-check.is-off .mcu-check-text { text-decoration: line-through; text-decoration-color: rgba(181, 173, 166, 0.6); }
+.mcu-check.is-off .mcu-check-ic { background: #F3EEEA; color: #C2B9B1; }
+
+.mcu-swipe-hint,
+.mcu-nav { display: none; }
+@media (max-width: 767px) {
+    .mcu-swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        margin: -0.35rem 0 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #8A8178;
+    }
+    .mcu-grid { cursor: grab; }
+    .mcu-grid.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+    .mcu-grid.is-dragging .mcu-card { pointer-events: none; }
+    .mcu-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.85rem;
+        margin-top: 0.5rem;
+    }
+    .mcu-arrow {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        border: 1px solid rgba(216, 48, 48, 0.25);
+        background: #fff;
+        color: #D83030;
+        box-shadow: 0 4px 12px rgba(45, 45, 45, 0.06);
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    }
+    .mcu-arrow:hover:not(:disabled) { background: #D83030; color: #fff; }
+    .mcu-arrow:disabled { opacity: 0.35; cursor: default; }
+    .mcu-dots { display: flex; align-items: center; gap: 0.4rem; }
+    .mcu-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        padding: 0;
+        border: 0;
+        border-radius: 9999px;
+        background: #E8DCD4;
+        cursor: pointer;
+        transition: width 0.25s ease, background 0.25s ease;
+    }
+    .mcu-dot.is-active { width: 1.35rem; background: #D83030; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .mcu-toggle::before, .mcu-card { transition: none; }
+    .mcu-pricing.is-switching .mcu-price,
+    .mcu-pricing.is-switching .mcu-by { animation: none; }
+}
 
 /* Vaccination hub cards (Pilihan Vaksinasi) */
 .vax-card {

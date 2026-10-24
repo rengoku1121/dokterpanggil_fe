@@ -109,8 +109,6 @@ module.exports = {
                     { title: 'Coordination with the Doctor', desc: 'Communicates progress or changes in condition to the supervising doctor.' }
                 ],
                 superTitle: 'Care Under Doctor Supervision',
-                superHeadline: 'Nurses Do Not Work Alone',
-                superBody: 'Every Dokter Panggil Homecare Nursing assignment is under doctor supervision. The nurse monitors and carries out the care plan at home, while the patient’s progress can be coordinated with the doctor throughout the care period.',
                 flowSteps: [
                     { title: 'Doctor Examination', desc: 'The doctor assesses the patient’s condition and care needs.' },
                     { title: 'Care Plan', desc: 'The doctor sets the care plan and form of nursing support.' },
@@ -125,16 +123,10 @@ module.exports = {
                     { title: '24-Hour Support', desc: 'Monitoring and care around the clock based on the doctor’s recommendation.' },
                     { title: 'Ongoing Support', desc: 'Support over several days or a set period, with evaluation based on how the patient progresses.' }
                 ],
-                startTitle: 'How Does Nursing Support Begin?',
-                startSteps: [
-                    { title: 'Consultation & Doctor Exam', desc: 'The doctor assesses the patient’s condition and care needs.' },
-                    { title: 'Care Recommendation', desc: 'The doctor determines the need for support, the care plan, and the duration based on the patient’s condition.' },
-                    { title: 'Cost Confirmation', desc: 'The Dokter Panggil team shares a cost estimate with the family.' },
-                    { title: 'Care Begins', desc: 'The nurse carries out support according to the care plan under doctor supervision.' }
-                ],
-                changeTitle: 'When the Patient’s Condition Changes',
-                changeLead: 'Care stays connected — during support, the nurse monitors progress and can coordinate with the doctor if the condition changes. The doctor can evaluate and recommend next services based on patient needs.',
-                linkedLabel: 'Connected services:',
+                linkedTitle: 'Care That Stays Connected',
+                linkedLead: 'During support, the nurse coordinates with the doctor. If the patient’s condition changes, the doctor can evaluate and connect the patient with the services below as needed.',
+                linkedItems: ['Specialist Doctor', 'Laboratory', 'Pharmacy', 'Medical Procedures'],
+                linkedMore: 'View service',
                 whyTitle: 'Why Homecare Nursing with Dokter Panggil?',
                 whyItems: [
                     { title: 'Based on Doctor Recommendation', desc: 'Support is given based on the doctor’s assessment and the patient’s care needs.' },
@@ -171,48 +163,15 @@ module.exports = {
             ctaBook: 'Book Lab Test',
             ctaAsk: 'Consult with a Doctor',
             lab: {
-                introTitle: 'Laboratory Testing from Home',
-                introLead: 'No Need to Visit the Lab',
-                introP1: 'Dokter Panggil helps coordinate the patient’s laboratory testing needs directly from home.',
-                introP2: 'A doctor can assess via online consultation or a home visit to determine which tests are needed for the patient’s condition.',
-                introP3: 'After tests are chosen, sample collection is coordinated with a partner laboratory and done at the patient’s location.',
-                introP4: 'From doctor consultation and sample collection through result review, everything can be coordinated from home.',
                 pathTitle: 'Choose Online Consultation or a Home Doctor Visit',
-                pathLead: 'Patients can choose online consultation or a doctor home visit based on condition and needs.',
                 onlineTitle: 'Online Doctor Consultation',
-                onlineP1: 'Patients share symptoms and health information online. The doctor assesses and recommends laboratory tests when needed.',
-                onlineP2: 'The Dokter Panggil team then coordinates sample collection at home.',
                 homeTitle: 'Doctor Comes to Your Home',
-                homeP1: 'The doctor visits for history-taking and a physical exam. When needed, the doctor selects laboratory tests that fit the patient’s condition.',
-                homeP2: 'The team then coordinates sample collection at home.',
-                onlineFlow: ['Online Consultation', 'Test Recommendation', 'Home Sample Collection', 'Lab Results'],
-                homeFlow: ['Doctor Visit', 'Patient Exam', 'Test Recommendation', 'Home Sample Collection', 'Lab Results'],
+                onlineFlow: ['Payment Confirmation', 'Online Consultation', 'Test Recommendation', 'Cost Confirmation', 'Home Sample Collection', 'Lab Result Consultation'],
+                homeFlow: ['Doctor Visit', 'Patient Exam', 'Test Recommendation', 'Cost Confirmation', 'Home Sample Collection', 'Lab Result Consultation'],
                 examTitle: 'Laboratory Test Options',
-                examLead: 'A Range of Lab Tests from Home',
-                examCats: [
-                    { title: 'Routine Blood Work', desc: 'Complete blood count • Hemoglobin • Leukocytes • Platelets • and more' },
-                    { title: 'Blood Sugar & Diabetes', desc: 'Blood glucose • HbA1c • and related tests' },
-                    { title: 'Liver & Kidney Function', desc: 'SGOT • SGPT • Urea • Creatinine • and more' },
-                    { title: 'Cholesterol & Blood Lipids', desc: 'Total cholesterol • LDL • HDL • Triglycerides' },
-                    { title: 'Electrolytes & Metabolic', desc: 'Sodium • Potassium • Chloride • and related tests' },
-                    { title: 'Infection & Special Tests', desc: 'Specific tests based on patient condition and the doctor’s recommendation.' }
-                ],
-                sampleTitle: 'Various Sample Types',
-                sampleLead: 'Not Only Blood Tests',
-                sampleP1: 'Depending on the tests needed, laboratory testing may use sample types such as:',
-                sampleTypes: ['Blood', 'Urine', 'Stool', 'Sputum'],
-                sampleP2: 'Sample type, collection method, and patient preparation are matched to the tests being done.',
-                howTitle: 'How Does It Work?',
-                howLead: 'From Consultation to Lab Results',
-                howSteps: [
-                    { title: 'Doctor Consultation', desc: 'The patient’s condition is assessed via online consultation or a doctor home visit.' },
-                    { title: 'Test Recommendation', desc: 'The doctor selects the laboratory tests needed based on the patient’s condition.' },
-                    { title: 'Test Confirmation', desc: 'The Dokter Panggil team shares the test types, fees, preparation needed, and sample-collection plan.' },
-                    { title: 'Home Sample Collection', desc: 'Partner laboratory staff come to the patient to collect samples for the confirmed tests.' },
-                    { title: 'Laboratory Processing', desc: 'Samples are processed by the laboratory according to the tests ordered.' },
-                    { title: 'Lab Results', desc: 'Results are available based on the estimated turnaround for each test type.' },
-                    { title: 'Doctor Review', desc: 'Results can be reviewed with a doctor to help interpret findings and decide next steps.' }
-                ],
+                examLead: 'Various sample types can be collected directly at home.',
+                labTypes: ['Blood Tests', 'Urine Tests', 'Stool Tests', 'Sputum Tests', 'Other Tests'],
+                sampleP2: 'Sample type, collection method, and patient preparation are matched to the tests recommended by the doctor.',
                 prepTitle: 'Preparation Before Testing',
                 prepLead: 'Is Fasting Required?',
                 prepBullets: [
@@ -220,17 +179,6 @@ module.exports = {
                     'If specific preparation is needed, the team will inform you before sample collection.',
                     'Patients should share information about medicines or supplements they take and any relevant health conditions.',
                     'Do not stop routine medicines before testing unless a doctor advises it.'
-                ],
-                resultsTitle: 'When Are Lab Results Ready?',
-                resultsLead: 'Turnaround Depends on the Test',
-                resultsP1: 'Result turnaround can differ by test. Some results are available sooner, while others need longer processing.',
-                resultsP2: 'An estimated result time is shared based on the test type and partner laboratory.',
-                audienceTitle: 'Home Laboratory for Many Needs',
-                audience: [
-                    { title: 'Children & Adults', desc: 'Laboratory testing matched to health condition and needs.' },
-                    { title: 'Older Adults', desc: 'Makes testing easier without traveling to a laboratory.' },
-                    { title: 'Homecare Patients', desc: 'Supports monitoring and evaluation during care at home.' },
-                    { title: 'Medical Check Up', desc: 'Laboratory tests as part of a broader health evaluation.' }
                 ],
                 whyTitle: 'Why Laboratory Testing through Dokter Panggil?',
                 whyItems: [
@@ -538,69 +486,24 @@ module.exports = {
             ctaBook: 'View MCU Packages',
             ctaAsk: 'Ask About Packages',
             mcu: {
-                introTitle: 'Medical Check Up Directly at Home',
-                introLead: 'More Than Just Laboratory Testing',
-                introP1: 'Dokter Panggil Medical Check Up starts with a doctor home visit for a medical interview and health assessment.',
-                introP2: 'The visit is completed with laboratory and supporting tests based on the chosen package.',
-                introP3: 'Results can be reviewed with the doctor to help understand health status and decide next steps when needed.',
-                introP4: 'The doctor comes. Testing is done from home. Results are reviewed medically.',
-                doctorTitle: 'Choose a Doctor for Medical Check Up',
-                doctorLead: 'Choose an Exam with a GP or a Specialist',
-                gpTitle: 'General Practitioner',
-                gpDesc: 'A health check at home with a GP for general and periodic health evaluation.',
-                gpPrice: 'From Rp1,000,000*',
-                gpCta: 'Choose GP',
-                spTitle: 'Internal Medicine Specialist',
-                spDesc: 'A health check at home with a specialist for a deeper health evaluation.',
-                spPrice: 'From Rp1,230,000*',
-                spCta: 'Choose Specialist',
-                priceNoteShort: '*Package prices do not include transportation.',
                 pkgTitle: 'Medical Check Up Packages',
-                pkgLead: 'Choose the panel that fits your needs.',
+                pkgLead: 'Choose a doctor, then pick the panel that fits your needs.',
+                toggleGp: 'General Practitioner',
+                toggleSp: 'Specialist',
+                fromLabel: 'from',
+                byLabel: 'by',
+                checksCount: 'items included',
+                swipeHint: 'Swipe to see other packages',
+                checks: [
+                    'Home Visit & Doctor Exam', 'ECG', 'Complete Blood Count (Hematology)', 'HbA1c',
+                    'Fasting Blood Glucose', 'Uric Acid', 'Total Cholesterol', 'HDL Cholesterol',
+                    'LDL Cholesterol', 'Triglycerides', 'SGOT (AST)', 'SGPT (ALT)', 'Creatinine', 'Routine Urinalysis'
+                ],
                 packages: [
-                    {
-                        name: 'PANEL FIT',
-                        prices: [
-                            { label: 'General Practitioner', value: 'Rp1,000,000*' },
-                            { label: 'Internal Medicine Specialist', value: 'Rp1,230,000*' }
-                        ],
-                        items: ['Home Visit & Doctor Exam', 'Uric Acid', 'Fasting Blood Glucose', 'Total Cholesterol', 'LDL Cholesterol', 'Triglycerides'],
-                        cta: 'Choose Panel FIT'
-                    },
-                    {
-                        name: 'PANEL PRIMA',
-                        badge: 'More Complete Testing',
-                        prices: [
-                            { label: 'General Practitioner', value: 'Rp1,350,000*' },
-                            { label: 'Internal Medicine Specialist', value: 'Rp1,600,000*' }
-                        ],
-                        items: ['Home Visit & Doctor Exam', 'Complete Blood Count', 'HbA1c', 'Uric Acid', 'Total Cholesterol', 'LDL Cholesterol', 'Triglycerides'],
-                        cta: 'Choose Panel PRIMA'
-                    },
-                    {
-                        name: 'PANEL JANTUNG SEHAT',
-                        badge: 'Includes ECG',
-                        prices: [
-                            { label: 'General Practitioner', value: 'Rp1,750,000*' },
-                            { label: 'Cardiologist', value: 'Rp1,990,000*' }
-                        ],
-                        items: ['Home Visit & Doctor Exam', 'ECG', 'Complete Blood Count', 'HbA1c', 'Uric Acid', 'Total Cholesterol', 'LDL Cholesterol', 'Triglycerides'],
-                        cta: 'Choose Heart Health Panel'
-                    },
-                    {
-                        name: 'PANEL HEALTHY LIFE',
-                        badge: 'Most Complete Testing',
-                        prices: [
-                            { label: 'General Practitioner', value: 'Rp2,090,000*' },
-                            { label: 'Internal Medicine Specialist', value: 'Rp2,350,000*' }
-                        ],
-                        items: [
-                            'Home Visit & Doctor Exam', 'ECG', 'Complete Hematology', 'Fasting Blood Glucose',
-                            'Total Cholesterol', 'HDL Cholesterol', 'LDL Cholesterol', 'Triglycerides',
-                            'SGOT (AST)', 'SGPT (ALT)', 'Creatinine', 'Routine Urinalysis', 'Uric Acid'
-                        ],
-                        cta: 'Choose Healthy Life Panel'
-                    }
+                    { name: 'PANEL FIT', gp: 'Rp1,000,000', sp: 'Rp1,230,000', spLabel: 'Internal Medicine Specialist' },
+                    { name: 'PANEL PRIMA', badge: 'Most Popular', gp: 'Rp1,350,000', sp: 'Rp1,600,000', spLabel: 'Internal Medicine Specialist' },
+                    { name: 'PANEL JANTUNG SEHAT', badge: 'Includes ECG', gp: 'Rp1,750,000', sp: 'Rp1,990,000', spLabel: 'Cardiologist' },
+                    { name: 'PANEL HEALTHY LIFE', badge: 'Most Complete Testing', gp: 'Rp2,090,000', sp: 'Rp2,350,000', spLabel: 'Internal Medicine Specialist' }
                 ],
                 priceNote: '*Package prices do not include transportation. Transport fees are shared based on exam location before booking is confirmed.',
                 unsureTitle: 'Not Sure Which Package Fits?',
@@ -617,18 +520,6 @@ module.exports = {
                     { title: 'Test Results', desc: 'Lab and supporting-test results are available based on each test’s processing time.' },
                     { title: 'Result Review', desc: 'Results can be reviewed with the doctor to help understand health status and decide follow-up when needed.' }
                 ],
-                prepTitle: 'Preparation Before Medical Check Up',
-                prepLead: 'What Should You Prepare?',
-                prepBullets: [
-                    'Some Medical Check Up packages include fasting blood glucose, so preparation may be required before the exam.',
-                    'The Dokter Panggil team will share preparation details for the chosen package before the visit.',
-                    'Patients should also prepare information about current medicines and supplements, medical history, allergies, and prior health-check results if available.',
-                    'Do not stop routine medicines before the exam unless a doctor advises it.'
-                ],
-                hoursTitle: '24-Hour Medical Check Up',
-                hoursLead: 'Home Medical Check Up on Your Schedule',
-                hoursP1: 'The Dokter Panggil team can be contacted 24 hours to help with home Medical Check Up needs.',
-                hoursP2: 'Exam schedules are confirmed based on doctor choice, MCU package, patient location, and service availability.',
                 whyTitle: 'Why MCU with Dokter Panggil?',
                 whyItems: [
                     { title: 'Doctor Comes Home', desc: 'No need to visit a clinic or hospital to start the exam.' },
@@ -743,40 +634,22 @@ module.exports = {
                 introP3: 'In some cases, the doctor may recommend an in-person exam when the condition cannot be assessed adequately online.',
                 sessionNote: 'The consultation session starts after doctor selection, consultation method, schedule confirmation, and payment are confirmed.',
                 doctorTitle: 'Choose Your Doctor',
-                doctorLead: 'Consult a GP or a Specialist',
+                doctorLead: 'Choose a doctor, then choose how to consult: Chat/Phone or Video Call.',
                 gpTitle: 'General Practitioner',
                 gpP1: 'Discuss a wide range of symptoms and health conditions with a GP online.',
-                gpP2: 'The doctor explores symptoms, health history, and other information needed to help assess the patient’s condition.',
                 gpCta: 'Choose GP',
                 spTitle: 'Specialist Doctor',
                 spP1: 'Online consultation with a specialist when the condition needs evaluation in a specific specialty field.',
-                spP2: 'Patients can choose a specialist based on needs and schedule availability.',
-                spFieldsLead: 'You can choose directly by field:',
                 specialties: [
                     'Internal Medicine', 'Neurology', 'Cardiology', 'Pediatrics', 'Clinical Nutrition',
-                    'Psychiatry', 'ENT', 'Ophthalmology', 'Lactation Counselor', 'Pulmonology'
+                    'Psychiatry', 'ENT', 'Ophthalmology', 'Lactation Counselor', 'Pulmonology', 'Anesthesiology'
                 ],
                 spCta: 'Choose Specialist',
-                methodTitle: 'Choose How to Consult',
-                methodLead: 'Chat/Phone or Video Call',
-                methodSub: 'Choose the consultation method that feels most comfortable for your needs.',
+                methodPick: 'Choose how to consult',
                 chatTitle: 'Chat / Phone',
-                chatP1: 'Consult a doctor by chat or phone to discuss the patient’s condition and health needs.',
-                chatP2: 'Suitable for: symptoms that can be explained in conversation, discussing test results, therapy questions, or follow-up on certain conditions.',
-                chatPrice: 'From Rp60,000',
-                chatCta: 'Choose Chat / Phone',
+                chatSub: 'Via chat or phone call',
                 videoTitle: 'Video Call',
-                videoP1: 'Consult live by video with a doctor so communication can be visual and more interactive.',
-                videoPrice: 'From Rp100,000',
-                videoCta: 'Choose Video Call',
-                tariffTitle: 'Online Consultation Fees',
-                tariffLead: 'Consultation Options',
-                tariffChatLabel: 'Chat / Phone',
-                tariffVideoLabel: 'Video Call',
-                tariffRows: [
-                    { role: 'General Practitioner', chat: 'Rp60,000', video: 'Rp100,000' },
-                    { role: 'Specialist Doctor', chat: 'Rp125,000', video: 'Rp200,000' }
-                ],
+                videoSub: 'Face-to-face over video',
                 paymentNote: 'Payment is made before the consultation session starts.',
                 howTitle: 'How Does Online Consultation Work?',
                 howLead: 'Consultation in a Few Steps',
@@ -788,36 +661,15 @@ module.exports = {
                     { title: 'Consultation Starts', desc: 'After payment is confirmed, the patient is connected with the doctor to start the session using the chosen method.' },
                     { title: 'Doctor Recommendation', desc: 'The doctor explains and recommends next steps based on the consultation and patient condition.' }
                 ],
-                topicsTitle: 'What Can Be Discussed?',
-                topicsLead: 'Consult on a Range of Health Needs',
-                topics: [
-                    { title: 'Health Concerns', desc: 'Discuss current symptoms or concerns with a doctor.' },
-                    { title: 'Test Results', desc: 'Discuss laboratory or health-check results you already have.' },
-                    { title: 'Treatment & Therapy', desc: 'Discuss medicine use, therapy progress, or follow-up needs based on the doctor’s assessment.' },
-                    { title: 'Second Opinion', desc: 'Discuss a condition or test results for an additional medical assessment.' },
-                    { title: 'Condition Follow-up', desc: 'Continue evaluating a condition after a previous consultation or care.' }
-                ],
-                prepTitle: 'Prepare Before Consultation',
                 prepLead: 'For a More Effective Session',
                 prepP1: 'Before the session starts, patients should prepare information about the main concern, when it started, medical history, current medicines and supplements, drug allergies, and prior test results if available.',
                 prepP2: 'For Video Call, patients should be in a place with adequate lighting and internet connection.',
-                followTitle: 'If the Doctor Needs an In-Person Exam',
-                followLead: 'Need Further Examination?',
-                followP1: 'Not every condition can be assessed or managed through online consultation alone.',
-                followP2: 'If the doctor judges that the patient needs a physical exam, laboratory testing, a medical procedure, or further evaluation, the doctor can recommend a suitable service.',
-                followP3: 'When needed, the Dokter Panggil team can help coordinate a doctor home visit, laboratory testing, medicine, or other homecare services.',
-                followP4: 'From online consultation through in-home care, patient needs can be coordinated in one service.',
+                connectedTitle: 'Connected to Other Services',
                 followLinks: [
                     { title: 'Doctor Visit', desc: 'In-person exam at home when needed.' },
                     { title: 'Laboratory', desc: 'Sample collection and testing from home.' },
                     { title: 'Pharmacy', desc: 'Medicine prepared and delivered home.' }
                 ],
-                rxTitle: 'What About Prescriptions & Medicine?',
-                rxLead: 'If the Doctor Prescribes Medicine',
-                rxP1: 'If the doctor issues a prescription or recommends medicine after consultation, patients can continue medicine needs through Dokter Panggil pharmacy service.',
-                rxP2: 'Medicine can be prepared and delivered to the patient’s home based on availability and service terms.',
-                rxFlow: 'Online Consultation → Prescription → Pharmacy → Medicine Delivered Home.',
-                rxCta: 'View Pharmacy Service',
                 whyTitle: 'Why Online Consultation through Dokter Panggil?',
                 whyItems: [
                     { title: 'GP & Specialists', desc: 'Choose a doctor based on consultation needs.' },
@@ -1312,39 +1164,11 @@ module.exports = {
             ctaBook: 'Discuss Medicine Needs',
             ctaAsk: 'Chat WhatsApp',
             farmasi: {
-                introTitle: 'From Consultation to Medicine at Home',
-                introLead: 'No Need to Leave Home to Find Medicine',
-                introP1: 'Dokter Panggil helps patients get needed medicine after a doctor assesses their condition.',
-                introP2: 'Consultation can be online or via a doctor home visit. After the doctor chooses suitable therapy, medicine needs are prepared and delivered to the patient.',
-                introP3: 'From doctor consultation through medicine delivery, treatment needs can be coordinated in one service.',
-                pathTitle: 'Choose Online Consultation or a Home Doctor Visit',
-                pathLead: 'Choose the Service That Fits the Patient’s Condition',
                 onlineTitle: 'Online Doctor Consultation',
-                onlineP1: 'Patients can consult a doctor online about symptoms and health conditions.',
-                onlineP2: 'If the doctor recommends therapy or prescribes medicine, it is prepared and delivered to the patient.',
                 homeTitle: 'Doctor Comes to Your Home',
-                homeP1: 'The doctor visits for history-taking and assessment of the patient’s condition.',
-                homeP2: 'If medicine is needed, the doctor chooses therapy based on the exam. Medicine is then prepared and delivered to the patient.',
                 pathNote: 'In some cases, the doctor may recommend an in-person exam when the condition cannot be assessed adequately online.',
-                onlineFlow: ['Online Consultation', 'Prescription / Doctor Recommendation', 'Medicine Prepared', 'Delivered Home'],
-                homeFlow: ['Doctor Visit', 'Patient Exam', 'Prescription / Doctor Recommendation', 'Medicine Prepared', 'Delivered Home'],
-                howTitle: 'How Does Pharmacy Service Work?',
-                howLead: 'From Exam to Medicine Delivery',
-                howSteps: [
-                    { title: 'Doctor Consultation', desc: 'The patient’s condition is assessed via online consultation or a doctor home visit.' },
-                    { title: 'Doctor Chooses Therapy', desc: 'The doctor selects therapy and medicine based on the assessment.' },
-                    { title: 'Medicine Confirmation', desc: 'The team confirms medicine needs, availability, fees, and information required before delivery.' },
-                    { title: 'Medicine Prepared', desc: 'Medicine is prepared according to the prescription or doctor’s recommendation.' },
-                    { title: 'Medicine Delivered Home', desc: 'Medicine is then sent directly to the patient.' },
-                    { title: 'Use as Directed', desc: 'Patients take medicine according to the dose, method, and instructions given.' }
-                ],
-                noRxTitle: 'Don’t Have a Prescription Yet?',
-                noRxLead: 'Discuss Your Condition with a Doctor',
-                noRxP1: 'You do not need to choose medicine yourself.',
-                noRxP2: 'Tell the doctor about symptoms, health history, and medicines currently used. The doctor will assess and choose suitable therapy when needed.',
-                noRxP3: 'Patients can choose online consultation or a doctor home visit.',
-                noRxCtaOnline: 'Online Consultation',
-                noRxCtaWa: 'Consult with a Doctor',
+                onlineFlow: ['Payment Confirmation', 'Online Consultation', 'Prescription / Doctor Recommendation', 'Medicine Confirmation', 'Medicine Prepared', 'Delivered Home'],
+                homeFlow: ['Doctor Visit', 'Patient Exam', 'Prescription / Doctor Recommendation', 'Medicine Confirmation', 'Medicine Prepared', 'Delivered Home'],
                 whyTitle: 'Why Pharmacy Service through Dokter Panggil?',
                 whyItems: [
                     { title: 'Connected to a Doctor', desc: 'Medicine needs can be determined after a doctor assesses the patient’s condition.' },

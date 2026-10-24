@@ -742,6 +742,125 @@
         };
     })();
 
+    /* MCU pricing: doctor toggle + mobile carousel (layanan/pemeriksaan-kesehatan.html) */
+    (function initMcuPricing() {
+        const root = document.querySelector('.mcu-pricing');
+        if (!root) return;
+        const grid = root.querySelector('.mcu-grid');
+        const btns = root.querySelectorAll('[data-mcu-set]');
+        const cards = grid ? Array.prototype.slice.call(grid.querySelectorAll('.mcu-card')) : [];
+        const dots = root.querySelectorAll('[data-mcu-dot]');
+        const mobile = window.matchMedia('(max-width: 767px)');
+
+        btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const doc = btn.getAttribute('data-mcu-set');
+                if (root.getAttribute('data-mcu-doc') === doc) return;
+                root.setAttribute('data-mcu-doc', doc);
+                btns.forEach(function (b) {
+                    b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+                });
+                root.classList.remove('is-switching');
+                void root.offsetWidth;
+                root.classList.add('is-switching');
+            });
+        });
+
+        if (!grid || !cards.length) return;
+
+        const prevBtn = root.querySelector('[data-mcu-prev]');
+        const nextBtn = root.querySelector('[data-mcu-next]');
+        let current = 0;
+
+        function setActiveDot(idx) {
+            if (idx < 0) return;
+            current = idx;
+            dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+            if (prevBtn) prevBtn.disabled = idx === 0;
+            if (nextBtn) nextBtn.disabled = idx === cards.length - 1;
+        }
+
+        function centerCard(card, smooth) {
+            const left = card.offsetLeft - (grid.clientWidth - card.clientWidth) / 2;
+            if (smooth && grid.scrollTo) grid.scrollTo({ left: left, behavior: 'smooth' });
+            else grid.scrollLeft = left;
+        }
+
+        function goTo(idx) {
+            const card = cards[Math.max(0, Math.min(cards.length - 1, idx))];
+            if (!card) return;
+            centerCard(card, true);
+            setActiveDot(cards.indexOf(card));
+        }
+
+        function nearestIndex() {
+            const mid = grid.scrollLeft + grid.clientWidth / 2;
+            let best = 0;
+            let bestDist = Infinity;
+            cards.forEach(function (c, i) {
+                const d = Math.abs(c.offsetLeft + c.clientWidth / 2 - mid);
+                if (d < bestDist) { bestDist = d; best = i; }
+            });
+            return best;
+        }
+
+        function focusFeatured() {
+            if (!mobile.matches) return;
+            const featured = grid.querySelector('[data-mcu-featured]') || cards[0];
+            centerCard(featured, false);
+            setActiveDot(cards.indexOf(featured));
+        }
+
+        dots.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                goTo(Number(dot.getAttribute('data-mcu-dot')));
+            });
+        });
+        if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+        let scrollTimer = null;
+        grid.addEventListener('scroll', function () {
+            if (!mobile.matches) return;
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function () { setActiveDot(nearestIndex()); }, 60);
+        }, { passive: true });
+
+        /* Mouse drag-to-slide (touch already scrolls natively) */
+        let drag = null;
+        grid.addEventListener('pointerdown', function (e) {
+            if (!mobile.matches || e.pointerType !== 'mouse' || e.button !== 0) return;
+            if (e.target.closest('a, button')) return;
+            drag = { x: e.clientX, left: grid.scrollLeft, moved: false };
+            grid.classList.add('is-dragging');
+        });
+        window.addEventListener('pointermove', function (e) {
+            if (!drag) return;
+            const dx = e.clientX - drag.x;
+            if (Math.abs(dx) > 4) drag.moved = true;
+            grid.scrollLeft = drag.left - dx;
+        });
+        window.addEventListener('pointerup', function () {
+            if (!drag) return;
+            const moved = drag.moved;
+            const startIdx = current;
+            drag = null;
+            grid.classList.remove('is-dragging');
+            if (!moved) return;
+            let idx = nearestIndex();
+            if (idx === startIdx) {
+                const mid = grid.scrollLeft + grid.clientWidth / 2;
+                const card = cards[startIdx];
+                const delta = mid - (card.offsetLeft + card.clientWidth / 2);
+                if (Math.abs(delta) > card.clientWidth * 0.15) idx = startIdx + (delta > 0 ? 1 : -1);
+            }
+            goTo(idx);
+        });
+
+        focusFeatured();
+        window.addEventListener('load', focusFeatured, { once: true });
+    })();
+
     /* Age tabs inside vaksinasi modal (event delegation) */
     (function initVaxAgeTabs() {
         function activate(root, id) {
