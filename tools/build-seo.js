@@ -3,7 +3,7 @@
  *
  *   node tools/build-seo.js
  *
- * Reads services-data.js plus seo-data.js (page-only content). Writes SEO
+ * Reads src/services-data.js plus src/seo-data.js (page-only content). Writes SEO
  * landing pages under layanan/, dokter/, and dokter-spesialis/. About, FAQ,
  * locations, and contact stay on index.html only.
  *
@@ -12,10 +12,10 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { SERVICES, COMMON, pick } = require('../services-data.js');
-const { SITE, IMG, SERVICE_SEO, DOCTOR_PAGES } = require('../seo-data.js');
-const SEO_EN = require('../seo-en.js');
-const VAKSINASI_DATA = require('../vaksinasi-data.js');
+const { SERVICES, COMMON, pick } = require('../src/services-data.js');
+const { SITE, IMG, SERVICE_SEO, DOCTOR_PAGES } = require('../src/seo-data.js');
+const SEO_EN = require('../src/seo-en.js');
+const VAKSINASI_DATA = require('../src/vaksinasi-data.js');
 
 const ROOT = path.join(__dirname, '..');
 const LANG = 'id';
@@ -409,15 +409,6 @@ function dokterSpesialisBody(prefix, en) {
         + iconRowCards(followUps, e.followUps),
         sectionHead('Apa yang Didapatkan Saat Kunjungan?', null, e.getTitle)
         + howStepCards(getItems, e.getItems),
-        doubtBox({
-            title: 'Belum tahu dokter spesialis yang tepat?',
-            titleEn: e.doubtTitle,
-            body: 'Sampaikan kondisi atau kebutuhan pasien kepada tim Dokter Panggil. Kami akan membantu mengarahkan Anda ke dokter spesialis yang sesuai.',
-            bodyEn: e.doubtBody,
-            cta: 'Chat Sekarang',
-            ctaEn: e.doubtCta || 'Chat Now',
-            href: waLink(waAsk)
-        }),
         sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
         + faqBlock(faqs, faqEn),
         ctaBlock(prefix, waAsk,
@@ -1743,31 +1734,30 @@ function renderShell(page) {
         + '<meta name="twitter:description" content="' + esc(page.desc) + '">\n'
         + '<meta name="twitter:image" content="' + esc(ogImage) + '">\n'
         + '<meta name="theme-color" content="#D83030">\n'
+        + '<link rel="icon" href="' + prefix + 'favicon.ico" sizes="any">\n'
+        + '<link rel="icon" type="image/png" sizes="32x32" href="' + prefix + 'assets/icons/favicon-32x32.png">\n'
+        + '<link rel="apple-touch-icon" href="' + prefix + 'apple-touch-icon.png">\n'
+        + '<link rel="manifest" href="' + prefix + 'site.webmanifest">\n'
+        + '<script src="' + prefix + 'assets/js/analytics.js" defer></script>\n'
         + '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
         + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
         + '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>\n'
         + '<link rel="preconnect" href="https://images.unsplash.com" crossorigin>\n'
         + '<link rel="dns-prefetch" href="https://plus.unsplash.com">\n'
-        + '<script src="https://cdn.tailwindcss.com/3.4.17"></script>\n'
         + '<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>\n'
         + '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">\n'
-        + '<script>\n'
-        + '    tailwind.config = { theme: { extend: { colors: {\n'
-        + "        primary: '#D83030', 'primary-light': '#E85555', 'primary-dark': '#772017',\n"
-        + "        accent: '#EA843F', cream: '#FFF9F5', 'warm-white': '#FFFDFB', 'warm-gray': '#F7F3F0',\n"
-        + "        charcoal: '#2D2D2D', 'soft-green': '#4CAF7D'\n"
-        + '    } } } }\n'
-        + '</script>\n'
-        + '<link rel="stylesheet" href="' + prefix + 'styles.css">\n'
-        + '<link rel="stylesheet" href="' + prefix + 'seo-pages.css">\n'
+        + '<link rel="stylesheet" href="' + prefix + 'assets/css/styles.css">\n'
+        + '<link rel="stylesheet" href="' + prefix + 'assets/css/seo-pages.css">\n'
+        // Last, like the Tailwind CDN did, so responsive utilities (lg:hidden...) win over component CSS.
+        + '<link rel="stylesheet" href="' + prefix + 'assets/css/tailwind.css">\n'
         + schemas.map(s => jsonLd(s)).join('\n') + '\n'
         + '</head>\n<body class="w-full min-h-screen bg-warm-white">\n'
         + header(prefix, NAV_LINKS) + '\n'
-        + '<main>\n' + hero(page, prefix) + '\n' + page.body + '\n</main>\n'
+        + '<main class="seo-main">\n' + hero(page, prefix) + '\n' + page.body + '\n</main>\n'
         + footer(prefix) + '\n'
         + floatWa() + '\n'
         + (page.afterBody || '')
-        + '<script src="' + prefix + 'seo-pages.js" defer></script>\n'
+        + '<script src="' + prefix + 'assets/js/seo-pages.js" defer></script>\n'
         + (page.scripts || []).map(src => '<script src="' + src + '" defer></script>\n').join('')
         + '</body>\n</html>\n';
 }
@@ -2145,7 +2135,7 @@ function servicePage(service) {
             ? doctorModalMarkup()
             : '',
         scripts: (service.slug === 'kunjungan-dokter-spesialis' && INLINE_SPECIALIST_SEARCH)
-            ? [prefix + 'doctors-data.js', prefix + 'doctors-directory.js']
+            ? [prefix + 'assets/js/doctors-data.js', prefix + 'assets/js/doctors-directory.js']
             : undefined
     };
 }
@@ -2398,7 +2388,7 @@ function doctorHub(group) {
 
     if (!isSpecialist) {
         page.afterBody = doctorModalMarkup();
-        page.scripts = [prefix + 'doctors-data.js', prefix + 'doctors-directory.js'];
+        page.scripts = [prefix + 'assets/js/doctors-data.js', prefix + 'assets/js/doctors-directory.js'];
     }
 
     return page;

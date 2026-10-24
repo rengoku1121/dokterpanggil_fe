@@ -563,9 +563,6 @@ module.exports = {
                     { title: 'Patient Finds Travel Difficult or Uncomfortable', desc: 'Suitable for older adults, patients with limited mobility, those recovering, or other situations that make travel to a facility harder.' },
                     { title: 'Need Ongoing Care at Home', desc: 'A specialist can evaluate the patient and recommend next care that can be coordinated with the homecare team as needed.' }
                 ],
-                doubtTitle: 'Not sure which specialist is right?',
-                doubtBody: 'Tell the Dokter Panggil team about the patient’s condition or needs. We will help direct you to the right specialist.',
-                doubtCta: 'Chat Now',
                 flowTitle: 'How Does a Specialist Visit Work?',
                 flowSteps: [
                     { title: 'Share the Patient’s Needs', desc: 'Tell us the patient’s condition or which specialist is needed.' },

@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="id">
  <head>
   <meta charset="UTF-8">
@@ -18,6 +18,11 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?w=1200&amp;q=80&amp;auto=format&amp;fit=crop">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#D83030">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <script src="assets/js/analytics.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -26,29 +31,10 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"MedicalBusiness","name":"DokterPanggil.id","legalName":"CV. Mentari Kasih Indonesia","url":"https://dokterpanggil.id/","telephone":"+62-811-4677-700","email":"dokterpanggil.id@gmail.com","image":"https://dokterpanggil.id/assets/images/logo-white.png","description":"Layanan kesehatan terpadu yang menghadirkan dokter dan tenaga kesehatan profesional langsung ke rumah Anda di Makassar.","address":{"@type":"PostalAddress","streetAddress":"Jl. Letnan Jenderal Hertasning No. 110","addressLocality":"Makassar","addressRegion":"Sulawesi Selatan","postalCode":"90222","addressCountry":"ID"},"areaServed":[{"@type":"City","name":"Makassar"}],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}
  </script>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#D83030',
-                        'primary-light': '#E85555',
-                        'primary-dark': '#772017',
-                        accent: '#EA843F',
-                        cream: '#FFF9F5',
-                        'warm-white': '#FFFDFB',
-                        'warm-gray': '#F7F3F0',
-                        charcoal: '#2D2D2D',
-                        'soft-green': '#4CAF7D'
-                    }
-                }
-            }
-        }
-    </script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
  </head>
  <body class="w-full min-h-screen"><!-- Header -->
   <header id="main-header" class="sticky top-0 z-50 w-full bg-primary shadow-md">
@@ -212,8 +198,8 @@
    <section id="services" class="w-full py-14 sm:py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
      <div class="home-svc-head fade-up">
-      <h2 data-i18n="svc.title" class="text-3xl font-bold mb-2">Layanan Kesehatan ke Rumah</h2>
-      <p data-i18n="svc.subtitle" class="text-sm sm:text-base text-gray-600 lg:whitespace-nowrap">Dokter, Perawat, dan Petugas Laboratorium hadir langsung ke rumah untuk membantu kebutuhan kesehatan Anda dan Keluarga</p>
+      <h2 data-i18n="svc.title" class="text-2xl sm:text-3xl font-bold mb-2">Layanan Kesehatan ke Rumah</h2>
+      <p data-i18n="svc.subtitle" class="text-base text-gray-600 leading-relaxed lg:whitespace-nowrap">Dokter, Perawat, dan Petugas Laboratorium hadir langsung ke rumah untuk membantu kebutuhan kesehatan Anda dan Keluarga</p>
      </div>
      <div class="home-svc-grid fade-up">
       <a href="layanan/kunjungan-dokter.html" class="home-svc-card">
@@ -311,28 +297,28 @@
    <section id="how" class="w-full py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
      <div class="text-center mb-12 fade-up">
-      <h2 data-i18n="how.title" class="text-3xl font-bold mb-3">Cara Panggil</h2>
+      <h2 data-i18n="how.title" class="text-2xl sm:text-3xl font-bold mb-3">Cara Panggil</h2>
      </div>
      <div class="how-grid fade-up">
       <div class="text-center">
-       <div class="w-16 h-16 mx-auto mb-4 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">1</div>
-       <p data-i18n="how.1" class="font-semibold text-sm mb-2">Hubungi Kami 24 Jam</p>
-       <p data-i18n="how.1desc" class="text-xs text-gray-600 leading-relaxed">WhatsApp atau hubungi Hotline Dokter Panggil untuk memulai layanan.</p>
+       <div class="seo-step-num mx-auto mb-4">01</div>
+       <p data-i18n="how.1" class="font-semibold text-[0.9375rem] mb-2">Hubungi Kami 24 Jam</p>
+       <p data-i18n="how.1desc" class="text-sm text-gray-600 leading-relaxed">WhatsApp atau hubungi Hotline Dokter Panggil untuk memulai layanan.</p>
       </div>
       <div class="text-center">
-       <div class="w-16 h-16 mx-auto mb-4 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">2</div>
-       <p data-i18n="how.2" class="font-semibold text-sm mb-2">Sampaikan Kebutuhan</p>
-       <p data-i18n="how.2desc" class="text-xs text-gray-600 leading-relaxed">Pilih layanan dan informasikan kebutuhan atau kondisi pasien kepada tim kami.</p>
+       <div class="seo-step-num mx-auto mb-4">02</div>
+       <p data-i18n="how.2" class="font-semibold text-[0.9375rem] mb-2">Sampaikan Kebutuhan</p>
+       <p data-i18n="how.2desc" class="text-sm text-gray-600 leading-relaxed">Pilih layanan dan informasikan kebutuhan atau kondisi pasien kepada tim kami.</p>
       </div>
       <div class="text-center">
-       <div class="w-16 h-16 mx-auto mb-4 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">3</div>
-       <p data-i18n="how.3" class="font-semibold text-sm mb-2">Konfirmasi Layanan &amp; Biaya</p>
-       <p data-i18n="how.3desc" class="text-xs text-gray-600 leading-relaxed">Tim kami akan menginformasikan biaya layanan sebelum kunjungan.</p>
+       <div class="seo-step-num mx-auto mb-4">03</div>
+       <p data-i18n="how.3" class="font-semibold text-[0.9375rem] mb-2">Konfirmasi Layanan &amp; Biaya</p>
+       <p data-i18n="how.3desc" class="text-sm text-gray-600 leading-relaxed">Tim kami akan menginformasikan biaya layanan sebelum kunjungan.</p>
       </div>
       <div class="text-center">
-       <div class="w-16 h-16 mx-auto mb-4 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">4</div>
-       <p data-i18n="how.4" class="font-semibold text-sm mb-2">Tim Medis menghubungi Anda</p>
-       <p data-i18n="how.4desc" class="text-xs text-gray-600 leading-relaxed">Setelah dikonfirmasi, tim medis yang bertugas akan segera menghubungi Anda untuk persiapan dan kunjungan.</p>
+       <div class="seo-step-num mx-auto mb-4">04</div>
+       <p data-i18n="how.4" class="font-semibold text-[0.9375rem] mb-2">Tim Medis menghubungi Anda</p>
+       <p data-i18n="how.4desc" class="text-sm text-gray-600 leading-relaxed">Setelah dikonfirmasi, tim medis yang bertugas akan segera menghubungi Anda untuk persiapan dan kunjungan.</p>
       </div>
      </div>
     </div>
@@ -340,8 +326,8 @@
    <section id="doctors" class="w-full py-16 bg-warm-gray hidden" hidden aria-hidden="true">
     <div class="max-w-7xl mx-auto px-4">
      <div class="text-center mb-10 fade-up">
-      <h2 data-i18n="doctors.title" class="text-3xl font-bold mb-3">Temukan Dokter yang Tepat untuk Anda</h2>
-      <p data-i18n="doctors.subtitle" class="text-lg text-gray-600">Dokter umum 24 jam dan berbagai dokter spesialis siap membantu sesuai kondisi dan kebutuhan kesehatan Anda.</p>
+      <h2 data-i18n="doctors.title" class="text-2xl sm:text-3xl font-bold mb-3">Temukan Dokter yang Tepat untuk Anda</h2>
+      <p data-i18n="doctors.subtitle" class="text-base text-gray-600 leading-relaxed">Dokter umum 24 jam dan berbagai dokter spesialis siap membantu sesuai kondisi dan kebutuhan kesehatan Anda.</p>
      </div>
      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-up mb-10">
       <a href="dokter/dokter-umum.html" class="canva-card p-6 rounded-2xl hover:shadow-lg hover:border-primary/20 transition-all block group">
@@ -369,7 +355,7 @@
    <section id="gallery" class="w-full py-16 bg-white hidden" hidden aria-hidden="true">
     <div class="max-w-7xl mx-auto px-4">
      <div class="text-center mb-12 fade-up">
-      <h2 data-i18n="gallery.title" class="text-3xl font-bold mb-3">Perawatan dalam Aksi</h2>
+      <h2 data-i18n="gallery.title" class="text-2xl sm:text-3xl font-bold mb-3">Perawatan dalam Aksi</h2>
      </div>
      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 fade-up">
       <div class="gallery-item rounded-2xl overflow-hidden">
@@ -396,7 +382,7 @@
    <section id="locations" class="w-full py-16 bg-warm-gray">
     <div class="max-w-7xl mx-auto px-4 fade-up">
      <div class="text-center mb-10">
-      <h2 data-i18n="loc.title" class="text-3xl font-bold">Tersedia di Kota Anda</h2>
+      <h2 data-i18n="loc.title" class="text-2xl sm:text-3xl font-bold">Tersedia di Kota Anda</h2>
      </div>
      <div class="loc-cities">
       <article class="loc-card loc-card--on">
@@ -431,7 +417,7 @@
    <section id="testimonials" class="w-full py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
      <div class="text-center mb-12 fade-up">
-      <h2 data-i18n="testi.title" class="text-3xl font-bold mb-3">Cerita dari Pasien Kami</h2>
+      <h2 data-i18n="testi.title" class="text-2xl sm:text-3xl font-bold mb-3">Cerita dari Pasien Kami</h2>
      </div>
      <div class="relative fade-up px-14 sm:px-16 lg:px-20">
       <div id="testi-viewport" class="testi-viewport overflow-hidden">
@@ -476,8 +462,8 @@
    </section><!-- Final CTA -->
    <section id="book" class="w-full py-16 sm:py-20 bg-cream">
     <div class="max-w-3xl mx-auto px-4 text-center fade-up">
-     <h2 data-i18n="cta.title" class="text-3xl md:text-4xl font-bold mb-4">Butuh Dokter atau Perawat di Rumah?</h2>
-     <p data-i18n="cta.subtitle" class="text-base sm:text-lg mb-8 leading-relaxed text-gray-600">Sampaikan kebutuhan Anda kepada Tim Dokter Panggil. Kami akan membantu memilih layanan yang sesuai untuk Anda dan keluarga.</p>
+     <h2 data-i18n="cta.title" class="text-2xl sm:text-3xl font-bold mb-4">Butuh Dokter atau Perawat di Rumah?</h2>
+     <p data-i18n="cta.subtitle" class="text-base mb-8 leading-relaxed text-gray-600">Sampaikan kebutuhan Anda kepada Tim Dokter Panggil. Kami akan membantu memilih layanan yang sesuai untuk Anda dan keluarga.</p>
      <div class="flex flex-wrap justify-center gap-3"><a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20menghubungi%20Call%20Centre%20Dokter%20Panggil%2024%20jam." target="_blank" rel="noopener noreferrer" data-i18n="cta.book" data-wa-id="Halo, saya ingin menghubungi Call Centre Dokter Panggil 24 jam." data-wa-en="Hi, I would like to contact Dokter Panggil 24-hour call centre." class="px-8 py-3.5 rounded-full font-semibold bg-primary text-white shadow-lg shadow-primary/20 hover:scale-105 transition-transform">Pesan Sekarang</a> <a href="https://wa.me/628114677700?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Dokter%20Panggil%20di%20Makassar." target="_blank" rel="noopener noreferrer" data-i18n="cta.wa" data-wa-id="Halo, saya ingin bertanya tentang layanan Dokter Panggil di Makassar." data-wa-en="Hi, I would like to ask about Dokter Panggil services in Makassar." class="px-8 py-3.5 rounded-full font-semibold border-2 border-green-500 text-green-600 hover:scale-105 transition-transform">Chat WhatsApp</a>
      </div>
     </div>
@@ -485,7 +471,7 @@
    <section id="faq" class="w-full py-16 bg-warm-gray">
     <div class="max-w-7xl mx-auto px-4 fade-up">
      <div class="text-center mb-10 md:mb-12">
-      <h2 data-i18n="faq.title" class="text-3xl font-bold mb-3">Pertanyaan yang Sering Diajukan</h2>
+      <h2 data-i18n="faq.title" class="text-2xl sm:text-3xl font-bold mb-3">Pertanyaan yang Sering Diajukan</h2>
      </div>
      <div id="faq-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 items-start">
       <details class="faq-item bg-white rounded-xl border border-[#F1E7E0] overflow-hidden">
@@ -651,7 +637,6 @@
    <svg width="28" height="28" viewbox="0 0 24 24" fill="white">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.11-1.14l-.29-.174-3.01.79.8-2.93-.19-.3A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" />
    </svg></a>
-  <script src="services-data.js" defer></script>
-  <script src="script.js" defer></script>
+  <script src="assets/js/script.js" defer></script>
  </body>
 </html>

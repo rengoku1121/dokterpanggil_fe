@@ -1,8 +1,11 @@
-"""Generate a transparent white logo from page-08 (white logo on solid #772017)."""
+"""Generate a transparent white logo from the brief page (white logo on solid #772017).
+
+Run from the project root:  python tools/make_logo.py
+"""
 import numpy as np
 from PIL import Image
 
-SRC = "assets/images/page-08.png"
+SRC = "src/data/logo-source.png"
 OUT = "assets/images/logo-white.png"
 BG = np.array([119, 32, 23], dtype=np.float32)  # #772017
 

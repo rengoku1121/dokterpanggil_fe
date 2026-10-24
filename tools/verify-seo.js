@@ -9,7 +9,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { SITE } = require('../seo-data.js');
+const { SITE } = require('../src/seo-data.js');
 
 const ROOT = path.join(__dirname, '..');
 const GENERATED_DIRS = ['layanan', 'dokter', 'dokter-spesialis'];
@@ -71,6 +71,19 @@ function checkTagBalance(relPath, html) {
     if (stack.length) fail(relPath, 'unclosed tag(s): ' + stack.join(', '));
 }
 
+/** Every local href/src (pages, CSS, JS, images, icons) must resolve on disk. */
+function checkLocalRefs(relPath, html) {
+    const refs = (html.match(/(?:href|src)="([^"]+)"/g) || []).map(m => m.replace(/^(?:href|src)="/, '').slice(0, -1));
+    const dir = path.dirname(path.join(ROOT, relPath));
+    refs.forEach(ref => {
+        if (/^(https?:|mailto:|tel:|data:|#|\/\/)/.test(ref)) return;
+        const target = ref.split('#')[0].split('?')[0];
+        if (!target) return;
+        const abs = target.startsWith('/') ? path.join(ROOT, target) : path.resolve(dir, target);
+        if (!fs.existsSync(abs)) fail(relPath, 'broken reference -> ' + ref);
+    });
+}
+
 function checkPage(relPath) {
     const html = fs.readFileSync(path.join(ROOT, relPath), 'utf8');
     checkTagBalance(relPath, html);
@@ -108,15 +121,7 @@ function checkPage(relPath) {
         }
     });
 
-    /* Internal links must resolve on disk */
-    const hrefs = (html.match(/href="([^"]+)"/g) || []).map(m => m.slice(6, -1));
-    const dir = path.dirname(path.join(ROOT, relPath));
-    hrefs.forEach(href => {
-        if (/^(https?:|mailto:|tel:|#)/.test(href)) return;
-        const target = href.split('#')[0].split('?')[0];
-        if (!target) return;
-        if (!fs.existsSync(path.resolve(dir, target))) fail(relPath, 'broken link -> ' + href);
-    });
+    checkLocalRefs(relPath, html);
 
     /* Must not link to deleted support/location pages */
     [
@@ -164,6 +169,12 @@ function checkSitemap(pages) {
 /** Homepage keeps About/FAQ/etc; only layanan + dokter are separate pages. */
 function checkHomepageIntact() {
     const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+    checkLocalRefs('index.html', html);
+    checkLocalRefs('404.html', fs.readFileSync(path.join(ROOT, '404.html'), 'utf8'));
+    const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.webmanifest'), 'utf8'));
+    (manifest.icons || []).forEach(i => {
+        if (!fs.existsSync(path.join(ROOT, i.src))) fail('site.webmanifest', 'missing icon ' + i.src);
+    });
     [
         ['id="home"', 'hero carousel section'],
         ['id="about"', 'about section'],
@@ -210,7 +221,7 @@ function checkDoctorDirectory() {
     ].forEach(([needle, label]) => {
         if (html.indexOf(needle) === -1) fail(rel, 'missing ' + label);
     });
-    ['doctors-data.js', 'doctors-directory.js'].forEach(file => {
+    ['assets/js/doctors-data.js', 'assets/js/doctors-directory.js'].forEach(file => {
         if (!fs.existsSync(path.join(ROOT, file))) fail(file, 'shared script missing');
     });
 }

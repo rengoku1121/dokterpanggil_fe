@@ -67,8 +67,6 @@ main > section.seo-hero {
 .seo-dot { flex: 0 0 auto; width: 1.5rem; height: 1.5rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin-top: 0.0625rem; }
 
 /* Numbered booking steps */
-.seo-step-num { flex: 0 0 auto; width: 2.25rem; height: 2.25rem; border-radius: 9999px; background: #D83030; color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-
 /* Title-only steps: compact 2-col tiles on phones */
 .seo-steps-tiles { gap: 0.65rem; }
 .seo-steps-tiles .canva-card {
@@ -1135,4 +1133,61 @@ main > section:not(#home):has(.mcu-pricing) { content-visibility: visible; }
     line-height: 1.45;
     color: #8A8A8A;
     font-style: italic;
+}
+
+/* ------------------------------------------------------------------------
+ * Type scale (tokens in styles.css :root). Kept last and scoped to
+ * .seo-main > section so it wins over Tailwind utilities and component
+ * defaults, while popups (rendered outside sections) keep their own sizes.
+ * --------------------------------------------------------------------- */
+.seo-main > section:not(.seo-hero) h2 {
+    font-size: var(--dp-fs-section);
+    line-height: 1.25;
+}
+.seo-main > section:not(.seo-hero) h2 + p {
+    font-size: var(--dp-fs-lead);
+    line-height: 1.65;
+}
+.seo-main > section h3,
+.seo-main > section p.font-semibold:not(.text-primary),
+.seo-main > section .seo-roster-role,
+.seo-main > section .ko-method-name {
+    font-size: var(--dp-fs-card);
+    line-height: 1.35;
+}
+.seo-main > section .seo-step-title,
+.seo-main > section .path-step-label,
+.seo-main > section ol > li span.block.font-semibold {
+    font-size: var(--dp-fs-step);
+    line-height: 1.35;
+}
+.seo-main > section p:is(.text-sm, .text-gray-600, .text-gray-500):not(h2 + p),
+.seo-main > section span.block.text-gray-500,
+.seo-main > section .seo-roster-text,
+.seo-main > section .vit-card-sum,
+.seo-main > section .seo-list li,
+.seo-main > section .seo-prose p {
+    font-size: var(--dp-fs-body);
+    line-height: 1.65;
+}
+.seo-main > section .seo-step-num,
+.seo-main > section .path-step-num {
+    width: var(--dp-step-num);
+    height: var(--dp-step-num);
+    font-size: var(--dp-fs-step-num);
+}
+.seo-main > section .mcu-badge,
+.seo-main > section .vit-badge,
+.seo-main > section .vax-chip,
+.seo-main > section .seo-roster-chip,
+.seo-main > section .seo-link-tile-more,
+.seo-main > section .ko-method-sub,
+.seo-main > section .ko-methods-label,
+.seo-main > section .mcu-by,
+.seo-main > section .mcu-count,
+.seo-main > section .vax-card-sub,
+.seo-main > section .vax-card-btn,
+.seo-main > section .vit-card-btn,
+.seo-main > section .mcu-swipe-hint {
+    font-size: var(--dp-fs-caption);
 }

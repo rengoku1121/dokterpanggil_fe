@@ -5,7 +5,7 @@
     else root.VAKSINASI_DATA = api;
 })(typeof self !== "undefined" ? self : this, function () {
     return {
-    "source": "assets/JADWAL VAKSINASI ANAK DAN DEWASA .xlsx",
+    "source": "src/data/jadwal-vaksinasi.xlsx",
     "anak": {
         "title": "Jadwal Vaksinasi Anak",
         "titleEn": "Child Vaccination Schedule",
@@ -206,9 +206,9 @@
                                 "brandPending": false
                             },
                             {
-                                "name": "HMFD",
+                                "name": "HFMD",
                                 "benefit": "Melindungi anak dari Hand, Foot and Mouth Disease (HFMD) yang disebabkan oleh Enterovirus 71 (EV71)",
-                                "schedule": "HMFD 1",
+                                "schedule": "HFMD 1",
                                 "brand": "Inlive",
                                 "brandPending": false
                             }
@@ -225,9 +225,9 @@
                                 "brandPending": false
                             },
                             {
-                                "name": "HMFD",
+                                "name": "HFMD",
                                 "benefit": "Melindungi anak dari Hand, Foot and Mouth Disease (HFMD) yang disebabkan oleh Enterovirus 71 (EV71)",
-                                "schedule": "HMFD 2",
+                                "schedule": "HFMD 2",
                                 "brand": "Inlive",
                                 "brandPending": false
                             }
@@ -521,7 +521,7 @@
                             },
                             {
                                 "name": "HPV",
-                                "benefit": "Melindungi dari kanker serviks atay kanker leher rahim pada wanita",
+                                "benefit": "Melindungi dari kanker serviks atau kanker leher rahim pada wanita",
                                 "schedule": "2 dosis (0 dan 6 bulan)",
                                 "brand": "Gardasil atau Cervarix",
                                 "brandPending": false

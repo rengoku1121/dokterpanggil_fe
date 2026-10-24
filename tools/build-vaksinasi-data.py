@@ -8,8 +8,8 @@ import openpyxl
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-XLSX = ROOT / 'assets' / 'JADWAL VAKSINASI ANAK DAN DEWASA .xlsx'
-OUT = ROOT / 'vaksinasi-data.js'
+XLSX = ROOT / 'src' / 'data' / 'jadwal-vaksinasi.xlsx'
+OUT = ROOT / 'src' / 'vaksinasi-data.js'
 
 CHILD_SECTIONS = ('0-2 TAHUN', '3 - 18 TAHUN')
 
@@ -19,6 +19,8 @@ TEXT_FIXES = [
     ('Diferi', 'Difteri'),
     ('Japanese Ensefalitis', 'Japanese Encephalitis'),
     ('Infranrix', 'Infanrix'),
+    ('HMFD', 'HFMD'),
+    (' atay ', ' atau '),
 ]
 
 
@@ -132,7 +134,7 @@ CHILD_TABS = [
     {
         'id': '2-5',
         'label': '3–5 tahun',
-        'labelEn': '2–5 years',
+        'labelEn': '3–5 years',
         'lead': 'Booster dan vaksin lanjutan sesuai usia prasekolah serta pemantauan imunisasi tahunan.',
         'leadEn': 'Boosters and follow-up vaccines for preschool age, plus annual immunization where relevant.'
     },
@@ -311,7 +313,7 @@ def build_adult(sections, key):
 
 sections = read_sections()
 
-payload = {'source': 'assets/JADWAL VAKSINASI ANAK DAN DEWASA .xlsx'}
+payload = {'source': 'src/data/jadwal-vaksinasi.xlsx'}
 for key in ('anak', 'dewasa', 'perjalanan', 'lansia'):
     tabs = build_child(sections) if key == 'anak' else build_adult(sections, key)
     payload[key] = dict(CATEGORY_META[key], tabs=tabs)
