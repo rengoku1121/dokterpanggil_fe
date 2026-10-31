@@ -101,9 +101,9 @@ function absUrl(urlPath) {
 
 /* ------------------------------------------------------- content components */
 
-function sectionHead(title, subtitle, titleEn, subtitleEn) {
+function sectionHead(title, subtitle, titleEn, subtitleEn, subtitleClass) {
     return biTag('h2', title, titleEn, 'class="text-2xl sm:text-3xl font-bold ' + (subtitle ? 'mb-2' : 'mb-6') + '"')
-        + (subtitle ? biTag('p', subtitle, subtitleEn, 'class="text-gray-500 mb-6 leading-relaxed max-w-3xl"') : '');
+        + (subtitle ? biTag('p', subtitle, subtitleEn, 'class="text-gray-500 mb-6 leading-relaxed max-w-3xl' + (subtitleClass ? ' ' + subtitleClass : '') + '"') : '');
 }
 
 function prose(paragraphs, paragraphsEn) {
@@ -405,7 +405,7 @@ function dokterSpesialisBody(prefix, en) {
         INLINE_SPECIALIST_SEARCH ? specialistSearchBlock(e) : findSpecialistCtaCard(e, findHref),
         sectionHead('Cara Panggil Dokter', null, e.howTitle)
         + howStepCards(howSteps, e.howSteps),
-        sectionHead('Perawatan Tidak Berhenti Setelah Konsultasi', 'Tim Dokter Panggil dapat membantu mengoordinasikan kebutuhan perawatan lanjutan sesuai rekomendasi dokter spesialis.', e.followTitle, e.followLead)
+        sectionHead('Perawatan Tidak Berhenti Setelah Konsultasi', 'Tim Dokter Panggil dapat membantu mengoordinasikan kebutuhan perawatan lanjutan sesuai rekomendasi dokter spesialis.', e.followTitle, e.followLead, 'seo-lead-sm')
         + iconRowCards(followUps, e.followUps),
         sectionHead('Apa yang Didapatkan Saat Kunjungan?', null, e.getTitle)
         + howStepCards(getItems, e.getItems),
@@ -514,10 +514,10 @@ function perawatHomecareBody(prefix, en) {
     const faqEn = e.faqs || [];
 
     return composeBody([
-        sectionHead('Pendampingan dengan Supervisi Dokter', null, e.superTitle)
-        + compactStepCards(flowSteps, e.flowSteps, 'sm:grid-cols-2 lg:grid-cols-5'),
         sectionHead('Kapan Membutuhkan Perawat Homecare di Rumah?', whenIntro, e.whenTitle, e.whenLead)
         + whenCards(whenItems, e.whenCards),
+        sectionHead('Pendampingan dengan Supervisi Dokter', null, e.superTitle)
+        + compactStepCards(flowSteps, e.flowSteps, 'sm:grid-cols-2 lg:grid-cols-5'),
         sectionHead('Apa yang Dilakukan Perawat Selama Pendampingan?', 'Perawatan sesuai rencana dokter — perawat membantu menjalankan pemantauan dan kebutuhan perawatan pasien di rumah sesuai rencana perawatan dan arahan dokter yang melakukan supervisi.', e.tasksTitle, e.tasksLead)
         + taskCards,
         sectionHead('Durasi Pendampingan Sesuai Kebutuhan Pasien', 'Durasi pendampingan perawat ditentukan berdasarkan kondisi pasien, kebutuhan pemantauan, dan rekomendasi dokter.', e.durationTitle, e.durationLead)
@@ -797,15 +797,16 @@ function infusVitaminBody(prefix, en) {
     const vitaminOptions = [
         {
             n: '01',
-            icon: 'citrus',
-            title: 'Vitamin C',
-            summary: 'Vitamin C (Asam Askorbat)',
-            summaryEn: 'Vitamin C (Ascorbic Acid)',
-            content: 'Vitamin C (Asam Askorbat)',
-            roleTitle: 'Peran Vitamin C',
-            role: 'Vitamin C berperan sebagai antioksidan serta mendukung fungsi normal sistem imun dan berbagai proses metabolisme tubuh.',
+            icon: 'shield-check',
+            highlight: true,
+            title: 'Immunobooster',
+            summary: '12 nutrisi lengkap: 9 vitamin larut air + 3 vitamin larut lemak',
+            summaryEn: '12 complete nutrients: 9 water-soluble + 3 fat-soluble vitamins',
+            content: 'Sediaan multivitamin parenteral yang mengandung 12 nutrisi lengkap: 9 vitamin larut air (B1, B2, B3, B5, B6, B7/biotin, B9/folic acid, B12, C) dan 3 vitamin larut lemak (A, D, E).',
+            roleTitle: 'Peran Kandungan',
+            role: 'Digunakan untuk membantu memenuhi kebutuhan berbagai vitamin pada kondisi tertentu ketika pemberian suplementasi vitamin secara parenteral dinilai diperlukan.',
             whenTitle: 'Kapan Dapat Dipertimbangkan?',
-            when: 'Sebagai suplementasi vitamin C pada kondisi tertentu ketika dokter menilai terdapat kebutuhan tambahan vitamin C, termasuk ketika asupan belum mencukupi atau pada kondisi tertentu selama masa pemulihan.'
+            when: 'Pada kondisi tertentu ketika dokter menilai pasien membutuhkan suplementasi multivitamin yang lebih lengkap melalui jalur intravena.'
         },
         {
             n: '02',
@@ -821,16 +822,15 @@ function infusVitaminBody(prefix, en) {
         },
         {
             n: '03',
-            icon: 'shield-check',
-            highlight: true,
-            title: 'Immunobooster',
-            summary: '12 nutrisi lengkap: 9 vitamin larut air + 3 vitamin larut lemak',
-            summaryEn: '12 complete nutrients: 9 water-soluble + 3 fat-soluble vitamins',
-            content: 'Sediaan multivitamin parenteral yang mengandung 12 nutrisi lengkap: 9 vitamin larut air (B1, B2, B3, B5, B6, B7/biotin, B9/folic acid, B12, C) dan 3 vitamin larut lemak (A, D, E).',
-            roleTitle: 'Peran Kandungan',
-            role: 'Digunakan untuk membantu memenuhi kebutuhan berbagai vitamin pada kondisi tertentu ketika pemberian suplementasi vitamin secara parenteral dinilai diperlukan.',
+            icon: 'citrus',
+            title: 'Vitamin C',
+            summary: 'Vitamin C (Asam Askorbat)',
+            summaryEn: 'Vitamin C (Ascorbic Acid)',
+            content: 'Vitamin C (Asam Askorbat)',
+            roleTitle: 'Peran Vitamin C',
+            role: 'Vitamin C berperan sebagai antioksidan serta mendukung fungsi normal sistem imun dan berbagai proses metabolisme tubuh.',
             whenTitle: 'Kapan Dapat Dipertimbangkan?',
-            when: 'Pada kondisi tertentu ketika dokter menilai pasien membutuhkan suplementasi multivitamin yang lebih lengkap melalui jalur intravena.'
+            when: 'Sebagai suplementasi vitamin C pada kondisi tertentu ketika dokter menilai terdapat kebutuhan tambahan vitamin C, termasuk ketika asupan belum mencukupi atau pada kondisi tertentu selama masa pemulihan.'
         }
     ];
     const vitEn = e.vitamins || [];
@@ -838,7 +838,7 @@ function infusVitaminBody(prefix, en) {
     const vitDetail = { id: 'Lihat detail', en: e.vitDetail || 'View details' };
     const vitCards = '<div class="grid md:grid-cols-3 gap-4">' + vitaminOptions.map((v, i) => {
         const ve = vitEn[i] || {};
-        return '<article class="vit-card' + (v.highlight ? ' is-highlight order-first md:order-none' : '') + '">'
+        return '<article class="vit-card' + (v.highlight ? ' is-highlight' : '') + '">'
             + (v.highlight ? biSpan(vitBadge.id, vitBadge.en, 'vit-badge') : '')
             + '<div class="vit-card-top">'
             + '<span class="vit-card-ic">' + icon(v.icon, 22, BRAND) + '</span>'
@@ -932,7 +932,7 @@ function infusVitaminBody(prefix, en) {
         sectionHead('Pilihan Infus Vitamin', 'Setiap pilihan memiliki kandungan dan tujuan suplementasi yang berbeda. Dokter akan membantu menentukan terapi yang sesuai berdasarkan kondisi dan kebutuhan Anda.', e.vitTitle, e.vitLead)
         + vitCards
         + biTag('p', 'Pilihan dan pemberian infus vitamin disesuaikan dengan kondisi dan kebutuhan pasien berdasarkan hasil penilaian dokter melalui konsultasi online atau kunjungan langsung ke rumah.', e.vitNote, 'class="text-sm text-gray-500 mt-5 max-w-3xl"'),
-        sectionHead('Dua Pilihan Layanan, Tetap dengan Rekomendasi Dokter', 'Pasien dapat memilih kunjungan Infus Vitamin dengan dokter atau dengan perawat. Perbedaannya terletak pada proses pemeriksaan dan konsultasi sebelum terapi diberikan.', e.pathTitle, e.pathLead)
+        sectionHead('Dua Pilihan Layanan, Tetap dengan Rekomendasi Dokter', 'Pasien dapat memilih layanan Infus Vitamin dengan kunjungan Dokter atau Perawat sesuai kebutuhan. Apabila memilih kunjungan Dokter, pasien juga dapat sekaligus melakukan konsultasi dan pemeriksaan kesehatan secara langsung, sehingga dokter dapat mengevaluasi kondisi kesehatan secara menyeluruh serta menentukan terapi vitamin yang sesuai. Apabila memilih kunjungan Perawat, pemeriksaan awal dilakukan oleh perawat dan dilanjutkan dengan konsultasi online bersama dokter sebelum pemberian infus vitamin.', e.pathTitle, e.pathLead)
         + pathSection,
         sectionHead('Kapan Infus Vitamin Dapat Dipertimbangkan?', 'Kebutuhan vitamin setiap orang berbeda. Dokter akan mempertimbangkan pemberian infus vitamin berdasarkan kondisi kesehatan, riwayat medis, kebutuhan pasien, serta hasil pemeriksaan.', e.whenTitle, e.whenLead)
         + whenThree,
@@ -1121,8 +1121,8 @@ function perawatanLukaBody(prefix, en) {
         { icon: 'stethoscope', title: 'Perawatan Luka dengan Dokter', titleEn: e.doctorTitle, flow: doctorFlow, flowEn: doctorFlowEn }
     ]);
 
-    const monitorFlow = ['Rencana Dokter', 'Perawatan Berkala', 'Monitoring Luka', 'Evaluasi Perkembangan', 'Koordinasi Dokter Bila Diperlukan'];
-    const monitorFlowEn = e.monitorFlow || ['Doctor Plan', 'Periodic Care', 'Wound Monitoring', 'Progress Evaluation', 'Doctor Coordination If Needed'];
+    const monitorFlow = ['Rencana Dokter', 'Perawatan Berkala', 'Monitoring Luka', 'Evaluasi Perkembangan'];
+    const monitorFlowEn = e.monitorFlow || ['Doctor Plan', 'Periodic Care', 'Wound Monitoring', 'Progress Evaluation'];
 
     const faqs = [
         { q: 'Apakah perawatan luka di rumah terasa sakit?', a: 'Tingkat rasa tidak nyaman dapat berbeda tergantung jenis, lokasi, dan kondisi luka. Tenaga medis akan melakukan perawatan dengan mempertimbangkan kondisi pasien. Apabila nyeri cukup berat atau membutuhkan penanganan tambahan, kondisi tersebut dapat dikonsultasikan dengan dokter.' },

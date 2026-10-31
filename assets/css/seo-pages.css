@@ -1148,12 +1148,23 @@ main > section:not(#home):has(.mcu-pricing) { content-visibility: visible; }
     font-size: var(--dp-fs-lead);
     line-height: 1.65;
 }
+.seo-main > section:not(.seo-hero) h2 + p.seo-lead-sm {
+    font-size: var(--dp-fs-body);
+}
 .seo-main > section h3,
 .seo-main > section p.font-semibold:not(.text-primary),
 .seo-main > section .seo-roster-role,
 .seo-main > section .ko-method-name {
     font-size: var(--dp-fs-card);
     line-height: 1.35;
+}
+/* Compact title-only icon tiles: smaller title, same size as descriptions */
+.seo-main > section .seo-icon-tiles h3 {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+}
+@media (min-width: 1024px) {
+    .seo-main > section .seo-icon-tiles h3 { font-size: var(--dp-fs-body); }
 }
 .seo-main > section .seo-step-title,
 .seo-main > section .path-step-label,

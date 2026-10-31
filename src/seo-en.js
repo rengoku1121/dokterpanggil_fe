@@ -451,7 +451,7 @@ module.exports = {
                 monitorP1: 'Some wounds are not finished in one visit and need periodic home visits.',
                 monitorP2: 'The doctor sets the care plan based on the patient’s condition. A nurse can then provide periodic care at home according to that plan.',
                 monitorP3: 'At each visit, wound progress is monitored. If changes or unexpected progress appear, the nurse coordinates again with the doctor for further evaluation.',
-                monitorFlow: ['Doctor Plan', 'Periodic Care', 'Wound Monitoring', 'Progress Evaluation', 'Doctor Coordination If Needed'],
+                monitorFlow: ['Doctor Plan', 'Periodic Care', 'Wound Monitoring', 'Progress Evaluation'],
                 whyTitle: 'Why Wound Care with Dokter Panggil?',
                 whyItems: [
                     { title: 'Doctor or Nurse to Your Home', desc: 'Patients can choose the service that fits their condition and care needs.' },
@@ -1088,12 +1088,12 @@ module.exports = {
                 vitLead: 'Each option has different contents and supplementation goals. A doctor helps choose the therapy that fits your condition and needs.',
                 vitamins: [
                     {
-                        title: 'Vitamin C',
-                        content: 'Vitamin C (Ascorbic Acid)',
-                        roleTitle: 'Role of Vitamin C',
-                        role: 'Vitamin C acts as an antioxidant and supports normal immune function and various metabolic processes.',
+                        title: 'Immunobooster',
+                        content: 'A parenteral multivitamin with 12 nutrients: 9 water-soluble vitamins (B1, B2, B3, B5, B6, B7/biotin, B9/folic acid, B12, C) and 3 fat-soluble vitamins (A, D, E).',
+                        roleTitle: 'Role of the Contents',
+                        role: 'Used to help meet multiple vitamin needs when parenteral vitamin supplementation is considered necessary.',
                         whenTitle: 'When It May Be Considered',
-                        when: 'As vitamin C supplementation when a doctor finds a need for extra vitamin C, including when intake is not enough or during certain recovery periods.'
+                        when: 'When a doctor finds the patient needs a more complete multivitamin supplementation through an intravenous route.'
                     },
                     {
                         title: 'Multivitamin',
@@ -1104,12 +1104,12 @@ module.exports = {
                         when: 'As supplementation when a doctor finds a need for extra B-complex vitamins and vitamin C, including when daily intake is not enough.'
                     },
                     {
-                        title: 'Immunobooster',
-                        content: 'A parenteral multivitamin with 12 nutrients: 9 water-soluble vitamins (B1, B2, B3, B5, B6, B7/biotin, B9/folic acid, B12, C) and 3 fat-soluble vitamins (A, D, E).',
-                        roleTitle: 'Role of the Contents',
-                        role: 'Used to help meet multiple vitamin needs when parenteral vitamin supplementation is considered necessary.',
+                        title: 'Vitamin C',
+                        content: 'Vitamin C (Ascorbic Acid)',
+                        roleTitle: 'Role of Vitamin C',
+                        role: 'Vitamin C acts as an antioxidant and supports normal immune function and various metabolic processes.',
                         whenTitle: 'When It May Be Considered',
-                        when: 'When a doctor finds the patient needs a more complete multivitamin supplementation through an intravenous route.'
+                        when: 'As vitamin C supplementation when a doctor finds a need for extra vitamin C, including when intake is not enough or during certain recovery periods.'
                     }
                 ],
                 vitNote: 'Vitamin infusion choice and delivery are matched to the patient’s condition and needs based on the doctor’s assessment via online consultation or a home visit.',
@@ -1121,7 +1121,7 @@ module.exports = {
                     { title: 'Certain Conditions or Recovery Periods', desc: 'A doctor may consider vitamin supplementation as part of patient needs during recovery.' }
                 ],
                 pathTitle: 'Two Service Options, Still with Doctor Recommendation',
-                pathLead: 'Patients can choose a vitamin infusion visit with a doctor or with a nurse. The difference is in the exam and consultation process before therapy is given.',
+                pathLead: 'Patients can choose a Vitamin Infusion service with a Doctor or Nurse visit as needed. With a Doctor visit, patients can also have an in-person consultation and health check at the same time, so the doctor can evaluate their overall health and choose the right vitamin therapy. With a Nurse visit, the initial check is done by the nurse, followed by an online consultation with a doctor before the vitamin infusion is given.',
                 nurseTitle: 'Vitamin Infusion with a Nurse',
                 nurseFlow: ['Booking', 'Nurse Arrives', 'Exam', 'Online Doctor Consult', 'Vitamin Recommendation', 'Infusion & Monitoring'],
                 doctorTitle: 'Vitamin Infusion with a Doctor',
