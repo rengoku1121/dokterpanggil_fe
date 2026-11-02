@@ -1683,6 +1683,7 @@ function hero(page, prefix) {
     const { bookLabel: bookCta, askLabel: askCta } = ctaPair({
         bookHref: page.ctaBookHref,
         bookLabel: page.ctaBook,
+        askHref: page.ctaAskHref,
         askLabel: page.ctaAsk
     });
 
@@ -1703,7 +1704,9 @@ function hero(page, prefix) {
         + '<a href="' + esc(page.ctaBookHref || waLink(page.waBookMessage || page.waMessage)) + '"'
         + (page.ctaBookHref ? '' : ' target="_blank" rel="noopener noreferrer"')
         + biAttrs(bookCta.id, bookCta.en) + ' class="hero-cta bg-primary text-white shadow-lg hover:scale-105 transition-transform">' + esc(bookCta.id) + '</a>'
-        + '<a href="' + esc(waLink(page.waMessage)) + '" target="_blank" rel="noopener noreferrer"' + biAttrs(askCta.id, askCta.en) + ' class="hero-cta hero-cta-ghost bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">' + esc(askCta.id) + '</a>'
+        + '<a href="' + esc(page.ctaAskHref || waLink(page.waMessage)) + '"'
+        + (page.ctaAskHref ? '' : ' target="_blank" rel="noopener noreferrer"')
+        + biAttrs(askCta.id, askCta.en) + ' class="hero-cta hero-cta-ghost bg-white/10 border-2 border-white text-white backdrop-blur hover:bg-white hover:text-primary transition-colors">' + esc(askCta.id) + '</a>'
         + '</div></div></div></section>';
 }
 
@@ -2284,9 +2287,9 @@ function doctorDirectoryBlock() {
     return '<div id="temukan-dokter" class="scroll-mt-28">'
         + sectionHead(
             'Temui Tim Medis Kami',
-            'Cari dokter spesialis berdasarkan nama, bidang keahlian, atau kondisi medis. Filter menurut spesialisasi, lalu buat janji melalui WhatsApp.',
+            'Ketik nama tim medis atau gunakan filter: Tim Dokter Umum / Dokter Spesialis / Tim Perawat.',
             'Meet Our Medical Team',
-            'Search specialists by name, field, or medical condition. Filter by specialty, then book via WhatsApp.'
+            'Type a medical team member’s name or use the filter: General Practitioners / Specialists / Nursing Team.'
         )
         + doctorSearchField()
         + '<div id="doctor-filters" class="flex justify-center gap-2 md:gap-3 mb-6 flex-wrap"></div>'
@@ -2355,12 +2358,21 @@ function doctorHub(group) {
         desc: isSpecialist
             ? 'Halaman konsultasi dokter spesialis ke rumah di Makassar: spesialis anak, jantung, dan penyakit dalam, beserta cakupan serta batasan penanganan di rumah.'
             : 'Direktori dokter, perawat, dan fisioterapis ke rumah di Makassar. Cari menurut peran atau spesialisasi, lalu buat janji melalui WhatsApp.',
-        h1: isSpecialist ? 'Dokter Spesialis ke Rumah' : 'Dokter, Perawat, dan Fisioterapis ke Rumah',
+        h1: isSpecialist ? 'Dokter Spesialis ke Rumah' : 'Kenali Tim Medis Dokter Panggil',
         h1En: hubEn.h1,
         lead: isSpecialist
             ? 'Konsultasi spesialis di rumah di Makassar untuk kondisi yang stabil dan memerlukan kontrol berkala.'
-            : 'Kenali peran setiap tenaga kesehatan, jelajahi direktori tim medis, dan pesan layanan yang paling sesuai kebutuhan pasien di Makassar.',
+            : 'Dokter Panggil menghadirkan dokter umum, dokter spesialis, dan perawat profesional untuk memberikan pelayanan kesehatan langsung di rumah maupun konsultasi online sesuai kebutuhan pasien. Setiap pelayanan dikoordinasikan berdasarkan kondisi pasien, kebutuhan medis, serta kompetensi tenaga kesehatan yang terlibat.',
         leadEn: hubEn.lead,
+        heroChips: isSpecialist ? null : [
+            { id: 'Tim Dokter dan Perawat Profesional', en: (hubEn.chips && hubEn.chips[0]) || 'Professional Doctor and Nurse Team' },
+            { id: 'Layanan Homecare', en: (hubEn.chips && hubEn.chips[1]) || 'Homecare Service' },
+            { id: 'Pelayanan Terkoordinasi', en: (hubEn.chips && hubEn.chips[2]) || 'Coordinated Care' }
+        ],
+        ctaBook: isSpecialist ? null : { id: 'Temukan Dokter', en: hubEn.ctaFind || 'Find a Doctor' },
+        ctaBookHref: isSpecialist ? null : '#temukan-dokter',
+        ctaAsk: isSpecialist ? null : { id: 'Kenali Tim Perawat', en: hubEn.ctaNurse || 'Meet the Nursing Team' },
+        ctaAskHref: isSpecialist ? null : 'perawat-home-care.html',
         heroImage: isSpecialist ? IMG.checkup : IMG.dokter,
         heroAlt: isSpecialist ? 'Dokter spesialis memeriksa pasien di rumah' : 'Tenaga kesehatan mendampingi pasien di rumah',
         waMessage: 'Halo, saya ingin bertanya tentang tenaga kesehatan yang sesuai untuk kondisi pasien di Makassar.',
@@ -2374,7 +2386,7 @@ function doctorHub(group) {
         schemas: [{
             '@context': 'https://schema.org',
             '@type': 'CollectionPage',
-            name: isSpecialist ? 'Dokter Spesialis ke Rumah' : 'Dokter, Perawat, dan Fisioterapis ke Rumah',
+            name: isSpecialist ? 'Dokter Spesialis ke Rumah' : 'Kenali Tim Medis Dokter Panggil',
             url: absUrl('/' + dir + '/'),
             mainEntity: {
                 '@type': 'ItemList',

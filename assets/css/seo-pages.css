@@ -220,6 +220,23 @@ main > section.seo-hero {
     .seo-icon-tile-title { font-size: 0.875rem; }
 }
 
+/* Row variant: icon beside the label on phones/tablets, regular tiles on desktop */
+@media (max-width: 1023px) {
+    .seo-icon-tiles--rows .canva-card {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 0.75rem;
+        min-height: 0;
+        padding: 0.7rem 0.9rem;
+    }
+    .seo-icon-tiles--rows .seo-icon-tile-ic {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.7rem;
+    }
+}
+
 /* FAQ accordion — mirrors the modal behaviour but scoped to these pages */
 .seo-faq-item + .seo-faq-item { border-top: 1px solid #F1E7E0; }
 .seo-faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; background: none; border: 0; cursor: pointer; padding: 1rem 0; font-size: 0.8125rem; line-height: 1.45; font-weight: 600; color: #2D2D2D; }

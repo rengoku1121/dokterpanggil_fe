@@ -614,7 +614,7 @@ module.exports = {
             }
         },
         'konsultasi-online': {
-            h1: 'Doctor Consultation, From Anywhere',
+            h1: 'An Easier Way to Get a Doctor’s Opinion',
             lead: 'Consult a GP or specialist without visiting a healthcare facility. Choose Chat/Phone or Video Call based on your needs.',
             chips: [
                 'GP & Specialists',
@@ -631,7 +631,6 @@ module.exports = {
                 introP3: 'In some cases, the doctor may recommend an in-person exam when the condition cannot be assessed adequately online.',
                 sessionNote: 'The consultation session starts after doctor selection, consultation method, schedule confirmation, and payment are confirmed.',
                 doctorTitle: 'Choose Your Doctor',
-                doctorLead: 'Choose a doctor, then choose how to consult: Chat/Phone or Video Call.',
                 gpTitle: 'General Practitioner',
                 gpP1: 'Discuss a wide range of symptoms and health conditions with a GP online.',
                 gpCta: 'Choose GP',
@@ -1161,6 +1160,7 @@ module.exports = {
             ctaBook: 'Discuss Medicine Needs',
             ctaAsk: 'Chat WhatsApp',
             farmasi: {
+                pathTitle: 'Choose an Online Doctor Consultation or a Home Doctor Visit',
                 onlineTitle: 'Online Doctor Consultation',
                 homeTitle: 'Doctor Comes to Your Home',
                 pathNote: 'In some cases, the doctor may recommend an in-person exam when the condition cannot be assessed adequately online.',
@@ -1390,8 +1390,11 @@ module.exports = {
         },
 
         dokter: {
-            h1: 'Doctors, Nurses, and Physiotherapists at Home',
-            lead: 'Learn each healthcare role, browse the medical team directory, and book the service that best fits the patient’s needs in Makassar.',
+            h1: 'Meet the Dokter Panggil Medical Team',
+            lead: 'Dokter Panggil brings general practitioners, specialists, and professional nurses to provide healthcare directly at home or through online consultation, based on each patient’s needs. Every service is coordinated according to the patient’s condition, medical needs, and the competence of the healthcare professionals involved.',
+            chips: ['Professional Doctor and Nurse Team', 'Homecare Service', 'Coordinated Care'],
+            ctaFind: 'Find a Doctor',
+            ctaNurse: 'Meet the Nursing Team',
             rolesTitle: 'Healthcare Roles',
             chooseTitle: 'Choosing the Right Professional',
             intro: [

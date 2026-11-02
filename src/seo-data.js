@@ -201,7 +201,7 @@
         },
         'konsultasi-online': {
             // Form — Konsultasi Dokter Online
-            h1: 'Konsultasi Dokter, Langsung dari Mana Saja',
+            h1: 'Lebih Mudah Mendapatkan Pendapat Dokter',
             metaTitle: 'Konsultasi Dokter Online | DokterPanggil.id',
             metaDesc: 'Konsultasi dokter umum atau spesialis via Chat/Telepon atau Video Call tanpa datang ke fasilitas kesehatan di Makassar.',
             lead: 'Konsultasikan kondisi kesehatan bersama Dokter Umum atau Dokter Spesialis tanpa perlu datang ke fasilitas kesehatan. Pilih konsultasi melalui Chat/Telepon atau Video Call sesuai kebutuhan Anda.',

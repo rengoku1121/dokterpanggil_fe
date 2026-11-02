@@ -32,9 +32,9 @@ module.exports = function createSupportBodies(h) {
             { icon: 'microscope', title: 'Pemeriksaan Lainnya' }
         ];
         const labTypesEn = e.labTypes || [];
-        const labTiles = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 seo-icon-tiles">' + labTypes.map((t, i) =>
-            '<div class="canva-card rounded-2xl' + (i === labTypes.length - 1 ? ' col-span-2 sm:col-span-1' : '') + '">'
-            + '<div class="seo-icon-tile-ic">' + icon(t.icon, 22, BRAND) + '</div>'
+        const labTiles = '<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 seo-icon-tiles seo-icon-tiles--rows">' + labTypes.map((t, i) =>
+            '<div class="canva-card rounded-2xl">'
+            + '<div class="seo-icon-tile-ic">' + icon(t.icon, 20, BRAND) + '</div>'
             + biTag('h3', t.title, labTypesEn[i] || t.title, 'class="seo-icon-tile-title"')
             + '</div>'
         ).join('') + '</div>';
@@ -105,7 +105,8 @@ module.exports = function createSupportBodies(h) {
         ];
 
         return composeBody([
-            pathSection,
+            sectionHead('Pilihan Konsultasi Online Dokter atau Dokter Datang ke Rumah', null, e.pathTitle)
+            + pathSection,
             sectionHead('Pertanyaan Umum', null, e.faqTitle || 'FAQ')
             + faqBlock(faqs, e.faqs),
             ctaBlock(prefix, waAsk,
@@ -400,7 +401,7 @@ module.exports = function createSupportBodies(h) {
                 'Pada kondisi tertentu, dokter dapat merekomendasikan pemeriksaan langsung apabila kondisi pasien tidak dapat dinilai secara memadai melalui konsultasi online.'
             ], [e.introP1, e.introP2, e.introP3])
             + noteLine('Sesi konsultasi dimulai setelah pemilihan dokter, metode konsultasi, konfirmasi kesesuaian jadwal, dan pembayaran dikonfirmasi.', e.sessionNote),
-            sectionHead('Pilih Dokter Anda', 'Pilih dokter, lalu pilih cara konsultasi: Chat/Telepon atau Video Call.', e.doctorTitle, e.doctorLead)
+            sectionHead('Pilih Dokter Anda', null, e.doctorTitle)
             + doctorCards,
             sectionHead('Bagaimana Cara Konsultasi Online?', 'Konsultasi dalam Beberapa Langkah', e.howTitle, e.howLead)
             + howStepCards(howSteps, e.howSteps),
