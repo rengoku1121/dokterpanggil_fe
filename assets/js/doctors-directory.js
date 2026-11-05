@@ -12,7 +12,7 @@
     const defaultCat = root && root.getAttribute('data-default-cat');
     const deferCards = !!(root && root.getAttribute('data-defer-cards') === '1');
     const docState = {
-        category: defaultCat || 'all',
+        category: defaultCat || 'umum',
         specialty: deferCards ? 'pending' : 'all',
         query: ''
     };
@@ -32,6 +32,7 @@
             bookNow: 'Chat WhatsApp',
             empty: 'Tidak ada tenaga medis yang cocok. Coba kata kunci atau filter lain.',
             searchPh: 'Cari nama, spesialisasi, atau kondisi...',
+            searchPhGp: 'Cari nama dokter...',
             alumni: 'Alumnus',
             practice: 'Praktek di',
             conditions: 'Keluhan & kondisi yang ditangani'
@@ -49,6 +50,7 @@
             bookNow: 'Chat WhatsApp',
             empty: 'No matching professionals. Try another keyword or filter.',
             searchPh: 'Search by name, specialty, or condition...',
+            searchPhGp: 'Search doctor name...',
             alumni: 'Alumnus',
             practice: 'Practices at',
             conditions: 'Complaints & conditions treated'
@@ -127,14 +129,30 @@
     function renderCategoryFilters() {
         const wrap = document.getElementById('doctor-filters');
         if (!wrap) return;
-        const cats = DOC_CATEGORIES.filter(c => c.key === 'all' || DOCTORS.some(d => d.category === c.key));
-        wrap.innerHTML = cats.map(c => {
-            const active = docState.category === c.key;
-            const cls = active
-                ? 'bg-primary text-white border-primary'
-                : 'bg-white text-charcoal border-gray-200 hover:border-primary/40';
-            return '<button type="button" class="doc-cat-btn min-h-[44px] px-5 py-2.5 rounded-full text-sm font-medium border transition-colors ' + cls + '" data-cat="' + c.key + '">' + L(c) + '</button>';
-        }).join('');
+        const staticTabs = Array.from(wrap.querySelectorAll('.doc-cat-btn[data-cat]'));
+        if (!staticTabs.length) return;
+        staticTabs.forEach(btn => {
+            const active = docState.category === btn.dataset.cat;
+            btn.classList.toggle('is-active', active);
+            btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+    }
+
+    function renderCategoryPanels() {
+        const panels = Array.from(document.querySelectorAll('[data-cat-panel]'));
+        panels.forEach(panel => panel.classList.toggle('hidden', panel.dataset.catPanel !== docState.category));
+
+        const searchWrap = document.getElementById('doctor-search-wrap');
+        const nursePanel = document.getElementById('doctor-nurse-panel');
+        const grid = document.getElementById('doctors-grid');
+        const empty = document.getElementById('doctors-empty');
+        const hint = document.getElementById('doctors-hint');
+        const isNurse = docState.category === 'perawat';
+
+        if (searchWrap) searchWrap.classList.toggle('hidden', isNurse);
+        if (nursePanel) nursePanel.classList.add('hidden');
+        if (grid) grid.classList.remove('hidden');
+        if (hint) hint.classList.add('hidden');
     }
 
     function specOptions() {
@@ -295,12 +313,13 @@
 
     function renderDoctors() {
         renderCategoryFilters();
+        renderCategoryPanels();
         renderSpecialtyFilters();
         renderDoctorCards();
         const search = document.getElementById('doctor-search');
         if (search) {
             if (search.value !== docState.query) search.value = docState.query;
-            search.placeholder = t('searchPh');
+            search.placeholder = docState.category === 'spesialis' ? t('searchPh') : t('searchPhGp');
         }
         if (window.lucide) lucide.createIcons();
     }
@@ -379,6 +398,10 @@
         if (!btn) return;
         docState.category = btn.dataset.cat;
         if (docState.category !== 'spesialis') docState.specialty = 'all';
+        docState.query = '';
+        if (btn.id) {
+            try { history.replaceState(null, '', '#' + btn.id); } catch (err) { /* ignore */ }
+        }
         renderDoctors();
     });
 
@@ -456,6 +479,21 @@
     try { currentLang = localStorage.getItem('lang') || 'id'; } catch (e) { /* ignore */ }
     if (currentLang !== 'id' && currentLang !== 'en') currentLang = 'id';
 
+    function syncCategoryFromHash() {
+        if (!document.getElementById('doctor-filters')) return;
+        const hash = (window.location.hash || '').toLowerCase();
+        const map = {
+            '#tim-dokter-umum': 'umum',
+            '#dokter-spesialis': 'spesialis',
+            '#tim-perawat': 'perawat'
+        };
+        if (map[hash]) {
+            docState.category = map[hash];
+            docState.specialty = docState.category === 'spesialis' ? docState.specialty : 'all';
+            docState.query = '';
+        }
+    }
+
     // Deep-link: /dokter/?cat=spesialis (atau umum / perawat / fisioterapis)
     try {
         const params = new URLSearchParams(window.location.search);
@@ -469,6 +507,12 @@
             docState.specialty = spec;
         }
     } catch (e) { /* ignore */ }
+
+    syncCategoryFromHash();
+    window.addEventListener('hashchange', () => {
+        syncCategoryFromHash();
+        renderDoctors();
+    });
 
     renderDoctors();
 })();

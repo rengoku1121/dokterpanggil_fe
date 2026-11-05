@@ -2284,17 +2284,71 @@ const DOCTOR_HUB_LABEL = {
 };
 
 function doctorDirectoryBlock() {
+    const e = (SEO_EN.hubs && SEO_EN.hubs.dokter) || {};
+    const nurseInfoCards = '<div class="doctor-nurse-points">'
+        + '<div class="canva-card rounded-2xl p-4">'
+        + '<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">' + icon('heart-handshake', 20, BRAND) + '</div>'
+        + biTag('p', 'Pendampingan Pasien', e.nursePoint1, 'class="font-semibold"')
+        + '</div>'
+        + '<div class="canva-card rounded-2xl p-4">'
+        + '<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">' + icon('activity', 20, BRAND) + '</div>'
+        + biTag('p', 'Pemantauan Kondisi', e.nursePoint2, 'class="font-semibold"')
+        + '</div>'
+        + '<div class="canva-card rounded-2xl p-4">'
+        + '<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">' + icon('syringe', 20, BRAND) + '</div>'
+        + biTag('p', 'Tindakan Keperawatan', e.nursePoint3, 'class="font-semibold"')
+        + '</div>'
+        + '</div>';
+
     return '<div id="temukan-dokter" class="scroll-mt-28">'
         + sectionHead(
             'Temui Tim Medis Kami',
             'Ketik nama tim medis atau gunakan filter: Tim Dokter Umum / Dokter Spesialis / Tim Perawat.',
-            'Meet Our Medical Team',
-            'Type a medical team member’s name or use the filter: General Practitioners / Specialists / Nursing Team.'
+            e.directoryTitle,
+            e.directoryLead
         )
+        + '<div id="doctor-filters" class="doctor-tab-nav mb-5" role="tablist" aria-label="Filter tim medis">'
+        + biTag('button', 'Tim Dokter Umum', e.tabGp, 'type="button" role="tab" id="tim-dokter-umum" class="doc-cat-btn doctor-tab-btn is-active scroll-mt-28" data-cat="umum" aria-selected="true"')
+        + biTag('button', 'Temukan Dokter Spesialis', e.tabSpec, 'type="button" role="tab" id="dokter-spesialis" class="doc-cat-btn doctor-tab-btn scroll-mt-28" data-cat="spesialis" aria-selected="false"')
+        + biTag('button', 'Kenali Tim Perawat', e.tabNurse, 'type="button" role="tab" id="tim-perawat" class="doc-cat-btn doctor-tab-btn scroll-mt-28" data-cat="perawat" aria-selected="false"')
+        + '</div>'
+        + '<div id="doctor-tab-intros" class="doctor-tab-intros mb-4">'
+        + '<div class="doctor-tab-intro" data-cat-panel="umum">'
+        + biTag('h3', 'Tim Dokter Umum', e.tabGp, 'class="doctor-tab-title"')
+        + biTag('p',
+            'Kenali tim dokter umum yang tergabung dalam tim Dokter Panggil dan siap memberikan pelayanan kesehatan selama 24 jam secara bergantian. Setiap dokter memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+            e.gpLead,
+            'class="doctor-tab-lead"')
+        + '</div>'
+        + '<div class="doctor-tab-intro hidden" data-cat-panel="spesialis">'
+        + biTag('h3', 'Temukan Dokter Spesialis', e.tabSpec, 'class="doctor-tab-title"')
+        + biTag('p',
+            'Cari berdasarkan nama, spesialisasi, atau kondisi medis.',
+            e.specLead,
+            'class="doctor-tab-lead"')
+        + '</div>'
+        + '<div class="doctor-tab-intro hidden" data-cat-panel="perawat">'
+        + biTag('h3', 'Perawat Profesional untuk Mendukung Perawatan di Rumah', e.nurseTitle, 'class="doctor-tab-title"')
+        + biTag('p',
+            'Tim perawat Dokter Panggil membantu memberikan pendampingan, pemantauan, dan tindakan keperawatan di rumah berdasarkan rencana perawatan dan rekomendasi dokter.',
+            e.nurseLead,
+            'class="doctor-tab-lead"')
+        + '</div>'
+        + '</div>'
+        + '<div id="doctor-search-wrap">'
         + doctorSearchField()
-        + '<div id="doctor-filters" class="flex justify-center gap-2 md:gap-3 mb-6 flex-wrap"></div>'
+        + '</div>'
         + '<div id="doctors-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>'
         + '<p id="doctors-empty" class="hidden text-center text-gray-500 py-10"></p>'
+        + '<div id="doctor-nurse-panel" class="hidden doctor-nurse-panel canva-card rounded-3xl p-5 sm:p-6">'
+        + nurseInfoCards
+        + '<div class="flex flex-col sm:flex-row gap-3">'
+        + '<a href="../layanan/perawatan-rumah.html" class="flex-1 text-center px-4 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"'
+        + biAttrs('Lihat Layanan Perawat Homecare', e.nurseCta) + '>Lihat Layanan Perawat Homecare</a>'
+        + '<a href="' + esc(waLink('Halo, saya ingin bertanya tentang pendampingan Tim Perawat Dokter Panggil di rumah di Makassar.')) + '" target="_blank" rel="noopener noreferrer"'
+        + biAttrs('Chat WhatsApp', 'Chat WhatsApp') + ' class="flex-1 text-center px-4 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-colors">Chat WhatsApp</a>'
+        + '</div>'
+        + '</div>'
         + '</div>';
 }
 
@@ -2372,7 +2426,7 @@ function doctorHub(group) {
         ctaBook: isSpecialist ? null : { id: 'Temukan Dokter', en: hubEn.ctaFind || 'Find a Doctor' },
         ctaBookHref: isSpecialist ? null : '#temukan-dokter',
         ctaAsk: isSpecialist ? null : { id: 'Kenali Tim Perawat', en: hubEn.ctaNurse || 'Meet the Nursing Team' },
-        ctaAskHref: isSpecialist ? null : 'perawat-home-care.html',
+        ctaAskHref: isSpecialist ? null : '#tim-perawat',
         heroImage: isSpecialist ? IMG.checkup : IMG.dokter,
         heroAlt: isSpecialist ? 'Dokter spesialis memeriksa pasien di rumah' : 'Tenaga kesehatan mendampingi pasien di rumah',
         waMessage: 'Halo, saya ingin bertanya tentang tenaga kesehatan yang sesuai untuk kondisi pasien di Makassar.',

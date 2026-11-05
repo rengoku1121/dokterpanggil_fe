@@ -5,10 +5,10 @@
  */
 (function (global) {
     const DOC_CATEGORIES = [
-        { key: 'all', id: 'Semua', en: 'All' },
-        { key: 'umum', id: 'Dokter Umum', en: 'General Practitioner' },
-        { key: 'spesialis', id: 'Dokter Spesialis', en: 'Specialist' },
-        { key: 'perawat', id: 'Perawat', en: 'Nurse' },
+        { key: 'all', id: 'Semua Tim Medis', en: 'All Medical Teams' },
+        { key: 'umum', id: 'Tim Dokter Umum', en: 'General Practitioner Team' },
+        { key: 'spesialis', id: 'Dokter Spesialis', en: 'Specialist Doctors' },
+        { key: 'perawat', id: 'Tim Perawat', en: 'Nursing Team' },
         { key: 'fisio', id: 'Fisioterapis', en: 'Physiotherapist' }
     ];
 
@@ -39,6 +39,114 @@
     }
 
     const DOCTORS = [
+        doc({
+            id: 'michele',
+            category: 'umum',
+            name: 'dr. Michele Wijaya Oei',
+            initials: 'MW',
+            tint: TINTS[0],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'aryanti',
+            category: 'umum',
+            name: 'dr. Aryanti Suardi',
+            initials: 'AS',
+            tint: TINTS[1],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'annisa',
+            category: 'umum',
+            name: 'dr. Annisa Westania Danial',
+            initials: 'AW',
+            tint: TINTS[2],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'nurul-rifqiani',
+            category: 'umum',
+            name: 'dr. Nurul Rifqiani Djerman',
+            initials: 'ND',
+            tint: TINTS[3],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'siswana',
+            category: 'umum',
+            name: 'dr. Siswana Ainun Khafifa',
+            initials: 'SK',
+            tint: TINTS[4],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'kurniawan',
+            category: 'umum',
+            name: 'dr. Kurniawan Trijaya',
+            initials: 'KT',
+            tint: TINTS[5],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'raedy',
+            category: 'umum',
+            name: 'dr. Moch Raedy Noorizki',
+            initials: 'MR',
+            tint: TINTS[6],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'fadhila',
+            category: 'umum',
+            name: 'dr. Nur Fadhila J',
+            initials: 'NF',
+            tint: TINTS[7],
+            role: { id: 'Dokter Umum', en: 'General Practitioner' },
+            bio: {
+                id: 'Dokter umum Dokter Panggil siap memberikan pemeriksaan, konsultasi, serta penanganan medis sesuai kondisi dan kebutuhan pasien, baik melalui kunjungan langsung ke rumah maupun konsultasi online.',
+                en: 'General practitioners at Dokter Panggil provide examination, consultation, and medical management based on patient needs through home visits or online consultation.'
+            }
+        }),
+        doc({
+            id: 'tim-perawat',
+            category: 'perawat',
+            name: 'Tim Perawat Dokter Panggil',
+            initials: 'TP',
+            tint: TINTS[2],
+            role: { id: 'Perawat Homecare', en: 'Homecare Nurse' },
+            bio: {
+                id: 'Tim perawat Dokter Panggil membantu memberikan pendampingan, pemantauan, dan tindakan keperawatan di rumah berdasarkan rencana perawatan dan rekomendasi dokter.',
+                en: 'The Dokter Panggil nursing team supports patient care at home through bedside assistance, monitoring, and nursing procedures based on the care plan and doctor recommendations.'
+            }
+        }),
         doc({
             id: 'fransiska',
             name: 'dr. Fransiska Carmelia Subeno, Sp.N',
